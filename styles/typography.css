@@ -1,0 +1,140 @@
+/* ==========================================================================
+   AARUTHRUN PORTFOLIO — TYPOGRAPHY STYLES
+   Font faces, type scales, and text utilities.
+   NOTE: Fonts are loaded via Google Fonts in HTML head.
+   ========================================================================== */
+
+/* Font faces are defined in design-tokens.css */
+/* This file contains type scale utilities and text patterns */
+
+/* --------------------------------------------------------------------------
+   TYPE SCALE UTILITIES
+   -------------------------------------------------------------------------- */
+
+.text-xs  { font-size: var(--text-xs); }
+.text-sm  { font-size: var(--text-sm); }
+.text-base { font-size: var(--text-base); }
+.text-md  { font-size: var(--text-md); }
+.text-lg  { font-size: var(--text-lg); }
+.text-xl  { font-size: var(--text-xl); }
+.text-2xl { font-size: var(--text-2xl); }
+.text-3xl { font-size: var(--text-3xl); }
+.text-4xl { font-size: var(--text-4xl); }
+.text-5xl { font-size: var(--text-5xl); }
+.text-hero { font-size: var(--text-hero); }
+
+/* --------------------------------------------------------------------------
+   LEADING (LINE HEIGHT) UTILITIES
+   -------------------------------------------------------------------------- */
+
+.leading-tight    { line-height: var(--leading-tight); }
+.leading-normal   { line-height: var(--leading-normal); }
+.leading-relaxed  { line-height: var(--leading-relaxed); }
+.leading-loose    { line-height: var(--leading-loose); }
+
+/* --------------------------------------------------------------------------
+   TRACKING (LETTER SPACING) UTILITIES
+   -------------------------------------------------------------------------- */
+
+.tracking-tight   { letter-spacing: var(--tracking-tight); }
+.tracking-normal  { letter-spacing: var(--tracking-normal); }
+.tracking-wide    { letter-spacing: var(--tracking-wide); }
+.tracking-wider   { letter-spacing: var(--tracking-wider); }
+
+/* --------------------------------------------------------------------------
+   FONT WEIGHT UTILITIES
+   -------------------------------------------------------------------------- */
+
+.font-normal   { font-weight: var(--font-normal); }
+.font-medium   { font-weight: var(--font-medium); }
+.font-semibold { font-weight: var(--font-semibold); }
+.font-bold     { font-weight: var(--font-bold); }
+
+/* --------------------------------------------------------------------------
+   FONT FAMILY UTILITIES
+   -------------------------------------------------------------------------- */
+
+.font-sans { font-family: var(--font-sans); }
+.font-mono { font-family: var(--font-mono); }
+
+/* --------------------------------------------------------------------------
+   TEXT ALIGNMENT
+   -------------------------------------------------------------------------- */
+
+.text-left   { text-align: left; }
+.text-center { text-align: center; }
+.text-right  { text-align: right; }
+
+/* --------------------------------------------------------------------------
+   TEXT TRANSFORM
+   -------------------------------------------------------------------------- */
+
+.uppercase { text-transform: uppercase; }
+.lowercase { text-transform: lowercase; }
+.capitalize { text-transform: capitalize; }
+
+/* --------------------------------------------------------------------------
+   QUOTES / CALLOUTS
+   -------------------------------------------------------------------------- */
+
+.engineering-quote {
+  position: relative;
+  margin: var(--space-3) 0;
+  padding: 16px 20px 16px 22px;
+  background-color: var(--color-surface-subtle);
+  border: var(--border-default);
+  border-left: 3px solid var(--color-accent);
+  max-width: 680px;
+}
+
+.engineering-quote::before {
+  content: """;
+  position: absolute;
+  top: 4px;
+  right: 14px;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 3rem;
+  line-height: 1;
+  color: var(--color-accent);
+  opacity: 0.16;
+  pointer-events: none;
+  user-select: none;
+}
+
+.engineering-quote-body {
+  font-size: var(--text-lg);
+  line-height: var(--leading-relaxed);
+  color: var(--color-text-main);
+  margin-bottom: 8px;
+  font-style: italic;
+  font-weight: var(--font-normal);
+  letter-spacing: var(--tracking-normal);
+}
+
+.engineering-quote-cite {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.05em;
+  color: var(--color-text-muted);
+  font-style: normal;
+  text-transform: uppercase;
+}
+
+.engineering-quote-cite::before {
+  content: "—";
+  color: var(--color-accent);
+  font-weight: var(--font-bold);
+}
+
+.engineering-quote-author {
+  color: var(--color-text-main);
+  font-weight: var(--font-semibold);
+}
+
+.engineering-quote-source {
+  color: var(--color-text-muted);
+}

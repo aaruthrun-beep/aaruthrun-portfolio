@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+(function(){
+  try {
+    var k = "portfolio-theme";
+    var v = localStorage.getItem(k);
+    if (v !== "light" && v !== "dark") {
+      v = "light";
+      try { localStorage.setItem(k, v); } catch(e) {}
+    }
+    if (v === "light") {
+      document.documentElement.setAttribute("data-theme","light");
+    }
+  } catch(e) {
+    document.documentElement.setAttribute("data-theme","light");
+  }
+})();
+</script>
+  <title>Contact & Communication Channels — Aaruthrun Robotics</title>
+  <meta name="description" content="Get in touch with Aaruthrun: direct email, GitHub repositories, LinkedIn, and secure inquiry form for robotics and automation engineering opportunities.">
+
+  <!-- OpenGraph Metadata -->
+  <meta property="og:title" content="Contact Aaruthrun — Robotics & Automation Engineer">
+  <meta property="og:description" content="Direct channels: email, GitHub, LinkedIn, and collaboration inquiries.">
+  <meta property="og:image" content="images/og-image.webp">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Google Fonts: Inter + JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css?v=2026-11-08">
+  <link rel="stylesheet" href="config/design-tokens.css?v=2026-11-08">
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Shared Header -->
+  <header id="site-header"></header>
+
+  <main id="main-content">
+    <div class="container">
+      
+      <!-- Page Header -->
+      <section class="reveal" style="padding: 40px 0 24px 0; border-bottom: 1px solid var(--border); margin-bottom: 40px; display: flex; gap: 24px; align-items: center; flex-wrap: wrap;">
+        <img class="avatar avatar-lg" src="images/aaruthrun.jpeg" alt="Portrait of Aaruthrun" width="96" height="96" fetchpriority="high">
+        <div style="flex: 1 1 420px; min-width: 280px;">
+          <div class="mono text-muted" style="font-size: 0.8125rem; margin-bottom: 8px; letter-spacing: 0.04em;">COMMUNICATION // SECURE DISPATCH</div>
+          <h1 style="font-size: 2.5rem; letter-spacing: -0.03em; font-weight: 600; margin-bottom: 8px;">Contact Channels</h1>
+          <p style="color: var(--text-secondary); max-width: 640px; margin-bottom: 0; line-height: 1.65;">
+            Available for robotics engineering opportunities, mechatronic design consulting, Avani Dynamics partnership inquiries, and academic research collaborations.
+          </p>
+        </div>
+      </section>
+
+      <!-- Main Contact Grid -->
+      <div class="contact-grid">
+        
+        <!-- Direct Channels Column -->
+        <div>            <div class="section-title-wrap" style="margin-bottom: 16px;">
+            
+            <h2 style="font-size: 1.2rem; letter-spacing: -0.01em;">Direct Engineering Links</h2>
+          </div>
+
+          <!-- Email Channel Box -->
+          <div class="contact-channel" id="box-email">
+            <div>
+              <div class="channel-label" style="letter-spacing: 0.04em;">PRIMARY EMAIL</div>
+              <div class="channel-value" id="email-address">aaruthrun@gmail.com</div>
+              <p style="font-size: 0.8125rem; color: var(--text-secondary); margin-top: 6px; margin-bottom: 0;">
+                Expected response latency: &lt; 24 hours. PGP key available upon request.
+              </p>
+            </div>
+            <div style="margin-top: 16px; display: flex; gap: 8px;">
+              <a href="mailto:aaruthrun@gmail.com" class="btn btn-sm btn-mono btn-primary">
+                COMPOSE EMAIL &nearr;
+              </a>
+              <button class="btn btn-sm btn-mono btn-secondary" id="btn-copy-email">
+                [COPY ADDRESS]
+              </button>
+            </div>
+          </div>
+
+          <!-- GitHub Channel Box -->
+          <div class="contact-channel">
+            <div>
+              <div class="channel-label" style="letter-spacing: 0.04em;">CODE & HARDWARE SCHEMATICS</div>
+              <div class="channel-value">github.com/aaruthrun-beep</div>
+              <p style="font-size: 0.8125rem; color: var(--text-secondary); margin-top: 6px; margin-bottom: 0;">
+                Firmware repositories, KiCAD PCB gerbers, ROS2 packages, and SolidWorks CAD models.
+              </p>
+            </div>
+            <div style="margin-top: 16px;">
+              <a href="https://github.com/aaruthrun-beep" target="_blank" rel="noopener" class="btn btn-sm btn-mono btn-secondary">
+                OPEN GITHUB PROFILE &nearr;
+              </a>
+            </div>
+          </div>
+
+          <!-- LinkedIn Channel Box -->
+          <div class="contact-channel">
+            <div>
+              <div class="channel-label" style="letter-spacing: 0.04em;">PROFESSIONAL NETWORK</div>
+              <div class="channel-value">linkedin.com/in/aaruthrun-saravanakumar</div>
+              <p style="font-size: 0.8125rem; color: var(--text-secondary); margin-top: 6px; margin-bottom: 0;">
+                Professional updates, university affiliations, and industry recommendations.
+              </p>
+            </div>
+            <div style="margin-top: 16px;">
+              <a href="https://linkedin.com/in/aaruthrun-saravanakumar" target="_blank" rel="noopener" class="btn btn-sm btn-mono btn-secondary">
+                CONNECT ON LINKEDIN &nearr;
+              </a>
+            </div>
+          </div>
+
+          <!-- Physical Location Box -->
+          <div style="border: 1px solid var(--border); padding: 16px; background-color: var(--surface-subtle); margin-top: 16px;">
+            <div class="mono text-muted" style="font-size: 0.75rem; margin-bottom: 4px; letter-spacing: 0.04em;">PHYSICAL LOCATION & LABS</div>
+            <div class="mono text-main" style="font-size: 0.875rem;">
+              Department of Robotics & Automation Engineering<br>
+              PSG College of Technology, Peelamedu, Coimbatore 641004<br>
+              Tamil Nadu, India
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive Transmission Form Column -->
+        <div>
+          <div class="section-title-wrap" style="margin-bottom: 16px;">
+            
+            <h2 style="font-size: 1.2rem; letter-spacing: -0.01em;">Transmission Dispatch Form</h2>
+          </div>
+
+          <div style="border: 1px solid var(--border); padding: 24px; background-color: var(--bg);">
+            <form id="contact-form" action="mailto:aaruthrun@gmail.com" method="GET" enctype="text/plain">
+              
+              <div class="form-group">
+                <label for="contact-name" class="form-label">Full Name / Organization *</label>
+                <input type="text" id="contact-name" name="name" class="form-input" placeholder="e.g. Dr. K. Ramesh / Apex Robotics Inc." required autocomplete="name">
+              </div>
+
+              <div class="form-group">
+                <label for="contact-email" class="form-label">Sender Email Address *</label>
+                <input type="email" id="contact-email" name="email" class="form-input" placeholder="name@organization.com" required autocomplete="email" inputmode="email">
+              </div>
+
+              <div class="form-group">
+                <label for="contact-topic" class="form-label">Inquiry Classification</label>
+                <select id="contact-topic" name="subject" class="form-input" style="font-family: var(--font-mono); font-size: 0.8125rem;">
+                  <option value="[Career] Robotics Engineering Role">Career / Full-Time Robotics Role</option>
+                  <option value="[Startup] Avani Dynamics Partnership">Avani Dynamics / Swarm Collaboration</option>
+                  <option value="[Research] Academic & Kinematics Inquiry">Academic Research / Kinematics</option>
+                  <option value="[Technical] General Hardware & Consulting">General Engineering Inquiry</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="contact-message" class="form-label">Message Payload *</label>
+                <textarea id="contact-message" name="body" rows="6" class="form-textarea" placeholder="Specify technical requirements, project timeline, or role parameters..." required></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-mono" style="width: 100%; margin-top: 8px;" id="btn-submit-message">
+                <span>DISPATCH MESSAGE VIA EMAIL CLIENT</span> &rarr;
+              </button>
+
+              <div id="form-feedback" class="mono text-accent" style="display: none; font-size: 0.75rem; margin-top: 12px; text-align: center;">
+                DISPATCH PREPARED // OPENING MAIL HANDLER...
+              </div>
+
+              <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 12px; margin-bottom: 0; text-align: center;">
+                No cookies, no trackers. Direct mailto submission format.
+              </p>
+            </form>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Reference: Nikola Tesla -->
+      <section class="reveal" style="margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--border); display: flex; gap: 20px; align-items: flex-start; flex-wrap: wrap;">
+        <figure style="margin: 0; flex: 0 0 auto; width: 170px;">
+          <img src="images/tesla-portrait.jpg" alt="Portrait of Nikola Tesla, circa 1890" width="170" height="227" loading="lazy" style="width: 100%; height: auto; display: block; border: 1px solid var(--border);">
+          <figcaption class="mono text-muted" style="font-size: 0.625rem; margin-top: 6px;">N. TESLA // C. 1890</figcaption>
+        </figure>
+        <blockquote class="engineering-quote" style="margin: 0; flex: 1 1 320px; min-width: 0;">
+          <p class="engineering-quote-body">
+            "Our virtues and our failings are inseparable, like force and matter. When they separate, man is no more."
+          </p>
+          <div class="engineering-quote-cite">
+            <span class="engineering-quote-author">NIKOLA TESLA</span>
+            <span class="engineering-quote-source">// THE CENTURY MAGAZINE, JUN 1900</span>
+          </div>
+        </blockquote>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Shared Footer -->
+  <footer id="site-footer"></footer>
+
+  <!-- Scripts -->
+  <!-- Scripts - Using modular architecture -->
+  <script src="config/app.config.js"></script>
+  <script src="data/data-store.js"></script>
+  <script src="modules/theme/theme-manager.js?v=2026-11-08"></script>
+  <script src="modules/header/header-manager.js?v=2026-11-08"></script>
+  <script src="modules/footer/footer-manager.js?v=2026-11-08"></script>
+  <script src="modules/reveal/reveal-manager.js?v=2026-11-08"></script>
+  <script src="js/app.js"></script>
+  <script>
+    // Copy email button with 150ms visual feedback
+    document.addEventListener('DOMContentLoaded', function () {
+      const copyBtn = document.getElementById('btn-copy-email');
+      const emailEl = document.getElementById('email-address');
+
+      if (copyBtn && emailEl) {
+        copyBtn.addEventListener('click', function () {
+          const email = emailEl.textContent.trim();
+          navigator.clipboard.writeText(email).then(() => {
+            const originalText = copyBtn.textContent;
+            copyBtn.textContent = '[COPIED TO CLIPBOARD!]';
+            copyBtn.style.borderColor = 'var(--accent)';
+            copyBtn.style.color = 'var(--accent)';
+            
+            setTimeout(() => {
+              copyBtn.textContent = originalText;
+              copyBtn.style.borderColor = '';
+              copyBtn.style.color = '';
+            }, 2000);
+          }).catch(err => {
+            console.error('Clipboard copy error:', err);
+          });
+        });
+      }
+
+      // Contact form submit handling
+      const form = document.getElementById('contact-form');
+      const feedback = document.getElementById('form-feedback');
+      if (form && feedback) {
+        form.addEventListener('submit', function (e) {
+          feedback.style.display = 'block';
+        });
+      }
+    });
+  </script>
+</body>
+</html>

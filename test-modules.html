@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+(function(){
+  try {
+    var k = "portfolio-theme";
+    var v = localStorage.getItem(k);
+    if (v !== "light" && v !== "dark") {
+      v = "light";
+      try { localStorage.setItem(k, v); } catch(e) {}
+    }
+    if (v === "light") {
+      document.documentElement.setAttribute("data-theme","light");
+    }
+  } catch(e) {
+    document.documentElement.setAttribute("data-theme","light");
+  }
+})();
+</script>
+  <title>Module Test — Aaruthrun</title>
+  <link rel="stylesheet" href="css/style.css?v=2026-11-08">
+  <style>
+    .test-result { padding: 10px; margin: 5px 0; border: 1px solid var(--color-border); }
+    .test-pass { background-color: var(--color-accent-light); border-color: var(--color-accent); }
+    .test-fail { background-color: #fee2e2; border-color: #ef4444; }
+  </style>
+</head>
+<body>
+  <div class="container" style="padding-top: 40px;">
+    <h1>Module System Test</h1>
+    <div id="test-results"></div>
+  </div>
+
+  <script src="config/app.config.js"></script>
+  <script src="data/data-store.js"></script>
+  <script src="modules/theme/theme-manager.js?v=2026-11-08"></script>
+  <script src="js/app.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const results = document.getElementById('test-results');
+      let passed = 0;
+      let failed = 0;
+
+      function test(name, condition) {
+        const div = document.createElement('div');
+        div.className = 'test-result ' + (condition ? 'test-pass' : 'test-fail');
+        div.textContent = (condition ? '✓ PASS' : '✗ FAIL') + ': ' + name;
+        results.appendChild(div);
+        if (condition) passed++; else failed++;
+      }
+
+      // Test 1: AppConfig exists
+      test('AppConfig is defined', typeof AppConfig === 'object');
+
+      // Test 2: AppConfig has expected methods
+      test('AppConfig.getNav() exists', typeof AppConfig.getNav === 'function');
+      test('AppConfig.getAuthor() exists', typeof AppConfig.getAuthor === 'function');
+      test('AppConfig.getFilters() exists', typeof AppConfig.getFilters === 'function');
+
+      // Test 3: AppConfig data integrity
+      const nav = AppConfig.getNav();
+      test('Nav has 9 items', nav.items.length === 9);
+      test('Nav brand is AARUTHRUN', nav.brand.label === 'AARUTHRUN');
+
+      const author = AppConfig.getAuthor();
+      test('Author has name', typeof author.name === 'string');
+      test('Author has github', author.github.includes('github.com'));
+
+      // Test 4: DataStore exists
+      test('DataStore is defined', typeof DataStore === 'object');
+
+      // Test 5: DataStore methods
+      test('DataStore.getProjects exists', typeof DataStore.getProjects === 'function');
+      test('DataStore.findProjectBySlug exists', typeof DataStore.findProjectBySlug === 'function');
+
+      // Test 6: ThemeManager exists
+      test('ThemeManager is defined', typeof ThemeManager === 'object');
+      test('ThemeManager.init exists', typeof ThemeManager.init === 'function');
+      test('ThemeManager.toggle exists', typeof ThemeManager.toggle === 'function');
+
+      // Test 7: Theme applied
+      test('data-theme attribute set', document.documentElement.getAttribute('data-theme') === 'light');
+
+      // Test 8: Header rendered
+      const header = document.getElementById('site-header');
+      test('Header element exists', header !== null);
+      if (header) {
+        test('Header has site-header class', header.classList.contains('site-header'));
+        test('Header contains nav', header.querySelector('.site-nav') !== null);
+        test('Header contains brand link', header.querySelector('.brand-link') !== null);
+      }
+
+      // Test 9: Navigation items rendered
+      const navLinks = document.querySelectorAll('.nav-link');
+      test('9 nav links rendered', navLinks.length === 9);
+
+      // Test 10: Footer rendered
+      const footer = document.getElementById('site-footer');
+      test('Footer element exists', footer !== null);
+      if (footer) {
+        test('Footer has site-footer class', footer.classList.contains('site-footer'));
+        test('Footer contains links', footer.querySelector('.footer-links') !== null);
+      }
+
+      // Test 11: Design tokens applied
+      const style = getComputedStyle(document.documentElement);
+      test('color-bg token exists', style.getPropertyValue('--color-bg').length > 0);
+      test('color-accent token exists', style.getPropertyValue('--color-accent').length > 0);
+      test('space-3 token exists', style.getPropertyValue('--space-3').length > 0);
+
+      // Summary
+      const summary = document.createElement('div');
+      summary.style.marginTop = '20px';
+      summary.style.padding = '15px';
+      summary.style.border = '2px solid ' + (failed === 0 ? 'var(--color-accent)' : '#ef4444');
+      summary.style.background = failed === 0 ? 'var(--color-accent-light)' : '#fee2e2';
+      summary.innerHTML = `
+        <h2>Test Summary</h2>
+        <p style="font-size: 1.2rem; font-weight: 600;">
+          ${passed} passed, ${failed} failed
+        </p>
+        <p style="color: var(--color-text-secondary);">
+          ${failed === 0 ? 'All tests passed! Modular architecture is working correctly.' : 'Some tests failed. Check the console for details.'}
+        </p>
+      `;
+      results.appendChild(summary);
+
+      if (failed > 0) console.error(`[Test] ${failed} tests failed`);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+(function(){
+  try {
+    var k = "portfolio-theme";
+    var v = localStorage.getItem(k);
+    if (v !== "light" && v !== "dark") {
+      v = "light";
+      try { localStorage.setItem(k, v); } catch(e) {}
+    }
+    if (v === "light") {
+      document.documentElement.setAttribute("data-theme","light");
+    }
+  } catch(e) {
+    document.documentElement.setAttribute("data-theme","light");
+  }
+})();
+</script>
+  <title>Project Specification & Build Log — Aaruthrun Robotics</title>
+  <meta name="description" content="Detailed technical breakdown, CAD kinematics, PCB schematics, and control algorithms for engineering projects by Aaruthrun.">
+
+  <!-- OpenGraph Metadata -->
+  <meta property="og:title" content="Project Specification — Aaruthrun Robotics">
+  <meta property="og:description" content="Technical documentation and empirical results from robotics hardware builds.">    <meta property="og:image" content="images/aaruthrun.jpeg">
+  <meta property="og:type" content="article">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="stylesheet" href="css/style.css?v=2026-11-08">
+  <link rel="stylesheet" href="config/design-tokens.css?v=2026-11-08">
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Shared Header -->
+  <header id="site-header"></header>
+
+  <main id="main-content">
+    <div class="container">
+      
+      <!-- Container for Project Detail Template (populated via project-manager.js) -->
+      <article id="project-detail-container" class="reveal" aria-label="Project Technical Documentation">
+        <!-- Initial skeleton state -->
+        <div style="padding: 48px 0; text-align: center;">
+          <p class="mono text-muted">LOADING PROJECT SPECIFICATIONS FROM DATASTORE...</p>
+        </div>
+      </article>
+
+      <div style="border-top: 1px solid var(--border); margin-top: 24px; padding-top: 16px;">
+        <blockquote class="engineering-quote" style="margin-top: 0;">
+          <p class="engineering-quote-body">
+            "Be alone, that is the secret of invention; be alone, that is when ideas are born."
+          </p>
+          <div class="engineering-quote-cite">
+            <span class="engineering-quote-author">NIKOLA TESLA</span>
+            <span class="engineering-quote-source">// "AN INVENTOR'S SEASONED IDEAS", NEW YORK TIMES, APR 1934</span>
+          </div>
+        </blockquote>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Shared Footer -->
+  <footer id="site-footer"></footer>
+
+  <!-- Scripts -->
+  <script src="config/app.config.js?v=2026-11-08"></script>
+  <script src="data/data-store.js?v=2026-11-08"></script>
+  <script src="modules/theme/theme-manager.js?v=2026-11-08"></script>
+  <script src="modules/header/header-manager.js?v=2026-11-08"></script>
+  <script src="modules/footer/footer-manager.js?v=2026-11-08"></script>
+  <script src="modules/reveal/reveal-manager.js?v=2026-11-08"></script>
+  <script src="modules/filters/filter-manager.js?v=2026-11-08"></script>
+  <script src="modules/projects/project-manager.js?v=2026-11-14"></script>
+  <script src="js/app.js?v=2026-11-08"></script>
+</body>
+</html>

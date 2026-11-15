@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+(function(){
+  try {
+    var k = "portfolio-theme";
+    var v = localStorage.getItem(k);
+    if (v !== "light" && v !== "dark") {
+      v = "light";
+      try { localStorage.setItem(k, v); } catch(e) {}
+    }
+    if (v === "light") {
+      document.documentElement.setAttribute("data-theme","light");
+    }
+  } catch(e) {
+    document.documentElement.setAttribute("data-theme","light");
+  }
+})();
+</script>
+  <title>Aaruthrun — Robotics &amp; Automation Engineer | Mechatronics Portfolio</title>
+  <meta name="description" content="Aaruthrun builds robots, motor controllers, and embedded firmware — a Robotics & Automation Engineering student at PSG College of Technology, Coimbatore.">
+
+  <!-- OpenGraph Metadata -->
+  <meta property="og:title" content="Aaruthrun — Robotics & Automation Engineering Portfolio">
+  <meta property="og:description" content="Six-axis arms, BLDC actuators, autonomous rovers, and the build notes behind them.">
+  <meta property="og:image" content="images/og-image.webp">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Typefaces: Instrument Serif for display, Inter for reading, JetBrains Mono for annotations -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css?v=2026-11-15">
+  <link rel="stylesheet" href="config/design-tokens.css?v=2026-11-15">
+  <link rel="stylesheet" href="styles/home.css?v=2026-11-15">
+</head>
+<body class="home">
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Shared Header Injected via header-manager.js -->
+  <header id="site-header"></header>
+
+  <main id="main-content">
+    <div class="container">
+
+      <!-- ── HERO ───────────────────────────────────────────────────────── -->
+      <section class="hero reveal" id="about-bio" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="hero-eyebrow">
+            <span class="eyebrow-mark" aria-hidden="true"></span>
+            Robotics &amp; Automation Engineering
+          </p>
+
+          <h1 id="hero-title" class="hero-name">Aaruthrun</h1>
+
+          <p class="hero-lead">
+            I build robots — the mechanical parts, the motor controllers, and the firmware
+            that makes them move. Most of what I know came from taking things apart and
+            putting them back together a little better.
+          </p>
+
+          <p class="hero-body">
+            I'm studying Robotics &amp; Automation Engineering at PSG College of Technology,
+            Coimbatore, after a diploma in Mechatronics. My bench is usually mid-surgery:
+            a 3D-printed six-axis arm, a BLDC actuator that has to hold position, or a rover
+            learning to find its way across a room.
+          </p>
+
+          <div class="hero-actions">
+            <a href="projects.html" class="btn btn-primary btn-mono" id="btn-hero-projects">
+              <span>Explore projects</span> <span aria-hidden="true">&rarr;</span>
+            </a>
+            <a href="timeline.html" class="btn btn-secondary btn-mono" id="btn-hero-timeline">
+              <span>My journey</span> <span aria-hidden="true">&rarr;</span>
+            </a>
+            <a href="contact.html" class="btn btn-secondary btn-mono" id="btn-hero-contact">
+              <span>Contact</span> <span aria-hidden="true">&rarr;</span>
+            </a>
+          </div>
+
+          <p class="hero-status">
+            <span>On the bench</span>
+            6-axis arm firmware &middot; cycloidal actuator v3 &middot; a rover that still misses the doorway
+          </p>
+        </div>
+
+        <figure class="hero-fig">
+          <div class="hero-fig-frame">
+            <img src="images/aaruthrun.jpeg" alt="Portrait of Aaruthrun" width="1088" height="1445" fetchpriority="high">
+          </div>
+          <figcaption>
+            <span class="fig-index">Fig. 01</span>
+            <span>
+              Department of Robotics &amp; Automation Engineering<br>
+              PSG College of Technology<br>
+              Coimbatore, India
+            </span>
+          </figcaption>
+        </figure>
+      </section>
+
+      <!-- ── 01 SELECTED WORK ───────────────────────────────────────────── -->
+      <section class="sec reveal" id="work" aria-labelledby="work-title">
+        <div class="sec-meta reveal-child">
+          <span class="sec-num">01</span>
+          <span class="sec-kicker">Selected work</span>
+          <a class="sec-jump" href="projects.html">All 8 projects <span aria-hidden="true">&nearr;</span></a>
+        </div>
+
+        <div class="sec-intro reveal-child">
+          <h2 class="sec-title" id="work-title">Things I've built</h2>
+          <p class="sec-note">
+            Six builds I keep coming back to. Each one has drawings, firmware, and the parts
+            that didn't work the first time written down.
+          </p>
+        </div>
+
+        <!-- Populated via project-manager.js -->
+        <div class="grid-12" id="featured-projects-grid">
+          <div class="col-12"><p class="mono text-muted">Loading projects&hellip;</p></div>
+        </div>
+      </section>
+
+      <!-- ── 02 TIMELINE ────────────────────────────────────────────────── -->
+      <section class="sec reveal" id="journey" aria-labelledby="journey-title">
+        <div class="sec-meta reveal-child">
+          <span class="sec-num">02</span>
+          <span class="sec-kicker">Engineering timeline</span>
+          <a class="sec-jump" href="timeline.html">Full timeline <span aria-hidden="true">&nearr;</span></a>
+        </div>
+
+        <div class="sec-intro reveal-child">
+          <h2 class="sec-title" id="journey-title">The journey so far</h2>
+          <p class="sec-note">
+            Hardware rarely moves in a straight line. Gearbox revisions overlap firmware
+            tuning, and this is the timeline as it actually ran — from the first diploma
+            builds to what's on the bench now.
+          </p>
+        </div>
+
+        <div class="timeline-panel reveal-child">
+          <div id="timeline-mini-preview" class="timeline-viewport" style="min-height: 230px;"></div>
+          <div class="timeline-foot">
+            <span>2024 &rarr; 2026 &middot; month-level resolution &middot; overlapping rows</span>
+            <a href="timeline.html">Open the full timeline &rarr;</a>
+          </div>
+        </div>
+
+        <div class="record-strip reveal-child">
+          <div class="record-item">
+            <span>On the record</span>
+            IndiaSkills — State Finalist, Mobile Robotics &amp; Mechatronics
+          </div>
+          <div class="record-item">
+            <span>#BuildAtHive</span>
+            1st place — 48-hour hardware sprint
+          </div>
+          <div class="record-item">
+            <span>Research</span>
+            2 papers — cycloidal actuators &amp; swarm kinematics
+          </div>
+        </div>
+      </section>
+
+      <!-- ── 03 SKILLS ──────────────────────────────────────────────────── -->
+      <section class="sec reveal" id="skills" aria-labelledby="skills-title">
+        <div class="sec-meta reveal-child">
+          <span class="sec-num">03</span>
+          <span class="sec-kicker">Technical skills</span>
+          <a class="sec-jump" href="skills.html">Full skills matrix <span aria-hidden="true">&nearr;</span></a>
+        </div>
+
+        <div class="sec-intro reveal-child">
+          <h2 class="sec-title" id="skills-title">What I work with</h2>
+          <p class="sec-note">
+            Four areas I keep returning to — the ones I'd be comfortable handing to someone
+            else, not a list of everything I've ever touched.
+          </p>
+        </div>
+
+        <div class="skills-index">
+          <div class="skill-row reveal-child">
+            <span class="skill-idx">01</span>
+            <div>
+              <h3>Robotic manipulators &amp; kinematics</h3>
+              <p>
+                Closed-form inverse kinematics, DH parameters, spherical wrist geometry, and
+                cycloidal reducers designed to take backlash out of a joint under load.
+              </p>
+            </div>
+            <div class="skill-tags">
+              <span class="tag">ROS2 MoveIt</span>
+              <span class="tag">6-DOF</span>
+              <span class="tag">Cycloidal drives</span>
+            </div>
+          </div>
+
+          <div class="skill-row reveal-child">
+            <span class="skill-idx">02</span>
+            <div>
+              <h3>BLDC motor control &amp; FOC</h3>
+              <p>
+                SVPWM, Clarke and Park transforms, shunt current sensing, and cascaded
+                current–velocity–position loops for haptic and dynamic torque control.
+              </p>
+            </div>
+            <div class="skill-tags">
+              <span class="tag">STM32F4</span>
+              <span class="tag">25 kHz SVPWM</span>
+              <span class="tag">14-bit encoders</span>
+            </div>
+          </div>
+
+          <div class="skill-row reveal-child">
+            <span class="skill-idx">03</span>
+            <div>
+              <h3>Embedded systems &amp; distributed CAN</h3>
+              <p>
+                FreeRTOS task design, DMA timer-synchronised conversions, isolated CAN
+                transceivers, and low-latency ESP-NOW links for steer-by-wire and swarm agents.
+              </p>
+            </div>
+            <div class="skill-tags">
+              <span class="tag">FreeRTOS</span>
+              <span class="tag">CAN 2.0B</span>
+              <span class="tag">ESP32-S3</span>
+            </div>
+          </div>
+
+          <div class="skill-row reveal-child">
+            <span class="skill-idx">04</span>
+            <div>
+              <h3>CAD &amp; digital fabrication</h3>
+              <p>
+                Parametric SolidWorks models with FEA checks, 3-axis CNC milling of aluminium,
+                GD&amp;T drawings, and carbon-nylon prints for structural parts.
+              </p>
+            </div>
+            <div class="skill-tags">
+              <span class="tag">SolidWorks CSWA</span>
+              <span class="tag">CNC 6061-T6</span>
+              <span class="tag">PA-CF printing</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── 04 BENCH GALLERY ───────────────────────────────────────────── -->
+      <section class="sec reveal" id="bench" aria-labelledby="bench-title">
+        <div class="sec-meta reveal-child">
+          <span class="sec-num">04</span>
+          <span class="sec-kicker">From the bench</span>
+          <a class="sec-jump" href="gallery.html">Open the gallery <span aria-hidden="true">&nearr;</span></a>
+        </div>
+
+        <div class="sec-intro reveal-child">
+          <h2 class="sec-title" id="bench-title">Between CAD and a demo</h2>
+          <p class="sec-note">
+            Prints, wiring, test rigs, and the occasional failure. This is what the projects
+            look like in the middle of being figured out.
+          </p>
+        </div>
+
+        <div class="bench">
+          <figure class="b1 reveal-child">
+            <img src="images/home/bench-nite.jpg" alt="NITE 369 arm joint assembly on the workbench" width="1400" height="1050" loading="lazy" decoding="async">
+            <figcaption><span>NITE 369 &middot; joint stack</span><span>bench</span></figcaption>
+          </figure>
+          <figure class="b2 reveal-child">
+            <img src="images/home/bench-cat.jpg" alt="CAT autonomous rover during a bench test" width="1400" height="1050" loading="lazy" decoding="async">
+            <figcaption><span>CAT rover &middot; bench test</span><span>drive + sensing</span></figcaption>
+          </figure>
+          <figure class="b3 reveal-child">
+            <img src="images/home/bench-scrapx6.jpg" alt="ScrapX6 chassis during a wiring pass" width="1400" height="874" loading="lazy" decoding="async">
+            <figcaption><span>ScrapX6 &middot; chassis</span><span>wiring pass</span></figcaption>
+          </figure>
+          <figure class="b4 reveal-child">
+            <img src="images/home/bench-cat-field.jpg" alt="CAT autonomous rover during a field test" width="1400" height="1050" loading="lazy" decoding="async">
+            <figcaption><span>CAT rover &middot; field test</span><span>December 2025</span></figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <!-- ── 05 VENTURES ────────────────────────────────────────────────── -->
+      <section class="sec reveal" id="ventures" aria-labelledby="ventures-title">
+        <div class="sec-meta reveal-child">
+          <span class="sec-num">05</span>
+          <span class="sec-kicker">Startups</span>
+          <a class="sec-jump" href="startup.html">Both ventures <span aria-hidden="true">&nearr;</span></a>
+        </div>
+
+        <div class="sec-intro reveal-child">
+          <h2 class="sec-title" id="ventures-title">Two ventures</h2>
+          <p class="sec-note">
+            Two ventures run alongside the coursework and the personal builds — one in
+            robotics and automation, one in farm machinery.
+          </p>
+        </div>
+
+        <div class="ventures">
+          <a class="venture reveal-child" href="startup.html">
+            <span class="venture-no">A</span>
+            <div>
+              <h3>Avani Dynamics</h3>
+              <p>
+                Robotics, automation, and custom hardware. Mechanical design, embedded systems,
+                and control engineering for machines that have to work outside a lab.
+              </p>
+            </div>
+            <span class="venture-tag">Robotics &middot; Automation &middot; Control</span>
+            <span class="venture-arrow" aria-hidden="true">&nearr;</span>
+          </a>
+
+          <a class="venture reveal-child" href="startup.html">
+            <span class="venture-no">B</span>
+            <div>
+              <h3>Avani AgroTech</h3>
+              <p>
+                Affordable electric farm machinery for small-scale farmers — built to take the
+                load off manual labour without pricing people out of better equipment.
+              </p>
+            </div>
+            <span class="venture-tag">Agritech &middot; Electric drives</span>
+            <span class="venture-arrow" aria-hidden="true">&nearr;</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- ── 06 NOTES ───────────────────────────────────────────────────── -->
+      <section class="sec reveal" id="notes" aria-labelledby="notes-title">
+        <div class="sec-meta reveal-child">
+          <span class="sec-num">06</span>
+          <span class="sec-kicker">Engineering notes</span>
+          <a class="sec-jump" href="blog.html">The log <span aria-hidden="true">&nearr;</span></a>
+        </div>
+
+        <div class="sec-intro reveal-child">
+          <h2 class="sec-title" id="notes-title">Notes from the bench</h2>
+          <p class="sec-note">
+            I write things up as the builds settle. The first three are in progress — the
+            gearbox redesign, FOC tuning, and a season of field tests with the weeder.
+          </p>
+        </div>
+
+        <div class="notes">
+          <a class="note-row reveal-child" href="blog.html">
+            <span class="note-status">Planned</span>
+            <div>
+              <h3>Build log — NITE 369 gearbox redesign</h3>
+              <p>New ratios, print tolerances, and a second attempt at taking backlash out of the compound planetary stages.</p>
+            </div>
+            <span class="note-cat">Build log</span>
+          </a>
+
+          <a class="note-row reveal-child" href="blog.html">
+            <span class="note-status">Planned</span>
+            <div>
+              <h3>FOC tuning notes — BLDC actuator</h3>
+              <p>Current loop, velocity loop, and encoder alignment, with the scope traces that finally made it behave.</p>
+            </div>
+            <span class="note-cat">Motor control</span>
+          </a>
+
+          <a class="note-row reveal-child" href="blog.html">
+            <span class="note-status">Planned</span>
+            <div>
+              <h3>Electric finger weeder — field notes</h3>
+              <p>What a season of testing did to the prototype, and what the farmers asked for next.</p>
+            </div>
+            <span class="note-cat">Field test</span>
+          </a>
+        </div>
+
+        <p class="notes-foot">
+          Writing in progress &middot; <a href="blog.html">read the log &rarr;</a>
+        </p>
+      </section>
+
+      <!-- ── 07 EDUCATION ───────────────────────────────────────────────── -->
+      <section class="sec reveal" id="education" aria-labelledby="education-title">
+        <div class="sec-meta reveal-child">
+          <span class="sec-num">07</span>
+          <span class="sec-kicker">Education</span>
+          <a class="sec-jump" href="education.html">Credentials <span aria-hidden="true">&nearr;</span></a>
+        </div>
+
+        <div class="sec-intro reveal-child">
+          <h2 class="sec-title" id="education-title">School &amp; shop floor</h2>
+          <p class="sec-note">
+            A diploma gave me the shop floor; the degree is teaching me why the numbers work.
+          </p>
+        </div>
+
+        <div class="edu">
+          <a class="edu-row reveal-child" href="education.html">
+            <span class="edu-years">2025 &mdash; 2028</span>
+            <div>
+              <h3>B.E. Robotics &amp; Automation Engineering</h3>
+              <p>PSG College of Technology, Coimbatore — kinematics, control theory, machine vision, and industrial robot cells.</p>
+            </div>
+            <span class="edu-meta">Class of 2028</span>
+          </a>
+
+          <a class="edu-row reveal-child" href="education.html">
+            <span class="edu-years">2020 &mdash; 2023</span>
+            <div>
+              <h3>Diploma in Mechatronics Engineering</h3>
+              <p>State Board of Technical Education — machining, CNC, industrial wiring, and pneumatics.</p>
+            </div>
+            <span class="edu-meta">Graduated with distinction</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- ── 08 CONTACT ─────────────────────────────────────────────────── -->
+      <section class="contact-band reveal" id="contact" aria-labelledby="contact-title">
+        <div>
+          <p class="contact-kicker">08 &middot; Contact</p>
+          <h2 id="contact-title">Let's build something.</h2>
+        </div>
+
+        <div class="contact-side">
+          <p>
+            If you're working on robots, embedded systems, or farm machinery — or you just
+            want to compare notes on a build — my inbox is open.
+          </p>
+          <a class="contact-email" href="mailto:aaruthrun@gmail.com">aaruthrun@gmail.com</a>
+          <div class="contact-links">
+            <a href="https://github.com/aaruthrun-beep" target="_blank" rel="noopener">GitHub &nearr;</a>
+            <a href="https://linkedin.com/in/aaruthrun-saravanakumar" target="_blank" rel="noopener">LinkedIn &nearr;</a>
+            <a href="contact.html">Contact page &rarr;</a>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Shared Footer Injected via footer-manager.js -->
+  <footer id="site-footer"></footer>
+
+  <!-- Scripts - Using modular architecture -->
+  <script src="config/app.config.js?v=2026-11-15"></script>
+  <script src="data/data-store.js?v=2026-11-15"></script>
+  <script src="modules/theme/theme-manager.js?v=2026-11-15"></script>
+  <script src="modules/header/header-manager.js?v=2026-11-15"></script>
+  <script src="modules/footer/footer-manager.js?v=2026-11-15"></script>
+  <script src="modules/reveal/reveal-manager.js?v=2026-11-15"></script>
+  <script src="modules/filters/filter-manager.js?v=2026-11-15"></script>
+  <script src="modules/projects/project-manager.js?v=2026-11-15"></script>
+  <script src="modules/timeline/timeline-manager.js?v=2026-11-15"></script>
+  <script src="js/app.js?v=2026-11-15"></script>
+</body>
+</html>

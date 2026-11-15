@@ -1,0 +1,309 @@
+/* ==========================================================================
+   AARUTHRUN PORTFOLIO — ANIMATION STYLES
+   Scroll reveal animations, transitions, and motion effects.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   SCROLL REVEAL ANIMATIONS
+   Fade-up slide with staggered children
+   -------------------------------------------------------------------------- */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity var(--dur-settle) var(--ease-settle),
+    transform var(--dur-settle) var(--ease-settle);
+}
+
+.reveal.reveal-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered children inside a revealed container */
+.reveal > .reveal-child {
+  opacity: 0;
+  transform: translateY(6px);
+  transition:
+    opacity var(--dur-child) var(--ease-settle),
+    transform var(--dur-child) var(--ease-settle);
+  transition-delay: calc(var(--reveal-child-index, 0) * 45ms);
+}
+
+.reveal.reveal-in > .reveal-child {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Cards grid — each card gets its own stagger */
+.reveal .project-card,
+.reveal .project-card-vertical {
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity var(--dur-settle) var(--ease-settle),
+    transform var(--dur-settle) var(--ease-settle);
+  transition-delay: var(--reveal-delay, 0s);
+}
+
+.reveal.reveal-in .project-card,
+.reveal.reveal-in .project-card-vertical {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Timeline rows */
+.reveal .vgantt-row {
+  opacity: 0;
+  transition: opacity 400ms ease;
+  transition-delay: var(--reveal-delay, 0s);
+}
+
+.reveal.reveal-in .vgantt-row {
+  opacity: 1;
+}
+
+/* Skill items */
+.reveal .skill-item {
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity var(--dur-child) var(--ease-settle),
+    transform var(--dur-child) var(--ease-settle);
+  transition-delay: var(--reveal-delay, 0s);
+}
+
+.reveal.reveal-in .skill-item {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --------------------------------------------------------------------------
+   HOVER TRANSITIONS (applied to interactive elements)
+   -------------------------------------------------------------------------- */
+
+/* Links */
+a {
+  transition: color var(--transition-base);
+}
+
+/* Buttons */
+.btn {
+  transition:
+    border-color var(--transition-base),
+    color var(--transition-base),
+    background-color var(--transition-base);
+}
+
+/* Nav links */
+.nav-link {
+  transition: color var(--transition-base);
+}
+
+/* Cards */
+.project-card,
+.project-card-vertical {
+  transition: border-color var(--transition-base);
+}
+
+.card-title {
+  transition: color var(--transition-base);
+}
+
+/* Tags */
+.tag {
+  transition: border-color var(--transition-base), color var(--transition-base);
+}
+
+/* Theme toggle */
+.theme-toggle {
+  transition: all var(--transition-base);
+}
+
+/* --------------------------------------------------------------------------
+   HERO — ONE ORCHESTRATED MOMENT
+   A hairline dimension rule draws out beneath the name as it lands.
+   -------------------------------------------------------------------------- */
+
+.hero-name {
+  width: fit-content;
+  max-width: 100%;
+}
+
+.hero-name::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 1px;
+  margin-top: 14px;
+  background-color: var(--color-accent);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 560ms var(--ease-settle) 140ms;
+}
+
+.reveal.reveal-in .hero-name::after,
+.hero-name.reveal-in::after {
+  transform: scaleX(1);
+}
+
+/* --------------------------------------------------------------------------
+   QUIET RESPONSES TO THE PERSON
+   Underlines grow, the header acknowledges the scroll, buttons press.
+   -------------------------------------------------------------------------- */
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: 0;
+  height: 1px;
+  background-color: currentColor;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 200ms var(--ease-settle);
+}
+
+.nav-link:hover::after,
+.nav-link:focus-visible::after,
+.nav-link.active::after {
+  transform: scaleX(1);
+}
+
+/* Sticky header separates from the page once it has something to sit above */
+.site-header {
+  transition: box-shadow 240ms var(--ease-settle);
+}
+
+.site-header.is-scrolled {
+  box-shadow: 0 12px 24px -22px rgba(32, 37, 34, 0.55);
+}
+
+[data-theme="dark"] .site-header.is-scrolled {
+  box-shadow: 0 12px 24px -22px rgba(0, 0, 0, 0.9);
+}
+
+/* A button that gives under the click */
+.btn:active {
+  translate: 0 1px;
+}
+
+/* --------------------------------------------------------------------------
+   THEME TOGGLE BUTTON
+   -------------------------------------------------------------------------- */
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  background: var(--color-surface-subtle);
+  border: var(--border-default);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  margin-left: auto;
+}
+
+.theme-toggle:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.theme-toggle .toggle-icon {
+  width: 14px;
+  height: 14px;
+  display: inline-block;
+}
+
+/* --------------------------------------------------------------------------
+   TIMELINE SPECIFIC ANIMATIONS
+   -------------------------------------------------------------------------- */
+
+.vgantt-row {
+  transition: opacity 0.15s ease;
+}
+
+.vgantt-rowbg {
+  transition: fill 0.15s ease;
+}
+
+.vgantt-row:hover .vgantt-rowbg {
+  fill: var(--color-surface-hover);
+}
+
+.vgantt-bar {
+  transition: opacity 0.15s ease;
+}
+
+/* --------------------------------------------------------------------------
+   GALLEY PHOTO HOVER
+   -------------------------------------------------------------------------- */
+
+.gallery-photo {
+  transition: transform 0.3s ease, border-color 0.15s ease;
+}
+
+.gallery-photo:hover {
+  transform: scale(1.05);
+  border-color: var(--color-accent);
+}
+
+/* --------------------------------------------------------------------------
+   REDUCED MOTION PREFERENCE
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 768px) {
+  .nav-link::after {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal > .reveal-child,
+  .reveal .project-card,
+  .reveal .project-card-vertical,
+  .reveal .vgantt-row,
+  .reveal .skill-item {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .hero-name::after {
+    transform: scaleX(1) !important;
+    transition: none !important;
+  }
+
+  .nav-link::after {
+    transition: none !important;
+  }
+
+  .site-header {
+    transition: none !important;
+  }
+
+  a,
+  .btn,
+  .nav-link,
+  .project-card,
+  .project-card-vertical,
+  .card-title,
+  .tag,
+  .theme-toggle,
+  .vgantt-row,
+  .vgantt-rowbg,
+  .vgantt-bar,
+  .gallery-photo {
+    transition: none !important;
+  }
+
+  .btn:active {
+    translate: none;
+  }
+}

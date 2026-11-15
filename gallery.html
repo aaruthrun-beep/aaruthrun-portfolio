@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+(function(){
+  try {
+    var k = "portfolio-theme";
+    var v = localStorage.getItem(k);
+    if (v !== "light" && v !== "dark") {
+      v = "light";
+      try { localStorage.setItem(k, v); } catch(e) {}
+    }
+    if (v === "light") {
+      document.documentElement.setAttribute("data-theme","light");
+    }
+  } catch(e) {
+    document.documentElement.setAttribute("data-theme","light");
+  }
+})();
+</script>
+  <title>Gallery Map — Aaruthrun</title>
+  <meta name="description" content="An interactive infinite canvas of project photos.">
+
+  <link rel="stylesheet" href="css/style.css?v=2026-11-08">
+  <link rel="stylesheet" href="config/design-tokens.css?v=2026-11-08">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@500&display=swap">
+  <link rel="stylesheet" href="styles/gallery.css?v=2026-11-11">
+  <style>
+    body { overflow: hidden; touch-action: none; }
+  </style>
+</head>
+<body style="min-height: 100vh; min-height: 100dvh; height: 100dvh; display: flex; flex-direction: column;">
+
+  <header id="site-header" style="flex-shrink: 0; z-index: 1000; background: var(--bg);"></header>
+
+  <main style="flex: 1; display: flex; flex-direction: column; position: relative;">
+    <div style="position: absolute; top: 16px; left: 16px; z-index: 100; pointer-events: none;">
+      <div class="mono text-muted" style="font-size: 0.8125rem; font-weight: 600;">PROJECT GALLERY MAP</div>
+      <p style="margin: 0; font-size: 0.875rem; color: var(--text-main); font-weight: 500;">Full-size photos, scattered inside each project circle &bull; Drag to pan &bull; Scroll to zoom</p>
+      
+
+    </div>
+
+    <!-- The interactive viewport -->
+    <div class="gallery-viewport" id="gallery-viewport" style="flex: 1; position: relative; overflow: hidden; touch-action: none; background-color: var(--color-card); cursor: grab;">
+
+      <!-- The movable/zoomable canvas -->
+      <div class="gallery-canvas" id="gallery-canvas" style="position:absolute;top:0;left:0;transform-origin:0 0;transition:none;will-change:transform;background-color:var(--color-card);">
+        <!-- Subtle grid texture (CAD blueprint dots on white) -->
+        <div style="position: absolute; inset: 0; background-image: radial-gradient(rgba(0,0,0,0.05) 1px, transparent 1px); background-size: 1200px 1200px; pointer-events: none;"></div>
+
+        <!-- Rendered by JS -->
+      </div>
+
+    </div>
+
+    <!-- Controls overlay -->
+    <div style="position: absolute; bottom: 24px; right: 24px; z-index: 100; display: flex; gap: 8px; flex-direction: column;">
+      <button class="btn btn-secondary btn-mono" id="btn-zoom-in"    style="width: 40px; height: 40px; padding: 0; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; background: #FFFFFF; border-color: var(--border-strong); color: var(--text-main); box-shadow: 0 2px 8px rgba(0,0,0,0.08);">+</button>
+      <button class="btn btn-secondary btn-mono" id="btn-zoom-reset" style="width: 40px; height: 40px; padding: 0; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; background: #FFFFFF; border-color: var(--border-strong); color: var(--text-main); box-shadow: 0 2px 8px rgba(0,0,0,0.08);">FIT</button>
+      <button class="btn btn-secondary btn-mono" id="btn-zoom-out"   style="width: 40px; height: 40px; padding: 0; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; background: #FFFFFF; border-color: var(--border-strong); color: var(--text-main); box-shadow: 0 2px 8px rgba(0,0,0,0.08);">&minus;</button>
+    </div>
+  </main>
+
+  <!-- Scripts - Using modular architecture -->
+  <script src="config/app.config.js"></script>
+  <script src="data/data-store.js"></script>
+  <script src="modules/theme/theme-manager.js?v=2026-11-08"></script>
+  <script src="modules/header/header-manager.js?v=2026-11-08"></script>
+  <script src="modules/footer/footer-manager.js?v=2026-11-08"></script>
+  <script src="modules/reveal/reveal-manager.js?v=2026-11-08"></script>
+  <script src="modules/gallery/gallery-manager.js?v=2026-11-14"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

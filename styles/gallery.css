@@ -1,0 +1,72 @@
+/* ==================================================================
+   GALLERY MAP - POLAROID PRINTS
+   The frame is added around the photo; the photo keeps its natural
+   pixel size. Layout packs the framed box, so no-overlap still holds.
+   --side and --bottom are set per print by the renderer.
+   ================================================================== */
+
+.gl-photo {
+  position: absolute;
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  transform-origin: 50% 50%;
+  will-change: transform;
+}
+
+.gl-photo .polaroid {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  box-sizing: border-box;
+  background: #fbf9f3;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.28), 0 8px 18px rgba(0, 0, 0, 0.18);
+}
+
+.gl-photo .polaroid img {
+  display: block;
+  max-width: none;
+  max-height: none;
+}
+
+.gl-photo .polaroid figcaption {
+  position: absolute;
+  left: var(--side, 0px);
+  right: var(--side, 0px);
+  bottom: 0;
+  height: var(--bottom, 0px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
+  overflow: hidden;
+  font-family: 'Caveat', 'Bradley Hand', 'Segoe Script', cursive;
+  font-size: calc(var(--bottom, 0px) * 0.38);
+  line-height: 1.05;
+  color: #3a3a3a;
+}
+
+.gl-photo .polaroid .note {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.gl-photo .polaroid time {
+  font-size: 0.8em;
+}
+
+/* Hover is applied by the gallery module (tilt follows the pointer) */
+.gl-photo.is-hover .polaroid {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3), 0 18px 44px rgba(0, 0, 0, 0.26);
+}
+
+[data-theme="dark"] .gl-photo .polaroid {
+  background: #efebe2;
+}
+
+[data-theme="dark"] .gl-photo .polaroid figcaption {
+  color: #2f2f2f;
+}

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+(function(){
+  try {
+    var k = "portfolio-theme";
+    var v = localStorage.getItem(k);
+    if (v !== "light" && v !== "dark") {
+      v = "light";
+      try { localStorage.setItem(k, v); } catch(e) {}
+    }
+    if (v === "light") {
+      document.documentElement.setAttribute("data-theme","light");
+    }
+  } catch(e) {
+    document.documentElement.setAttribute("data-theme","light");
+  }
+})();
+</script>
+  <title>Education, Credentials & Competitions — Aaruthrun Robotics</title>
+  <meta name="description" content="Academic background and technical achievements of Aaruthrun: B.E. Robotics & Automation at PSG Tech, Diploma in Mechatronics, IndiaSkills, and #BuildAtHive.">
+
+  <!-- OpenGraph Metadata -->
+  <meta property="og:title" content="Education & Credentials — Aaruthrun">
+  <meta property="og:description" content="Academic degrees, professional certifications, and competitive robotics accolades.">
+  <meta property="og:image" content="images/og-image.webp">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Google Fonts: Inter + JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css?v=2026-11-08">
+  <link rel="stylesheet" href="config/design-tokens.css?v=2026-11-08">
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Shared Header -->
+  <header id="site-header"></header>
+
+  <main id="main-content">
+    <div class="container">
+      
+      <!-- Page Header -->
+      <section class="reveal" style="padding: 40px 0 24px 0; border-bottom: 1px solid var(--border); margin-bottom: 40px;">
+        <div class="mono text-muted" style="font-size: 0.8125rem; margin-bottom: 6px; letter-spacing: 0.04em;">ACADEMIC PROFILE // PEDAGOGY & COMPETITIVE HONORS</div>
+        <h1 style="font-size: 2.5rem; letter-spacing: -0.03em; font-weight: 600;">Education & Credentials</h1>
+        <p style="color: var(--text-secondary); max-width: 680px; margin-top: 8px; line-height: 1.65;">
+          Formal training bridging vocational, hands-on workshop mechatronics with rigorous university-level mathematical modeling, dynamics, and autonomous robotics engineering.
+        </p>
+        <blockquote class="engineering-quote" style="margin-top: 14px;">
+          <p class="engineering-quote-body">
+            "Of all the frictional resistances, the one that most retards human movement is ignorance.
+            The friction which results from ignorance can be reduced only by the spread of knowledge and
+            the unification of the heterogeneous elements of humanity. No effort could be better spent."
+          </p>
+          <div class="engineering-quote-cite">
+            <span class="engineering-quote-author">NIKOLA TESLA</span>
+            <span class="engineering-quote-source">// THE CENTURY MAGAZINE, JUN 1900</span>
+          </div>
+        </blockquote>
+      </section>
+
+      <!-- Section: Vertical Degree Timeline -->
+      <section class="reveal" style="margin-bottom: 64px;" aria-labelledby="academic-degrees-title">
+        <div class="section-header">
+          <div class="section-title-wrap">
+            
+            <h2 id="academic-degrees-title" style="font-size: 1.4rem; letter-spacing: -0.01em;">Academic Qualifications</h2>
+          </div>
+        </div>
+
+        <div class="v-timeline">
+          
+          <!-- B.E. Degree -->
+          <div class="v-timeline-item">
+            <div class="v-timeline-node" style="background-color: var(--accent); border-color: var(--accent);"></div>
+            <div class="v-timeline-date">2025 — 2028 // CANDIDATE (CLASS OF 2028)</div>
+            <h3 class="v-timeline-title">Bachelor of Engineering (B.E.) — Robotics & Automation Engineering</h3>
+            <p class="v-timeline-sub" style="font-weight: 500; color: var(--text-main);">
+              PSG College of Technology, Coimbatore, Tamil Nadu
+            </p>
+            <div class="v-timeline-body">
+              <p style="font-size: 0.875rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 12px;">
+                Intensive curriculum focusing on advanced multi-body kinematics, modern control theory, digital image processing, and industrial robot cells. Conducted specialized research in cycloidal drive torque ripple minimization and distributed CAN nodes for 6-axis articulated arms.
+              </p>
+              
+              <div class="mono text-muted" style="font-size: 0.75rem; margin-bottom: 6px; letter-spacing: 0.04em;">RELEVANT COURSEWORK & LABS:</div>
+              <div class="tag-list" style="margin-bottom: 8px;">
+                <span class="tag">Robot Kinematics & Dynamics</span>
+                <span class="tag">Machine Vision Systems</span>
+                <span class="tag">Field-Oriented Motor Drives</span>
+                <span class="tag">Microcontroller & Embedded RTOS</span>
+                <span class="tag">Industrial Manipulators & ROS2</span>
+                <span class="tag">PLC, SCADA & Industrial Networks</span>
+                <span class="tag">Sensors & Signal Conditioning</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Diploma Degree -->
+          <div class="v-timeline-item">
+            <div class="v-timeline-node"></div>
+            <div class="v-timeline-date">2020 — 2023 // GRADUATED WITH DISTINCTION</div>
+            <h3 class="v-timeline-title">Diploma in Mechatronics Engineering</h3>
+            <p class="v-timeline-sub" style="font-weight: 500; color: var(--text-main);">
+              State Board of Technical Education
+            </p>
+            <div class="v-timeline-body">
+              <p style="font-size: 0.875rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 12px;">
+                Extensive practical shop-floor foundation in mechanical machining and industrial automation. Spent hundreds of hours operating manual lathes, 3-axis CNC milling centers, wiring industrial relay control panels, and pneumatics/hydraulics test rigs.
+              </p>
+              
+              <div class="mono text-muted" style="font-size: 0.75rem; margin-bottom: 6px; letter-spacing: 0.04em;">FOUNDATIONAL TRAINING:</div>
+              <div class="tag-list">
+                <span class="tag">Manual & CNC Machining</span>
+                <span class="tag">SolidWorks CAD & Drafting</span>
+                <span class="tag">Industrial Hydraulics & Pneumatics</span>
+                <span class="tag">Analog & Digital Electronics</span>
+                <span class="tag">Relay Logic & Microcontroller Interfacing</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Section: Competitive Accolades & Hackathons (Vertical Flow) -->
+      <section class="reveal" style="margin-bottom: 56px;" aria-labelledby="competitions-title">
+        <div class="section-header">
+          <div class="section-title-wrap">
+            
+            <h2 id="competitions-title">Competitive Arenas & Rapid Sprints</h2>
+          </div>
+          <span class="mono text-muted" style="font-size: 0.75rem; letter-spacing: 0.04em;">HANDS-ON PERFORMANCE BENCHMARKS</span>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 16px;">
+          
+          <div style="border: 1px solid var(--border); padding: 24px; background-color: var(--bg);">
+            <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; flex-wrap: wrap; gap: 8px;">
+              <div>
+                <span class="mono text-muted" style="font-size: 0.75rem; letter-spacing: 0.04em;">NATIONAL SKILLS ARENA</span>
+                <h3 style="font-size: 1.2rem; margin-top: 2px; letter-spacing: -0.01em;">IndiaSkills Mobile Robotics & Mechatronics</h3>
+              </div>
+              <span class="status-chip active">STATE FINALIST</span>
+            </div>
+            <p style="font-size: 0.875rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 12px;">
+              Competed in rigorous timed challenges requiring autonomous spatial navigation, color sorting via camera streams, precision electromechanical alignment, and live hardware fault-finding under strict benchmarking criteria.
+            </p>
+            <div class="tag-list">
+              <span class="tag">Autonomous Navigation</span>
+              <span class="tag">On-the-Fly Fault Debugging</span>
+              <span class="tag">Machine Vision</span>
+              <span class="tag">Precision Assembly</span>
+            </div>
+          </div>
+
+          <div style="border: 1px solid var(--border); padding: 24px; background-color: var(--bg);">
+            <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; flex-wrap: wrap; gap: 8px;">
+              <div>
+                <span class="mono text-muted" style="font-size: 0.75rem; letter-spacing: 0.04em;">HARDWARE PROTOTYPING SPRINT</span>
+                <h3 style="font-size: 1.2rem; margin-top: 2px; letter-spacing: -0.01em;">#BuildAtHive 48-Hour Engineering Challenge</h3>
+              </div>
+              <span class="status-chip active">WINNER / 1ST PLACE</span>
+            </div>
+            <p style="font-size: 0.875rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 12px;">
+              Architected, CAD-modeled, 3D printed, soldered, and tuned a functional smart electromechanical actuator module from scratch in 48 hours. Achieved closed-loop angular feedback, wireless MQTT telemetry over ESP32, and demonstrated live compliant haptic feedback to the technical evaluation panel.
+            </p>
+            <div class="tag-list">
+              <span class="tag">48h Hardware Sprint</span>
+              <span class="tag">Smart Actuator</span>
+              <span class="tag">ESP32 Telemetry</span>
+              <span class="tag">Haptic Control</span>
+            </div>
+          </div>
+
+          <div style="border: 1px solid var(--border); padding: 20px; background-color: var(--surface-subtle);">
+            <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px; flex-wrap: wrap; gap: 8px;">
+              <span class="mono text-muted" style="font-size: 0.75rem; letter-spacing: 0.04em;">CONFERENCE PAPER PRESENTATIONS</span>
+              <span class="mono text-muted" style="font-size: 0.75rem;">REGIONAL TECH SYMPOSIA</span>
+            </div>
+            <h4 style="margin-bottom: 4px; letter-spacing: -0.01em;">Technical Research Presentations on Actuator & Kinematics Design</h4>
+            <p style="font-size: 0.8125rem; color: var(--text-secondary); margin-bottom: 0; line-height: 1.5;">
+              Authored and presented technical papers on "Zero-Backlash Cycloidal Speed Reducers for Compact Robotic Arms" and "Distributed Hermaphroditic Latching Topologies for Modular Swarms" across college research symposia.
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Section: Professional Certifications (Vertical Stack) -->
+      <section class="reveal" style="margin-bottom: 40px;" aria-labelledby="certs-title">
+        <div class="section-header">
+          <div class="section-title-wrap">
+            
+            <h2 id="certs-title">Professional Certifications & Verified Training</h2>
+          </div>
+          <span class="mono text-muted" style="font-size: 0.75rem; letter-spacing: 0.04em;">INDUSTRY CREDENTIALS</span>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 14px;">
+          
+          <div style="border: 1px solid var(--border); padding: 20px; background-color: var(--surface-subtle); display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px;">
+            <div style="max-width: 780px;">
+              <div class="mono text-muted" style="font-size: 0.75rem; margin-bottom: 4px; letter-spacing: 0.04em;">MECHANICAL DESIGN // DASSAULT SYSTÈMES</div>
+              <h4 style="font-size: 1rem; margin-bottom: 4px; letter-spacing: -0.01em;">Certified SolidWorks Associate (CSWA)</h4>
+              <p style="font-size: 0.8125rem; color: var(--text-secondary); margin-bottom: 8px; line-height: 1.5;">
+                Demonstrated mastery in parametric 3D solid modeling, bottom-up multi-body assembly constraints, interference checks, material mass properties, and manufacturing drawing production conforming to ASME Y14.5 standards.
+              </p>
+              <div class="tag-list">
+                <span class="tag">Parametric Modeling</span>
+                <span class="tag">Interference Checking</span>
+                <span class="tag">GD&T</span>
+              </div>
+            </div>
+            <span class="mono text-muted" style="font-size: 0.75rem;">VERIFIED // CSWA</span>
+          </div>
+
+          <div style="border: 1px solid var(--border); padding: 20px; background-color: var(--surface-subtle); display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px;">
+            <div style="max-width: 780px;">
+              <div class="mono text-muted" style="font-size: 0.75rem; margin-bottom: 4px; letter-spacing: 0.04em;">REAL-TIME FIRMWARE // ARM & FREERTOS</div>
+              <h4 style="font-size: 1rem; margin-bottom: 4px; letter-spacing: -0.01em;">ARM Cortex-M Architecture & Deterministic RTOS</h4>
+              <p style="font-size: 0.8125rem; color: var(--text-secondary); margin-bottom: 8px; line-height: 1.5;">
+                Deep-dive training on Cortex-M4/M7 register-level peripheral drivers, DMA circular buffers, NVIC interrupt preemption, CMSIS-DSP math primitives, and FreeRTOS task synchronization for real-time motor control loops.
+              </p>
+              <div class="tag-list">
+                <span class="tag">STM32 Hardware Timers</span>
+                <span class="tag">DMA Interrupts</span>
+                <span class="tag">CMSIS-DSP</span>
+              </div>
+            </div>
+            <span class="mono text-muted" style="font-size: 0.75rem;">VERIFIED // EMBEDDED</span>
+          </div>
+
+          <div style="border: 1px solid var(--border); padding: 20px; background-color: var(--surface-subtle); display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px;">
+            <div style="max-width: 780px;">
+              <div class="mono text-muted" style="font-size: 0.75rem; margin-bottom: 4px; letter-spacing: 0.04em;">POWER ELECTRONICS // BRUSHLESS MOTOR DRIVES</div>
+              <h4 style="font-size: 1rem; margin-bottom: 4px; letter-spacing: -0.01em;">Field-Oriented Control (FOC) Specialization</h4>
+              <p style="font-size: 0.8125rem; color: var(--text-secondary); margin-bottom: 8px; line-height: 1.5;">
+                Advanced space vector pulse-width modulation (SVPWM), Clarke and Park mathematical transformations, decoupling cross-coupling back-EMF terms, and inline high-CMRR current sensing for precision servo actuators.
+              </p>
+              <div class="tag-list">
+                <span class="tag">25kHz SVPWM</span>
+                <span class="tag">Park & Clarke Transforms</span>
+                <span class="tag">Current PI Tuning</span>
+              </div>
+            </div>
+            <span class="mono text-muted" style="font-size: 0.75rem;">VERIFIED // FOC MOTOR DRIVES</span>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Shared Footer -->
+  <footer id="site-footer"></footer>
+
+  <!-- Scripts -->
+  <!-- Scripts - Using modular architecture -->
+  <script src="config/app.config.js"></script>
+  <script src="data/data-store.js"></script>
+  <script src="modules/theme/theme-manager.js?v=2026-11-08"></script>
+  <script src="modules/header/header-manager.js?v=2026-11-08"></script>
+  <script src="modules/footer/footer-manager.js?v=2026-11-08"></script>
+  <script src="modules/reveal/reveal-manager.js?v=2026-11-08"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

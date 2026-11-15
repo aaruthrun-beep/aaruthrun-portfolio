@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+(function(){
+  try {
+    var k = "portfolio-theme";
+    var v = localStorage.getItem(k);
+    if (v !== "light" && v !== "dark") {
+      v = "light";
+      try { localStorage.setItem(k, v); } catch(e) {}
+    }
+    if (v === "light") {
+      document.documentElement.setAttribute("data-theme","light");
+    }
+  } catch(e) {
+    document.documentElement.setAttribute("data-theme","light");
+  }
+})();
+</script>
+  <title>Startups — Avani Dynamics & Avani AgroTech</title>
+  <meta name="description" content="Two engineering ventures by Aaruthrun: Avani Dynamics (robotics, automation, advanced engineering) and Avani AgroTech (electric agricultural machinery for small-scale farmers).">
+
+  <!-- OpenGraph Metadata -->
+  <meta property="og:title" content="Startups — Avani Dynamics & Avani AgroTech">
+  <meta property="og:description" content="Two engineering ventures: Avani Dynamics and Avani AgroTech — building machines that matter.">
+  <meta property="og:image" content="images/mars-swarm-diagram.webp">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Google Fonts: Inter + JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css?v=2026-11-08">
+  <link rel="stylesheet" href="config/design-tokens.css?v=2026-11-08">
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Shared Header -->
+  <header id="site-header"></header>
+
+  <main id="main-content">
+    <div class="container">
+
+      <!-- ══════════════════════════════════════════════════════
+           PAGE HEADER
+           ══════════════════════════════════════════════════════ -->
+      <section style="padding: 40px 0 28px 0; border-bottom: 1px solid var(--border); margin-bottom: 48px;">
+        <span class="mono text-muted" style="font-size: 0.75rem; letter-spacing: 0.06em;">ENGINEERING VENTURES</span>
+        <h1 style="font-size: 2.5rem; letter-spacing: -0.03em; font-weight: 600; margin: 6px 0 12px 0;">Startups</h1>
+        <p style="max-width: 640px; color: var(--text-secondary); font-size: 1rem; line-height: 1.65; margin: 0;">
+          Two independent engineering ventures built around hardware, real-world problems, and hands-on development.
+          Each with a distinct focus — one in robotics and automation, one in agricultural machinery.
+        </p>
+      </section>
+
+      <!-- ══════════════════════════════════════════════════════
+           SIDE-BY-SIDE OVERVIEW
+           ══════════════════════════════════════════════════════ -->
+      <section style="margin-bottom: 96px;" aria-label="Startup overview">
+        <div id="startup-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1px; border: 1px solid var(--border); background-color: var(--border);">
+
+          <!-- Avani Dynamics Card -->
+          <div style="background-color: var(--bg); padding: clamp(30px, 4vw, 48px); display: flex; flex-direction: column; gap: 24px;">
+            <!-- Logo -->
+            <div style="height: 80px; display: flex; align-items: center;">
+              <img src="images/startup/avani-dynamics/logo.png" alt="Avani Dynamics Logo" style="max-height: 128px; width: auto; max-width: 100%; object-fit: contain; display: block;" loading="eager">
+            </div>
+
+            <div>
+              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                
+              </div>
+              <h2 style="font-size: 1.4rem; letter-spacing: -0.02em; margin-bottom: 6px;">Avani Dynamics</h2>
+              <p class="mono text-muted" style="font-size: 0.8125rem; margin-bottom: 12px; letter-spacing: 0.03em;">ENGINEERING IDEAS INTO REALITY.</p>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.65; margin-bottom: 0;">
+                Robotics, automation, and advanced engineering. Developing robotic systems,
+                intelligent machines, and custom hardware through mechanical design, embedded systems, and control engineering.
+              </p>
+            </div>
+
+            <div>
+              <div class="mono text-muted" style="font-size: 0.7rem; margin-bottom: 8px; text-transform: uppercase;">Focus Areas</div>
+              <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+                <span class="tag">ROBOTICS</span>
+                <span class="tag">EMBEDDED SYSTEMS</span>
+                <span class="tag">MOTOR CONTROL</span>
+                <span class="tag">MECHANICAL DESIGN</span>
+                <span class="tag">PCB DESIGN</span>
+              </div>
+            </div>
+
+            <div style="margin-top: auto; padding-top: 8px; border-top: 1px solid var(--border); display: flex; gap: 10px; flex-wrap: wrap;">
+              <a href="#dynamics-detail" class="btn btn-primary btn-sm btn-mono">DEEP DIVE &darr;</a>
+              <a href="projects.html" class="btn btn-sm btn-mono btn-secondary">PROJECTS &rarr;</a>
+            </div>
+          </div>
+
+          <!-- Avani AgroTech Card -->
+          <div style="background-color: var(--surface-subtle); padding: clamp(30px, 4vw, 48px); display: flex; flex-direction: column; gap: 24px;">
+            <!-- Logo placeholder — no logo yet -->
+            <div style="height: 80px; display: flex; align-items: center;">
+              <div style="height: 80px; display: flex; align-items: center;">
+              <img src="images/startup/Avani agrotech/Interwoven Knot Agrotech Logo.png" alt="Avani AgroTech Logo" style="max-height: 128px; width: auto; max-width: 100%; object-fit: contain; display: block; margin: auto;">
+            </div>
+            </div>
+
+            <div>
+              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                
+              </div>
+              <h2 style="font-size: 1.4rem; letter-spacing: -0.02em; margin-bottom: 6px;">Avani AgroTech</h2>
+              <p class="mono text-muted" style="font-size: 0.8125rem; margin-bottom: 12px; letter-spacing: 0.03em;">ENGINEERING A SMARTER WAY TO FARM.</p>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.65; margin-bottom: 0;">
+                Affordable electric-powered agricultural machinery for small-scale farmers.
+                Reducing manual labour, improving field efficiency, and making modern farm equipment more accessible.
+              </p>
+            </div>
+
+            <div>
+              <div class="mono text-muted" style="font-size: 0.7rem; margin-bottom: 8px; text-transform: uppercase;">Focus Areas</div>
+              <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+                <span class="tag">ELECTRIC MACHINERY</span>
+                <span class="tag">PRECISION WEEDING</span>
+                <span class="tag">SOIL PREPARATION</span>
+                <span class="tag">FARM AUTOMATION</span>
+                <span class="tag">LOW-COST DESIGN</span>
+              </div>
+            </div>
+
+            <div style="margin-top: auto; padding-top: 8px; border-top: 1px solid var(--border); display: flex; gap: 10px; flex-wrap: wrap;">
+              <a href="#agrotech-detail" class="btn btn-primary btn-sm btn-mono">DEEP DIVE &darr;</a>
+              <a href="projects.html" class="btn btn-sm btn-mono btn-secondary">PROJECTS &rarr;</a>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Responsive fallback note -->
+        <style>
+          @media (max-width: 680px) {
+            #startup-grid { grid-template-columns: 1fr !important; }
+          }
+        </style>
+      </section>
+
+      <!-- ══════════════════════════════════════════════════════
+           DIVIDER
+           ══════════════════════════════════════════════════════ -->
+      <div style="border-top: 2px solid var(--border-strong); margin-bottom: 64px; display: flex; align-items: center; gap: 16px; padding-top: 12px;">
+        <span class="mono text-muted" style="font-size: 0.75rem; white-space: nowrap;">01 // AVANI DYNAMICS — IN DEPTH</span>
+        <div style="flex: 1; height: 1px; background: var(--border);"></div>
+      </div>
+
+      <!-- ══════════════════════════════════════════════════════
+           AVANI DYNAMICS — DEEP DIVE
+           ══════════════════════════════════════════════════════ -->
+      <section id="dynamics-detail" style="margin-bottom: 64px;">
+
+        <!-- Dynamics Header -->
+        <section style="padding-bottom: 32px; border-bottom: 1px solid var(--border); margin-bottom: 40px;">
+          <div style="margin-bottom: 20px;">
+            <img src="images/startup/avani-dynamics/logo.png" alt="Avani Dynamics Logo" style="max-height: 128px; width: auto; max-width: 100%; object-fit: contain; display: block;" loading="lazy">
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
+            <span class="status-chip active"><span class="status-dot"></span><span>ROBOTICS · AUTOMATION · ADVANCED ENGINEERING</span></span>
+            
+          </div>
+          <h2 style="font-size: 2rem; letter-spacing: -0.02em; margin-bottom: 6px;">Avani Dynamics</h2>
+          <p class="mono text-muted" style="font-size: 1rem; margin-bottom: 14px; letter-spacing: 0.03em;">ENGINEERING IDEAS INTO REALITY.</p>
+          <p class="lead" style="max-width: 720px; color: var(--text-secondary); margin-bottom: 28px;">
+            Avani Dynamics is an engineering venture focused on developing innovative robotic systems,
+            intelligent machines, and custom engineering solutions. By combining mechanical design,
+            embedded systems, electronics, and control engineering, the company transforms experimental
+            concepts into functional hardware.
+          </p>
+          <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+            <a href="projects.html" class="btn btn-primary btn-mono"><span>EXPLORE PROJECTS</span> &rarr;</a>
+            <a href="#coll-cta" class="btn btn-secondary btn-mono"><span>COLLABORATE</span> &rarr;</a>
+          </div>
+        </section>         <!-- Dynamics: Engineering Disciplines -->
+        <section style="padding: 40px 0; border-bottom: 1px solid var(--border);" aria-labelledby="dyn-tech-title">
+          <div class="section-header">
+            <div class="section-title-wrap">
+              
+              <h3 id="dyn-tech-title" style="font-size: 1.3rem; letter-spacing: -0.01em;">Engineering Across Disciplines</h3>
+            </div>
+            <a href="skills.html" class="mono text-muted" style="font-size: 0.8125rem;">SKILLS MATRIX &rarr;</a>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 16px;">
+            <div class="vertical-feature-item">
+              <div class="vertical-feature-header"><h4 class="vertical-feature-title" style="font-size: 1rem;">Robotics &amp; Autonomous Systems</h4></div>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.65; margin-bottom: 0;">
+                Robotic manipulators, mobile robots, autonomous navigation, and intelligent machine coordination.
+              </p>
+            </div>
+            <div class="vertical-feature-item">
+              <div class="vertical-feature-header"><h4 class="vertical-feature-title" style="font-size: 1rem;">Actuation &amp; Mechanical Design</h4></div>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.65; margin-bottom: 0;">
+                Custom actuators, gearboxes, transmission mechanisms, and innovative mechanical architectures.
+              </p>
+            </div>
+            <div class="vertical-feature-item">
+              <div class="vertical-feature-header"><h4 class="vertical-feature-title" style="font-size: 1rem;">Embedded Systems &amp; Control</h4></div>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.65; margin-bottom: 0;">
+                Custom electronics, microcontroller-based systems, motor control, and distributed computing.
+              </p>
+            </div>
+            <div class="vertical-feature-item">
+              <div class="vertical-feature-header"><h4 class="vertical-feature-title" style="font-size: 1rem;">Prototyping &amp; R&amp;D</h4></div>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.65; margin-bottom: 0;">
+                CAD, rapid prototyping, hardware integration, and experimental validation.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Dynamics: Projects -->
+        <section style="padding: 40px 0; border-bottom: 1px solid var(--border);" aria-labelledby="dyn-proj-title">
+          <div class="section-header">
+            <div class="section-title-wrap">
+              
+              <h3 id="dyn-proj-title">From Concepts to Functional Machines</h3>
+            </div>
+            <a href="projects.html" class="mono text-accent" style="font-size: 0.8125rem;">VIEW ALL PROJECTS &rarr;</a>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 16px;">
+            <div class="vertical-feature-item">
+              <div class="vertical-feature-header">
+                <h4 class="vertical-feature-title"><a href="project.html?slug=nite-369" class="text-main">NITE 369 — Six-Axis Robotic Arm</a></h4>
+              </div>
+              <p style="font-size: 0.875rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">
+                A robotic manipulator featuring fully 3D-printed structural components, custom compound planetary gearboxes, and distributed control using three RP2040 microcontrollers.
+              </p>
+            </div>
+            <div class="vertical-feature-item">
+              <div class="vertical-feature-header">
+                <h4 class="vertical-feature-title"><a href="project.html?slug=mars-369" class="text-main">MARS 369 — Modular Robotics</a></h4>
+              </div>
+              <p style="font-size: 0.875rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">
+                A reconfigurable robotics platform exploring autonomous coordination, modular docking, and collaborative robotic systems.
+              </p>
+            </div>
+            <div class="vertical-feature-item">
+              <div class="vertical-feature-header">
+                <h4 class="vertical-feature-title"><a href="project.html?slug=scrapx6" class="text-main">ScrapX6 — Six-Axis Robotic Arm</a></h4>
+              </div>
+              <p style="font-size: 0.875rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">
+                A robotic manipulator built from salvaged components using stepper motors and accessible electronics. Secured third place at Onfluence 2026.
+              </p>
+            </div>
+            <div class="vertical-feature-item">
+              <div class="vertical-feature-header">
+                <h4 class="vertical-feature-title"><a href="project.html?slug=cat-autonomous-rover" class="text-main">Autonomous Rover Systems</a></h4>
+              </div>
+              <p style="font-size: 0.875rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">
+                Mobile robotics projects focused on embedded control, sensor integration, and autonomous navigation.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Dynamics: Approach -->
+        <section style="padding: 40px 0; border-bottom: 1px solid var(--border);" aria-labelledby="dyn-approach-title">
+          <div class="section-header">
+            <div class="section-title-wrap">
+              
+              <h3 id="dyn-approach-title">Design. Build. Test. Improve.</h3>
+            </div>
+          </div>
+          <div style="border: 1px solid var(--border); padding: 24px; background-color: var(--surface-subtle);">
+            <p style="color: var(--text-secondary); line-height: 1.65; margin-bottom: 12px;">
+              From initial concepts to functional prototypes, every project follows an iterative engineering
+              process involving research, mechanical and electronic design, hardware development, and experimental testing.
+            </p>
+            <p style="color: var(--text-secondary); line-height: 1.65; margin-bottom: 0;">
+              Open-source development and technical documentation support knowledge sharing, collaboration, and accessible engineering.
+            </p>
+          </div>
+        </section>
+
+        <!-- Dynamics: Founder -->
+        <section style="padding: 40px 0;" aria-labelledby="dyn-founder-title">
+          <div class="section-header">
+            <div class="section-title-wrap">
+              
+              <h3 id="dyn-founder-title">Aaruthrun</h3>
+            </div>
+            <span class="mono text-muted" style="font-size: 0.75rem;">FOUNDER &amp; ROBOTICS SYSTEMS ARCHITECT</span>
+          </div>
+          <div style="border: 1px solid var(--border); padding: 24px; background-color: var(--bg);">
+            <p style="font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.65; margin-bottom: 12px;">
+              Robotics and Automation Engineering student with a background in Mechatronics, focused on robotic manipulation, custom actuation, embedded systems, and autonomous machines.
+            </p>
+            <p style="font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.65; margin-bottom: 16px;">
+              Avani Dynamics brings these interests together through hands-on engineering, experimental R&amp;D, and the development of innovative robotic technologies.
+            </p>
+            <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+              <a href="https://github.com/aaruthrun-beep" target="_blank" rel="noopener" class="btn btn-sm btn-mono btn-secondary"><span>GITHUB</span> &nearr;</a>
+              <a href="https://linkedin.com/in/aaruthrun-saravanakumar" target="_blank" rel="noopener" class="btn btn-sm btn-mono btn-secondary"><span>LINKEDIN</span> &nearr;</a>
+              <a href="index.html#about-bio" class="btn btn-sm btn-mono btn-secondary"><span>PORTFOLIO</span> &rarr;</a>
+            </div>
+          </div>
+        </section>
+
+      </section>
+
+      <!-- ══════════════════════════════════════════════════════
+           DIVIDER
+           ══════════════════════════════════════════════════════ -->
+      <div style="border-top: 2px solid var(--border-strong); margin-bottom: 64px; display: flex; align-items: center; gap: 16px; padding-top: 12px;">
+        <span class="mono text-muted" style="font-size: 0.75rem; white-space: nowrap;">02 // AVANI AGROTECH — IN DEPTH</span>
+        <div style="flex: 1; height: 1px; background: var(--border);"></div>
+      </div>
+
+      <!-- ══════════════════════════════════════════════════════
+           AVANI AGROTECH — DEEP DIVE
+           ══════════════════════════════════════════════════════ -->
+      <section id="agrotech-detail" style="margin-bottom: 64px;">
+
+        <!-- Agrotech Header -->
+        <section style="padding-bottom: 32px; border-bottom: 1px solid var(--border); margin-bottom: 40px;">
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
+            <span class="status-chip active"><span class="status-dot"></span><span>AGRICULTURAL MACHINERY · ELECTRIC FARM EQUIPMENT · PRECISION WEEDING</span></span>
+            
+          </div>
+          <h2 style="font-size: 2rem; letter-spacing: -0.02em; margin-bottom: 6px;">Avani AgroTech</h2>
+          <p class="mono text-accent" style="font-size: 1rem; margin-bottom: 14px;">ENGINEERING A SMARTER WAY TO FARM.</p>
+          <p class="lead" style="max-width: 860px; color: var(--text-secondary); margin-bottom: 24px;">
+            Avani AgroTech focuses on developing affordable agricultural machinery and electric-powered
+            equipment to simplify farming operations. By combining mechanical engineering, electric drive
+            systems, and practical design, the venture aims to reduce manual labour, improve efficiency, and
+            make modern farm machinery more accessible to small-scale farmers.
+          </p>
+          <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+            <a href="projects.html" class="btn btn-primary btn-mono"><span>EXPLORE PROJECTS</span> &rarr;</a>
+            <a href="#coll-cta" class="btn btn-secondary btn-mono"><span>COLLABORATE</span> &rarr;</a>
+          </div>
+        </section>
+
+        <!-- Agrotech: Engineering Areas -->
+        <section style="padding: 40px 0; border-bottom: 1px solid var(--border);" aria-labelledby="agr-tech-title">
+          <div class="section-header">
+            <div class="section-title-wrap">
+              
+              <h3 id="agr-tech-title">Practical Engineering for Agriculture</h3>
+            </div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 16px;">
+            <div class="vertical-feature-item">
+              <div class="vertical-feature-header"><h4 class="vertical-feature-title">Electric Farm Machinery</h4></div>
+              <p style="font-size: 0.875rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">
+                Electric-powered equipment for soil preparation, cultivation, and other labour-intensive agricultural operations.
+              </p>
+            </div>
+            <div class="vertical-feature-item">
+              <div class="vertical-feature-header"><h4 class="vertical-feature-title">Precision Weeding Systems</h4></div>
+              <p style="font-size: 0.875rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">
+                Innovative mechanical weeding solutions for crop-row cultivation, inter-row weed removal, and organic farming.
+              </p>
+            </div>
+            <div class="vertical-feature-item">
+              <div class="vertical-feature-header"><h4 class="vertical-feature-title">Soil Preparation Equipment</h4></div>
+              <p style="font-size: 0.875rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">
+                Compact, purpose-built machinery for tilling, drilling, and preparing soil for planting.
+              </p>
+            </div>
+            <div class="vertical-feature-item">
+              <div class="vertical-feature-header"><h4 class="vertical-feature-title">Sustainable Farm Mechanization</h4></div>
+              <p style="font-size: 0.875rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">
+                Affordable, energy-efficient equipment designed around the practical needs of small-scale farmers.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Agrotech: Projects -->
+        <section style="padding: 40px 0; border-bottom: 1px solid var(--border);" aria-labelledby="agr-proj-title">
+          <div class="section-header">
+            <div class="section-title-wrap">
+              
+              <h3 id="agr-proj-title">Built Around Real Farming Challenges</h3>
+            </div>
+            <a href="projects.html" class="mono text-accent" style="font-size: 0.8125rem;">VIEW ALL PROJECTS &rarr;</a>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 16px;">
+            <div class="vertical-feature-item">
+              <div class="vertical-feature-header"><h4 class="vertical-feature-title">Electric Finger Weeder</h4></div>
+              <p style="font-size: 0.875rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">
+                A precision weeding system designed to remove weeds close to crops while minimizing soil disturbance and reducing manual effort.
+              </p>
+            </div>
+            <div class="vertical-feature-item">
+              <div class="vertical-feature-header"><h4 class="vertical-feature-title">Electric Earth Auger</h4></div>
+              <p style="font-size: 0.875rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">
+                A motorized soil-drilling system designed to simplify hole preparation for planting, fencing, and other agricultural applications.
+              </p>
+            </div>
+            <div class="vertical-feature-item">
+              <div class="vertical-feature-header"><h4 class="vertical-feature-title">Electric Weeder</h4></div>
+              <p style="font-size: 0.875rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">
+                An electrically powered weeding machine designed to reduce physical effort and improve efficiency during field operations.
+              </p>
+            </div>
+            <div class="vertical-feature-item">
+              <div class="vertical-feature-header"><h4 class="vertical-feature-title">Electric Mini Tiller</h4></div>
+              <p style="font-size: 0.875rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">
+                A compact electric soil-cultivation machine designed for small-scale farming and garden applications.
+              </p>
+            </div>
+            <div class="vertical-feature-item">
+              <div class="vertical-feature-header"><h4 class="vertical-feature-title">Mobile Finger Weeder</h4></div>
+              <p style="font-size: 0.875rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">
+                A mobile agricultural platform integrating precision weeding mechanisms for efficient crop-row maintenance.
+              </p>
+            </div>
+            <div class="vertical-feature-item">
+              <div class="vertical-feature-header"><h4 class="vertical-feature-title">Electric Agricultural Sprayer</h4></div>
+              <p style="font-size: 0.875rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">
+                An electrically powered spraying system designed to simplify agricultural spraying and reduce manual pumping effort.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Agrotech: Approach -->
+        <section style="padding: 40px 0; border-bottom: 1px solid var(--border);" aria-labelledby="agr-approach-title">
+          <div class="section-header">
+            <div class="section-title-wrap">
+              
+              <h3 id="agr-approach-title">Design. Build. Test. Improve.</h3>
+            </div>
+          </div>
+          <div style="border: 1px solid var(--border); padding: 24px; background-color: var(--surface-subtle);">
+            <p style="color: var(--text-secondary); line-height: 1.65; margin-bottom: 0;">
+              Agricultural machinery must be practical, affordable, and reliable under real field conditions.
+              Development focuses on understanding farming challenges, designing purpose-built mechanical systems,
+              and building prototypes that prioritize usability, maintainability, and cost-effectiveness.
+            </p>
+          </div>
+        </section>
+
+        <!-- Agrotech: Vision -->
+        <section style="padding: 40px 0;" aria-labelledby="agr-vision-title">
+          <div class="section-header">
+            <div class="section-title-wrap">
+              
+              <h3 id="agr-vision-title">Better Tools. Smarter Farming.</h3>
+            </div>
+          </div>
+          <div style="border: 1px solid var(--border); padding: 24px; background-color: var(--bg);">
+            <p style="font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.65; margin-bottom: 12px;">
+              Avani AgroTech aims to make agricultural mechanization more accessible through compact electric machinery and innovative farming equipment.
+            </p>
+            <p style="font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.65; margin-bottom: 0;">
+              By focusing on the needs of small-scale farmers and organic farming practices, the venture seeks to reduce labour-intensive work,
+              simplify everyday farming operations, and develop practical alternatives to conventional agricultural machinery.
+            </p>
+          </div>
+        </section>
+
+      </section>
+
+      <!-- ══════════════════════════════════════════════════════
+           SHARED COLLABORATION CTA
+           ══════════════════════════════════════════════════════ -->
+      <section id="coll-cta" style="padding: 48px 0;" aria-labelledby="collab-title">
+        <div style="border: 1px solid var(--border-strong); padding: 32px; background-color: var(--surface-subtle);">
+          <div class="mono text-accent" style="font-size: 0.8125rem; margin-bottom: 8px;">COLLABORATION // AVANI DYNAMICS &amp; AGROTECH</div>
+          <h2 id="collab-title" style="font-size: 1.75rem; margin-bottom: 12px;">Let's Build Something Meaningful.</h2>
+          <p style="font-size: 0.9375rem; color: var(--text-secondary); max-width: 720px; line-height: 1.6; margin-bottom: 12px;">
+            Both ventures welcome collaboration with researchers, engineers, makers, academic institutions, farmers,
+            and industry partners across robotics, automation, and agricultural engineering.
+          </p>
+          <p class="mono text-muted" style="font-size: 0.75rem; margin-bottom: 24px;">
+            RESEARCH · HARDWARE DEVELOPMENT · OPEN SOURCE · FIELD TESTING · INDUSTRY PARTNERSHIPS
+          </p>
+          <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+            <a href="contact.html" class="btn btn-primary btn-mono"><span>GET IN TOUCH</span> &rarr;</a>
+          </div>
+          <div style="margin-top: 24px; border-top: 1px solid var(--border); padding-top: 16px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+            <span class="mono text-main" style="font-size: 0.75rem;">AVANI DYNAMICS &nbsp;·&nbsp; AVANI AGROTECH</span>
+            <span class="mono text-muted" style="font-size: 0.75rem;">BUILDING MACHINES. EXPLORING POSSIBILITIES.</span>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Shared Footer -->
+  <footer id="site-footer"></footer>
+
+  <!-- Scripts -->
+  <!-- Scripts - Using modular architecture -->
+  <script src="config/app.config.js"></script>
+  <script src="data/data-store.js"></script>
+  <script src="modules/theme/theme-manager.js?v=2026-11-08"></script>
+  <script src="modules/header/header-manager.js?v=2026-11-08"></script>
+  <script src="modules/footer/footer-manager.js?v=2026-11-08"></script>
+  <script src="modules/reveal/reveal-manager.js?v=2026-11-08"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+{
+  "name": "aaruthrun-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Static engineering portfolio with a folder-driven project gallery map.",
+  "scripts": {
+    "gallery": "node tools/build-gallery.mjs",
+    "gallery:watch": "node tools/build-gallery.mjs --watch",
+    "serve": "npx -y http-server -p 8080 -c-1 --cors ."
+  },
+  "dependencies": {
+    "exifr": "^7.1.3"
+  }
+}

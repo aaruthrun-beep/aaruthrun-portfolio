@@ -1,0 +1,727 @@
+/* ==========================================================================
+   AARUTHRUN PORTFOLIO — COMPONENT STYLES
+   Buttons, cards, tags, forms, and reusable UI components.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   BUTTONS
+   -------------------------------------------------------------------------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
+  padding: 8px 16px;
+  font-size: var(--text-md);
+  font-weight: var(--font-medium);
+  text-decoration: none;
+  border: var(--border-strong);
+  background-color: var(--color-bg);
+  color: var(--color-text-main);
+  cursor: pointer;
+  transition: border-color var(--transition-base), color var(--transition-base),
+    background-color var(--transition-base);
+  font-family: var(--font-sans);
+}
+
+.btn:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.btn-primary {
+  background-color: var(--color-text-main);
+  color: var(--color-bg);
+  border-color: var(--color-text-main);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-bg);
+}
+
+.btn-secondary {
+  border-color: var(--color-border-strong);
+  color: var(--color-text-secondary);
+}
+
+.btn-secondary:hover {
+  border-color: var(--color-text-main);
+  color: var(--color-text-main);
+}
+
+.btn-sm {
+  padding: 5px 10px;
+  font-size: var(--text-base);
+}
+
+.btn-mono {
+  font-family: var(--font-mono);
+  font-size: var(--text-base);
+}
+
+/* --------------------------------------------------------------------------
+   AVATARS / PROFILE IMAGES
+   -------------------------------------------------------------------------- */
+
+.avatar {
+  display: block;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: var(--border-default);
+  background-color: var(--color-surface-subtle);
+}
+
+.avatar-sm {
+  width: 28px;
+  height: 28px;
+}
+
+.avatar-lg {
+  width: 96px;
+  height: 96px;
+  border: 2px solid var(--color-accent);
+}
+
+/* --------------------------------------------------------------------------
+   CARDS
+   -------------------------------------------------------------------------- */
+
+.project-card {
+  border: var(--border-default);
+  background-color: var(--color-bg);
+  display: flex;
+  flex-direction: column;
+  transition: border-color var(--transition-base);
+  height: 100%;
+}
+
+.project-card:hover {
+  border-color: var(--color-border-strong);
+}
+
+.project-card-vertical {
+  border: var(--border-default);
+  background-color: var(--color-bg);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transition: border-color var(--transition-base);
+  margin-bottom: 0;
+  text-decoration: none;
+}
+
+.project-card-vertical:hover {
+  border-color: var(--color-border-strong);
+}
+
+.project-card-vertical .card-media {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-right: none;
+  border-bottom: none;
+  background-color: var(--color-surface-subtle);
+  overflow: hidden;
+}
+
+.project-card-vertical .card-body {
+  padding: var(--space-3);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-3);
+  flex-grow: 1;
+}
+
+@media (max-width: 850px) {
+  .project-card-vertical .card-media {
+    border-right: none;
+    border-bottom: none;
+  }
+}
+
+.card-media {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  background-color: var(--color-surface-subtle);
+  border-bottom: none;
+  overflow: hidden;
+  position: relative;
+}
+
+.card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.card-body {
+  padding: var(--space-3);
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.card-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-1);
+}
+
+.card-title {
+  font-size: var(--text-2xl);
+  margin-bottom: var(--space-1);
+  color: var(--color-text-main);
+  transition: color var(--transition-base);
+  letter-spacing: var(--tracking-normal);
+}
+
+.project-card:hover .card-title,
+.project-card-vertical:hover .card-title {
+  color: var(--color-accent);
+}
+
+.card-summary {
+  font-size: var(--text-lg);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-2);
+  line-height: var(--leading-relaxed);
+}
+
+.card-footer {
+  margin-top: auto;
+  padding-top: var(--space-2);
+}
+
+/* --------------------------------------------------------------------------
+   CHIPS, TAGS & BADGES
+   -------------------------------------------------------------------------- */
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tag {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  padding: 2px 7px;
+  border: var(--border-default);
+  background-color: var(--color-bg);
+  color: var(--color-text-secondary);
+  border-radius: var(--radius-none);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.tag.clickable:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.status-chip {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  padding: 2px 6px;
+  border: var(--border-default);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background-color: var(--color-bg);
+}
+
+.status-chip.active {
+  border-color: var(--color-border-strong);
+  color: var(--color-text-main);
+}
+
+.status-chip.completed {
+  border-color: var(--color-border);
+  color: var(--color-text-secondary);
+}
+
+.status-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: currentColor;
+}
+
+/* --------------------------------------------------------------------------
+   FILTER BAR
+   -------------------------------------------------------------------------- */
+
+.filter-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  border: var(--border-default);
+  padding: var(--space-2);
+  margin-bottom: var(--space-4);
+  background-color: var(--color-surface-subtle);
+}
+
+.filter-group {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.filter-label {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  margin-right: 6px;
+  text-transform: uppercase;
+}
+
+.filter-btn {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  padding: 4px 10px;
+  background-color: var(--color-bg);
+  border: var(--border-default);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-base);
+}
+
+.filter-btn:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.filter-btn.active {
+  background-color: var(--color-text-main);
+  color: #FFFFFF;
+  border-color: var(--color-text-main);
+}
+
+.filter-btn.active:hover {
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+/* --------------------------------------------------------------------------
+   FORM ELEMENTS
+   -------------------------------------------------------------------------- */
+
+.form-group {
+  margin-bottom: var(--space-2);
+}
+
+.form-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--color-text-main);
+  margin-bottom: 4px;
+  text-transform: uppercase;
+}
+
+.form-input,
+.form-textarea {
+  width: 100%;
+  padding: 10px;
+  border: var(--border-default);
+  background-color: var(--color-bg);
+  color: var(--color-text-main);
+  font-family: var(--font-sans);
+  font-size: var(--text-md);
+  border-radius: var(--radius-none);
+  transition: border-color var(--transition-base);
+}
+
+.form-input:focus,
+.form-textarea:focus {
+  outline: none;
+  border-color: var(--color-accent);
+}
+
+/* Contact channel cards */
+.contact-channel {
+  border: var(--border-default);
+  padding: var(--space-3);
+  background-color: var(--color-bg);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: var(--space-2);
+  transition: border-color var(--transition-base);
+}
+
+.contact-channel:hover {
+  border-color: var(--color-accent);
+}
+
+.channel-label {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.channel-value {
+  font-family: var(--font-mono);
+  font-size: var(--text-xl);
+  color: var(--color-text-main);
+  word-break: break-all;
+}
+
+/* --------------------------------------------------------------------------
+   SPEC BOX (sidebar)
+   -------------------------------------------------------------------------- */
+
+.spec-box {
+  border: var(--border-default);
+  padding: var(--space-3);
+  background-color: var(--color-surface-subtle);
+}
+
+.spec-box-title {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  margin-bottom: var(--space-2);
+  padding-bottom: 6px;
+  border-bottom: var(--border-default);
+}
+
+.spec-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.spec-table tr {
+  border-bottom: var(--border-default);
+}
+
+.spec-table tr:last-child {
+  border-bottom: none;
+}
+
+.spec-table th,
+.spec-table td {
+  padding: 8px 0;
+  text-align: left;
+  font-size: var(--text-base);
+}
+
+.spec-table th {
+  font-family: var(--font-mono);
+  font-weight: var(--font-medium);
+  color: var(--color-text-secondary);
+  width: 40%;
+}
+
+.spec-table td {
+  color: var(--color-text-main);
+  font-family: var(--font-mono);
+}
+
+/* --------------------------------------------------------------------------
+   DETAIL PAGE LAYOUT
+   -------------------------------------------------------------------------- */
+
+.detail-header {
+  border-bottom: var(--border-default);
+  padding-bottom: var(--space-4);
+  margin-bottom: var(--space-4);
+}
+
+.detail-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: var(--text-base);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-3);
+  text-decoration: none;
+}
+
+.detail-back:hover {
+  color: var(--color-accent);
+}
+
+.detail-title {
+  font-size: var(--text-5xl);
+  margin-bottom: var(--space-2);
+}
+
+.detail-subtitle {
+  font-size: var(--text-2xl);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-3);
+  max-width: 800px;
+}
+
+.detail-meta-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) 0;
+  border-top: var(--border-default);
+  border-bottom: var(--border-default);
+  font-family: var(--font-mono);
+  font-size: var(--text-base);
+  color: var(--color-text-secondary);
+}
+
+.detail-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.detail-actions {
+  display: flex;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+}
+
+.detail-main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.detail-section {
+  border-top: var(--border-default);
+  padding-top: var(--space-3);
+}
+
+.detail-section-title {
+  font-family: var(--font-mono);
+  font-size: var(--text-md);
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-2);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  letter-spacing: 0.04em;
+}
+
+.detail-section p {
+  color: var(--color-text-main);
+  font-size: var(--text-lg);
+  line-height: var(--leading-relaxed);
+}
+
+.detail-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+/* --------------------------------------------------------------------------
+   SKILLS MATRIX
+   -------------------------------------------------------------------------- */
+
+.skills-domain-card {
+  border: var(--border-default);
+  padding: var(--space-3);
+  background-color: var(--color-bg);
+  margin-bottom: var(--space-3);
+}
+
+.domain-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  border-bottom: var(--border-default);
+  padding-bottom: var(--space-1);
+  margin-bottom: var(--space-3);
+}
+
+.domain-title {
+  font-family: var(--font-mono);
+  font-size: var(--text-xl);
+  color: var(--color-text-main);
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-2);
+}
+
+.skill-item {
+  border: var(--border-default);
+  padding: var(--space-2);
+  background-color: var(--color-surface-subtle);
+  transition: border-color var(--transition-base);
+}
+
+.skill-item:hover {
+  border-color: var(--color-border-strong);
+}
+
+.skill-name {
+  font-family: var(--font-mono);
+  font-size: var(--text-md);
+  font-weight: var(--font-semibold);
+  color: var(--color-text-main);
+  margin-bottom: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.skill-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.skill-proj-pill {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  padding: 1px 6px;
+  background-color: var(--color-bg);
+  border: var(--border-default);
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  transition: all var(--transition-base);
+}
+
+.skill-proj-pill:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+/* --------------------------------------------------------------------------
+   MONO SPEC LINE
+   -------------------------------------------------------------------------- */
+
+.mono-spec {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  padding: 6px 0;
+  border-top: var(--border-default);
+  border-bottom: none;
+  margin: var(--space-2) 0;
+  white-space: normal;
+  line-height: 1.5;
+}
+
+/* --------------------------------------------------------------------------
+   VERTICAL FEATURE ITEMS (Home page focus areas)
+   -------------------------------------------------------------------------- */
+
+.vertical-feature-item {
+  border: var(--border-default);
+  padding: var(--space-3);
+  background-color: var(--color-surface-subtle);
+  margin-bottom: var(--space-3);
+  transition: border-color var(--transition-base);
+}
+
+.vertical-feature-item:hover {
+  border-color: var(--color-border-strong);
+}
+
+.vertical-feature-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.vertical-feature-title {
+  font-size: var(--text-lg);
+  font-weight: var(--font-semibold);
+  color: var(--color-text-main);
+  letter-spacing: var(--tracking-normal);
+}
+
+/* --------------------------------------------------------------------------
+   PROJECT DETAIL IMAGE GALLERY STRIP
+   -------------------------------------------------------------------------- */
+
+.gallery-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: var(--space-2);
+}
+
+.gallery-strip-item {
+  overflow: hidden;
+  border: var(--border-default);
+  transition: border-color var(--transition-base), transform var(--transition-base);
+}
+
+.gallery-strip-item:hover {
+  border-color: var(--color-accent);
+  transform: translateY(-2px);
+}
+
+.gallery-strip-item img {
+  display: block;
+  transition: transform var(--transition-base);
+}
+
+.gallery-strip-item:hover img {
+  transform: scale(1.05);
+}
+
+/* --------------------------------------------------------------------------
+   GALLERY CANVAS / VIEWPORT - Engineering Minimalist Light
+   -------------------------------------------------------------------------- */
+
+.gallery-viewport {
+  background-color: #FAFAF7;
+}
+
+.gallery-canvas {
+  background-color: #FAFAF7;
+}
+
+.gallery-project-label {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.gallery-project-name {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #202522;
+}
+
+.gallery-project-date {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: #737B78;
+}
+
+.gallery-photo {
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.gallery-photo-img {
+  transition: transform 0.3s ease;
+}

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+(function(){
+  try {
+    var k = "portfolio-theme";
+    var v = localStorage.getItem(k);
+    if (v !== "light" && v !== "dark") {
+      v = "light";
+      try { localStorage.setItem(k, v); } catch(e) {}
+    }
+    if (v === "light") {
+      document.documentElement.setAttribute("data-theme","light");
+    }
+  } catch(e) {
+    document.documentElement.setAttribute("data-theme","light");
+  }
+})();
+</script>
+  <title>Blog — Aaruthrun // Engineering Log & Articles</title>
+  <meta name="description" content="Engineering logs, build updates, technical articles, and daily notes from Aaruthrun — robotics, electronics, embedded systems, and hardware development.">
+
+  <!-- OpenGraph Metadata -->
+  <meta property="og:title" content="Blog — Aaruthrun // Engineering Log & Articles">
+  <meta property="og:description" content="Daily engineering logs, build updates, and technical articles on robotics, electronics, and hardware development.">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Google Fonts: Inter + JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css?v=2026-11-08">
+  <link rel="stylesheet" href="config/design-tokens.css?v=2026-11-08">
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Shared Header -->
+  <header id="site-header"></header>
+
+  <main id="main-content">
+    <div class="container">
+
+      <!-- Page Header -->
+      <section style="padding: 40px 0 24px 0; border-bottom: 1px solid var(--border); margin-bottom: 48px;">
+        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
+          <span class="mono text-muted" style="font-size: 0.75rem; letter-spacing: 0.04em;">ENGINEERING LOG</span>
+          <span class="mono text-muted" style="font-size: 0.75rem;">// ARTICLES · UPDATES · NOTES</span>
+        </div>
+        <h1 style="font-size: 2.5rem; letter-spacing: -0.03em; font-weight: 600; margin-bottom: 12px;">Blog</h1>
+        <p style="max-width: 620px; color: var(--text-secondary); font-size: 1rem; line-height: 1.65; margin: 0;">
+          Daily build logs, technical articles, and engineering notes from ongoing projects and experiments.
+          Hardware-focused writing on robotics, embedded systems, electronics, and fabrication.
+        </p>
+      </section>
+
+      <!-- Coming Soon Notice -->
+      <section style="margin-bottom: 48px; border: 1px solid var(--border); padding: 32px; background-color: var(--surface-subtle);">
+        <div class="mono text-muted" style="font-size: 0.75rem; margin-bottom: 8px; letter-spacing: 0.04em;">STATUS // UNDER CONSTRUCTION</div>
+        <h2 style="font-size: 1.25rem; margin-bottom: 10px;">Articles &amp; Logs Coming Soon</h2>
+        <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6; margin: 0; max-width: 600px;">
+          This section will host daily engineering logs, build documentation, teardown notes, and technical articles.
+          Check back regularly or reach out via the contact page to stay updated.
+        </p>
+        <div style="margin-top: 20px;">
+          <a href="contact.html" class="btn btn-sm btn-mono btn-secondary">GET NOTIFIED &rarr;</a>
+        </div>
+      </section>
+
+      <!-- Blog Categories Placeholder -->
+      <section style="margin-bottom: 48px;" aria-labelledby="categories-title">
+        <div class="section-header">
+          <div class="section-title-wrap">
+            
+            <h2 id="categories-title">Categories</h2>
+          </div>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+          <span class="tag">BUILD LOGS</span>
+          <span class="tag">ELECTRONICS</span>
+          <span class="tag">ROBOTICS</span>
+          <span class="tag">EMBEDDED SYSTEMS</span>
+          <span class="tag">CAD &amp; FABRICATION</span>
+          <span class="tag">MOTOR CONTROL</span>
+          <span class="tag">TUTORIALS</span>
+          <span class="tag">PROJECT UPDATES</span>
+          <span class="tag">TEARDOWNS</span>
+          <span class="tag">ENGINEERING NOTES</span>
+        </div>
+      </section>
+
+      <!-- Sample Article Skeletons -->
+      <section aria-labelledby="recent-posts-title" style="margin-bottom: 48px;">
+        <div class="section-header">
+          <div class="section-title-wrap">
+            
+            <h2 id="recent-posts-title">Recent Posts</h2>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 0;">
+
+          <!-- Post Entry Placeholder -->
+          <article style="border-top: 1px solid var(--border); padding: 20px 0; display: flex; gap: 24px; align-items: flex-start; flex-wrap: wrap;">
+            <div class="mono text-muted" style="font-size: 0.75rem; min-width: 90px; padding-top: 3px;">COMING SOON</div>
+            <div>
+              <h3 style="font-size: 1rem; font-weight: 600; margin-bottom: 6px; color: var(--text-main);">
+                Build Log — NITE 369 Gearbox Redesign
+              </h3>
+              <p style="font-size: 0.875rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 8px;">
+                Notes from the compound planetary gearbox redesign for the NITE 369 robotic arm — new gear ratios, print tolerances, and backlash reduction.
+              </p>
+              <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+                <span class="tag">BUILD LOGS</span>
+                <span class="tag">ROBOTICS</span>
+                <span class="tag">CAD &amp; FABRICATION</span>
+              </div>
+            </div>
+          </article>
+
+          <article style="border-top: 1px solid var(--border); padding: 20px 0; display: flex; gap: 24px; align-items: flex-start; flex-wrap: wrap;">
+            <div class="mono text-muted" style="font-size: 0.75rem; min-width: 90px; padding-top: 3px;">COMING SOON</div>
+            <div>
+              <h3 style="font-size: 1rem; font-weight: 600; margin-bottom: 6px; color: var(--text-main);">
+                FOC Tuning Notes — BLDC Actuator
+              </h3>
+              <p style="font-size: 0.875rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 8px;">
+                Practical observations from tuning Field-Oriented Control parameters on the custom BLDC actuator — current loop, velocity loop, and encoder alignment.
+              </p>
+              <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+                <span class="tag">ELECTRONICS</span>
+                <span class="tag">MOTOR CONTROL</span>
+                <span class="tag">EMBEDDED SYSTEMS</span>
+              </div>
+            </div>
+          </article>
+
+          <article style="border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 20px 0; display: flex; gap: 24px; align-items: flex-start; flex-wrap: wrap;">
+            <div class="mono text-muted" style="font-size: 0.75rem; min-width: 90px; padding-top: 3px;">COMING SOON</div>
+            <div>
+              <h3 style="font-size: 1rem; font-weight: 600; margin-bottom: 6px; color: var(--text-main);">
+                Electric Finger Weeder — Field Test Notes
+              </h3>
+              <p style="font-size: 0.875rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 8px;">
+                Field observations from the first round of testing the electric finger weeder prototype — mechanical durability, drive system load, and operator feedback.
+              </p>
+              <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+                <span class="tag">BUILD LOGS</span>
+                <span class="tag">PROJECT UPDATES</span>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Shared Footer -->
+  <footer id="site-footer"></footer>
+
+  <!-- Scripts -->
+  <!-- Scripts - Using modular architecture -->
+  <script src="config/app.config.js"></script>
+  <script src="data/data-store.js"></script>
+  <script src="modules/theme/theme-manager.js?v=2026-11-08"></script>
+  <script src="modules/header/header-manager.js?v=2026-11-08"></script>
+  <script src="modules/footer/footer-manager.js?v=2026-11-08"></script>
+  <script src="modules/reveal/reveal-manager.js?v=2026-11-08"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
