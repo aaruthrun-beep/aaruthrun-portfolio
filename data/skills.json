@@ -1,0 +1,273 @@
+{
+  "schemaVersion": 1,
+  "categories": [
+    {
+      "id": "robotics",
+      "title": "Robotics & robot engineering",
+      "items": [
+        {
+          "name": "Robot architecture",
+          "projects": [
+            "nite-369",
+            "mars-369",
+            "scrapx6",
+            "cat-autonomous-rover"
+          ]
+        },
+        {
+          "name": "Robot kinematics",
+          "projects": [
+            "nite-369",
+            "titan-klipper-corexy"
+          ]
+        },
+        {
+          "name": "Robot mechanisms",
+          "projects": [
+            "nite-369",
+            "scrapx6",
+            "ffb-steer-by-wire"
+          ]
+        },
+        {
+          "name": "End effectors",
+          "projects": []
+        },
+        {
+          "name": "Robot integration",
+          "projects": [
+            "nite-369",
+            "cat-autonomous-rover",
+            "scrapx6"
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "image": "images/skills/nite-369-assembly.jpg",
+          "alt": "NITE 369 six-axis robotic arm shown in a full assembly render",
+          "title": "Six-axis arm architecture",
+          "caption": "The complete NITE 369 assembly: six articulated axes, printed structural links and integrated joint reduction stages. The arm was developed as a mechanical, embedded and actuator system rather than a purchased platform.",
+          "project": "nite-369",
+          "skills": [
+            "Robot architecture",
+            "Robot mechanisms",
+            "Robot integration"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "embedded",
+      "title": "Embedded systems",
+      "items": [
+        {
+          "name": "Microcontrollers",
+          "projects": [
+            "nite-369",
+            "mars-369",
+            "esp32-s3-micro-robot",
+            "bldc-foc-actuator",
+            "scrapx6"
+          ]
+        },
+        {
+          "name": "Firmware development",
+          "projects": [
+            "nite-369",
+            "ffb-steer-by-wire",
+            "esp32-s3-micro-robot",
+            "titan-klipper-corexy"
+          ]
+        },
+        {
+          "name": "Motor control",
+          "projects": [
+            "bldc-foc-actuator",
+            "ffb-steer-by-wire",
+            "scrapx6"
+          ]
+        },
+        {
+          "name": "Communication protocols",
+          "projects": [
+            "ffb-steer-by-wire",
+            "cat-autonomous-rover",
+            "titan-klipper-corexy",
+            "mars-369"
+          ]
+        },
+        {
+          "name": "Real-time control",
+          "projects": [
+            "nite-369",
+            "ffb-steer-by-wire",
+            "esp32-s3-micro-robot"
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "image": "images/skills/scrapx6-control-bay.jpg",
+          "alt": "ScrapX6 control enclosure with a stack of green stepper drivers and field wiring",
+          "title": "Stepper-drive control enclosure",
+          "caption": "ScrapX6 control electronics on the bench: a bank of TB6600 stepper drivers, power distribution and field wiring serving the arm axes. This is the integration layer between controller commands and mechanical motion.",
+          "project": "scrapx6",
+          "skills": [
+            "Microcontrollers",
+            "Motor control"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "electronics",
+      "title": "Electronics & PCB",
+      "items": [
+        {
+          "name": "Circuit design",
+          "projects": [
+            "bldc-foc-actuator",
+            "ffb-steer-by-wire",
+            "esp32-s3-micro-robot",
+            "mars-369"
+          ]
+        },
+        {
+          "name": "PCB design",
+          "projects": [
+            "bldc-foc-actuator",
+            "ffb-steer-by-wire",
+            "esp32-s3-micro-robot",
+            "mars-369"
+          ]
+        },
+        {
+          "name": "Sensor interfacing",
+          "projects": [
+            "esp32-s3-micro-robot",
+            "ffb-steer-by-wire",
+            "bldc-foc-actuator",
+            "cat-autonomous-rover"
+          ]
+        },
+        {
+          "name": "Power electronics",
+          "projects": [
+            "bldc-foc-actuator"
+          ]
+        },
+        {
+          "name": "Hardware prototyping",
+          "projects": [
+            "nite-369",
+            "mars-369",
+            "ffb-steer-by-wire",
+            "esp32-s3-micro-robot",
+            "scrapx6"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mechanical",
+      "title": "Mechanical & CAD",
+      "items": [
+        {
+          "name": "3D CAD",
+          "projects": [
+            "nite-369",
+            "mars-369",
+            "bldc-foc-actuator",
+            "ffb-steer-by-wire",
+            "cat-autonomous-rover",
+            "titan-klipper-corexy",
+            "scrapx6"
+          ]
+        },
+        {
+          "name": "Mechanical assemblies",
+          "projects": [
+            "nite-369",
+            "scrapx6",
+            "ffb-steer-by-wire",
+            "cat-autonomous-rover"
+          ]
+        },
+        {
+          "name": "Gearbox design",
+          "projects": [
+            "nite-369"
+          ]
+        },
+        {
+          "name": "3D printing",
+          "projects": [
+            "nite-369",
+            "titan-klipper-corexy"
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "image": "images/skills/nite-369-gearbox.jpg",
+          "alt": "Close-up of the printed compound planetary gearbox and belt drive on NITE 369",
+          "title": "Printed compound planetary stage",
+          "caption": "Shoulder reduction and belt drive on NITE 369. The compound planetary stages were designed and printed as part of the arm structure, then iterated for reduction and backlash under load.",
+          "project": "nite-369",
+          "skills": [
+            "Gearbox design",
+            "3D printing",
+            "Mechanical assemblies"
+          ]
+        },
+        {
+          "image": "images/skills/cat-rover-cad.jpg",
+          "alt": "CAD render of the CAT autonomous rover chassis with wheels, sensor mast and front implement",
+          "title": "CAT rover chassis packaging",
+          "caption": "CAD packaging study for the CAT autonomous rover: differential-drive wheel assembly, electronics enclosure, sensor mast and front implement arranged around the chassis.",
+          "project": "cat-autonomous-rover",
+          "skills": [
+            "3D CAD",
+            "Mechanical assemblies"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "software",
+      "title": "Programming & software",
+      "items": [
+        {
+          "name": "C / C++",
+          "projects": [
+            "ffb-steer-by-wire",
+            "cat-autonomous-rover"
+          ]
+        },
+        {
+          "name": "Python",
+          "projects": [
+            "cat-autonomous-rover"
+          ]
+        },
+        {
+          "name": "ROS 2",
+          "projects": [
+            "cat-autonomous-rover"
+          ]
+        },
+        {
+          "name": "Linux",
+          "projects": []
+        },
+        {
+          "name": "Computer vision",
+          "projects": [
+            "esp32-s3-micro-robot"
+          ]
+        }
+      ]
+    }
+  ]
+}

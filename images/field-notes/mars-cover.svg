@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900">
+  <title>MARS 369 — PCB DEVELOPMENT field note cover</title>
+  <rect width="1600" height="900" fill="#EDEAE4"/>
+  <rect x="32" y="32" width="1536" height="836" fill="none" stroke="#D8DAD4" stroke-width="1"/>
+  <text x="80" y="94" fill="#315C9B" font-family="'JetBrains Mono', Consolas, 'Courier New', monospace" font-size="17" letter-spacing="4">FIELD NOTES / 03</text>
+  <text x="1520" y="94" text-anchor="end" fill="#646B67" font-family="'JetBrains Mono', Consolas, 'Courier New', monospace" font-size="15" letter-spacing="3">PCB DEVELOPMENT</text>
+  <text x="80" y="270" fill="#202522" font-family="Georgia, 'Times New Roman', serif" font-size="112" letter-spacing="-4">18.5 N</text>
+  <text x="80" y="368" fill="#202522" font-family="Georgia, 'Times New Roman', serif" font-size="90" font-style="italic" letter-spacing="-3">zero-power latch</text>
+  <text x="80" y="432" fill="#315C9B" font-family="'JetBrains Mono', Consolas, 'Courier New', monospace" font-size="18" letter-spacing="3">MARS 369</text>
+  <line x1="80" y1="466" x2="196" y2="466" stroke="#315C9B" stroke-width="3"/>
+  <text x="80" y="522" fill="#58605C" font-family="'JetBrains Mono', Consolas, 'Courier New', monospace" font-size="19" letter-spacing="1">3× ELECTRO-PERMANENT COUPLERS</text>
+  <text x="80" y="556" fill="#58605C" font-family="'JetBrains Mono', Consolas, 'Courier New', monospace" font-size="19" letter-spacing="1">6 × 38 kHz IR / ESP32-S3</text>
+  <line x1="980" y1="150" x2="980" y2="750" stroke="#D8DAD4" stroke-width="1"/>
+  <g transform="translate(1060 180)">
+    <g fill="none" stroke="#315C9B" stroke-width="2.5">
+      <polygon points="230,55 385,145 385,325 230,415 75,325 75,145"/>
+      <line x1="230" y1="235" x2="230" y2="55" stroke-dasharray="4 10"/>
+      <line x1="230" y1="235" x2="385" y2="145" stroke-dasharray="4 10"/>
+      <line x1="230" y1="235" x2="385" y2="325" stroke-dasharray="4 10"/>
+      <line x1="230" y1="235" x2="230" y2="415" stroke-dasharray="4 10"/>
+      <line x1="230" y1="235" x2="75" y2="325" stroke-dasharray="4 10"/>
+      <line x1="230" y1="235" x2="75" y2="145" stroke-dasharray="4 10"/>
+      <rect x="188" y="193" width="84" height="84"/>
+      <circle cx="230" cy="235" r="20" fill="#315C9B" stroke="none"/>
+    </g>
+    <g fill="#315C9B">
+      <circle cx="230" cy="55" r="8"/><circle cx="385" cy="145" r="8"/><circle cx="385" cy="325" r="8"/>
+      <circle cx="230" cy="415" r="8"/><circle cx="75" cy="325" r="8"/><circle cx="75" cy="145" r="8"/>
+    </g>
+    <text x="230" y="458" text-anchor="middle" fill="#646B67" font-family="'JetBrains Mono', Consolas, 'Courier New', monospace" font-size="14" letter-spacing="3">6 × IR / 60°</text></g>
+  <text x="80" y="824" fill="#646B67" font-family="'JetBrains Mono', Consolas, 'Courier New', monospace" font-size="14" letter-spacing="3">FIELD NOTE 03 / 27 SEP 2026</text>
+  <text x="1520" y="824" text-anchor="end" fill="#646B67" font-family="'JetBrains Mono', Consolas, 'Courier New', monospace" font-size="14" letter-spacing="3">AARUTHRUN / ENGINEERING ARCHIVE</text>
+</svg>

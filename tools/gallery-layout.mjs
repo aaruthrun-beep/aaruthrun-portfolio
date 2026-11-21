@@ -392,8 +392,10 @@ function layoutIncremental(items, previousRadius, cfg, rng) {
 /* One project                                                         */
 /* ------------------------------------------------------------------ */
 
-function layoutProject(project, previous, cfg) {
-  const rng = makeRng(hashSeed(project.slug + ':pack'));
+function layoutProject(project, previous, cfg, forceFresh) {
+  const rng = makeRng(hashSeed(
+    project.slug + ':pack' + (forceFresh ? ':shuffle:' + (cfg.shuffleSeed || 0) : '')
+  ));
 
   const items = project.images.map((img) => ({
     src: img.src,
@@ -405,6 +407,7 @@ function layoutProject(project, previous, cfg) {
     bottom: img.bottom || 0,
     text: img.text || '',
     date: img.date || '',
+    srcset: img.srcset || '',
     nw: img.nw || img.w,
     nh: img.nh || img.h,
     rot: (makeRng(hashSeed(project.slug + ':' + img.src))() * 2 - 1) * cfg.maxRot,
@@ -414,7 +417,7 @@ function layoutProject(project, previous, cfg) {
   }));
 
   const oldSpots = new Map();
-  if (previous && Array.isArray(previous.images)) {
+  if (!forceFresh && previous && Array.isArray(previous.images)) {
     for (const im of previous.images) {
       if (im && typeof im.src === 'string') oldSpots.set(im.src, im);
     }
@@ -496,6 +499,7 @@ function layoutProject(project, previous, cfg) {
       bottom: item.bottom,
       text: item.text,
       date: item.date,
+      srcset: item.srcset || '',
       nw: item.nw,
       nh: item.nh,
       x: round(item.x, 1),
@@ -644,10 +648,11 @@ export function layoutGallery(projects, previous, config) {
   }
 
   const clusters = [];
+  const shuffled = new Set(cfg.shuffle || []);
 
   for (const project of projects) {
     const prev = prevBySlug.get(project.slug);
-    const laid = layoutProject(project, prev, cfg);
+    const laid = layoutProject(project, prev, cfg, shuffled.has(project.slug));
 
     const cluster = {
       slug: project.slug,
@@ -735,9 +740,13 @@ export function verifyLayout(model, config) {
   for (const project of model.projects) {
     const imgs = project.images;
 
+    // Saved coordinates are rounded to 0.1px and rotations to 0.01deg, so a
+    // photo that was packed exactly `pad` away can land a hair inside it.
+    const pad = Math.max(0, cfg.pad - 0.5);
+
     for (let a = 0; a < imgs.length; a++) {
       for (let b = a + 1; b < imgs.length; b++) {
-        if (!apart(imgs[a], imgs[b], cfg.pad)) {
+        if (!apart(imgs[a], imgs[b], pad)) {
           problems.push(`${project.slug}: photos ${a} and ${b} are too close`);
         }
       }

@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script>
 (function(){
@@ -20,101 +21,88 @@
   }
 })();
 </script>
-  <title>Engineering Projects Archive — Aaruthrun Robotics</title>
-  <meta name="description" content="Filterable directory of robotics, mechatronics, and embedded systems engineering projects by Aaruthrun (PSG Tech).">
+  <title>Engineering Projects Archive — Aaruthrun</title>
+  <meta name="description" content="A curated archive of robotics, mechatronics and embedded systems projects by Aaruthrun — featured builds documented in depth, plus the wider project record.">
 
-  <!-- OpenGraph Metadata -->
   <meta property="og:title" content="Engineering Projects Archive — Aaruthrun">
-  <meta property="og:description" content="Filterable engineering projects: 6-axis arms, modular swarm robotics, BLDC FOC motor drives, steer-by-wire vehicles, and autonomous rovers.">
-  <meta property="og:image" content="images/og-image.webp">
+  <meta property="og:description" content="Featured six-axis arms, a scrap-built robot and an autonomous rover, plus the wider engineering archive.">
+  <meta property="og:image" content="https://aaruthrun-beep.github.io/portfolio/images/og-image.webp">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
 
-  <!-- Google Fonts: Inter + JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="css/style.css?v=2026-11-08">
-  <link rel="stylesheet" href="config/design-tokens.css?v=2026-11-08">
+  <link rel="stylesheet" href="css/style.css?v=2026-11-23">
+  <link rel="stylesheet" href="config/design-tokens.css?v=2026-11-15">
+  <link rel="stylesheet" href="styles/platform.css?v=2026-11-15">
+  <link rel="stylesheet" href="styles/archive.css?v=2026-11-18">
+  <!-- Global typography system -->
+  <link rel="stylesheet" href="styles/readability.css?v=2026-11-16">
 </head>
-<body>
+<body class="archive-page platform-page">
   <a href="#main-content" class="skip-link">Skip to main content</a>
 
-  <!-- Shared Header (rendered by HeaderManager) -->
   <header id="site-header"></header>
 
   <main id="main-content">
     <div class="container">
-      
-      <!-- Page Header -->
-      <section class="reveal" style="padding: 40px 0 24px 0; border-bottom: 1px solid var(--border); margin-bottom: 40px;">
-        <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 16px;">
-          <div>
-            <div class="mono text-muted" style="font-size: 0.8125rem; margin-bottom: 6px; letter-spacing: 0.04em;">DIRECTORY // 08 VERIFIED HARDWARE BUILDS</div>
-            <h1 style="font-size: 2.5rem; letter-spacing: -0.03em; font-weight: 600;">Engineering Project Archive</h1>
-            <p style="color: var(--text-secondary); max-width: 680px; margin-top: 8px; line-height: 1.65;">
-              I've worked across a diverse range of projects &mdash; from mechanical design and 3D printing
-              to electronics and software &mdash; each one a valuable learning experience in itself. I invite
-              you to explore the write-ups for the detailed documentation, CAD, schematics, and source code
-              behind every build.
-            </p>
-          </div>
-          <div>
-            <a href="timeline.html" class="btn btn-sm btn-mono btn-secondary">
-              VIEW IN TIMELINE &rarr;
-            </a>
-          </div>
+
+      <header class="platform-head archive-head">
+        <div class="platform-kicker">
+          <span class="mark" aria-hidden="true"></span>
+          <span>Directory</span>
+          <span aria-hidden="true">//</span>
+          <span>05 documented hardware builds</span>
         </div>
+        <h1>Engineering project archive</h1>
+        <p>
+          The builds worth reading in full, followed by the wider record. Featured projects
+          carry large photographs, the reasoning behind them, and the specifications that
+          matter — the rest stay compact, with dates, status and technical tags.
+        </p>
+        <div class="archive-head-actions">
+          <a href="timeline.html" class="btn btn-sm btn-mono btn-secondary">View in timeline &rarr;</a>
+          <a href="gallery.html" class="btn btn-sm btn-mono btn-secondary">Photo archive &nearr;</a>
+        </div>
+      </header>
 
-        <blockquote class="engineering-quote" style="margin-top: 16px;">
-          <p class="engineering-quote-body">
-            "Today's scientists have substituted mathematics for experiments, and they wander off through
-            equation after equation, and eventually build a structure which has no relation to reality."
-          </p>
-          <div class="engineering-quote-cite">
-            <span class="engineering-quote-author">NIKOLA TESLA</span>
-            <span class="engineering-quote-source">// MODERN MECHANICS, JUL 1934</span>
-          </div>
-        </blockquote>
-      </section>
-
-      <!-- Filter Controls Container (Rendered by projects.js) -->
       <section class="reveal" id="filter-controls" aria-label="Project filter options"></section>
 
-      <!-- Project Cards Grid (Rendered by projects.js) -->
-      <section class="reveal" aria-label="Project Cards Grid">
-        <div class="grid-12" id="projects-grid">
-          <!-- Fallback loading state -->
-          <div class="col-12" style="padding: 48px 0; text-align: center;">
-            <p class="mono text-muted">LOADING PROJECT DATABASE...</p>
+      <section class="reveal" aria-label="Project archive">
+        <div id="projects-grid">
+          <div style="padding: 48px 0; text-align: center;">
+            <p class="mono text-muted">LOADING PROJECT DATABASE&hellip;</p>
           </div>
         </div>
       </section>
 
-      <!-- Technical Note on Reproducibility -->
-      <section class="reveal" style="margin-top: 64px; padding: 24px; border: 1px solid var(--border); background-color: var(--surface-subtle);">
-        <div class="mono text-accent" style="font-size: 0.75rem; margin-bottom: 6px;">NOTE ON REPRODUCIBILITY & HARDWARE OPEN SOURCE</div>
-        <p style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 0;">
-          All CAD models are modeled natively in SolidWorks with parametric master sketches. Electronics schematics and multi-layer PCB gerbers are generated using KiCAD. Microcontroller firmware uses ANSI C/C++ running bare-metal or on FreeRTOS with zero dynamic memory allocation in runtime control loops. Detailed design docs and build logs accompany each project.
+      <aside class="archive-note reveal" aria-label="Note on reproducibility">
+        <div class="archive-note-title">Note on reproducibility &amp; hardware open source</div>
+        <p>
+          All CAD models are modeled natively in SolidWorks with parametric master sketches.
+          Electronics schematics and multi-layer PCB gerbers are generated using KiCAD.
+          Microcontroller firmware uses ANSI C/C++ running bare-metal or on FreeRTOS with zero
+          dynamic memory allocation in runtime control loops. Detailed design docs and build
+          logs accompany each project.
         </p>
-      </section>
+      </aside>
 
     </div>
   </main>
 
-  <!-- Shared Footer -->
   <footer id="site-footer"></footer>
 
-  <!-- Scripts - Using modular architecture -->
-  <script src="config/app.config.js"></script>
-  <script src="data/data-store.js"></script>
-  <script src="modules/theme/theme-manager.js?v=2026-11-08"></script>
-  <script src="modules/header/header-manager.js?v=2026-11-08"></script>
-  <script src="modules/footer/footer-manager.js?v=2026-11-08"></script>
-  <script src="modules/reveal/reveal-manager.js?v=2026-11-08"></script>
-  <script src="modules/filters/filter-manager.js?v=2026-11-08"></script>
-  <script src="modules/projects/project-manager.js?v=2026-11-08"></script>
-  <script src="js/app.js"></script>
+  <script src="config/app.config.js?v=2026-11-15"></script>
+  <script src="data/data-store.js?v=2026-11-15"></script>
+  <script src="modules/theme/theme-manager.js?v=2026-11-15"></script>
+  <script src="modules/header/header-manager.js?v=2026-11-15"></script>
+  <script src="modules/footer/footer-manager.js?v=2026-11-15"></script>
+  <script src="modules/reveal/reveal-manager.js?v=2026-11-15"></script>
+  <script src="modules/filters/filter-manager.js?v=2026-11-15"></script>
+  <script src="modules/projects/project-archive.js?v=2026-11-15"></script>
+  <script src="modules/projects/project-manager.js?v=2026-11-15"></script>
+  <script src="js/app.js?v=2026-11-15"></script>
 </body>
 </html>

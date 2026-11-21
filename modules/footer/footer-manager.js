@@ -33,16 +33,6 @@ const FooterManager = (function () {
             </p>
           </div>
 
-          <!-- Navigation Column -->
-          <div>
-            <div class="footer-col-title">Navigation</div>
-            <ul class="footer-links">
-              ${config.links.navigation.map(link => `
-                <li><a href="${link.href}">${link.label}</a></li>
-              `).join('')}
-            </ul>
-          </div>
-
           <!-- Connect Column -->
           <div>
             <div class="footer-col-title">Connect</div>
@@ -52,6 +42,15 @@ const FooterManager = (function () {
               `).join('')}
             </ul>
           </div>
+
+          <!-- Navigation: one line across the footer -->
+          <nav class="footer-nav" aria-label="Footer navigation">
+            <ul class="footer-links footer-nav-links">
+              ${config.links.navigation.map(link => `
+                <li><a href="${link.href}">${link.label}</a></li>
+              `).join('')}
+            </ul>
+          </nav>
         </div>
 
         <!-- Bottom Bar -->

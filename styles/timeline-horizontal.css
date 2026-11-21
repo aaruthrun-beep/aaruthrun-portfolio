@@ -1,0 +1,670 @@
+/* ==========================================================================
+   HORIZONTAL ENGINEERING TIMELINE
+   A single time axis with stacked duration rails and milestone markers.
+   Scoped to .tlx so it does not alter the rest of the archive.
+   ========================================================================== */
+
+.tlx,
+.tlx-card,
+.tlx-legend {
+  --tl-completed: #315C9B;
+  --tl-active: #2E6B4F;
+  --tl-paused: #9A6212;
+  --tl-discontinued: #A33F38;
+  --tl-planned: #6F7672;
+}
+
+[data-theme="dark"] .tlx,
+[data-theme="dark"] .tlx-card,
+[data-theme="dark"] .tlx-legend {
+  --tl-completed: #7FA7DC;
+  --tl-active: #7FC49B;
+  --tl-paused: #E0AA5E;
+  --tl-discontinued: #E08A82;
+  --tl-planned: #A9B1AC;
+}
+
+.tlx {
+  position: relative;
+  margin-top: 4px;
+  border: 1px solid var(--color-border);
+  background: var(--color-card);
+}
+
+.tlx-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  padding: 13px 18px;
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-surface-subtle);
+}
+
+.tlx-heading {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+}
+
+.tlx-range,
+.tlx-count,
+.tlx-hint {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  line-height: 1.5;
+  letter-spacing: 0.07em;
+}
+
+.tlx-range {
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+.tlx-count {
+  color: var(--color-text-secondary);
+}
+
+.tlx-hint {
+  color: var(--color-text-muted);
+  letter-spacing: 0.1em;
+}
+
+.tlx-viewport {
+  position: relative;
+  overflow-x: auto;
+  overflow-y: hidden;
+  cursor: grab;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-x pan-y;
+  scrollbar-color: var(--color-border) transparent;
+}
+
+.tlx-viewport:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: -3px;
+}
+
+.tlx-viewport.is-dragging {
+  cursor: grabbing;
+  user-select: none;
+}
+
+.tlx:not(.is-scrollable) .tlx-viewport,
+.tlx:not(.is-scrollable) .tlx-viewport.is-dragging {
+  cursor: default;
+}
+
+.tlx-canvas {
+  position: relative;
+  min-width: 100%;
+  --axis-y: 238px;
+}
+
+.tlx-bands,
+.tlx-year-labels,
+.tlx-quarter-labels,
+.tlx-spans,
+.tlx-axis-ticks,
+.tlx-stems,
+.tlx-markers {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.tlx-band {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  border-right: 1px solid color-mix(in srgb, var(--color-border) 60%, transparent);
+  background: color-mix(in srgb, var(--color-surface-subtle) 34%, transparent);
+}
+
+.tlx-band.is-alt {
+  background: transparent;
+}
+
+.tlx-year-label {
+  position: absolute;
+  top: 9px;
+  transform: translateX(-50%);
+  font-family: var(--font-display);
+  font-size: clamp(1.55rem, 2.3vw, 2.15rem);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--color-text-main);
+  white-space: nowrap;
+}
+
+.tlx-year-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  border-left: 1px solid color-mix(in srgb, var(--color-border) 75%, transparent);
+}
+
+.tlx-quarter {
+  position: absolute;
+  top: 52px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  line-height: 1.4;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+}
+
+.tlx-axis {
+  position: absolute;
+  left: 48px;
+  right: 32px;
+  height: 1px;
+  background: var(--color-border-strong);
+  z-index: 3;
+}
+
+.tlx-axis-tick {
+  position: absolute;
+  top: var(--axis-y);
+  width: 1px;
+  height: 5px;
+  background: color-mix(in srgb, var(--color-border-strong) 55%, transparent);
+}
+
+/* --------------------------------------------------------------------------
+   DURATION RAILS
+   -------------------------------------------------------------------------- */
+
+.tlx-spans {
+  top: 84px;
+}
+
+.tlx-span {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  height: 18px;
+  padding: 0 6px;
+  border: 1px solid color-mix(in srgb, var(--status-color) 36%, transparent);
+  border-left: 2px solid var(--status-color);
+  background: color-mix(in srgb, var(--status-color) 9%, var(--color-card));
+  color: var(--color-text-main);
+  text-decoration: none;
+  pointer-events: auto;
+  overflow: visible;
+  border-radius: 1px;
+  transition: background var(--transition-base), border-color var(--transition-base), box-shadow var(--transition-base);
+}
+
+.tlx-span[data-status="completed"] { --status-color: var(--tl-completed); }
+.tlx-span[data-status="active"] { --status-color: var(--tl-active); }
+.tlx-span[data-status="paused"] { --status-color: var(--tl-paused); }
+.tlx-span[data-status="discontinued"] { --status-color: var(--tl-discontinued); }
+.tlx-span[data-status="planned"] {
+  --status-color: var(--tl-planned);
+  border-style: dashed;
+  border-left-style: solid;
+}
+
+.tlx-span:hover,
+.tlx-span:focus-visible {
+  background: color-mix(in srgb, var(--status-color) 16%, var(--color-card));
+  border-color: var(--status-color);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--status-color) 14%, transparent);
+  z-index: 2;
+}
+
+.tlx-span:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.tlx-span-name {
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.015em;
+}
+
+.tlx-span.is-tight {
+  padding: 0 4px;
+}
+
+.tlx-span.is-tight .tlx-span-name {
+  font-size: 0;
+}
+
+.tlx-span.is-tight .tlx-span-name::after {
+  content: "";
+  display: block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--status-color);
+}
+
+.tlx-span-end {
+  display: none;
+}
+
+.tlx-span.is-ongoing .tlx-span-end {
+  display: block;
+  position: absolute;
+  top: 50%;
+  right: -6px;
+  width: 0;
+  height: 0;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 6px solid var(--status-color);
+  transform: translateY(-50%);
+}
+
+/* --------------------------------------------------------------------------
+   MILESTONES AND TODAY
+   -------------------------------------------------------------------------- */
+
+.tlx-stem {
+  position: absolute;
+  width: 1px;
+  background: color-mix(in srgb, var(--status-color) 45%, transparent);
+  transform: translateX(-0.5px);
+}
+
+.tlx-stem[data-status="completed"] { --status-color: var(--tl-completed); }
+.tlx-stem[data-status="active"] { --status-color: var(--tl-active); }
+.tlx-stem[data-status="paused"] { --status-color: var(--tl-paused); }
+.tlx-stem[data-status="discontinued"] { --status-color: var(--tl-discontinued); }
+.tlx-stem[data-status="planned"] { --status-color: var(--tl-planned); }
+
+.tlx-marker {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  display: grid;
+  place-items: center;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  text-decoration: none;
+  pointer-events: auto;
+  z-index: 5;
+}
+
+.tlx-marker[data-status="completed"] { --status-color: var(--tl-completed); }
+.tlx-marker[data-status="active"] { --status-color: var(--tl-active); }
+.tlx-marker[data-status="paused"] { --status-color: var(--tl-paused); }
+.tlx-marker[data-status="discontinued"] { --status-color: var(--tl-discontinued); }
+.tlx-marker[data-status="planned"] { --status-color: var(--tl-planned); }
+
+.tlx-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--status-color);
+  box-shadow: 0 0 0 3px var(--color-card);
+  transition: width var(--transition-base), height var(--transition-base), box-shadow var(--transition-base);
+}
+
+.tlx-marker:hover .tlx-dot,
+.tlx-marker:focus-visible .tlx-dot {
+  width: 11px;
+  height: 11px;
+  box-shadow: 0 0 0 3px var(--color-card), 0 0 0 5px color-mix(in srgb, var(--status-color) 24%, transparent);
+}
+
+.tlx-marker:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 4px;
+}
+
+.tlx-today {
+  position: absolute;
+  width: 0;
+  border-left: 1px dashed var(--color-accent);
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+.tlx-today-label {
+  position: absolute;
+  right: 6px;
+  bottom: 4px;
+  padding: 2px 4px;
+  background: var(--color-card);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  line-height: 1.4;
+  letter-spacing: 0.06em;
+  color: var(--color-accent);
+  white-space: nowrap;
+}
+
+/* --------------------------------------------------------------------------
+   LEGEND
+   -------------------------------------------------------------------------- */
+
+.tlx-legend {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 9px 20px;
+  padding: 12px 2px 0;
+}
+
+.tlx-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  line-height: 1.5;
+  letter-spacing: 0.05em;
+  color: var(--color-text-secondary);
+}
+
+.tlx-legend-item[data-status="completed"] { --status-color: var(--tl-completed); }
+.tlx-legend-item[data-status="active"] { --status-color: var(--tl-active); }
+.tlx-legend-item[data-status="paused"] { --status-color: var(--tl-paused); }
+.tlx-legend-item[data-status="discontinued"] { --status-color: var(--tl-discontinued); }
+.tlx-legend-item[data-status="planned"] { --status-color: var(--tl-planned); }
+
+.tlx-swatch {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--status-color);
+  flex: none;
+}
+
+.tlx-legend-key {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  line-height: 1.5;
+  letter-spacing: 0.05em;
+  color: var(--color-text-muted);
+}
+
+.tlx-key-line {
+  width: 22px;
+  height: 3px;
+  border-top: 2px solid var(--color-text-muted);
+  border-bottom: 1px solid color-mix(in srgb, var(--color-text-muted) 40%, transparent);
+}
+
+.tlx-key-dot {
+  width: 7px;
+  height: 7px;
+  border: 1px solid var(--color-text-muted);
+  border-radius: 50%;
+}
+
+.tlx-key-today {
+  width: 16px;
+  border-top: 1px dashed var(--color-accent);
+}
+
+.tlx-empty {
+  position: absolute;
+  left: 50%;
+  top: 120px;
+  transform: translateX(-50%);
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+/* --------------------------------------------------------------------------
+   HOVER / TAP CARD
+   -------------------------------------------------------------------------- */
+
+.tlx-card {
+  position: fixed;
+  z-index: 1000;
+  width: min(338px, calc(100vw - 28px));
+  padding: 16px 17px 14px;
+  border: 1px solid var(--color-border-strong);
+  background: var(--color-card);
+  box-shadow: 0 18px 48px rgba(20, 24, 22, 0.16);
+  color: var(--color-text-main);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(4px);
+  transition: opacity 140ms ease, transform 140ms ease;
+  pointer-events: none;
+}
+
+.tlx-card.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.tlx-card.is-pinned {
+  pointer-events: auto;
+}
+
+.tlx-card[data-status="completed"] { --status-color: var(--tl-completed); }
+.tlx-card[data-status="active"] { --status-color: var(--tl-active); }
+.tlx-card[data-status="paused"] { --status-color: var(--tl-paused); }
+.tlx-card[data-status="discontinued"] { --status-color: var(--tl-discontinued); }
+.tlx-card[data-status="planned"] { --status-color: var(--tl-planned); }
+
+.tlx-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.tlx-card-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0.07em;
+  color: var(--color-text-main);
+}
+
+.tlx-card-status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--status-color);
+  flex: none;
+}
+
+.tlx-card-close {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  border: 1px solid var(--color-border);
+  background: transparent;
+  color: var(--color-text-secondary);
+  font-family: var(--font-sans);
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.tlx-card.is-pinned .tlx-card-close {
+  display: inline-flex;
+}
+
+.tlx-card-close:hover {
+  border-color: var(--color-border-strong);
+  color: var(--color-text-main);
+}
+
+.tlx-card-title {
+  margin: 0 0 6px;
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--color-text-main);
+}
+
+.tlx-card-dates {
+  margin: 0 0 11px;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  color: var(--color-text-secondary);
+}
+
+.tlx-card-event {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 0 0 11px;
+  padding: 7px 0 7px 9px;
+  border-left: 2px solid var(--status-color);
+  background: color-mix(in srgb, var(--status-color) 6%, transparent);
+}
+
+.tlx-card-event-type,
+.tlx-card-event-date {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  line-height: 1.45;
+  letter-spacing: 0.06em;
+  color: var(--color-text-muted);
+}
+
+.tlx-card-event-name {
+  font-size: 0.9375rem;
+  line-height: 1.4;
+  font-weight: 500;
+  color: var(--color-text-main);
+}
+
+.tlx-card-desc {
+  margin: 0 0 13px;
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  color: var(--color-text-secondary);
+}
+
+.tlx-card-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 10px;
+  border-top: 1px solid var(--color-border);
+}
+
+.tlx-card-category {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  line-height: 1.4;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.tlx-card-link {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  line-height: 1.4;
+  letter-spacing: 0.04em;
+  color: var(--color-accent);
+  text-decoration: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--color-accent) 45%, transparent);
+  white-space: nowrap;
+}
+
+.tlx-card-link:hover {
+  border-bottom-color: var(--color-accent);
+}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 760px) {
+  .tlx-head {
+    padding: 11px 14px;
+  }
+
+  .tlx-hint {
+    display: block;
+    width: 100%;
+  }
+
+  .tlx-year-label {
+    font-size: 1.55rem;
+  }
+
+  .tlx-quarter {
+    font-size: 10px;
+  }
+
+  .tlx-span-name {
+    font-size: 9.5px;
+  }
+
+  .tlx-card.is-pinned {
+    left: 12px !important;
+    right: 12px !important;
+    bottom: 12px !important;
+    top: auto !important;
+    width: auto;
+    max-height: 58vh;
+    overflow-y: auto;
+    box-shadow: 0 -8px 40px rgba(20, 24, 22, 0.2);
+  }
+
+  .tlx-legend {
+    gap: 8px 14px;
+    padding-top: 11px;
+  }
+}
+
+@media (max-width: 520px) {
+  .tlx-legend-item,
+  .tlx-legend-key {
+    font-size: 10px;
+  }
+
+  .tlx-card {
+    padding: 14px 14px 12px;
+  }
+
+  .tlx-card-title {
+    font-size: 1.35rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tlx-span,
+  .tlx-dot,
+  .tlx-card {
+    transition: none;
+  }
+}

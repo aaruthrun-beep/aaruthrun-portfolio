@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+(function(){
+  try {
+    var k = "portfolio-theme";
+    var v = localStorage.getItem(k);
+    if (v !== "light" && v !== "dark") {
+      v = "light";
+      try { localStorage.setItem(k, v); } catch(e) {}
+    }
+    if (v === "light") {
+      document.documentElement.setAttribute("data-theme","light");
+    }
+  } catch(e) {
+    document.documentElement.setAttribute("data-theme","light");
+  }
+})();
+</script>
+    <meta name="generator" content="tools/build-pages.mjs">
+  <title>Scrap is a material, not a constraint — Field Notes</title>
+  <meta name="description" content="A six-axis robot assembled from salvaged NEMA steppers, TB6600 drivers, an Arduino Mega, and reclaimed structure — and taken to a competition.">
+  <link rel="canonical" href="https://aaruthrun-beep.github.io/portfolio/journal-scrap-built-six-axis.html">
+
+  <meta property="og:title" content="Scrap is a material, not a constraint">
+  <meta property="og:description" content="A six-axis robot assembled from salvaged NEMA steppers, TB6600 drivers, an Arduino Mega, and reclaimed structure — and taken to a competition.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://aaruthrun-beep.github.io/portfolio/journal-scrap-built-six-axis.html">
+  <meta property="og:image" content="https://aaruthrun-beep.github.io/portfolio/images/field-notes/scrap-cover.jpg">
+  <meta property="og:image:alt" content="ScrapX6 six-axis arm photographed on the bench">
+  <meta property="og:site_name" content="Aaruthrun">
+  <meta property="og:locale" content="en_IN">
+  <meta property="article:published_time" content="2026-08-21">
+  <meta property="article:author" content="Aaruthrun">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Scrap is a material, not a constraint">
+  <meta name="twitter:description" content="A six-axis robot assembled from salvaged NEMA steppers, TB6600 drivers, an Arduino Mega, and reclaimed structure — and taken to a competition.">
+  <meta name="twitter:image" content="https://aaruthrun-beep.github.io/portfolio/images/field-notes/scrap-cover.jpg">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Scrap is a material, not a constraint","description":"A six-axis robot assembled from salvaged NEMA steppers, TB6600 drivers, an Arduino Mega, and reclaimed structure — and taken to a competition.","image":"https://aaruthrun-beep.github.io/portfolio/images/field-notes/scrap-cover.jpg","url":"https://aaruthrun-beep.github.io/portfolio/journal-scrap-built-six-axis.html","keywords":"ScrapX6, NEMA, TB6600, Onfluence 2026","author":{"@type":"Person","name":"Aaruthrun","url":"https://aaruthrun-beep.github.io/portfolio"},"publisher":{"@type":"Person","name":"Aaruthrun","url":"https://aaruthrun-beep.github.io/portfolio"},"isPartOf":{"@type":"Blog","name":"Field Notes","url":"https://aaruthrun-beep.github.io/portfolio/journal.html"},"datePublished":"2026-08-21"}</script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css?v=2026-11-23">
+  <link rel="stylesheet" href="config/design-tokens.css?v=2026-11-15">
+  <link rel="stylesheet" href="styles/platform.css?v=2026-11-15">
+  <!-- Global typography system -->
+  <link rel="stylesheet" href="styles/readability.css?v=2026-11-16">
+  <link rel="stylesheet" href="styles/journal.css?v=2026-11-15b">
+</head>
+<body class="entry-page platform-page journal-entry-page" data-page="journal" data-slug="scrap-built-six-axis">
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <header id="site-header"></header>
+
+  <main id="main-content">
+    <div class="container">
+      <article id="journal-entry">
+        <p class="mono text-muted" style="padding: 48px 0;">Loading field note&hellip;</p>
+      </article>
+    </div>
+      <noscript>
+      <div class="container">
+        <p class="mono text-muted">FIELD NOTE // EXPERIMENTS</p>
+        <h1>Scrap is a material, not a constraint</h1>
+        <p>ScrapX6 was built from salvaged motors, drivers, and structural material. The limitation was real, but it was also a useful design filter.</p>
+        <p><a href="journal.html">Back to Field Notes &rarr;</a></p>
+      </div>
+    </noscript>
+  </main>
+
+  <footer id="site-footer"></footer>
+
+  <script src="config/app.config.js?v=2026-11-15"></script>
+  <script src="data/data-store.js?v=2026-11-15"></script>
+  <script src="modules/theme/theme-manager.js?v=2026-11-15"></script>
+  <script src="modules/header/header-manager.js?v=2026-11-15"></script>
+  <script src="modules/footer/footer-manager.js?v=2026-11-15"></script>
+  <script src="modules/reveal/reveal-manager.js?v=2026-11-15"></script>
+  <script src="modules/content/blocks.js?v=2026-11-18"></script>
+  <script src="config/firebase.config.js?v=2026-11-17b"></script>
+  <script src="data/content-store.js?v=2026-11-17"></script>
+  <script src="modules/journal/journal-manager.js?v=2026-11-18"></script>
+  <script src="js/app.js?v=2026-11-15"></script>
+</body>
+</html>

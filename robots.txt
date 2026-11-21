@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /journal-admin.html
+Disallow: /test-modules.html
+
+Sitemap: https://aaruthrun-beep.github.io/portfolio/sitemap.xml

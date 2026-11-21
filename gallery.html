@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script>
 (function(){
@@ -23,15 +24,24 @@
   <title>Gallery Map — Aaruthrun</title>
   <meta name="description" content="An interactive infinite canvas of project photos.">
 
-  <link rel="stylesheet" href="css/style.css?v=2026-11-08">
+  <link rel="stylesheet" href="css/style.css?v=2026-11-23">
+
   <link rel="stylesheet" href="config/design-tokens.css?v=2026-11-08">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@500&display=swap">
-  <link rel="stylesheet" href="styles/gallery.css?v=2026-11-11">
+  <link rel="stylesheet" href="styles/gallery.css?v=2026-11-22">
+  <link rel="stylesheet" href="styles/platform.css?v=2026-11-15">
+
   <style>
     body { overflow: hidden; touch-action: none; }
   </style>
+  <!-- Global typography system -->
+
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles/readability.css?v=2026-11-16">
+
 </head>
 <body style="min-height: 100vh; min-height: 100dvh; height: 100dvh; display: flex; flex-direction: column;">
 
@@ -49,7 +59,7 @@
     <div class="gallery-viewport" id="gallery-viewport" style="flex: 1; position: relative; overflow: hidden; touch-action: none; background-color: var(--color-card); cursor: grab;">
 
       <!-- The movable/zoomable canvas -->
-      <div class="gallery-canvas" id="gallery-canvas" style="position:absolute;top:0;left:0;transform-origin:0 0;transition:none;will-change:transform;background-color:var(--color-card);">
+      <div class="gallery-canvas" id="gallery-canvas" style="position:absolute;top:0;left:0;width:4800px;height:3600px;transform-origin:0 0;transition:none;will-change:transform;background-color:var(--color-card);">
         <!-- Subtle grid texture (CAD blueprint dots on white) -->
         <div style="position: absolute; inset: 0; background-image: radial-gradient(rgba(0,0,0,0.05) 1px, transparent 1px); background-size: 1200px 1200px; pointer-events: none;"></div>
 
@@ -60,9 +70,12 @@
 
     <!-- Controls overlay -->
     <div style="position: absolute; bottom: 24px; right: 24px; z-index: 100; display: flex; gap: 8px; flex-direction: column;">
-      <button class="btn btn-secondary btn-mono" id="btn-zoom-in"    style="width: 40px; height: 40px; padding: 0; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; background: #FFFFFF; border-color: var(--border-strong); color: var(--text-main); box-shadow: 0 2px 8px rgba(0,0,0,0.08);">+</button>
-      <button class="btn btn-secondary btn-mono" id="btn-zoom-reset" style="width: 40px; height: 40px; padding: 0; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; background: #FFFFFF; border-color: var(--border-strong); color: var(--text-main); box-shadow: 0 2px 8px rgba(0,0,0,0.08);">FIT</button>
-      <button class="btn btn-secondary btn-mono" id="btn-zoom-out"   style="width: 40px; height: 40px; padding: 0; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; background: #FFFFFF; border-color: var(--border-strong); color: var(--text-main); box-shadow: 0 2px 8px rgba(0,0,0,0.08);">&minus;</button>
+      <button class="btn btn-secondary btn-mono" id="btn-zoom-in"    style="width: 40px; height: 40px; padding: 0; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; background: #FFFFFF; border-color: var(--color-border-strong); color: var(--text-main); box-shadow: 0 2px 8px rgba(0,0,0,0.08);">+</button>
+
+      <button class="btn btn-secondary btn-mono" id="btn-zoom-reset" style="width: 40px; height: 40px; padding: 0; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; background: #FFFFFF; border-color: var(--color-border-strong); color: var(--text-main); box-shadow: 0 2px 8px rgba(0,0,0,0.08);">FIT</button>
+
+      <button class="btn btn-secondary btn-mono" id="btn-zoom-out"   style="width: 40px; height: 40px; padding: 0; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; background: #FFFFFF; border-color: var(--color-border-strong); color: var(--text-main); box-shadow: 0 2px 8px rgba(0,0,0,0.08);">&minus;</button>
+
     </div>
   </main>
 
@@ -73,7 +86,10 @@
   <script src="modules/header/header-manager.js?v=2026-11-08"></script>
   <script src="modules/footer/footer-manager.js?v=2026-11-08"></script>
   <script src="modules/reveal/reveal-manager.js?v=2026-11-08"></script>
-  <script src="modules/gallery/gallery-manager.js?v=2026-11-14"></script>
+  <script src="modules/gallery/gallery-manager.js?v=2026-11-24"></script>
+  <script src="js/gallery.js"></script>
+  <script src="modules/gallery/lightbox.js?v=2026-11-15"></script>
+
   <script src="js/app.js"></script>
 </body>
 </html>

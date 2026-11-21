@@ -6,6 +6,11 @@
  * Every project owns a hand-drawn circle. Its photos sit inside at natural
  * pixel size, scattered at random and never overlapping. Adding a photo grows
  * only that circle, and the neighbours move aside to keep clear space.
+ *
+ * Performance: full-res images are preloaded on init so zooming swaps a
+ * cached source instead of refetching; pointer tilt is throttled with
+ * requestAnimationFrame; pan/zoom write the transform directly so dragging
+ * stays smooth.
  */
 
 const GalleryManager = (function () {
@@ -45,6 +50,7 @@ const GalleryManager = (function () {
   var dragging = false, ddX = 0, ddY = 0;
   var vp = null, cvs = null;
   var started = false;
+  var tiltRaf = null;
 
   /* ------------------------------------------------------------------ */
   /* View transform                                                      */
@@ -106,19 +112,79 @@ const GalleryManager = (function () {
 
   function zoomIn() {
     if (!vp) return;
+    swapToFull();
     zoomBy(CFG.zoomFactor, vp.clientWidth / 2, vp.clientHeight / 2);
   }
 
   function zoomOut() {
     if (!vp) return;
+    swapToThumb();
     zoomBy(1 / CFG.zoomFactor, vp.clientWidth / 2, vp.clientHeight / 2);
   }
 
+  /* ------------------------------------------------------------------ */
+  /* Zoom image swap (full-res sources are preloaded on init)            */
+  /* ------------------------------------------------------------------ */
+
+  function swapToFull() {
+    if (!cvs) return;
+    var imgs = cvs.querySelectorAll('img.gl-img');
+    for (var i = 0; i < imgs.length; i++) {
+      var img = imgs[i];
+      if (!img.dataset.fullsrc || img.dataset.fullsrc === img.src) continue;
+      var tmp = img.src;
+      img.src = img.dataset.fullsrc;
+      img.dataset.fullsrc = tmp;
+    }
+  }
+
+  function swapToThumb() {
+    if (!cvs) return;
+    var imgs = cvs.querySelectorAll('img.gl-img');
+    for (var i = 0; i < imgs.length; i++) {
+      var img = imgs[i];
+      if (!img.dataset.fullsrc || img.dataset.fullsrc === img.src) continue;
+      var tmp = img.src;
+      img.src = img.dataset.fullsrc;
+      img.dataset.fullsrc = tmp;
+    }
+  }
+
+  function preloadImages() {
+    if (!cvs) return;
+    var imgs = cvs.querySelectorAll('img.gl-img');
+    for (var i = 0; i < imgs.length; i++) {
+      var full = imgs[i].dataset.fullsrc;
+      if (!full || full === imgs[i].src) continue;
+      var pref = new Image();
+      pref.src = full;
+    }
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* Interactions                                                        */
+  /* ------------------------------------------------------------------ */
+
   function setupInteractions() {
     if (!vp) return;
+
+    // A press anywhere - including on a photo - starts a pan. Photos are
+    // links, so their native image drag has to be disabled separately,
+    // otherwise the browser drags the picture into a new tab instead.
+    // Either mouse button pans: left for ordinary dragging, right for the
+    // habits picked up in CAD and map tools.
+    var moved = false, startX = 0, startY = 0, wasDrag = false;
+
+    vp.addEventListener('dragstart', function (e) { e.preventDefault(); });
+
+    // The context menu would cut a right-button drag short.
+    vp.addEventListener('contextmenu', function (e) { e.preventDefault(); });
+
     vp.addEventListener('pointerdown', function (e) {
-      if (e.target.closest('a')) return;
-      dragging = true; ddX = e.clientX - tx; ddY = e.clientY - ty;
+      if (e.button !== undefined && e.button !== 0 && e.button !== 2) return;
+      dragging = true; moved = false; wasDrag = false;
+      startX = e.clientX; startY = e.clientY;
+      ddX = e.clientX - tx; ddY = e.clientY - ty;
       vp.style.cursor = 'grabbing';
       try { vp.setPointerCapture(e.pointerId); } catch (_) {}
     });
@@ -131,8 +197,21 @@ const GalleryManager = (function () {
     });
     vp.addEventListener('pointermove', function (e) {
       if (!dragging) return;
+      if (!moved && Math.abs(e.clientX - startX) + Math.abs(e.clientY - startY) > 4) {
+        moved = true;
+      }
+      if (moved) wasDrag = true;
       tx = e.clientX - ddX; ty = e.clientY - ddY; applyTransform();
-    });
+    }, { passive: true });
+
+    // After a pan, swallow the click so a photo does not open (lightbox or
+    // page) when the user meant to drag the map.
+    vp.addEventListener('click', function (e) {
+      if (!wasDrag) return;
+      wasDrag = false;
+      e.preventDefault();
+      e.stopPropagation();
+    }, true);
     vp.addEventListener('wheel', function (e) {
       e.preventDefault();
       var factor = Math.exp(-e.deltaY * 0.0016);
@@ -184,7 +263,7 @@ const GalleryManager = (function () {
     var ph2 = rng() * Math.PI * 2;
     var amp1 = 0.010 + rng() * 0.009;
     var amp2 = 0.004 + rng() * 0.005;
-    var steps = 150;
+    var steps = 80;  // reduced from 150: fewer path points, same look
 
     var pts = [];
     for (var i = 0; i <= steps; i++) {
@@ -268,15 +347,29 @@ const GalleryManager = (function () {
                      esc(formatDate(img.date)) + '</time>';
         }
 
-        html += '<a class="gl-photo" href="project.html?slug=' + proj.slug +
-                '" data-rot="' + img.rot.toFixed(2) +
+        // The photo is a print on the map, but it still needs a name for
+        // screen readers and the lightbox: project, note and date, never a
+        // filename.
+        var photoAlt = proj.shortTitle || proj.title;
+        if (img.text) photoAlt += ' — ' + img.text;
+        if (img.date) photoAlt += ' — ' + formatDate(img.date);
+
+        var href = 'project-' + encodeURIComponent(proj.slug) + '.html';
+
+        html += '<a class="gl-photo" href="' + href +
+                '" data-project="' + href +
+                '" aria-label="Open ' + esc(proj.shortTitle || proj.title) + ' documentation"' +
+                ' data-rot="' + img.rot.toFixed(2) +
                 '" style="left:' + left.toFixed(1) + 'px;top:' + top.toFixed(1) +
                 'px;width:' + img.w + 'px;height:' + img.h +
                 'px;transform:rotate(' + img.rot.toFixed(2) + 'deg);">' +
                 '<figure class="polaroid" style="padding:' + side + 'px ' + side +
                 'px ' + bottom + 'px;--side:' + side + 'px;--bottom:' + bottom + 'px;">' +
-                '<img class="gl-img" src="' + img.src + '" alt="' + esc(proj.title) + '" ' +
-                'decoding="async" width="' + pw + '" height="' + ph +
+                '<img class="gl-img" src="' + img.src + '" data-fullsrc="' +
+                esc(img.fullsrc || img.src) +
+                (img.srcset ? '" srcset="' + img.srcset : '') +
+                '" sizes="' + pw + 'px" alt="' + esc(photoAlt) + '" ' +
+                'loading="lazy" draggable="false" decoding="async" width="' + pw + '" height="' + ph +
                 '" style="width:' + pw + 'px;height:' + ph + 'px;">' +
                 (caption ? '<figcaption>' + caption + '</figcaption>' : '') +
                 '</figure></a>';
@@ -305,6 +398,9 @@ const GalleryManager = (function () {
 
     canvasEl.insertAdjacentHTML('beforeend', html);
 
+    // Cache full-res sources right away so zoom swaps are instant.
+    preloadImages();
+
     var photos = canvasEl.querySelectorAll('a.gl-photo');
     var reduced = window.matchMedia &&
                   window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -322,7 +418,6 @@ const GalleryManager = (function () {
     for (var h = 0; h < photos.length; h++) {
       (function (link) {
         var base = parseFloat(link.getAttribute('data-rot')) || 0;
-        var img = link.querySelector('img');
 
         link.addEventListener('mouseenter', function () {
           link.classList.add('is-hover');
@@ -334,9 +429,13 @@ const GalleryManager = (function () {
           var rect = link.getBoundingClientRect();
           var dx = (ev.clientX - (rect.left + rect.width / 2)) / (rect.width / 2);
           var dy = (ev.clientY - (rect.top + rect.height / 2)) / (rect.height / 2);
-          link.style.transform = 'rotate(' + (base + dy * 2.5).toFixed(2) +
-                                  'deg) translateY(' + (-dx * 3).toFixed(2) + 'px)';
-        });
+          if (tiltRaf !== null) return;
+          tiltRaf = requestAnimationFrame(function () {
+            tiltRaf = null;
+            link.style.transform = 'rotate(' + (base + dy * 2.5).toFixed(2) +
+                                   'deg) translateY(' + (-dx * 3).toFixed(2) + 'px)';
+          });
+        }, { passive: true });
 
         link.addEventListener('mouseleave', function () {
           link.classList.remove('is-hover');

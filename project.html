@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script>
 (function(){
@@ -20,62 +21,55 @@
   }
 })();
 </script>
-  <title>Project Specification & Build Log — Aaruthrun Robotics</title>
-  <meta name="description" content="Detailed technical breakdown, CAD kinematics, PCB schematics, and control algorithms for engineering projects by Aaruthrun.">
+  <!-- build-pages:meta:start -->
+  <title>Project Documentation — Aaruthrun</title>
+  <meta name="description" content="Engineering documentation for Aaruthrun's projects: overview, concept, architecture, development, testing, media, build log and current status.">
+  <link rel="canonical" href="project.html">
 
-  <!-- OpenGraph Metadata -->
-  <meta property="og:title" content="Project Specification — Aaruthrun Robotics">
-  <meta property="og:description" content="Technical documentation and empirical results from robotics hardware builds.">    <meta property="og:image" content="images/aaruthrun.jpeg">
+  <meta property="og:title" content="Project Documentation — Aaruthrun">
+  <meta property="og:description" content="How the builds were made: architecture, development records, test notes and build logs.">
+  <meta property="og:image" content="https://aaruthrun-beep.github.io/portfolio/images/aaruthrun.jpeg">
   <meta property="og:type" content="article">
   <meta name="twitter:card" content="summary_large_image">
+  <!-- build-pages:meta:end -->
 
-  <link rel="stylesheet" href="css/style.css?v=2026-11-08">
-  <link rel="stylesheet" href="config/design-tokens.css?v=2026-11-08">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css?v=2026-11-23">
+  <link rel="stylesheet" href="config/design-tokens.css?v=2026-11-15">
+  <link rel="stylesheet" href="styles/platform.css?v=2026-11-15">
+  <!-- Global typography system -->
+  <link rel="stylesheet" href="styles/readability.css?v=2026-11-16">
 </head>
-<body>
+<body class="doc-page platform-page">
   <a href="#main-content" class="skip-link">Skip to main content</a>
 
-  <!-- Shared Header -->
   <header id="site-header"></header>
 
   <main id="main-content">
     <div class="container">
-      
-      <!-- Container for Project Detail Template (populated via project-manager.js) -->
-      <article id="project-detail-container" class="reveal" aria-label="Project Technical Documentation">
-        <!-- Initial skeleton state -->
+      <article id="project-detail-container" aria-label="Project technical documentation">
         <div style="padding: 48px 0; text-align: center;">
-          <p class="mono text-muted">LOADING PROJECT SPECIFICATIONS FROM DATASTORE...</p>
+          <p class="mono text-muted">LOADING PROJECT DOCUMENTATION&hellip;</p>
         </div>
       </article>
-
-      <div style="border-top: 1px solid var(--border); margin-top: 24px; padding-top: 16px;">
-        <blockquote class="engineering-quote" style="margin-top: 0;">
-          <p class="engineering-quote-body">
-            "Be alone, that is the secret of invention; be alone, that is when ideas are born."
-          </p>
-          <div class="engineering-quote-cite">
-            <span class="engineering-quote-author">NIKOLA TESLA</span>
-            <span class="engineering-quote-source">// "AN INVENTOR'S SEASONED IDEAS", NEW YORK TIMES, APR 1934</span>
-          </div>
-        </blockquote>
-      </div>
-
     </div>
   </main>
 
-  <!-- Shared Footer -->
   <footer id="site-footer"></footer>
 
-  <!-- Scripts -->
-  <script src="config/app.config.js?v=2026-11-08"></script>
-  <script src="data/data-store.js?v=2026-11-08"></script>
-  <script src="modules/theme/theme-manager.js?v=2026-11-08"></script>
-  <script src="modules/header/header-manager.js?v=2026-11-08"></script>
-  <script src="modules/footer/footer-manager.js?v=2026-11-08"></script>
-  <script src="modules/reveal/reveal-manager.js?v=2026-11-08"></script>
-  <script src="modules/filters/filter-manager.js?v=2026-11-08"></script>
-  <script src="modules/projects/project-manager.js?v=2026-11-14"></script>
-  <script src="js/app.js?v=2026-11-08"></script>
+  <script src="config/app.config.js?v=2026-11-15"></script>
+  <script src="data/data-store.js?v=2026-11-15"></script>
+  <script src="modules/theme/theme-manager.js?v=2026-11-15"></script>
+  <script src="modules/header/header-manager.js?v=2026-11-15"></script>
+  <script src="modules/footer/footer-manager.js?v=2026-11-15"></script>
+  <script src="modules/reveal/reveal-manager.js?v=2026-11-15"></script>
+  <script src="modules/content/blocks.js?v=2026-11-18"></script>
+  <script src="modules/projects/project-detail-renderer.js?v=2026-11-15"></script>
+  <script src="modules/gallery/lightbox.js?v=2026-11-15"></script>
+  <script src="modules/projects/project-manager.js?v=2026-11-15"></script>
+  <script src="js/app.js?v=2026-11-15"></script>
 </body>
 </html>

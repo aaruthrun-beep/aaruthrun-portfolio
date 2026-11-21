@@ -87,29 +87,32 @@
       }
     ],
     "repo": "https://github.com/aaruthrun-beep/nite-369-robotic-arm",
-    "video": "https://youtube.com/watch?v=nite-369-demo",
     "links": [
       {
         "label": "GitHub Firmware & CAD Repository",
         "url": "https://github.com/aaruthrun-beep/nite-369-robotic-arm"
-      },
-      {
-        "label": "Kinematics & Cycloidal Whitepaper (PDF)",
-        "url": "#"
       }
     ],
     "images": [
       "images/projects/nite-369/1.png",
+      "images/projects/nite-369/darker_check.png",
+      "images/projects/nite-369/IMG_20260707_191639419.jpg",
+      "images/projects/nite-369/IMG_20260713_182610886.jpg",
+      "images/projects/nite-369/IMG_20260713_182846050.jpg",
       "images/projects/nite-369/IMG_20260729_014512191.jpg",
+      "images/projects/nite-369/IMG_20260731_002215921.jpg",
       "images/projects/nite-369/IMG_20260801_120742624.jpg",
       "images/projects/nite-369/IMG_20260801_120745341.jpg",
+      "images/projects/nite-369/IMG_20260801_120753747.jpg",
+      "images/projects/nite-369/IMG_20260801_120802966.jpg",
       "images/projects/nite-369/IMG_20260810_004419763.jpg",
       "images/projects/nite-369/IMG_20260810_004658996.jpg",
       "images/projects/nite-369/max 3.png",
-      "images/projects/nite-369/NITE_369_LAUNCHING_SOON_POSTER.png",
-      "images/projects/nite-369/PROJECT_REVEAL_SILHOUETTE.png",
-      "images/projects/nite-369/darker_check.png"
-    ]
+      "images/projects/nite-369/NITE_369_LAUNCHING_SOON_POSTER.png"
+    ],
+    "featuredRank": 1,
+    "archiveImage": "images/archive/nite-369.jpg",
+    "thumbImage": "images/archive/nite-369-thumb.jpg"
   },
   {
     "id": 2,
@@ -120,6 +123,8 @@
     "start": "2024-08",
     "end": null,
     "status": "Active",
+    "updated": "2026-03",
+    "currentFocus": "Docking consensus across the five-unit swarm, and the Avani Dynamics telemetry pipeline",
     "featured": true,
     "tags": [
       "Robotics",
@@ -138,7 +143,7 @@
     ],
     "summary": "Hexagonal reconfigurable autonomous swarm robotic platform with magnetic latching docks, localized directional IR mesh, and decentralized emergent formation control.",
     "monoSpec": "Hexagonal // Electro-Perm Latch // 6-Ch IR Comms // ESP32-S3 Mesh",
-    "image": "images/projects/mars-369/1.png",
+    "image": "images/projects/mars-369/mars-369-08.jpg",
     "specs": {
       "Form Factor": "115 mm width across flats, 42 mm chassis height",
       "Latching Mechanism": "3x Hermaphroditic electro-permanent magnetic couplers",
@@ -216,7 +221,6 @@
       }
     ],
     "repo": "https://github.com/aaruthrun-beep/mars-369-swarm-robot",
-    "video": "https://youtube.com/watch?v=mars-369-demo",
     "links": [
       {
         "label": "GitHub Hardware & Firmware Repository",
@@ -228,313 +232,24 @@
       }
     ],
     "images": [
-      "images/projects/mars-369/1.png"
-    ]
-  },
-  {
-    "id": 3,
-    "slug": "bldc-foc-actuator",
-    "title": "BLDC FOC Actuator — High-Torque Integrated Servo Module",
-    "shortTitle": "BLDC FOC Actuator",
-    "category": "Control",
-    "start": "2024-01",
-    "end": "2024-07",
-    "status": "Completed",
-    "featured": true,
-    "tags": [
-      "Control",
-      "Embedded",
-      "Mechanical"
+      "images/projects/mars-369/mars-369-01.jpg",
+      "images/projects/mars-369/mars-369-02.jpg",
+      "images/projects/mars-369/mars-369-03.jpg",
+      "images/projects/mars-369/mars-369-04.jpg",
+      "images/projects/mars-369/mars-369-05.jpg",
+      "images/projects/mars-369/mars-369-06.jpg",
+      "images/projects/mars-369/mars-369-07.jpg",
+      "images/projects/mars-369/mars-369-08.jpg",
+      "images/projects/mars-369/mars-369-09.jpg",
+      "images/projects/mars-369/mars-369-10.jpg",
+      "images/projects/mars-369/mars-369-11.jpg",
+      "images/projects/mars-369/mars-369-12.jpg",
+      "images/projects/mars-369/mars-369-13.jpg",
+      "images/projects/mars-369/mars-369-14.jpg"
     ],
-    "skills": [
-      "Field Oriented Control",
-      "SVPWM",
-      "STM32",
-      "KiCAD",
-      "SolidWorks",
-      "Oscilloscope",
-      "PID Tuning"
-    ],
-    "summary": "Compact, hollow-shaft brushless servo actuator with integrated Space Vector PWM Field-Oriented Control, 14-bit magnetic angle tracking, and high-efficiency planar power stage.",
-    "monoSpec": "4310 KV100 // 25kHz SVPWM // 14-bit AS5047P // 2.4Nm Peak",
-    "image": "images/projects/bldc-foc-actuator/1.png",
-    "specs": {
-      "Motor Type": "4310 KV100 14-pole-pair Brushless Outrunner",
-      "Current Sensing": "Dual inline shunts with INA240 high-CMRR amplifiers",
-      "Switching Frequency": "25 kHz center-aligned Space Vector PWM (SVPWM)",
-      "Position Feedback": "AS5047P 14-bit magnetic rotary encoder (0.022° resolution)",
-      "Operating Voltage": "12V to 24V DC input rail",
-      "Rated Torque": "0.85 Nm Continuous / 2.4 Nm Peak (transient 5s)",
-      "Control Loops": "25 kHz Current (Iq/Id), 5 kHz Velocity, 1 kHz Position",
-      "Central Bore": "12 mm hollow shaft for cabling pass-through"
-    },
-    "milestones": [
-      {
-        "date": "2024-01",
-        "type": "prototype",
-        "label": "FOC Mathematical Derivation",
-        "description": "Simulated Clarke/Park transforms and Space Vector modulation in Python."
-      },
-      {
-        "date": "2024-03",
-        "type": "prototype",
-        "label": "KiCAD Power Stage V1",
-        "description": "Fabricated 42mm circular 4-layer PCB with low-inductance MOSFET loop."
-      },
-      {
-        "date": "2024-05",
-        "type": "demo",
-        "label": "Closed-Loop Current Tuning",
-        "description": "Tuned PI current loops with 25 kHz sample rate; step response under 1.2ms."
-      },
-      {
-        "date": "2024-07",
-        "type": "publish",
-        "label": "Haptic Impedance Verification",
-        "description": "Demonstrated virtual spring, damping, and detent emulation over UART telemetry."
-      }
-    ],
-    "problem": "Standard stepper motors and hobby R/C servo motors lack true torque sensing, generate excessive heat during standstill, produce high acoustic noise, and suffer from position step loss when externally perturbed. Existing commercial industrial FOC drives (e.g. ODrive, Elmo) are physically bulky and cannot fit directly inside robotic joint pivots.",
-    "architecture": "The actuator merges motor stator, rotor, hollow shaft, 14-bit absolute magnetic encoder, dual inline current shunts, 3-phase MOSFET inverter, and STM32 MCU into a single self-contained 45mm x 32mm cylindrical module. Control commands are received via CAN bus or high-speed UART.",
-    "mechanical": "Machined 6061-T6 aluminum housing doubles as a structural bearing mount and thermal heat sink. Thermal interface material (0.5mm 6 W/mK) couples the six high-side and low-side MOSFETs directly to the chassis. Central 12mm stainless steel hollow bore enables daisy-chaining electrical cables through joint centers without twisting.",
-    "electronicsFirmware": "4-layer 2oz copper PCB with symmetrical phase track routing to equalize parasitic inductances. Utilizes six N-channel 40V 60A low-RDS(on) (1.8 mΩ) MOSFETs driven by TI DRV8301. Firmware is written in ANSI C with CMSIS-DSP math primitives on STM32F4, executing Park and Clarke transforms in under 2.8 microseconds.",
-    "control": "Full field-oriented control with Space Vector PWM (SVPWM) allows 15% higher bus voltage utilization over standard sinusoidal modulation. Cascaded architecture: 25 kHz inner current loop with decouple cross-coupling back-EMF terms, 5 kHz velocity loop, and 1 kHz position loop with anti-windup clamping.",
-    "results": "89.4% motor electrical efficiency measured at continuous rated load. Cogging torque was virtually eliminated via automated harmonic compensation lookup tables. Actuator demonstrated compliant impedance control with virtual spring constants tunable from 0.01 to 10 Nm/rad.",
-    "buildLog": [
-      {
-        "date": "2024-01-18",
-        "entry": "Wrote Python simulation modeling Park transform rotor reference frame and current response."
-      },
-      {
-        "date": "2024-03-24",
-        "entry": "Assembled KiCAD Rev A boards; verified gate driver charge pump levels at 24V supply."
-      },
-      {
-        "date": "2024-05-15",
-        "entry": "Measured phase current noise margin; adjusted RC filter cutoff to 120 kHz to eliminate ADC spikes."
-      },
-      {
-        "date": "2024-07-29",
-        "entry": "Completed haptic knob demo with 12 distinct software-defined mechanical detents."
-      }
-    ],
-    "repo": "https://github.com/aaruthrun-beep/bldc-foc-actuator",
-    "video": "https://youtube.com/watch?v=bldc-foc-demo",
-    "links": [
-      {
-        "label": "GitHub Hardware & Firmware",
-        "url": "https://github.com/aaruthrun-beep/bldc-foc-actuator"
-      },
-      {
-        "label": "FOC Mathematics & Tuning Guide",
-        "url": "#"
-      }
-    ],
-    "images": [
-      "images/projects/bldc-foc-actuator/1.png"
-    ]
-  },
-  {
-    "id": 4,
-    "slug": "ffb-steer-by-wire",
-    "title": "FFB Steer-by-Wire RC Car — Direct-Drive Haptic System",
-    "shortTitle": "FFB Steer-by-Wire RC Car",
-    "category": "Embedded",
-    "start": "2024-09",
-    "end": "2025-04",
-    "status": "Completed",
-    "featured": true,
-    "tags": [
-      "Embedded",
-      "Control",
-      "Mechanical",
-      "Fabrication"
-    ],
-    "skills": [
-      "C/C++",
-      "FreeRTOS",
-      "CAN Bus",
-      "KiCAD",
-      "SolidWorks",
-      "Load Cell / Strain Gauge",
-      "FOC"
-    ],
-    "summary": "Full steer-by-wire 1:10 scale RC vehicle coupled to a direct-drive brushless steering wheel that provides realistic haptic road surface, tire slip, and curb bump feedback.",
-    "monoSpec": "1:10 Scale // 4.2Nm Direct Drive Base // <4.8ms Latency // CAN + ESP-NOW",
-    "image": "images/projects/ffb-steer-by-wire/1.png",
-    "specs": {
-      "Chassis Platform": "1:10 Scale 4WD Touring / Drift Competition Chassis",
-      "Telemetry Link": "Bidirectional 2.4 GHz ESP-NOW with error-checked CAN 2.0 gateway",
-      "Wheel Motor Base": "High-torque direct-drive outrunner delivering up to 4.2 Nm haptic torque",
-      "Wheel Sensing": "2400 PPR optical incremental encoder + index mark",
-      "Rack Actuator": "High-speed titanium-gear coreless digital steering actuator (0.06s/60°)",
-      "Force Sensing": "Custom tie-rod load cells measuring real mechanical tire scrub forces",
-      "End-to-End Latency": "< 4.8 ms measured from tire impact to steering wheel reaction",
-      "Firmware OS": "FreeRTOS deterministic real-time scheduler on both nodes"
-    },
-    "milestones": [
-      {
-        "date": "2024-09",
-        "type": "prototype",
-        "label": "Ackermann Steering Dynamics Modeling",
-        "description": "Calculated pneumatic trail, slip angle moments, and road restitution forces."
-      },
-      {
-        "date": "2024-11",
-        "type": "prototype",
-        "label": "Strain-Gauge Tie Rod Prototyping",
-        "description": "Calibrated dual wheatstone bridge amplifier boards for lateral force sensing."
-      },
-      {
-        "date": "2025-01",
-        "type": "demo",
-        "label": "Direct-Drive Base Integration",
-        "description": "Interfaced high-torque brushless base with FreeRTOS telemetry stack."
-      },
-      {
-        "date": "2025-04",
-        "type": "competition",
-        "label": "Full System Skidpad Trials",
-        "description": "Driver accurately identified understeer/oversteer transitions solely through haptic feel."
-      }
-    ],
-    "problem": "Conventional RC radio transmitters use tiny plastic spring-loaded trigger/wheel inputs with zero mechanical road feedback. Drivers have no physical awareness of tire adhesion limits, steering rack resistance, curb collisions, or surface changes, leading to over-correction and loss of vehicle stability.",
-    "architecture": "The system replaces traditional radio gear with a physical steer-by-wire architecture. The chassis carries a sensor package including strain-gauge tie-rods, wheel speed Hall sensors, and a 6-axis IMU. Telemetry is streamed over low-latency ESP-NOW to a desktop direct-drive steering base. The base's MCU calculates real-time haptic torque profiles and outputs commanded torque to the driver's steering rim.",
-    "mechanical": "Custom CNC-machined 6061-T6 aluminum steering knuckles and bellcrank assembly designed to eliminate play while integrating miniature 10 kg S-type load cells into both left and right tie rods. The steering wheel base consists of a 110mm outrunner mounted to a 5mm steel faceplate with dual preloaded angular contact bearings.",
-    "electronicsFirmware": "Chassis node: STM32F411 reading INA125 instrumentation amplifiers and MPU6050 over I2C, transmitting to onboard ESP32 radio node over CAN bus. Base station: ESP32-S3 receiving packet bursts, filtering with an exponential moving average, and commanding motor driver via UART at 500k baud.",
-    "control": "Haptic rendering engine combines three force components: (1) measured mechanical rack force from tie-rod load cells, (2) synthesized tire self-aligning torque derived from Pacejka tire slip model using chassis yaw rate and wheel speed, and (3) high-frequency road texture synthesized from accelerometer Z-axis shocks.",
-    "results": "Measured end-to-end loop latency was 4.8 ms. In controlled blind testing on simulated low-friction surfaces, test operators improved lap time consistency by 18% and reduced unrecoverable spin-outs by 65%.",
-    "buildLog": [
-      {
-        "date": "2024-09-12",
-        "entry": "Constructed mathematical tire model relating steering scrub radius to rack load."
-      },
-      {
-        "date": "2024-11-20",
-        "entry": "Bonded 350-ohm foil strain gauges to 6061 aluminum tie rods; temperature-compensated circuit."
-      },
-      {
-        "date": "2025-01-14",
-        "entry": "Tested direct-drive torque safety limits; implemented hard emergency stop clamp on high acceleration."
-      },
-      {
-        "date": "2025-04-08",
-        "entry": "Conducted figure-8 wet track testing; confirmed haptic road feel accurately relayed curb strikes."
-      }
-    ],
-    "repo": "https://github.com/aaruthrun-beep/ffb-steer-by-wire",
-    "video": "https://youtube.com/watch?v=ffb-steer-demo",
-    "links": [
-      {
-        "label": "GitHub Firmware & Telemetry",
-        "url": "https://github.com/aaruthrun-beep/ffb-steer-by-wire"
-      },
-      {
-        "label": "Telemetry Data Visualizer",
-        "url": "#"
-      }
-    ],
-    "images": [
-      "images/projects/ffb-steer-by-wire/1.png"
-    ]
-  },
-  {
-    "id": 5,
-    "slug": "esp32-s3-micro-robot",
-    "title": "ESP32-S3 Micro-Robot — Self-Balancing Wi-Fi Vision Agent",
-    "shortTitle": "ESP32-S3 Micro-Robot",
-    "category": "Embedded",
-    "start": "2025-01",
-    "end": "2025-05",
-    "status": "Completed",
-    "featured": true,
-    "tags": [
-      "Embedded",
-      "Control",
-      "Robotics"
-    ],
-    "skills": [
-      "ESP32-S3",
-      "FreeRTOS",
-      "IMU Sensor Fusion",
-      "OpenCV",
-      "PID Tuning",
-      "KiCAD"
-    ],
-    "summary": "Two-wheeled inverted pendulum micro-robot featuring ESP32-S3 dual-core MCU, 6-axis MPU6050 with Madgwick filter, onboard OV2640 camera, and web-based telemetry dashboard.",
-    "monoSpec": "70x60x95mm // 200Hz Balance Loop // OV2640 Wi-Fi Video // Madgwick Fusion",
-    "image": "images/projects/esp32-s3-micro-robot/1.png",
-    "specs": {
-      "Dimensions": "70 mm width x 60 mm depth x 95 mm height",
-      "Control Rate": "200 Hz hard real-time inverted pendulum PID loop",
-      "MCU": "ESP32-S3 Dual-Core Xtensa LX7 @ 240 MHz (8MB PSRAM)",
-      "Vision": "OmniVision OV2640 2MP Camera streaming JPEG over WebSockets",
-      "Sensors": "MPU6050 6-axis IMU + dual magnetic quadrature encoders",
-      "Drive System": "Precision coreless micro metal gearmotors with silicone tires",
-      "Power": "Single 18650 3500mAh Li-ion with onboard 5V/3.3V synchronous boost",
-      "Telemetry": "Browser-based dashboard with live PID tuning & WebSocket controls"
-    },
-    "milestones": [
-      {
-        "date": "2025-01",
-        "type": "prototype",
-        "label": "Inverted Pendulum Dynamic Equations",
-        "description": "Derived Lagrange state-space equations of motion for wheeled inverted pendulum."
-      },
-      {
-        "date": "2025-02",
-        "type": "prototype",
-        "label": "Integrated PCB Layout",
-        "description": "Routed 4-layer ultra-compact PCB in KiCAD integrating ESP32-S3, camera, and H-bridges."
-      },
-      {
-        "date": "2025-03",
-        "type": "demo",
-        "label": "First Stable Self-Balancing",
-        "description": "Achieved continuous stationary balance under external physical pushes."
-      },
-      {
-        "date": "2025-05",
-        "type": "demo",
-        "label": "Live Vision & Teleoperation",
-        "description": "Integrated 25 FPS video stream and responsive browser joystick control."
-      }
-    ],
-    "problem": "Robotics platforms used for embedded controls education are either oversized, rely on desktop computers for balance loops, or lack real-time visual streaming due to microcontroller bandwidth constraints.",
-    "architecture": "The ESP32-S3 dual-core chip splits duties deterministically: Core 0 handles Wi-Fi, HTTP server, and WebSocket video streaming. Core 1 runs an un-preemptible 200 Hz FreeRTOS task reading the MPU6050 IMU, computing the Madgwick attitude filter, executing the cascaded balance PID loop, and updating motor PWMs.",
-    "mechanical": "Lightweight 3D printed PETG chassis with modular snap-fit battery cradle placing the 18650 cell at the top center of gravity to optimize the pendulum moment of inertia for easier dynamic stabilization.",
-    "electronicsFirmware": "Custom PCB with dedicated low-noise LDOs powering the analog IMU and camera domains. Dual TI DRV8833 dual H-bridge motor drivers with current limiting. Firmware built using ESP-IDF framework.",
-    "control": "Cascaded dual-loop control: inner loop stabilizes chassis tilt angle at 200 Hz; outer loop regulates translational position and velocity at 50 Hz to prevent drift.",
-    "results": "Continuous upright balance maintained across carpet and polished wood surfaces. Video stream delivered stable 25 FPS VGA (640x480) with latency under 95 ms over standard 2.4 GHz Wi-Fi.",
-    "buildLog": [
-      {
-        "date": "2025-01-22",
-        "entry": "Calculated center of mass and required motor torque at 15° maximum tilt recovery."
-      },
-      {
-        "date": "2025-02-18",
-        "entry": "Soldered ultra-fine pitch QFN ESP32-S3 modules using hot air rework station."
-      },
-      {
-        "date": "2025-03-30",
-        "entry": "Tuned derivative filter on balance loop, eliminating high-frequency wheel buzz."
-      },
-      {
-        "date": "2025-05-12",
-        "entry": "Tested teleoperation over local Wi-Fi network; verified fail-safe motor stop on packet timeout."
-      }
-    ],
-    "repo": "https://github.com/aaruthrun-beep/esp32-s3-micro-robot",
-    "video": "https://youtube.com/watch?v=esp32-robot-demo",
-    "links": [
-      {
-        "label": "GitHub Repository & Web UI",
-        "url": "https://github.com/aaruthrun-beep/esp32-s3-micro-robot"
-      }
-    ],
-    "images": [
-      "images/projects/esp32-s3-micro-robot/1.png"
-    ]
+    "featuredRank": 4,
+    "archiveImage": "images/archive/mars-369.jpg",
+    "thumbImage": "images/archive/mars-369-thumb.jpg"
   },
   {
     "id": 6,
@@ -564,7 +279,7 @@
     ],
     "summary": "Rugged 4WD differential-drive outdoor autonomous rover with centimetre-accurate RTK-GPS, 2D LiDAR SLAM, obstacle avoidance, and mission planner for agricultural mapping.",
     "monoSpec": "4WD // RTK-GPS <2cm // Slamtec A2 LiDAR // ROS2 Nav2 // 4h Battery",
-    "image": "images/projects/cat-autonomous-rover/Base_V5_2025-Nov-08_04-14-23AM-000_CustomizedView27029332276_jpg.jpg",
+    "image": "images/projects/cat-autonomous-rover/cat-autonomous-rover-02.jpg",
     "specs": {
       "Drive System": "4WD Independent Planetary Geared Motors (150W total)",
       "Chassis": "Welded 6061 aluminum box section with passive rocker suspension",
@@ -626,129 +341,32 @@
       }
     ],
     "repo": "https://github.com/aaruthrun-beep/cat-autonomous-rover",
-    "video": "https://youtube.com/watch?v=cat-rover-demo",
     "links": [
       {
         "label": "GitHub ROS2 Workspace",
         "url": "https://github.com/aaruthrun-beep/cat-autonomous-rover"
-      },
-      {
-        "label": "Outdoor Field Test Data Logs",
-        "url": "#"
       }
     ],
     "images": [
-      "images/projects/cat-autonomous-rover/Base_V5_2025-Nov-08_04-14-23AM-000_CustomizedView27029332276_jpg.jpg",
-      "images/projects/cat-autonomous-rover/Base_V5_2025-Nov-08_04-15-33AM-000_CustomizedView36099446252_jpg.jpg",
-      "images/projects/cat-autonomous-rover/Base_V5_2025-Nov-08_04-24-57AM-000_CustomizedView23991858566_jpg.jpg",
-      "images/projects/cat-autonomous-rover/IMG20251214153627.jpg",
-      "images/projects/cat-autonomous-rover/IMG20251214155739.jpg",
       "images/projects/cat-autonomous-rover/20251214_130742.jpg",
       "images/projects/cat-autonomous-rover/20251214_152004.jpg",
-      "images/projects/cat-autonomous-rover/20251214_155126.jpg"
-    ]
-  },
-  {
-    "id": 7,
-    "slug": "titan-klipper-corexy",
-    "title": "Titan-Klipper CoreXY 3D Printer — High-Speed Precision Fabricator",
-    "shortTitle": "Titan-Klipper CoreXY Printer",
-    "category": "Fabrication",
-    "start": "2025-08",
-    "end": null,
-    "status": "Active",
-    "featured": false,
-    "tags": [
-      "Fabrication",
-      "Mechanical",
-      "Embedded"
+      "images/projects/cat-autonomous-rover/20251214_155126.jpg",
+      "images/projects/cat-autonomous-rover/cat-autonomous-rover-01.jpg",
+      "images/projects/cat-autonomous-rover/cat-autonomous-rover-02.jpg",
+      "images/projects/cat-autonomous-rover/cat-autonomous-rover-03.jpg",
+      "images/projects/cat-autonomous-rover/cat-autonomous-rover-04.jpg",
+      "images/projects/cat-autonomous-rover/IMG20251214153627.jpg",
+      "images/projects/cat-autonomous-rover/IMG20251214155739.jpg",
+      "images/projects/cat-autonomous-rover/IMG20261113153917.jpg",
+      "images/projects/cat-autonomous-rover/IMG20261113153921.jpg",
+      "images/projects/cat-autonomous-rover/vlcsnap-2026-11-21-18h38m16s924.png",
+      "images/projects/cat-autonomous-rover/vlcsnap-2026-11-21-18h38m58s661.png",
+      "images/projects/cat-autonomous-rover/vlcsnap-2026-11-21-18h39m02s098.png",
+      "images/projects/cat-autonomous-rover/vlcsnap-2026-11-21-18h40m08s693.png"
     ],
-    "skills": [
-      "CoreXY Kinematics",
-      "Klipper Firmware",
-      "Input Shaping",
-      "SolidWorks",
-      "CAN Bus",
-      "CNC Machining"
-    ],
-    "summary": "Custom-engineered CoreXY 3D printer built on 3030 aluminum extrusions with linear rails, CAN-bus toolhead, chamber heating, and input-shaping resonance compensation.",
-    "monoSpec": "300x300x350mm // 500mm/s @ 25k Accel // CAN Toolhead // 65°C Chamber",
-    "image": "images/projects/titan-klipper-corexy/1.png",
-    "specs": {
-      "Kinematics": "True CoreXY with crossed Gates 9mm 2GT belts",
-      "Usable Build Volume": "300 mm x 300 mm x 350 mm",
-      "Motion Hardware": "Hiwin MGN12H linear guide rails on all linear axes",
-      "Max Kinematic Speed": "500 mm/s travel speed @ 25,000 mm/s² acceleration",
-      "Hotend & Extruder": "Water-cooled UHF ceramic hotend (up to 450°C) with dual-drive planetary extruder",
-      "Toolhead Electronics": "RP2040 CAN bus toolhead board with ADXL345 accelerometer",
-      "Enclosure Temperature": "Active 65°C heated chamber for engineering polymers (PA-CF, PEEK, PC)",
-      "Mainboard": "BTT Octopus Pro (STM32F446) + Raspberry Pi 4 running Klipper & Moonraker"
-    },
-    "milestones": [
-      {
-        "date": "2025-08",
-        "type": "prototype",
-        "label": "Gantry Kinematic Modeling",
-        "description": "Calculated CoreXY belt tension vectors and gantry racking stiffness."
-      },
-      {
-        "date": "2025-10",
-        "type": "prototype",
-        "label": "Frame Extrusion & CNC Plate Machining",
-        "description": "Machined 8mm mic-6 cast aluminum bed plate and corner brace brackets."
-      },
-      {
-        "date": "2026-01",
-        "type": "demo",
-        "label": "Input Shaping & Resonance Tuning",
-        "description": "Collected ADXL345 accelerometer frequency graphs; tuned MZV input shaper."
-      },
-      {
-        "date": "2026-05",
-        "type": "publish",
-        "label": "High-Temp Polymer Certification",
-        "description": "Successfully printed carbon-fiber reinforced nylon (PA12-CF) structural parts for NITE 369."
-      }
-    ],
-    "problem": "Off-the-shelf desktop 3D printers lack the thermal capabilities and mechanical stiffness required to reliably print high-temperature engineering plastics like PA-CF, PEEK, and Polycarbonate. Bed-slinger architectures suffer from ringing artifacts at speeds above 80 mm/s.",
-    "architecture": "The machine uses a CoreXY gantry where stationary dual high-torque NEMA 17 steppers drive two independent belts. A Raspberry Pi 4 runs the Klipper motion planner and sends step-generation queues over USB and CAN bus to an Octopus Pro mainboard and RP2040 toolhead board.",
-    "mechanical": "Rigid cube frame assembled from heavy-duty 3030 T-slot aluminum extrusions with cast aluminum corner gussets. Precision mic-6 cast aluminum tooling plate (8mm thick) with silicone AC heater bed. Gantry uses lightweight carbon fiber square tube to minimize moving mass to under 280 grams.",
-    "electronicsFirmware": "Toolhead utilizes a single 4-wire umbilical (24V, GND, CAN_H, CAN_L) running to an RP2040 MCU, eliminating bulky wire harnesses. Integrated ADXL345 digital accelerometer captures gantry vibrational response.",
-    "control": "Klipper's advance motion planning implements input shaping (resonance compensation using MZV/EI filters), eliminating ghosting and ringing at accelerations up to 25,000 mm/s². Pressure advance compensates for molten plastic viscosity in high-flow nozzle.",
-    "results": "Benchmarked volumetric flow rate of 38 mm³/s with 0.4mm nozzle. Capable of printing high-strength structural parts for the NITE 369 arm and MARS 369 robots with dimensional tolerances within ±0.04 mm.",
-    "buildLog": [
-      {
-        "date": "2025-08-16",
-        "entry": "Calculated structural natural frequency of 3030 frame under 25k acceleration."
-      },
-      {
-        "date": "2025-10-28",
-        "entry": "Faced aluminum tooling plate on CNC mill to ensure bed planarity within 15 microns."
-      },
-      {
-        "date": "2026-01-19",
-        "entry": "Ran automated accelerometer resonance sweep; shaper frequency identified at 68.4 Hz on X-axis."
-      },
-      {
-        "date": "2026-05-04",
-        "entry": "Printed full batch of cycloidal gear blanks in PA6-CF with zero bed warping in 65°C chamber."
-      }
-    ],
-    "repo": "https://github.com/aaruthrun-beep/titan-klipper-corexy",
-    "video": "https://youtube.com/watch?v=titan-klipper-demo",
-    "links": [
-      {
-        "label": "GitHub Klipper Config & Macros",
-        "url": "https://github.com/aaruthrun-beep/titan-klipper-corexy"
-      },
-      {
-        "label": "CAD Assembly Files (SolidWorks)",
-        "url": "#"
-      }
-    ],
-    "images": [
-      "images/projects/titan-klipper-corexy/1.png"
-    ]
+    "featuredRank": 3,
+    "archiveImage": "images/archive/cat-autonomous-rover.jpg",
+    "thumbImage": "images/archive/cat-autonomous-rover-thumb.jpg"
   },
   {
     "id": 8,
@@ -776,7 +394,7 @@
     ],
     "summary": "Six-axis robotic arm built from salvaged materials and scrap components using NEMA 17 and NEMA 23 stepper motors, TB6600 drivers, and an Arduino Mega. Focused on mechanical assembly, motor control integration, and repurposing discarded components into a functional robotic system. Secured third place at Onfluence 2026.",
     "monoSpec": "6-DOF // Scrap-Built // NEMA 17/23 + TB6600 // Arduino Mega // Onfluence 2026 (3rd Place)",
-    "image": "images/projects/scrapx6/WhatsApp Image 2026-03-17 at 9.46.42 PM.jpeg",
+    "image": "images/projects/scrapx6/scrapx6-03.jpg",
     "specs": {
       "Degrees of Freedom": "Six-axis articulated arm",
       "Motors": "Salvaged NEMA 17 + NEMA 23 stepper motors",
@@ -833,13 +451,103 @@
       }
     ],
     "images": [
-      "images/projects/scrapx6/WhatsApp Image 2026-02-17 at 7.42.30 AM.jpeg",
-      "images/projects/scrapx6/WhatsApp Image 2026-03-17 at 9.46.42 PM.jpeg",
-      "images/projects/scrapx6/WhatsApp Image 2026-04-08 at 6.39.00 PM.jpeg",
-      "images/projects/scrapx6/WhatsApp Image 2026-04-08 at 6.42.11 PM.jpeg",
-      "images/projects/scrapx6/WhatsApp Image 2026-04-08 at 6.42.13 PM.jpeg",
-      "images/projects/scrapx6/WhatsApp Image 2026-04-09 at 4.59.38 PM.jpeg",
-      "images/projects/scrapx6/WhatsApp Image 2026-04-09 at 5.00.18 PM.jpeg"
-    ]
+      "images/projects/scrapx6/scrapx6-01.jpg",
+      "images/projects/scrapx6/scrapx6-02.jpg",
+      "images/projects/scrapx6/scrapx6-03.jpg",
+      "images/projects/scrapx6/scrapx6-04.jpg",
+      "images/projects/scrapx6/scrapx6-05.jpg",
+      "images/projects/scrapx6/scrapx6-06.jpg",
+      "images/projects/scrapx6/scrapx6-07.jpg",
+      "images/projects/scrapx6/scrapx6-08.jpg"
+    ],
+    "featuredRank": 2,
+    "archiveImage": "images/archive/scrapx6.jpg",
+    "thumbImage": "images/archive/scrapx6-thumb.jpg"
+  },
+  {
+    "id": 9,
+    "slug": "origin-one",
+    "title": "Origin One — First DC-Motor Robot",
+    "shortTitle": "Origin One DC Robot",
+    "category": "Robotics",
+    "start": "2023-06",
+    "end": "2023-12",
+    "status": "Completed",
+    "tags": [
+      "Robotics",
+      "Mechanical",
+      "Control",
+      "Embedded",
+      "Fabrication"
+    ],
+    "skills": [
+      "DC Gear Motors",
+      "PCB Design",
+      "Soldering",
+      "Hand Fabrication",
+      "Motor Wiring",
+      "Mechanical Assembly"
+    ],
+    "summary": "The first robot I built, during the second year of my diploma: a DC-motor arm carrying a 1 kg payload. The control system is a custom board I designed for this machine, fabricated and soldered by hand on dot board — and it is where I closed my first control loop in hardware.",
+    "monoSpec": "First Robot // All-DC Drive // 1 kg Payload // Hand-Soldered Dot-Board Control // First Closed Loop",
+    "image": "images/projects/origin-one/20231228_163308.jpg",
+    "specs": {
+      "Actuation": "DC gear motors driving every joint",
+      "Payload Capacity": "1 kg",
+      "Control Electronics": "Custom board designed for the complete control system, built on dot board (perfboard) and soldered entirely by hand",
+      "Feedback": "Two potentiometers — one for the commanded setpoint, one for the actual joint position",
+      "Control Mode": "Closed-loop position control",
+      "Build Period": "Second year of diploma, 2023",
+      "Significance": "First complete robot build and first closed loop in hardware"
+    },
+    "milestones": [
+      {
+        "date": "2023-06",
+        "type": "prototype",
+        "label": "Mechanical Frame & Joints",
+        "description": "Built the base, arm links and motor mounts by hand around a set of DC gear motors."
+      },
+      {
+        "date": "2023-09",
+        "type": "prototype",
+        "label": "Custom Control Board",
+        "description": "Designed the single board carrying drive switching, both potentiometer inputs and the controller, then fabricated and soldered it on dot board."
+      },
+      {
+        "date": "2023-12",
+        "type": "demo",
+        "label": "Closed Loop & College Demonstration",
+        "description": "Closed the position loop with a setpoint and a joint potentiometer, then presented the finished 1 kg-payload robot at a college function."
+      }
+    ],
+    "problem": "A first robot is where theory stops being enough. Building the arm from DC gear motors and a board of my own design meant the mechanics, the drive electronics and the wiring all had to agree with each other. It was also the first time I had to hold a joint at a position rather than switch it on and off.",
+    "architecture": "DC motors drive every joint, and a single control board designed for this build carries the motor switching, the two potentiometer inputs and the controller. One potentiometer sets the target position, the second is coupled to the joint and reports its actual position, so the controller can close the loop.",
+    "mechanical": "The arm, base and controller enclosure were built by hand from sheet and box material with salvaged hardware, sized around the DC motors that were available and able to take a 1 kg payload. The joint potentiometers are mechanically coupled to the moving axes.",
+    "electronicsFirmware": "The control board is dot board — cut, populated and soldered entirely by hand to a design made for this robot: motor switching, both potentiometer inputs and the controller on one board. Debugging it signal by signal was the first real electronics work I did.",
+    "control": "Closed-loop position control: the setpoint potentiometer sets the target, the joint potentiometer reports the actual position, and the controller drives the DC motor until the difference between them is closed.",
+    "results": "A working all-DC robot carrying a 1 kg payload with its joints held at commanded positions by closed-loop control, running on a board soldered together by hand — the first machine where I owned the mechanics, the electronics and the wiring end to end.",
+    "buildLog": [
+      {
+        "date": "2023-06-20",
+        "entry": "Assembled the base and first arm links around the DC gear motors; checked joint travel by hand."
+      },
+      {
+        "date": "2023-09-14",
+        "entry": "Finished the custom dot-board control board and brought up the motor channels one at a time."
+      },
+      {
+        "date": "2023-12-28",
+        "entry": "Tuned the two-potentiometer position loop, tested the 1 kg payload, and photographed the finished robot."
+      }
+    ],
+    "images": [
+      "images/projects/origin-one/20231228_163308.jpg",
+      "images/projects/origin-one/20231228_122943.jpg",
+      "images/projects/origin-one/20231228_162124.jpg",
+      "images/projects/origin-one/origin-one-01.jpg",
+      "images/projects/origin-one/origin-one-02.jpg"
+    ],
+    "archiveImage": "images/archive/origin-one.jpg",
+    "thumbImage": "images/archive/origin-one-thumb.jpg"
   }
 ]

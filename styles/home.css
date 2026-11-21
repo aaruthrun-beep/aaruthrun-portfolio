@@ -146,25 +146,6 @@
   filter: saturate(0.94);
 }
 
-.home .hero-fig figcaption {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  gap: 14px;
-  margin-top: 12px;
-  padding-top: 12px;
-  border-top: 1px solid var(--color-border);
-  font-family: var(--font-mono);
-  font-size: 9.5px;
-  line-height: 1.8;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  color: var(--color-text-secondary);
-}
-
-.home .fig-index {
-  color: var(--color-accent);
-}
-
 /* --------------------------------------------------------------------------
    SECTION SYSTEM
    -------------------------------------------------------------------------- */
@@ -186,14 +167,6 @@
   color: var(--color-text-muted);
 }
 
-.home .sec-num {
-  color: var(--color-accent);
-}
-
-.home .sec-kicker {
-  color: var(--color-text-secondary);
-}
-
 .home .sec-jump {
   margin-left: auto;
   color: var(--color-text-main);
@@ -210,7 +183,7 @@
 
 .home .sec-intro {
   display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  grid-template-columns: minmax(0, 1fr);
   gap: clamp(20px, 4vw, 56px);
   align-items: end;
   margin: 22px 0 clamp(28px, 4vw, 44px);
@@ -224,14 +197,6 @@
   line-height: 1;
   letter-spacing: -0.02em;
   color: var(--color-text-main);
-}
-
-.home .sec-note {
-  max-width: 46ch;
-  margin: 0 0 3px;
-  font-size: 0.9rem;
-  line-height: 1.75;
-  color: var(--color-text-secondary);
 }
 
 /* --------------------------------------------------------------------------
@@ -465,22 +430,6 @@
 .home .bench .b2 img,
 .home .bench .b3 img { aspect-ratio: 4 / 3; }
 
-.home .bench figcaption {
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  margin-top: 9px;
-  font-family: var(--font-mono);
-  font-size: 9px;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
-  color: var(--color-text-muted);
-}
-
-.home .bench figcaption span:first-child {
-  color: var(--color-text-secondary);
-}
-
 /* --------------------------------------------------------------------------
    VENTURES
    -------------------------------------------------------------------------- */
@@ -550,6 +499,64 @@
 
 .home .venture:hover .venture-arrow {
   transform: translate(3px, -3px);
+}
+
+/* --------------------------------------------------------------------------
+   TESLA — INHERITANCE BAND
+   A portrait and three lines worth keeping.
+   -------------------------------------------------------------------------- */
+
+.home .tesla-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.6fr) minmax(0, 1.4fr);
+  gap: clamp(24px, 4vw, 56px);
+  align-items: start;
+}
+
+.home .tesla-portrait {
+  margin: 0;
+}
+
+.home .tesla-portrait img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--color-border);
+  background-color: var(--color-surface-subtle);
+  filter: grayscale(1) contrast(1.03);
+}
+
+.home .tesla-quotes {
+  border-top: 1px solid var(--color-border-strong);
+}
+
+.home .tesla-quotes blockquote {
+  display: grid;
+  gap: 9px;
+  margin: 0;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.home .tesla-quotes p {
+  max-width: 42ch;
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.28rem, 2.1vw, 1.7rem);
+  font-weight: 400;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: var(--color-text-main);
+  text-wrap: pretty;
+}
+
+.home .tesla-quotes cite {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-style: normal;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
 }
 
 /* --------------------------------------------------------------------------
@@ -781,9 +788,6 @@
     align-items: start;
   }
 
-  .home .sec-note {
-    max-width: 62ch;
-  }
 }
 
 @media (max-width: 900px) and (min-width: 561px) {
@@ -824,6 +828,15 @@
   .home .record-strip {
     grid-template-columns: minmax(0, 1fr);
     gap: 12px;
+  }
+
+  .home .tesla-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
+  }
+
+  .home .tesla-portrait {
+    max-width: 300px;
   }
 }
 

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+(function(){
+  try {
+    var k = "portfolio-theme";
+    var v = localStorage.getItem(k);
+    if (v !== "light" && v !== "dark") {
+      v = "light";
+      try { localStorage.setItem(k, v); } catch(e) {}
+    }
+    if (v === "light") {
+      document.documentElement.setAttribute("data-theme","light");
+    }
+  } catch(e) {
+    document.documentElement.setAttribute("data-theme","light");
+  }
+})();
+</script>
+  <title>Field Notes — Engineering Journal | Aaruthrun</title>
+  <meta name="description" content="Engineering field notes from Aaruthrun: build logs, motor-control investigations, mechanical iterations, measurements and the lessons that came out of them.">
+
+  <meta property="og:title" content="Field Notes — Aaruthrun">
+  <meta property="og:description" content="An engineering journal for the builds: experiments, measurements, failures and fixes.">
+  <meta property="og:image" content="https://aaruthrun-beep.github.io/portfolio/images/og-image.webp">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css?v=2026-11-23">
+  <link rel="stylesheet" href="config/design-tokens.css?v=2026-11-15">
+  <link rel="stylesheet" href="styles/platform.css?v=2026-11-15">
+  <!-- Global typography system -->
+  <link rel="stylesheet" href="styles/readability.css?v=2026-11-16">
+  <link rel="stylesheet" href="styles/journal.css?v=2026-11-15b">
+</head>
+<body class="journal-page platform-page">
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <header id="site-header"></header>
+
+  <main id="main-content">
+    <div class="container">
+      <header class="fn-hero">
+        <div class="fn-hero-label">
+          <span class="mark" aria-hidden="true"></span>
+          <span>Engineering journal / Field Notes</span>
+          <a class="fn-admin-link" href="journal-admin.html">Post editor <span aria-hidden="true">&nearr;</span></a>
+        </div>
+        <div class="fn-hero-grid">
+          <h1>Field Notes<span class="fn-period">.</span></h1>
+          <div class="fn-hero-copy">
+            <p>
+              An ongoing record of things I build, things I break, problems I encounter, and things
+              I learn along the way. From robotics and embedded systems to electronics and mechanical
+              experiments.
+            </p>
+            <div class="fn-stats" aria-label="Publication statistics">
+              <div class="fn-stat">
+                <span class="fn-stat-value" data-journal-stat="articles">&mdash;</span>
+                <span class="fn-stat-label">Articles</span>
+              </div>
+              <div class="fn-stat">
+                <span class="fn-stat-value" data-journal-stat="categories">&mdash;</span>
+                <span class="fn-stat-label">Categories</span>
+              </div>
+              <div class="fn-stat is-wide">
+                <span class="fn-stat-value is-date" data-journal-stat="latest">&mdash;</span>
+                <span class="fn-stat-label">Latest publication</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <div id="journal-app">
+        <p class="mono text-muted">Loading field notes&hellip;</p>
+      </div>
+    </div>
+  </main>
+
+  <footer id="site-footer"></footer>
+
+  <script src="config/app.config.js?v=2026-11-15"></script>
+  <script src="data/data-store.js?v=2026-11-15"></script>
+  <script src="modules/theme/theme-manager.js?v=2026-11-15"></script>
+  <script src="modules/header/header-manager.js?v=2026-11-15"></script>
+  <script src="modules/footer/footer-manager.js?v=2026-11-15"></script>
+  <script src="modules/reveal/reveal-manager.js?v=2026-11-15"></script>
+  <script src="modules/content/blocks.js?v=2026-11-18"></script>
+  <script src="config/firebase.config.js?v=2026-11-17b"></script>
+  <script src="data/content-store.js?v=2026-11-17"></script>
+  <script src="modules/journal/journal-manager.js?v=2026-11-18"></script>
+  <script src="js/app.js?v=2026-11-15"></script>
+</body>
+</html>

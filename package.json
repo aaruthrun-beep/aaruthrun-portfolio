@@ -5,10 +5,19 @@
   "description": "Static engineering portfolio with a folder-driven project gallery map.",
   "scripts": {
     "gallery": "node tools/build-gallery.mjs",
+    "responsive": "node tools/build-responsive.mjs",
+    "responsive:check": "node tools/build-responsive.mjs --check",
+    "cv": "node tools/build-cv.mjs",
     "gallery:watch": "node tools/build-gallery.mjs --watch",
-    "serve": "npx -y http-server -p 8080 -c-1 --cors ."
+    "pages": "node tools/build-pages.mjs",
+    "pages:check": "node tools/build-pages.mjs --check",
+    "serve": "npx -y http-server -p 8080 -c-1 --cors .",
+    "check": "node tools/check-site.mjs"
   },
   "dependencies": {
     "exifr": "^7.1.3"
+  },
+  "devDependencies": {
+    "sharp": "^0.35.5"
   }
 }

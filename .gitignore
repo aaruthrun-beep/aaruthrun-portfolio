@@ -2,5 +2,13 @@ node_modules/
 .freebuff/
 *.log
 screenshot-*.png
+screenshots/*-profile/
 .DS_Store
 Thumbs.db
+
+# One-off debug scripts, screenshots and legacy config moved out of the web root
+tools/legacy/
+
+# Local QA artefacts: browser profiles, captures and exported attachment previews
+screenshots/
+.cloud-attachments/

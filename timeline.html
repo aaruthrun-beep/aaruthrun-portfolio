@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script>
 (function(){
@@ -21,24 +22,28 @@
 })();
 </script>
   <title>Concurrent Project Timeline — Aaruthrun Robotics</title>
-  <meta name="description" content="Interactive swimlane Gantt timeline showcasing concurrent robotics engineering projects, hardware milestones, and overlapping R&D cycles.">
+  <meta name="description" content="Interactive horizontal engineering timeline: robotics projects, recorded milestones, project durations, and overlapping R&amp;D cycles read left to right.">
 
   <!-- OpenGraph Metadata -->
   <meta property="og:title" content="Concurrent Project Timeline — Aaruthrun">
   <meta property="og:description" content="Visualizing simultaneous multi-disciplinary execution: 6-DOF manipulators, FOC motor control, autonomous rovers, and modular swarms.">
-  <meta property="og:image" content="images/og-image.webp">
+  <meta property="og:image" content="https://aaruthrun-beep.github.io/portfolio/images/og-image.webp">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
 
   <!-- Google Fonts: Inter + JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="css/style.css?v=2026-11-08">
+  <link rel="stylesheet" href="css/style.css?v=2026-11-23">
   <link rel="stylesheet" href="config/design-tokens.css?v=2026-11-08">
+  <link rel="stylesheet" href="styles/platform.css?v=2026-11-15">
+  <!-- Global typography system -->
+  <link rel="stylesheet" href="styles/readability.css?v=2026-11-16">
+  <link rel="stylesheet" href="styles/timeline-horizontal.css?v=2026-11-16h">
 </head>
-<body>
+<body class="timeline-page">
   <a href="#main-content" class="skip-link">Skip to main content</a>
 
   <!-- Shared Header -->
@@ -51,21 +56,11 @@
       <section class="reveal" style="padding: 40px 0 24px 0; border-bottom: 1px solid var(--border); margin-bottom: 32px;">
         <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 16px;">
           <div>
-            <div class="mono text-muted" style="font-size: 0.8125rem; margin-bottom: 6px; letter-spacing: 0.04em;">GANTT // CONCURRENT HARDWARE & FIRMWARE CYCLES</div>
+            <div class="mono text-muted" style="font-size: 0.8125rem; margin-bottom: 6px; letter-spacing: 0.04em;">CHRONOLOGY // HORIZONTAL ENGINEERING TIMELINE</div>
             <h1 style="font-size: 2.3rem; letter-spacing: -0.02em; font-weight: 600;">Concurrent Project Timeline</h1>
             <p style="color: var(--text-secondary); max-width: 680px; margin-top: 8px; line-height: 1.65;">
-              Physical robotics requires synchronized progression across mechanical CAD, power electronics, real-time firmware, and high-level control. Hover any project row to inspect its dates, status, and milestones.
+              A single chronology running left to right through mechanical design, power electronics, firmware, and fabrication. Duration rails show each project&rsquo;s span; circular markers mark recorded milestones. Hover or tap a marker to inspect its dates, status, and documentation.
             </p>
-            <blockquote class="engineering-quote" style="margin-top: 14px;">
-              <p class="engineering-quote-body">
-                "Work, untiring effort, useful and accumulative, with periods of rest and recuperation aiming
-                at higher efficiency, is its chief and ever-recurring command."
-              </p>
-              <div class="engineering-quote-cite">
-                <span class="engineering-quote-author">NIKOLA TESLA</span>
-                <span class="engineering-quote-source">// THE CENTURY MAGAZINE, JUN 1900</span>
-              </div>
-            </blockquote>
           </div>
           <div>
             <a href="projects.html" class="btn btn-sm btn-mono btn-secondary">
@@ -81,7 +76,7 @@
         <div class="filter-group">
           <span class="filter-label">Time Window:</span>
           <div class="zoom-controls">
-            <button class="filter-btn active" data-timeline-zoom="ALL" aria-label="Show all timeline history">ALL (2024-2026)</button>
+            <button class="filter-btn active" data-timeline-zoom="ALL" aria-label="Show all timeline history">ALL</button>
             <button class="filter-btn" data-timeline-zoom="1Y" aria-label="Show past 1 year">1 YEAR</button>
             <button class="filter-btn" data-timeline-zoom="6M" aria-label="Show past 6 months">6 MONTHS</button>
           </div>
@@ -103,44 +98,45 @@
           <button class="filter-btn active" data-tl-status="ALL">ALL</button>
           <button class="filter-btn" data-tl-status="Active">ACTIVE</button>
           <button class="filter-btn" data-tl-status="Completed">COMPLETED</button>
+          <button class="filter-btn" data-tl-status="Paused">PAUSED</button>
+          <button class="filter-btn" data-tl-status="Discontinued">DISCONTINUED</button>
+          <button class="filter-btn" data-tl-status="Planned">PLANNED</button>
         </div>
 
-        <!-- Colour Legend -->
-        <div class="timeline-legend">
-          <span class="legend-item">
-            <span class="legend-swatch active"></span>
-            <span>Active</span>
-          </span>
-          <span class="legend-item">
-            <span class="legend-swatch completed"></span>
-            <span>Completed</span>
-          </span>
-          <span class="legend-item">
-            <span class="legend-swatch paused"></span>
-            <span>Paused</span>
-          </span>
-          <span class="legend-item">
-            <span class="legend-swatch on-hold"></span>
-            <span>On Hold</span>
-          </span>
-          <span class="legend-item" style="margin-left:8px;">
-            <span style="font-family:Pixeled,monospace;color:var(--accent);font-size:0.75rem;">| TODAY</span>
-          </span>
-          <span class="legend-item">
-            <span style="font-family:Pixeled,monospace;color:var(--text-muted);font-size:0.75rem;">◆ milestone</span>
-          </span>
+      </section>
+
+      <!-- Horizontal engineering timeline (rendered from projects.json) -->
+      <section class="reveal" id="timeline-main-container" aria-label="Horizontal engineering timeline">
+        <div style="padding: 32px 0; text-align: center;">
+          <p class="mono text-muted">LOADING TIMELINE&hellip;</p>
         </div>
       </section>
 
-      <!-- Horizontal Gantt Viewport (Rendered by js/timeline.js) -->
-      <section class="reveal timeline-viewport" id="timeline-main-container" aria-label="Gantt chart — time on X axis">
-        <div style="padding: 48px 0; text-align: center;">
-          <p class="mono text-muted">LOADING GANTT...</p>
+      <!-- Status legend below the graphical timeline -->
+      <div class="tlx-legend" aria-label="Timeline status legend">
+        <span class="tlx-legend-item" data-status="completed"><span class="tlx-swatch"></span>COMPLETED</span>
+        <span class="tlx-legend-item" data-status="active"><span class="tlx-swatch"></span>ACTIVE / ONGOING</span>
+        <span class="tlx-legend-item" data-status="paused"><span class="tlx-swatch"></span>PAUSED</span>
+        <span class="tlx-legend-item" data-status="discontinued"><span class="tlx-swatch"></span>DISCONTINUED</span>
+        <span class="tlx-legend-item" data-status="planned"><span class="tlx-swatch"></span>PLANNED</span>
+        <span class="tlx-legend-key"><span class="tlx-key-line"></span>DURATION</span>
+        <span class="tlx-legend-key"><span class="tlx-key-dot"></span>MILESTONE</span>
+        <span class="tlx-legend-key"><span class="tlx-key-today"></span>TODAY</span>
+      </div>
+
+      <!-- Milestone ledger: dated project milestones plus verified recognition -->
+      <section class="reveal" style="margin-top: 56px;" aria-labelledby="ledger-title">
+        <div class="section-header">
+          <div class="section-title-wrap">
+            <span class="section-index">LEDGER</span>
+            <h2 id="ledger-title" style="font-family: var(--font-display); font-weight: 400; font-size: clamp(1.8rem, 3vw, 2.3rem); letter-spacing: -0.02em;">Milestone ledger</h2>
+          </div>
+          <p class="section-desc" style="margin: 0;">Dated entries from the project archive, plus education and recognition. Undated facts stay undated.</p>
+        </div>
+        <div id="timeline-ledger" aria-live="polite">
+          <p class="mono text-muted">Loading milestones&hellip;</p>
         </div>
       </section>
-
-      <!-- Stacked list fallback (visible ≤768px, where the chart is hidden) -->
-      <div class="timeline-mobile-list" id="timeline-mobile-list" aria-label="Project timeline list"></div>
 
       <!-- Reference notes -->
       <section class="reveal" style="margin-top: 40px;" aria-label="Timeline reference notes">
@@ -149,12 +145,12 @@
             <div style="border: 1px solid var(--border); padding: 20px; background-color: var(--surface-subtle); height: 100%;">
               <div class="mono text-muted" style="font-size: 0.75rem; margin-bottom: 8px; letter-spacing: 0.04em;">HOW TO READ</div>
               <ul style="padding-left: 18px; font-size: 0.875rem; color: var(--text-secondary); line-height: 1.8; margin: 0;">
-                <li><strong>Time flows left &rarr; right</strong> across the X-axis.</li>
-                <li><strong>One row per project</strong> — name, date range, and status on the left.</li>
-                <li><strong>Hover any row</strong> to see a card with project image, dates, and summary.</li>
-                <li><strong>Bar colour</strong> shows status &mdash; blue=Active, black=Completed, amber=Paused.</li>
-                <li><strong>&#9670; Diamonds</strong> are milestones; hover them for the milestone label.</li>
-                <li><strong>Click any row</strong> to open the full project page.</li>
+                <li><strong>Time flows left &rarr; right</strong>; years and quarters sit above the axis.</li>
+                <li><strong>Duration rails</strong> show each project&rsquo;s span; overlapping work stacks into separate lanes.</li>
+                <li><strong>Circular markers</strong> are recorded milestones, positioned at their actual dates.</li>
+                <li><strong>Hover on desktop, tap on touch</strong> to open a card with dates, summary, and status.</li>
+                <li><strong>Colour indicates status</strong> &mdash; the legend below the timeline defines every state.</li>
+                <li><strong>Scroll or drag horizontally</strong> to move through the chronology. Rail, marker, and card links open documentation.</li>
               </ul>
             </div>
           </div>
@@ -185,8 +181,11 @@
   <script src="modules/footer/footer-manager.js?v=2026-11-08"></script>
   <script src="modules/reveal/reveal-manager.js?v=2026-11-08"></script>
   <script src="modules/filters/filter-manager.js?v=2026-11-08"></script>
-  <script src="modules/projects/project-manager.js?v=2026-11-08"></script>
-  <script src="modules/timeline/timeline-manager.js?v=2026-11-08"></script>
-  <script src="js/app.js"></script>
+  <script src="modules/content/blocks.js?v=2026-11-18"></script>
+  <script src="data/content-store.js?v=2026-11-15"></script>
+  <script src="modules/projects/project-manager.js?v=2026-11-15"></script>
+  <script src="modules/timeline/horizontal-timeline.js?v=2026-11-17"></script>
+  <script src="modules/timeline/timeline-ledger.js?v=2026-11-15"></script>
+  <script src="js/app.js?v=2026-11-15"></script>
 </body>
 </html>

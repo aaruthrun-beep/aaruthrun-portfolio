@@ -307,3 +307,190 @@ a {
     translate: none;
   }
 }
+
+/* --------------------------------------------------------------------------
+   PAGE TRANSITIONS — NATIVE CROSS-DOCUMENT VIEW TRANSITIONS
+   A quiet fade with a small rise between pages. Uses the browser's own
+   View Transitions API; unsupported browsers simply navigate as before.
+   -------------------------------------------------------------------------- */
+
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-old(root) {
+  animation: page-leave 160ms var(--ease-settle) both;
+}
+
+::view-transition-new(root) {
+  animation: page-arrive 280ms var(--ease-settle) both;
+}
+
+@keyframes page-leave {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes page-arrive {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Load-in for every page. Stood down when a real view transition is running,
+   so the two never play on top of each other. */
+main {
+  animation: page-arrive 320ms var(--ease-settle);
+}
+
+html:active-view-transition main {
+  animation: none;
+}
+
+/* --------------------------------------------------------------------------
+   HOVER LIFT — cards acknowledge the pointer
+   Uses the standalone `translate` property so it composes with the reveal
+   transforms instead of fighting them.
+   -------------------------------------------------------------------------- */
+
+.project-card,
+.project-card-vertical,
+.skill-item,
+.vertical-feature-item,
+.vertical-innovation-card,
+.contact-channel,
+.stream-time-node,
+.archive-mini,
+.venture {
+  transition:
+    translate 200ms var(--ease-settle),
+    border-color var(--transition-base),
+    box-shadow var(--transition-base);
+}
+
+.project-card:hover,
+.project-card-vertical:hover,
+.skill-item:hover,
+.vertical-feature-item:hover,
+.vertical-innovation-card:hover,
+.contact-channel:hover,
+.stream-time-node:hover,
+.archive-mini:hover,
+.venture:hover {
+  translate: 0 -2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none !important;
+  }
+
+  main {
+    animation: none !important;
+  }
+
+  .project-card,
+  .project-card-vertical,
+  .skill-item,
+  .vertical-feature-item,
+  .vertical-innovation-card,
+  .contact-channel,
+  .stream-time-node,
+  .archive-mini,
+  .venture {
+    translate: none !important;
+    transition: none !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   DATA-DRIVEN LIST ENTRIES — the home page rows arrive on a stagger
+   (.stagger-item / .stagger-in are applied by modules/home/home-platform.js)
+   -------------------------------------------------------------------------- */
+
+.stagger-item {
+  opacity: 0;
+  translate: 0 16px;
+  transition:
+    opacity 560ms var(--ease-settle),
+    translate 560ms var(--ease-settle);
+  transition-delay: calc(var(--stagger-index, 0) * 70ms);
+}
+
+.stagger-in .stagger-item {
+  opacity: 1;
+  translate: 0 0;
+}
+
+/* A row lifts a hair under the pointer, and its photograph answers. */
+.bench-entry,
+.work-row {
+  transition: translate 240ms var(--ease-settle);
+}
+
+.bench-entry:hover,
+.work-row:hover {
+  translate: 0 -2px;
+}
+
+.bench-entry:hover .bench-thumb img,
+.work-row:hover .work-media img {
+  transform: scale(1.025);
+}
+
+/* The arrow inside a button drifts the way it points. */
+.home .btn > [aria-hidden="true"] {
+  display: inline-block;
+  transition: translate 200ms var(--ease-settle);
+}
+
+.home .btn:hover > [aria-hidden="true"],
+.home .btn:focus-visible > [aria-hidden="true"] {
+  translate: 3px 0;
+}
+
+/* --------------------------------------------------------------------------
+   HERO PORTRAIT — the print settles onto the page
+   -------------------------------------------------------------------------- */
+
+@keyframes hero-print-settle {
+  from { transform: scale(1.035); }
+  to { transform: scale(1); }
+}
+
+.reveal.reveal-in .hero-fig img {
+  animation: hero-print-settle 1100ms var(--ease-settle) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stagger-item {
+    opacity: 1 !important;
+    translate: none !important;
+    transition: none !important;
+  }
+
+  .bench-entry,
+  .work-row {
+    translate: none !important;
+    transition: none !important;
+  }
+
+  .home .btn > [aria-hidden="true"] {
+    translate: none !important;
+    transition: none !important;
+  }
+
+  .reveal .hero-fig img,
+  .reveal.reveal-in .hero-fig img {
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
+  }
+}

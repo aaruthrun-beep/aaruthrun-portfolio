@@ -53,7 +53,7 @@ if (typeof ThemeManager !== 'undefined' && typeof HeaderManager !== 'undefined' 
       { label: 'Gallery', href: 'gallery.html' },
       { label: 'Skills', href: 'skills.html' },
       { label: 'Startups', href: 'startup.html' },
-      { label: 'Blog', href: 'blog.html' },
+      { label: 'Journal', href: 'journal.html' },
       { label: 'Education', href: 'education.html' },
       { label: 'Contact', href: 'contact.html' }
     ];
@@ -145,7 +145,7 @@ if (typeof ThemeManager !== 'undefined' && typeof HeaderManager !== 'undefined' 
                 <li><a href="gallery.html">Infinite Photo Gallery</a></li>
                 <li><a href="skills.html">Cross-Linked Skills Matrix</a></li>
                 <li><a href="startup.html">Startups (Dynamics & Agrotech)</a></li>
-                <li><a href="blog.html">Engineering Blog</a></li>
+                <li><a href="journal.html">Field Notes Journal</a></li>
                 <li><a href="education.html">Education & Credentials</a></li>
               </ul>
             </div>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+(function(){
+  try {
+    var k = "portfolio-theme";
+    var v = localStorage.getItem(k);
+    if (v !== "light" && v !== "dark") {
+      v = "light";
+      try { localStorage.setItem(k, v); } catch(e) {}
+    }
+    if (v === "light") {
+      document.documentElement.setAttribute("data-theme","light");
+    }
+  } catch(e) {
+    document.documentElement.setAttribute("data-theme","light");
+  }
+})();
+</script>
+  <!-- build-pages:meta:start -->
+  <title>Field Note — Field Notes | Aaruthrun</title>
+  <meta name="description" content="An engineering field note from Aaruthrun's build archive.">
+  <link rel="canonical" href="journal-entry.html">
+
+  <meta property="og:title" content="Field Note — Field Notes">
+  <meta property="og:description" content="Build logs, measurements and engineering notes.">
+  <meta property="og:image" content="https://aaruthrun-beep.github.io/portfolio/images/archive/nite-369.jpg">
+  <meta property="og:type" content="article">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- build-pages:meta:end -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css?v=2026-11-23">
+  <link rel="stylesheet" href="config/design-tokens.css?v=2026-11-15">
+  <link rel="stylesheet" href="styles/platform.css?v=2026-11-15">
+  <!-- Global typography system -->
+  <link rel="stylesheet" href="styles/readability.css?v=2026-11-16">
+  <link rel="stylesheet" href="styles/journal.css?v=2026-11-15b">
+</head>
+<body class="entry-page platform-page journal-entry-page">
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <header id="site-header"></header>
+
+  <main id="main-content">
+    <div class="container">
+      <article id="journal-entry">
+        <p class="mono text-muted" style="padding: 48px 0;">Loading field note&hellip;</p>
+      </article>
+    </div>
+  </main>
+
+  <footer id="site-footer"></footer>
+
+  <script src="config/app.config.js?v=2026-11-15"></script>
+  <script src="data/data-store.js?v=2026-11-15"></script>
+  <script src="modules/theme/theme-manager.js?v=2026-11-15"></script>
+  <script src="modules/header/header-manager.js?v=2026-11-15"></script>
+  <script src="modules/footer/footer-manager.js?v=2026-11-15"></script>
+  <script src="modules/reveal/reveal-manager.js?v=2026-11-15"></script>
+  <script src="modules/content/blocks.js?v=2026-11-18"></script>
+  <script src="config/firebase.config.js?v=2026-11-17b"></script>
+  <script src="data/content-store.js?v=2026-11-17"></script>
+  <script src="modules/journal/journal-manager.js?v=2026-11-18"></script>
+  <script src="js/app.js?v=2026-11-15"></script>
+</body>
+</html>

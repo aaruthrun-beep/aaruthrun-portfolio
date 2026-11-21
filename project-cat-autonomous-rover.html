@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+(function(){
+  try {
+    var k = "portfolio-theme";
+    var v = localStorage.getItem(k);
+    if (v !== "light" && v !== "dark") {
+      v = "light";
+      try { localStorage.setItem(k, v); } catch(e) {}
+    }
+    if (v === "light") {
+      document.documentElement.setAttribute("data-theme","light");
+    }
+  } catch(e) {
+    document.documentElement.setAttribute("data-theme","light");
+  }
+})();
+</script>
+    <meta name="generator" content="tools/build-pages.mjs">
+  <title>CAT Autonomous Rover — Caterpillar Autonomous Challenge — Aaruthrun</title>
+  <meta name="description" content="Rugged 4WD differential-drive outdoor autonomous rover with centimetre-accurate RTK-GPS, 2D LiDAR SLAM, obstacle avoidance, and mission planner for agricultural mapping.">
+  <link rel="canonical" href="https://aaruthrun-beep.github.io/portfolio/project-cat-autonomous-rover.html">
+
+  <meta property="og:title" content="CAT Autonomous Rover — Caterpillar Autonomous Challenge">
+  <meta property="og:description" content="Rugged 4WD differential-drive outdoor autonomous rover with centimetre-accurate RTK-GPS, 2D LiDAR SLAM, obstacle avoidance, and mission planner for agricultural mapping.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://aaruthrun-beep.github.io/portfolio/project-cat-autonomous-rover.html">
+  <meta property="og:image" content="https://aaruthrun-beep.github.io/portfolio/images/archive/cat-autonomous-rover.jpg">
+  <meta property="og:image:alt" content="CAT Autonomous Rover">
+  <meta property="og:site_name" content="Aaruthrun">
+  <meta property="og:locale" content="en_IN">
+  <meta property="article:published_time" content="2025-05-01">
+  <meta property="article:author" content="Aaruthrun">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CAT Autonomous Rover — Caterpillar Autonomous Challenge">
+  <meta name="twitter:description" content="Rugged 4WD differential-drive outdoor autonomous rover with centimetre-accurate RTK-GPS, 2D LiDAR SLAM, obstacle avoidance, and mission planner for agricultural mapping.">
+  <meta name="twitter:image" content="https://aaruthrun-beep.github.io/portfolio/images/archive/cat-autonomous-rover.jpg">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"CAT Autonomous Rover — Caterpillar Autonomous Challenge","description":"Rugged 4WD differential-drive outdoor autonomous rover with centimetre-accurate RTK-GPS, 2D LiDAR SLAM, obstacle avoidance, and mission planner for agricultural mapping.","image":"https://aaruthrun-beep.github.io/portfolio/images/archive/cat-autonomous-rover.jpg","url":"https://aaruthrun-beep.github.io/portfolio/project-cat-autonomous-rover.html","keywords":"Robotics, Control, Embedded, Mechanical, Competition","author":{"@type":"Person","name":"Aaruthrun","url":"https://aaruthrun-beep.github.io/portfolio"},"isPartOf":{"@type":"CollectionPage","name":"Engineering project archive","url":"https://aaruthrun-beep.github.io/portfolio/projects.html"},"datePublished":"2025-05-01","dateModified":"2026-02-01"}</script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css?v=2026-11-23">
+  <link rel="stylesheet" href="config/design-tokens.css?v=2026-11-15">
+  <link rel="stylesheet" href="styles/platform.css?v=2026-11-15">
+  <!-- Global typography system -->
+  <link rel="stylesheet" href="styles/readability.css?v=2026-11-16">
+</head>
+<body class="doc-page platform-page" data-page="project" data-slug="cat-autonomous-rover">
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <header id="site-header"></header>
+
+  <main id="main-content">
+    <div class="container">
+      <article id="project-detail-container" aria-label="Project technical documentation">
+        <div style="padding: 48px 0; text-align: center;">
+          <p class="mono text-muted">LOADING PROJECT DOCUMENTATION&hellip;</p>
+        </div>
+      </article>
+    </div>
+      <noscript>
+      <div class="container">
+        <p class="mono text-muted">PROJECT DOCUMENTATION // CAT-AUTONOMOUS-ROVER</p>
+        <h1>CAT Autonomous Rover — Caterpillar Autonomous Challenge</h1>
+        <p class="mono-spec">4WD // RTK-GPS &lt;2cm // Slamtec A2 LiDAR // ROS2 Nav2 // 4h Battery</p>
+        <p>Rugged 4WD differential-drive outdoor autonomous rover with centimetre-accurate RTK-GPS, 2D LiDAR SLAM, obstacle avoidance, and mission planner for agricultural mapping.</p>
+        <p><a href="projects.html">Browse the project archive &rarr;</a></p>
+      </div>
+    </noscript>
+  </main>
+
+  <footer id="site-footer"></footer>
+
+  <script src="config/app.config.js?v=2026-11-15"></script>
+  <script src="data/data-store.js?v=2026-11-15"></script>
+  <script src="modules/theme/theme-manager.js?v=2026-11-15"></script>
+  <script src="modules/header/header-manager.js?v=2026-11-15"></script>
+  <script src="modules/footer/footer-manager.js?v=2026-11-15"></script>
+  <script src="modules/reveal/reveal-manager.js?v=2026-11-15"></script>
+  <script src="modules/content/blocks.js?v=2026-11-18"></script>
+  <script src="modules/projects/project-detail-renderer.js?v=2026-11-15"></script>
+  <script src="modules/gallery/lightbox.js?v=2026-11-15"></script>
+  <script src="modules/projects/project-manager.js?v=2026-11-15"></script>
+  <script src="js/app.js?v=2026-11-15"></script>
+</body>
+</html>

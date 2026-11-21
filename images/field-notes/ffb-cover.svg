@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900">
+  <title>FFB STEER-BY-WIRE — ELECTRONICS field note cover</title>
+  <rect width="1600" height="900" fill="#EDEAE4"/>
+  <rect x="32" y="32" width="1536" height="836" fill="none" stroke="#D8DAD4" stroke-width="1"/>
+  <text x="80" y="94" fill="#315C9B" font-family="'JetBrains Mono', Consolas, 'Courier New', monospace" font-size="17" letter-spacing="4">FIELD NOTES / 08</text>
+  <text x="1520" y="94" text-anchor="end" fill="#646B67" font-family="'JetBrains Mono', Consolas, 'Courier New', monospace" font-size="15" letter-spacing="3">ELECTRONICS</text>
+  <text x="80" y="270" fill="#202522" font-family="Georgia, 'Times New Roman', serif" font-size="112" letter-spacing="-4">4.8 ms</text>
+  <text x="80" y="368" fill="#202522" font-family="Georgia, 'Times New Roman', serif" font-size="90" font-style="italic" letter-spacing="-3">steering feel</text>
+  <text x="80" y="432" fill="#315C9B" font-family="'JetBrains Mono', Consolas, 'Courier New', monospace" font-size="18" letter-spacing="3">FFB STEER-BY-WIRE</text>
+  <line x1="80" y1="466" x2="196" y2="466" stroke="#315C9B" stroke-width="3"/>
+  <text x="80" y="522" fill="#58605C" font-family="'JetBrains Mono', Consolas, 'Courier New', monospace" font-size="19" letter-spacing="1">TIE-ROD LOAD CELLS / CAN 2.0</text>
+  <text x="80" y="556" fill="#58605C" font-family="'JetBrains Mono', Consolas, 'Courier New', monospace" font-size="19" letter-spacing="1">4.2 Nm DIRECT-DRIVE HAPTICS</text>
+  <line x1="980" y1="150" x2="980" y2="750" stroke="#D8DAD4" stroke-width="1"/>
+  <g transform="translate(1060 180)">
+    <g fill="none" stroke="#315C9B" stroke-width="2.5">
+      <circle cx="230" cy="235" r="168"/>
+      <circle cx="230" cy="235" r="104" opacity=".45"/>
+      <line x1="230" y1="235" x2="230" y2="67"/>
+      <line x1="230" y1="235" x2="91" y2="327"/>
+      <line x1="230" y1="235" x2="369" y2="327"/>
+      <path d="M 60 180 C 95 120 160 92 230 92" stroke-width="5"/>
+      <path d="M 400 180 C 365 120 300 92 230 92" stroke-width="5"/>
+    </g>
+    <g stroke="#202522" stroke-width="2">
+      <line x1="230" y1="235" x2="230" y2="405"/>
+      <polygon points="230,420 220,397 240,397" fill="#202522" stroke="none"/>
+      <line x1="230" y1="235" x2="352" y2="298"/>
+      <polygon points="365,305 342,295 349,315" fill="#202522" stroke="none"/>
+    </g>
+    <text x="230" y="458" text-anchor="middle" fill="#646B67" font-family="'JetBrains Mono', Consolas, 'Courier New', monospace" font-size="14" letter-spacing="3">RACK FORCE / TIRE Mz</text></g>
+  <text x="80" y="824" fill="#646B67" font-family="'JetBrains Mono', Consolas, 'Courier New', monospace" font-size="14" letter-spacing="3">FIELD NOTE 08 / 26 JUN 2026</text>
+  <text x="1520" y="824" text-anchor="end" fill="#646B67" font-family="'JetBrains Mono', Consolas, 'Courier New', monospace" font-size="14" letter-spacing="3">AARUTHRUN / ENGINEERING ARCHIVE</text>
+</svg>

@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900">
+  <title>BLDC FOC cascaded control-loop diagram</title>
+  <rect width="1600" height="900" fill="#EDEAE4"/>
+  <text x="80" y="86" fill="#315C9B" font-family="'JetBrains Mono', Consolas, 'Courier New', monospace" font-size="16" letter-spacing="4">CONTROL ARCHITECTURE / BLDC FOC ACTUATOR</text>
+  <line x1="80" y1="112" x2="1520" y2="112" stroke="#D8DAD4"/>
+  <g font-family="'JetBrains Mono', Consolas, 'Courier New', monospace" font-size="16" letter-spacing="1">
+    <g>
+      <rect x="80" y="225" width="220" height="118" fill="#FAFAF7" stroke="#D8DAD4"/>
+      <rect x="80" y="225" width="220" height="3" fill="#315C9B"/>
+      <text x="104" y="266" fill="#646B67" font-size="12" letter-spacing="3">OUTER LOOP</text>
+      <text x="104" y="300" fill="#202522" font-size="20">POSITION</text>
+      <text x="104" y="326" fill="#315C9B" font-size="13">1 kHz</text>
+    </g>
+    <g>
+      <rect x="390" y="225" width="220" height="118" fill="#FAFAF7" stroke="#D8DAD4"/>
+      <rect x="390" y="225" width="220" height="3" fill="#315C9B"/>
+      <text x="414" y="266" fill="#646B67" font-size="12" letter-spacing="3">MIDDLE LOOP</text>
+      <text x="414" y="300" fill="#202522" font-size="20">VELOCITY</text>
+      <text x="414" y="326" fill="#315C9B" font-size="13">5 kHz</text>
+    </g>
+    <g>
+      <rect x="700" y="225" width="220" height="118" fill="#FAFAF7" stroke="#D8DAD4"/>
+      <rect x="700" y="225" width="220" height="3" fill="#315C9B"/>
+      <text x="724" y="266" fill="#646B67" font-size="12" letter-spacing="3">INNER LOOP</text>
+      <text x="724" y="300" fill="#202522" font-size="20">CURRENT / Iq Id</text>
+      <text x="724" y="326" fill="#315C9B" font-size="13">25 kHz</text>
+    </g>
+    <g>
+      <rect x="1010" y="225" width="220" height="118" fill="#FAFAF7" stroke="#D8DAD4"/>
+      <rect x="1010" y="225" width="220" height="3" fill="#315C9B"/>
+      <text x="1034" y="266" fill="#646B67" font-size="12" letter-spacing="3">MODULATION</text>
+      <text x="1034" y="300" fill="#202522" font-size="20">SVPWM</text>
+      <text x="1034" y="326" fill="#315C9B" font-size="13">25 kHz</text>
+    </g>
+    <g>
+      <rect x="1320" y="225" width="200" height="118" fill="#FAFAF7" stroke="#D8DAD4"/>
+      <rect x="1320" y="225" width="200" height="3" fill="#315C9B"/>
+      <text x="1344" y="266" fill="#646B67" font-size="12" letter-spacing="3">PLANT</text>
+      <text x="1344" y="300" fill="#202522" font-size="20">MOTOR</text>
+      <text x="1344" y="326" fill="#315C9B" font-size="13">4310 / 14 PP</text>
+    </g>
+  </g>
+  <g stroke="#315C9B" stroke-width="2.5" fill="none">
+    <line x1="300" y1="284" x2="380" y2="284"/><polygon points="390,284 374,277 374,291" fill="#315C9B" stroke="none"/>
+    <line x1="610" y1="284" x2="690" y2="284"/><polygon points="700,284 684,277 684,291" fill="#315C9B" stroke="none"/>
+    <line x1="920" y1="284" x2="1000" y2="284"/><polygon points="1010,284 994,277 994,291" fill="#315C9B" stroke="none"/>
+    <line x1="1230" y1="284" x2="1310" y2="284"/><polygon points="1320,284 1304,277 1304,291" fill="#315C9B" stroke="none"/>
+  </g>
+  <g stroke="#646B67" stroke-width="1.5" fill="none" stroke-dasharray="5 8">
+    <path d="M1420 343 L1420 650 L920 650"/>
+    <path d="M810 343 L810 560 L250 560 L250 343"/>
+  </g>
+  <g font-family="'JetBrains Mono', Consolas, 'Courier New', monospace" font-size="13" fill="#646B67" letter-spacing="2">
+    <text x="1180" y="690">ENCODER / θe</text>
+    <text x="420" y="600">CURRENT SENSE / Ia Ib Ic</text>
+    <text x="1430" y="495">AS5047P</text>
+    <text x="140" y="495">TORQUE COMMAND</text>
+  </g>
+  <g stroke="#315C9B" stroke-width="2" fill="none">
+    <line x1="250" y1="560" x2="250" y2="485"/><polygon points="250,475 243,491 257,491" fill="#315C9B" stroke="none"/>
+    <line x1="1420" y1="650" x2="1420" y2="515"/><polygon points="1420,505 1413,521 1427,521" fill="#315C9B" stroke="none"/>
+  </g>
+  <text x="80" y="824" fill="#646B67" font-family="'JetBrains Mono', Consolas, 'Courier New', monospace" font-size="13" letter-spacing="3">FIGURE / CASCADED CONTROL LOOPS</text>
+  <text x="1520" y="824" text-anchor="end" fill="#646B67" font-family="'JetBrains Mono', Consolas, 'Courier New', monospace" font-size="13" letter-spacing="3">FIELD NOTES / 02</text>
+</svg>

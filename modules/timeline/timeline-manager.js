@@ -316,7 +316,7 @@ const TimelineManager = (function () {
         // Click → project page
         g.addEventListener('click', () => {
           if (proj) {
-            window.location.href = `project.html?slug=${proj.slug}`;
+            window.location.href = `project-${proj.slug}.html`;
           }
         });
 
@@ -411,7 +411,7 @@ const TimelineManager = (function () {
             const endT = p.end ? parseYM(p.end).getTime() : maxD.getTime();
             const w = Math.max(6, Math.round((endT - startT) / span * 100));
             return `
-              <a class="mobile-proj-item" href="project.html?slug=${esc(p.slug)}" style="display:block">
+              <a class="mobile-proj-item" href="project-${esc(p.slug)}.html" style="display:block">
                 <div style="display:flex;justify-content:space-between;gap:8px;align-items:baseline;margin-bottom:6px;">
                   <span class="mono" style="font-size:0.72rem;color:${color};">${STATUS_LABELS[statusKey(p)] || esc(p.status)}</span>
                   <span class="mono" style="font-size:0.72rem;color:#888;">${esc(p.start)} → ${esc(p.end || 'NOW')}</span>

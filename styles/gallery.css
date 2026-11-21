@@ -10,9 +10,8 @@
   display: block;
   text-decoration: none;
   color: inherit;
-  cursor: pointer;
+  cursor: grab;
   transform-origin: 50% 50%;
-  will-change: transform;
 }
 
 .gl-photo .polaroid {
@@ -29,6 +28,10 @@
   display: block;
   max-width: none;
   max-height: none;
+  /* Pressing a photo should pan the map, never start a native image drag. */
+  -webkit-user-drag: none;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .gl-photo .polaroid figcaption {

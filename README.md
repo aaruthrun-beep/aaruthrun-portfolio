@@ -8,23 +8,24 @@ Built with **pure semantic HTML5, Vanilla CSS, and Vanilla JavaScript**—zero h
 
 ## 📐 Design System & Aesthetic Principles
 
-- **Color Palette**:
-  - Background: Pure White (`#FFFFFF`)
-  - Primary Typography: `#111111`
-  - Secondary / Body: `#666666`
-  - Hairline Borders & Dividers: `#E5E5E5`
-  - Single Accent: `#0057FF` (reserved for links, active indicators, and hover states only)
+- **Colour palette** (defined in `config/design-tokens.css`):
+  - Background: warm off-white `#F0EFE9`
+  - Primary typography: `#202522`
+  - Secondary text: `#737B78` (the archive uses `#5D6561` for long reading)
+  - Hairline borders: `#D8DAD4`
+  - Single accent: muted cobalt `#315C9B`
 - **Typography**:
-  - UI & Headings: `Inter` (system fallback: `-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif`)
-  - Specifications, Dates, Code, & Tags: `JetBrains Mono` (system fallback: `'SF Mono', Consolas, monospace`)
-- **Aesthetic Philosophy**:
-  - Technical, minimal, Dieter Rams / Braun engineering precision.
-  - **No gradients, no box-shadows, no decorative graphics.**
-  - Hover transitions strictly capped at **150ms** (`transition: all 150ms ease`).
+  - Display headings: `Instrument Serif`
+  - Body & UI: `Inter`
+  - Specifications, dates, code & tags: `JetBrains Mono`
+- **Aesthetic philosophy**:
+  - Technical, minimal, editorial engineering archive.
+  - **No gradients, no glassmorphism, no decorative graphics.**
+  - Motion is quiet and purposeful; image settles use a longer easing than UI hovers.
 - **Layout**:
-  - 1100px max width container, 12-column grid, 8px spacing scale (`8px, 16px, 24px, 32px, 48px, 64px`).
+  - 920–1240px containers depending on page, 8px spacing scale.
   - Sticky navigation bar with active page indicator.
-  - Shared header and footer injected via `js/include.js` to eliminate markup duplication.
+  - Shared header and footer injected via the modules in `modules/header/` and `modules/footer/`.
 
 ---
 
@@ -130,13 +131,22 @@ All project data lives in `projects.json` (and `data/projects.json`). To add a n
 }
 ```
 
-3. Save a 16:10 WebP graphic (e.g. `960x600px`) in the `images/` directory.
-4. Refresh your browser! The project will automatically populate on:
-   - `projects.html` (with filter support)
+3. Save the cover photograph at the path named in `image`, and any additional photographs under `images/projects/<slug>/` for the media grid.
+4. Regenerate the web-sized derivatives:
+   ```bash
+   powershell -NoProfile -ExecutionPolicy Bypass -File tools/make-archive-images.ps1
+   ```
+   This writes `images/archive/<slug>.jpg` and `<slug>-thumb.jpg` and links them through `archiveImage` / `thumbImage`.
+5. Refresh your browser. The project will appear on:
+   - `projects.html` — featured if it has a `featuredRank`, otherwise in the compact listing
    - `project.html?slug=custom-drone-payload`
-   - `timeline.html` (as a new swimlane with milestones)
-   - `skills.html` (linked under each skill listed in the project)
-   - `index.html` (if `featured: true`)
+   - `timeline.html` as a swimlane plus dated ledger entries
+   - `skills.html` for every skill listed in `data/skills.json` that references its slug
+   - `index.html` only when it is curated in `data/home.json`
+
+### Featured vs. other projects
+
+The archive uses two explicit editorial tiers. `data/projects.json` carries `featuredRank` (1 = most prominent) on the projects shown as large alternating rows; every project without a rank appears in the compact **Other projects** listing with its date range, status and tags. Filters apply across both tiers and a group disappears when it has no matches. Increase or remove a rank to change the hierarchy — no template changes are needed.
 
 ---
 
@@ -161,6 +171,29 @@ Every photo is drawn as a **Polaroid print**: the frame is added around the imag
 4. blank — the file's modification time is deliberately never used, since that is the copy date, not the shot date.
 
 The frame geometry (`sideRatio`, `minSide`, `bottomMult`) lives in `tools/gallery-layout.mjs`; it is hashed into the manifest, so changing it rebuilds the layout. A folder that is not listed in `data/projects.json` still becomes a circle, titled from its folder name; `data/projects.json` continues to supply the titles, dates and metadata used elsewhere on the site.
+
+---
+
+## 🔗 Shareable project and field-note pages
+
+`project.html` and `journal-entry.html` render in the browser, so their `<head>` metadata only exists once JavaScript runs — invisible to the crawlers that build link previews. `tools/build-pages.mjs` bakes one real page per project and per published field note from the same templates and data:
+
+```bash
+npm run pages          # regenerate after editing data/projects.json or data/journal.json
+npm run pages:check    # exit 1 when a page is missing or out of date
+```
+
+It writes `project-<slug>.html` and `journal-<slug>.html` beside the templates with:
+
+- `<title>`, description, canonical, and Open Graph/Twitter tags for that build or note
+- an absolute `og:image` taken from the web-sized `images/archive/` derivative, never the multi-megabyte original
+- `TechArticle` / `BlogPosting` structured data
+- `data-page` / `data-slug` on `<body>`, so the usual renderer takes over on load
+- a `<noscript>` summary of the page
+
+Everything else — stylesheets, scripts, cache-busting versions — comes from `project.html` and `journal-entry.html`, so the generated pages never drift from the real ones. If you edit those two templates, keep the `<!-- build-pages:meta:start -->` / `<!-- build-pages:meta:end -->` markers around the head block.
+
+Absolute URLs come from `SITE.url` in `config/app.config.js`; pass `--base-url=https://example.com/base` to build for a fork or a preview deploy. Pages whose project or note has been removed are cleaned up on the next build.
 
 ---
 
@@ -235,3 +268,101 @@ Right-click `index.html` and select **"Open with Live Server"**.
   - Semantic HTML5 structure (`<header>`, `<nav>`, `<main>`, `<section>`, `<article>`, `<aside>`, `<footer>`).
   - Screen reader skip link (`.skip-link`).
   - High-visibility keyboard navigation outline (`:focus-visible`).
+
+---
+
+## 🧱 Content Architecture (Journal, Skills, Timeline, Homepage)
+
+The site is still static: each content file is fetched at runtime through `data/content-store.js` and rendered by a small module. No build step is required to publish writing.
+
+### `data/journal.json` — field notes
+
+The archive currently ships with eight published entries. Add or edit entries in the `entries` array; the index, search, featured note, archive statistics and homepage teaser all update from this file without editing a page.
+
+```json
+{
+  "schemaVersion": 2,
+  "entries": [
+    {
+      "slug": "foc-current-loop-tuning",
+      "title": "Tuning the current loop on the BLDC actuator",
+      "subtitle": "The deck that appears under the article title.",
+      "date": "2026-04-18",
+      "category": "Motor Control",
+      "project": "bldc-foc-actuator",
+      "cover": "images/archive/bldc-foc-actuator.jpg",
+      "thumb": "images/archive/bldc-foc-actuator-thumb.jpg",
+      "coverAlt": "BLDC FOC actuator on the bench",
+      "coverCaption": "Optional cover caption.",
+      "author": "Aaruthrun",
+      "featured": false,
+      "summary": "One sentence that appears in the archive and on the homepage.",
+      "tags": ["FOC", "STM32"],
+      "status": "published",
+      "blocks": [
+        { "type": "paragraph", "text": "Context and what was on the bench." },
+        { "type": "heading", "level": 2, "text": "Attempt one" },
+        { "type": "image", "src": "images/projects/bldc-foc-actuator/scope.jpg", "caption": "Current loop step response." },
+        { "type": "table", "head": ["Setting", "Value"], "rows": [["Bandwidth", "—"]], "caption": "Measured values" },
+        { "type": "code", "language": "c", "filename": "current_loop.c", "code": "// excerpt" },
+        { "type": "references", "items": [{ "label": "Datasheet", "url": "https://example.com" }] }
+      ]
+    }
+  ]
+}
+```
+
+Supported block types: `paragraph`, `heading` (level 2–3), `list` (`ordered`, `items`), `image`, `image-grid`, `table` (`head`, `rows`, `caption`), `code` (`language`, `filename`, `code`), `callout` (`title`, `text`), `quote` (`text`, `attribution`), `video` (`url`, `title`), `references` (`items[]` with `label`/`url`/`note`), and `divider`. All text is escaped by `modules/content/blocks.js`; code blocks support lightweight C, C++, Python and JavaScript syntax highlighting.
+
+- Only entries with `status: "published"` are rendered; draft or review entries never appear on the index, article routes or homepage.
+- The latest entry with `featured: true` becomes the featured note automatically. If none is featured, the latest published note is used.
+- Search covers titles, subtitles, summaries, categories, tags and project names. Category filters and Load More run client-side without a page reload.
+- Reading time is calculated from the entry text unless `readingTime` is provided explicitly.
+- Article headings are collected into a table of contents; every article has a permanent `journal-entry.html?slug=...` address and a canonical link.
+- Related projects resolve through `project` (a slug) and link to the project documentation. For a project that is not yet in `data/projects.json`, set `projectLabel` and optional `projectUrl` on the entry; the reference will still render without inventing a project page. The `v-plotter`, `itms` and `agri-robotics` slugs have display aliases ready for that case.
+- The journal index shows a designed empty state if no entries are published.
+- `journal-entry.html?template=1` previews every block type without pretending to be published content.
+
+### `data/skills.json` — disciplines and evidence
+
+```json
+{
+  "categories": [
+    { "id": "embedded", "title": "Embedded systems",
+      "items": [ { "name": "Motor control", "projects": ["bldc-foc-actuator"] } ] }
+  ]
+}
+```
+
+Only list projects where the capability is already documented. An empty `projects` array renders as “No project linked yet” rather than a proficiency score. Category `id` values are the anchor targets used by the homepage skill rows.
+
+### `data/timeline.json` — awards, papers, education
+
+```json
+{
+  "events": [
+    { "date": "2025", "dateLabel": "2025 — 2028", "type": "Education",
+      "title": "B.E. Robotics & Automation Engineering", "detail": "PSG College of Technology", "link": "education.html" }
+  ]
+}
+```
+
+`date` is optional. Leave it `null` and set `dateLabel` to `"Date not recorded"` when the date is unknown; the ledger keeps it in the undated group rather than guessing. Dated project milestones come automatically from `projects.json`.
+
+### `data/home.json` — homepage curation
+
+- `bench.status` selects the project status shown under **Currently on the bench** (`"Active"` by default). Missing `currentFocus` / `updated` values render as explicit placeholders.
+- `selected` is the ordered list of `Featured work` slugs and their web-sized photographs. Reorder it to change the homepage; the archive hierarchy is controlled separately by `featuredRank`.
+
+### Pages and modules
+
+| Page | Purpose | Renderer |
+|---|---|---|
+| `journal.html` / `journal-entry.html` | Journal index, article reading view, template preview | `modules/journal/journal-manager.js` |
+| `skills.html` | Five-discipline matrix linked to projects | `modules/skills/skills-index.js` |
+| `timeline.html` | Gantt plus milestone ledger | `modules/timeline/timeline-ledger.js` |
+| `projects.html` | Featured rows + compact archive, filters | `modules/projects/project-archive.js` |
+| `project.html` | Eight-section documentation template | `modules/projects/project-detail-renderer.js` |
+| `index.html` | Bench, selected work, journal teaser, skills | `modules/home/home-platform.js` |
+
+Image derivatives: `tools/make-archive-images.ps1` creates archive and thumbnail copies; `tools/make-selected-images.ps1` creates the three homepage selected-work photographs. Originals in `images/projects/` are never modified.

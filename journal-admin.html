@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+(function(){
+  try {
+    var k = "portfolio-theme";
+    var v = localStorage.getItem(k);
+    if (v !== "light" && v !== "dark") {
+      v = "light";
+      try { localStorage.setItem(k, v); } catch(e) {}
+    }
+    if (v === "light") {
+      document.documentElement.setAttribute("data-theme","light");
+    }
+  } catch(e) {
+    document.documentElement.setAttribute("data-theme","light");
+  }
+})();
+</script>
+  <title>Post editor — Field Notes | Aaruthrun</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="Authorised editor for Aaruthrun's Field Notes journal.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css?v=2026-11-23">
+  <link rel="stylesheet" href="config/design-tokens.css?v=2026-11-15">
+  <link rel="stylesheet" href="styles/platform.css?v=2026-11-15">
+  <link rel="stylesheet" href="styles/readability.css?v=2026-11-16">
+  <link rel="stylesheet" href="styles/journal.css?v=2026-11-15b">
+  <link rel="stylesheet" href="styles/journal-admin.css?v=2026-11-17">
+</head>
+<body class="journal-admin-page platform-page">
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <header id="site-header"></header>
+
+  <main id="main-content">
+    <div class="container">
+      <header class="ja-hero">
+        <div class="fn-hero-label">
+          <span class="mark" aria-hidden="true"></span>
+          <span>Field Notes / Publishing desk</span>
+          <a class="fn-admin-link" href="journal.html">View journal <span aria-hidden="true">&rarr;</span></a>
+        </div>
+        <div class="ja-hero-grid">
+          <div>
+            <span class="ja-kicker">Authorised editor</span>
+            <h1>Post desk<span class="fn-period">.</span></h1>
+          </div>
+          <div class="ja-hero-copy">
+            <p>Write, preview, save a draft, and publish directly to the Field Notes archive. Published posts appear on the journal index, article pages, and the homepage teaser.</p>
+            <p class="ja-secure-note"><span class="ja-live-dot" aria-hidden="true"></span> Firebase-authenticated · unpublished drafts stay private</p>
+          </div>
+        </div>
+      </header>
+
+      <div id="ja-gate" class="ja-gate" aria-live="polite">
+        <p class="mono text-muted">Checking editor access&hellip;</p>
+      </div>
+
+      <div id="ja-app" class="ja-shell" hidden>
+        <aside class="ja-sidebar" aria-label="Published posts">
+          <div class="ja-sidebar-head">
+            <div>
+              <span class="ja-kicker">Remote posts</span>
+              <h2>Library</h2>
+            </div>
+            <button class="ja-button is-quiet" type="button" id="ja-new">New post</button>
+          </div>
+          <p class="ja-sidebar-user" id="ja-user"></p>
+          <div id="ja-post-list" class="ja-post-list"></div>
+          <div class="ja-sidebar-foot">
+            <span id="ja-static-count">Seeded notes stay in data/journal.json</span>
+            <button class="ja-text-button" type="button" id="ja-signout">Sign out</button>
+          </div>
+        </aside>
+
+        <section class="ja-editor" aria-labelledby="ja-editor-title">
+          <div class="ja-editor-head">
+            <div>
+              <span class="ja-kicker" id="ja-mode">New field note</span>
+              <h2 id="ja-editor-title">Compose</h2>
+            </div>
+            <div class="ja-editor-links">
+              <a class="ja-text-button" id="ja-view-live" href="journal.html" hidden>View live &rarr;</a>
+              <button class="ja-button is-danger" type="button" id="ja-delete" hidden>Delete</button>
+            </div>
+          </div>
+
+          <form id="ja-form" novalidate>
+            <div class="ja-fields">
+              <label class="ja-field is-wide">
+                <span>Title <em>required</em></span>
+                <input id="ja-title" name="title" type="text" required autocomplete="off" maxlength="200" placeholder="What happened on the bench?">
+              </label>
+
+              <label class="ja-field">
+                <span>Slug <em>required</em></span>
+                <input id="ja-slug" name="slug" type="text" required autocomplete="off" maxlength="80" placeholder="bench-note-slug">
+                <small>Lowercase letters, numbers and hyphens. Used in the article URL.</small>
+              </label>
+
+              <label class="ja-field">
+                <span>Publication date <em>required</em></span>
+                <input id="ja-date" name="date" type="date" required>
+              </label>
+
+              <label class="ja-field">
+                <span>Category</span>
+                <input id="ja-category" name="category" type="text" list="ja-category-options" maxlength="80" placeholder="Mechanical Engineering">
+                <datalist id="ja-category-options">
+                  <option value="Mechanical Engineering"></option>
+                  <option value="Motor Control"></option>
+                  <option value="PCB Development"></option>
+                  <option value="Robotics"></option>
+                  <option value="Embedded Systems"></option>
+                  <option value="Experiments"></option>
+                  <option value="Engineering Notes"></option>
+                </datalist>
+              </label>
+
+              <label class="ja-field">
+                <span>Related project</span>
+                <select id="ja-project" name="project">
+                  <option value="">No project link</option>
+                </select>
+              </label>
+
+              <label class="ja-field is-wide">
+                <span>Tags</span>
+                <input id="ja-tags" name="tags" type="text" placeholder="3D Printing, Gearboxes, Firmware">
+                <small>Comma-separated. Used by journal search and related notes.</small>
+              </label>
+
+              <label class="ja-field">
+                <span>Cover image path or URL</span>
+                <input id="ja-cover" name="cover" type="text" maxlength="2000" placeholder="images/field-notes/note-cover.jpg">
+              </label>
+
+              <label class="ja-field">
+                <span>Cover alt text</span>
+                <input id="ja-cover-alt" name="coverAlt" type="text" maxlength="300" placeholder="Describe the photograph">
+              </label>
+
+              <label class="ja-field is-wide">
+                <span>Subtitle</span>
+                <input id="ja-subtitle" name="subtitle" type="text" maxlength="300" placeholder="One sentence that sets up the note.">
+              </label>
+
+              <label class="ja-field is-wide">
+                <span>Summary <em>required</em></span>
+                <textarea id="ja-summary" name="summary" rows="3" required maxlength="1200" placeholder="The short description shown on the journal index and homepage."></textarea>
+              </label>
+
+              <label class="ja-field is-wide">
+                <span>Body <em>required</em></span>
+                <textarea id="ja-body" name="body" rows="22" required maxlength="100000" spellcheck="true" placeholder="Write the note. Markdown-lite is supported:
+## Section heading
+A paragraph of text.
+- A list item
+> A quotation
+![Alt text](images/path.jpg &quot;Optional caption&quot;)
+```c firmware/file.c
+code goes here
+```"></textarea>
+                <small>Paragraphs, ## / ### headings, lists, quotes, tables, images, code fences, callouts and dividers.</small>
+              </label>
+
+              <label class="ja-field is-check">
+                <input id="ja-featured" name="featured" type="checkbox">
+                <span>Feature this note on the journal index</span>
+              </label>
+
+              <label class="ja-field">
+                <span>Status</span>
+                <select id="ja-status" name="status">
+                  <option value="draft">Draft — private</option>
+                  <option value="published">Published — live</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="ja-actions">
+              <button class="ja-button is-primary" type="submit" id="ja-save">Save post</button>
+              <button class="ja-button" type="button" id="ja-publish">Publish now</button>
+              <span class="ja-form-status" id="ja-form-status" role="status" aria-live="polite"></span>
+            </div>
+          </form>
+
+          <section class="ja-preview" aria-labelledby="ja-preview-title">
+            <div class="ja-preview-head">
+              <span class="ja-kicker">Live preview</span>
+              <h3 id="ja-preview-title">Reader view</h3>
+            </div>
+            <article class="ja-preview-article fn-prose" id="ja-preview-article">
+              <p class="mono text-muted">Start writing to preview the post.</p>
+            </article>
+          </section>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer id="site-footer"></footer>
+
+  <script src="config/app.config.js?v=2026-11-15"></script>
+  <script src="config/firebase.config.js?v=2026-11-17b"></script>
+  <script src="data/data-store.js?v=2026-11-15"></script>
+  <script src="modules/theme/theme-manager.js?v=2026-11-15"></script>
+  <script src="modules/header/header-manager.js?v=2026-11-15"></script>
+  <script src="modules/footer/footer-manager.js?v=2026-11-15"></script>
+  <script src="modules/reveal/reveal-manager.js?v=2026-11-15"></script>
+  <script src="modules/content/blocks.js?v=2026-11-18"></script>
+  <script src="js/app.js?v=2026-11-15"></script>
+  <script type="module" src="modules/journal/journal-admin.js?v=2026-11-18"></script>
+</body>
+</html>

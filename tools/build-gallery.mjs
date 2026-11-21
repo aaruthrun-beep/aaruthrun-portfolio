@@ -270,6 +270,25 @@ function displaySize(size, cfg) {
   };
 }
 
+// tools/build-responsive.mjs writes images/derived/... variants. Record the
+// ones that exist so the page can offer them, rather than making the browser
+// request candidates that were never built.
+const DERIVED_WIDTHS = [800, 1600];
+
+function srcsetFor(src) {
+  if (!/\.(jpe?g|png|webp)$/i.test(src)) return '';
+  const base = src
+    .replace(/^images\//, 'images/derived/')
+    .replace(/\.(jpe?g|png|webp)$/i, '');
+  const candidates = [];
+  for (const width of DERIVED_WIDTHS) {
+    const candidate = `${base}-${width}.jpg`;
+    if (!fs.existsSync(path.join(ROOT, candidate))) continue;
+    candidates.push(`${encodeURI(candidate)} ${width}w`);
+  }
+  return candidates.join(', ');
+}
+
 function titleFromSlug(slug) {
   return slug
     .split(/[-_]+/)
@@ -318,21 +337,30 @@ async function collectProjects(meta, cfg) {
     const sidecar = await readJson(path.join(folder, 'project.json'));
     const captions = (sidecar && sidecar.captions) || {};
     const files = await listImages(folder);
-    const sources = new Set(files.map((name) => `images/projects/${slug}/${name}`));
 
+    // An explicit `images` list in data/projects.json sets the running order,
+    // because the project page uses the same list; files dropped into the
+    // folder later are appended in filename order.
+    const explicit = [];
     for (const src of info.images || []) {
       if (typeof src !== 'string' || !IMAGE_RE.test(src)) continue;
       const normalized = src.replace(/\\/g, '/');
-      if (fs.existsSync(path.join(ROOT, normalized))) sources.add(normalized);
+      if (explicit.includes(normalized)) continue;
+      if (fs.existsSync(path.join(ROOT, normalized))) explicit.push(normalized);
     }
+
+    const sources = explicit.concat(
+      files
+        .map((name) => `images/projects/${slug}/${name}`)
+        .filter((src) => !explicit.includes(src))
+        .sort((a, b) => a.localeCompare(b, 'en', { numeric: true }))
+    );
 
     const images = [];
     for (const src of sources) {
       const natural = await readImageSize(path.join(ROOT, src));
       if (!natural) {
-        if (sources.size === files.length) {
-          console.warn(`[gallery] skipped unreadable image: ${src}`);
-        }
+        console.warn(`[gallery] skipped unreadable image: ${src}`);
         continue;
       }
       const shown = displaySize(natural, cfg);
@@ -353,12 +381,15 @@ async function collectProjects(meta, cfg) {
         bottom: frame.bottom,
         nw: natural.w,
         nh: natural.h,
+        srcset: srcsetFor(src),
         text: caption.text,
         date: caption.date,
       });
     }
 
-    images.sort((a, b) => a.src.localeCompare(b.src, 'en', { numeric: true }));
+    if (!explicit.length) {
+      images.sort((a, b) => a.src.localeCompare(b.src, 'en', { numeric: true }));
+    }
 
     if (!images.length) continue;
     projects.push({ ...info, images });
@@ -390,9 +421,18 @@ async function build() {
   };
 
   await fsp.mkdir(DATA_DIR, { recursive: true });
-  const tmp = OUTPUT + '.tmp';
-  await fsp.writeFile(tmp, JSON.stringify(model, null, 2) + '\n');
-  await fsp.rename(tmp, OUTPUT);
+
+  // generatedAt changes on every run; keep the previous value when nothing
+  // else moved so a no-op build does not dirty the working tree (CI runs
+  // this and then checks that generated files are committed).
+  const strip = (value) => value && JSON.stringify({ ...value, generatedAt: undefined });
+  if (previous && strip(previous) === strip(model)) {
+    model.generatedAt = previous.generatedAt;
+  } else {
+    const tmp = OUTPUT + '.tmp';
+    await fsp.writeFile(tmp, JSON.stringify(model, null, 2) + '\n');
+    await fsp.rename(tmp, OUTPUT);
+  }
 
   const photos = model.projects.reduce((sum, p) => sum + p.images.length, 0);
   const ms = Date.now() - started;

@@ -1,0 +1,1022 @@
+{
+  "schemaVersion": 2,
+  "entries": [
+    {
+      "slug": "printed-six-axis-gearboxes",
+      "title": "The six-axis arm that started as a pile of printed gearbox tests",
+      "subtitle": "NITE 369 began as a question about how much of a robot arm could be printed before the mechanics stopped making sense.",
+      "summary": "A six-axis arm built around printed structure and custom compound planetary gearboxes, with control distributed across three RP2040 microcontrollers.",
+      "date": "2026-11-08",
+      "category": "Mechanical Engineering",
+      "tags": [
+        "NITE 369",
+        "3D Printing",
+        "Gearboxes",
+        "Distributed Control"
+      ],
+      "project": "nite-369",
+      "cover": "images/field-notes/nite-cover.jpg",
+      "thumb": "images/field-notes/nite-thumb.jpg",
+      "coverAlt": "NITE 369 six-axis arm on the bench",
+      "coverCaption": "NITE 369 assembled from printed structural links and custom gearbox housings.",
+      "author": "Aaruthrun",
+      "featured": true,
+      "status": "published",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The first version of NITE 369 was not a robot yet. It was a set of printed joint housings, a growing pile of failed gearbox stages, and a question: how much of a six-axis arm could be made from printed structure before the mechanics stopped making sense?"
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "The brief was a cost constraint"
+        },
+        {
+          "type": "paragraph",
+          "text": "Commercial six-axis arms are expensive, and their closed firmware makes student and maker work difficult to adapt. NITE 369 set out to prove that a functional manipulator could be built with 3D-printed mechanical components, custom compound planetary gearboxes, and low-cost microcontrollers instead of purchased arm hardware."
+        },
+        {
+          "type": "image",
+          "src": "images/field-notes/nite-body-1.jpg",
+          "alt": "NITE 369 arm structure on the bench",
+          "caption": "Printed structural links and integrated gearbox housings. The arm is assembled as a complete mechanical system, not a purchased kit."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Three controllers instead of one"
+        },
+        {
+          "type": "paragraph",
+          "text": "The control architecture is distributed across three RP2040 microcontrollers. Each controller handles a subset of joints and communicates over a shared bus, while the mechanical, embedded, and actuator subsystems remain hosted by the same printed structure. Splitting the work made the electronics easier to bring up one joint at a time."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Where the gearbox work paid off"
+        },
+        {
+          "type": "paragraph",
+          "text": "Every structural link is printed. The compound planetary gearboxes were designed and printed to provide the reduction needed for joint torque, then iterated as a mechanism rather than treated as a fixed catalog part. The useful validation was not a single torque number; it was watching backlash and reduction behave under load as the printed stages changed."
+        },
+        {
+          "type": "table",
+          "caption": "The design choices that defined NITE 369.",
+          "head": [
+            "Subsystem",
+            "Choice",
+            "What it bought"
+          ],
+          "rows": [
+            [
+              "Structure",
+              "Fully 3D-printed links",
+              "Cheap iteration and integrated gearbox mounts"
+            ],
+            [
+              "Drive reduction",
+              "Custom compound planetary stages",
+              "Torque without purchased gearboxes"
+            ],
+            [
+              "Control",
+              "Three distributed RP2040s",
+              "Joint-level bring-up and a shared motion bus"
+            ],
+            [
+              "Integration",
+              "Printed structure as the system backbone",
+              "Mechanical and embedded work developed together"
+            ]
+          ]
+        },
+        {
+          "type": "image-grid",
+          "images": [
+            {
+              "src": "images/field-notes/nite-body-2.jpg",
+              "alt": "Detail of the NITE 369 printed arm",
+              "caption": "Printed joint detail during assembly."
+            },
+            {
+              "src": "images/projects/nite-369/IMG_20260810_004658996.jpg",
+              "alt": "NITE 369 arm from another angle",
+              "caption": "The same structure after the control nodes were integrated."
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "What I would measure next"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Repeatability at the tool centre point under a known payload, not just unloaded motion.",
+            "Backlash growth in the printed planetary stages after repeated cycles.",
+            "Thermal behaviour in the printed joint housings during sustained multi-axis moves.",
+            "How much the shared control bus constrains coordinated motion as more joints move at once."
+          ]
+        },
+        {
+          "type": "callout",
+          "title": "The useful lesson",
+          "text": "A printed gearbox is not a substitute for a machined one. It is a different design problem. The iteration speed is the advantage, but only if the mechanical test and the firmware bring-up happen in parallel."
+        },
+        {
+          "type": "references",
+          "items": [
+            {
+              "label": "NITE 369 firmware and CAD repository",
+              "url": "https://github.com/aaruthrun-beep/nite-369-robotic-arm",
+              "note": "project repository"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "foc-current-loop-bench-notes",
+      "title": "Bench notes from a 25 kHz FOC current loop",
+      "subtitle": "The part of a brushless servo that decides whether the machine feels precise or nervous is the current loop running underneath everything else.",
+      "summary": "Notes from bringing up a compact brushless actuator: current sensing, Space Vector PWM, encoder feedback, and the order in which the control loops actually need to be tuned.",
+      "date": "2026-10-19",
+      "category": "Motor Control",
+      "tags": [
+        "FOC",
+        "SVPWM",
+        "STM32",
+        "Current Control"
+      ],
+      "projectLabel": "BLDC FOC Actuator (archived build)",
+      "cover": "images/field-notes/foc-cover.svg",
+      "thumb": "images/field-notes/foc-cover.svg",
+      "coverAlt": "FOC control-loop technical cover plate",
+      "coverCaption": "Technical cover plate: the cascaded current, velocity and position loops of the BLDC actuator.",
+      "author": "Aaruthrun",
+      "featured": false,
+      "status": "published",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A brushless servo can look convincing while sitting still. The interesting part starts when the current loop has to respond to a step, reject a disturbance, and keep the rotor reference frame aligned while the motor is moving. The BLDC FOC actuator was built to make that loop small enough to fit inside a joint."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Start with the current loop"
+        },
+        {
+          "type": "paragraph",
+          "text": "The actuator uses dual inline shunts with INA240 current-sense amplifiers and a 25 kHz centre-aligned Space Vector PWM stage. The current loop runs at the same 25 kHz, with velocity at 5 kHz and position at 1 kHz. That hierarchy matters: a position loop cannot be tuned around a current loop that is still arguing with its own measurements."
+        },
+        {
+          "type": "code",
+          "filename": "firmware/foc_current_step.c",
+          "language": "c",
+          "code": "typedef struct {\n    float ia, ib, ic;\n    float theta_e;\n    float id_ref, iq_ref;\n} foc_state_t;\n\nvoid foc_current_step(foc_state_t *s)\n{\n    float id = clarke_d(s->ia, s->ib, s->ic);\n    float iq = clarke_q(s->ia, s->ib, s->ic);\n\n    float id_err = s->id_ref - id;\n    float iq_err = s->iq_ref - iq;\n\n    float vd = pi_update(&pi_d, id_err);\n    float vq = pi_update(&pi_q, iq_err);\n\n    svpwm_apply(vd, vq, s->theta_e);\n}"
+        },
+        {
+          "type": "paragraph",
+          "text": "That excerpt is the simplified shape of the step. The production firmware also handles cross-coupling, voltage saturation, and the practical details that decide whether a clean simulation survives a real motor."
+        },
+        {
+          "type": "quote",
+          "text": "The current loop is not a detail underneath the servo. It is the servo.",
+          "attribution": "Field note / BLDC FOC actuator"
+        },
+        {
+          "type": "image",
+          "src": "images/field-notes/foc-loop.svg",
+          "alt": "Cascaded position, velocity and current control loops",
+          "caption": "The actuator separates the 1 kHz position loop, 5 kHz velocity loop and 25 kHz current loop. The encoder and current-sense paths close the two inner loops."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "The encoder is part of the control loop"
+        },
+        {
+          "type": "paragraph",
+          "text": "The rotor position comes from an AS5047P 14-bit magnetic encoder. Its resolution is only useful if the electrical angle is handled correctly through the Park transform. A small angle error at high current turns into torque ripple that looks like a mechanical problem but is really a feedback problem."
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "text": "Electrical angle, not shaft angle"
+        },
+        {
+          "type": "paragraph",
+          "text": "The encoder reports mechanical shaft position. The control loop needs electrical angle, which advances once per pole pair. Multiplying by the pole-pair count, wrapping the result, and applying the offset correctly is a small piece of arithmetic with an outsized effect on commutation. An offset that looks acceptable at low current can produce uneven torque as soon as the loop is asked for more."
+        },
+        {
+          "type": "table",
+          "caption": "BLDC FOC actuator control and power specifications.",
+          "head": [
+            "Parameter",
+            "Specification"
+          ],
+          "rows": [
+            [
+              "Motor",
+              "4310 KV100, 14 pole pairs"
+            ],
+            [
+              "Current sensing",
+              "Dual inline shunts with INA240 amplifiers"
+            ],
+            [
+              "Switching",
+              "25 kHz centre-aligned SVPWM"
+            ],
+            [
+              "Position feedback",
+              "AS5047P, 14-bit magnetic encoder"
+            ],
+            [
+              "Control loops",
+              "25 kHz current, 5 kHz velocity, 1 kHz position"
+            ],
+            [
+              "Torque",
+              "0.85 Nm continuous / 2.4 Nm peak"
+            ],
+            [
+              "Shaft",
+              "12 mm hollow bore"
+            ]
+          ]
+        },
+        {
+          "type": "image",
+          "src": "images/projects/bldc-foc-actuator/1.png",
+          "alt": "BLDC FOC actuator module",
+          "caption": "The actuator integrates the motor, power stage, encoder, and controller into one cylindrical module."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "What the bench exposes"
+        },
+        {
+          "type": "paragraph",
+          "text": "The first useful debugging tool was not a plot. It was the sound of the motor. A current loop with a noisy sense path or a badly placed filter announces itself as a tone or a tick before it shows up as a number. The oscilloscope confirmed what the ear noticed, but only after the gate-drive and shunt layout were treated as part of the control design."
+        },
+        {
+          "type": "callout",
+          "title": "Tuning order",
+          "text": "Current first, then velocity, then position. Every time the current loop was treated as a formality, the outer loops inherited a problem that no amount of PID tuning could fix."
+        },
+        {
+          "type": "references",
+          "items": [
+            {
+              "label": "TI DRV8301 gate driver",
+              "url": "https://www.ti.com/product/DRV8301",
+              "note": "power-stage reference"
+            },
+            {
+              "label": "ams OSRAM AS5047P magnetic encoder",
+              "url": "https://ams.com/as5047p",
+              "note": "position feedback"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "zero-power-magnetic-latch",
+      "title": "A robot latch that holds with zero current",
+      "subtitle": "MARS 369 needed a docking mechanism that could stay closed without draining the battery, and open again on command.",
+      "summary": "How an electro-permanent magnetic latch, a six-channel infrared ring, and chamfered mechanical guides combine into a reconfigurable swarm module.",
+      "date": "2026-09-27",
+      "category": "PCB Development",
+      "tags": [
+        "MARS 369",
+        "Electro-Permanent Magnet",
+        "ESP32-S3",
+        "Swarm"
+      ],
+      "project": "mars-369",
+      "cover": "images/field-notes/mars-cover.svg",
+      "thumb": "images/field-notes/mars-cover.svg",
+      "coverAlt": "MARS 369 magnetic latch technical cover plate",
+      "coverCaption": "Technical cover plate: the six-direction IR ring and magnetic latch architecture.",
+      "author": "Aaruthrun",
+      "featured": false,
+      "status": "published",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A swarm robot that has to hold formation cannot spend its battery holding itself together. The MARS 369 docking system had to latch firmly, release on command, and do both without a continuous holding current. The answer was an electro-permanent magnet pair switched by a short capacitive discharge."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "A latch with no holding current"
+        },
+        {
+          "type": "paragraph",
+          "text": "Each latch uses AlNiCo and NdFeB magnet pairs wrapped in a coil. A brief pulse switches the magnetic state; the magnet then holds without power. The design target was 18.5 N per latch interface with a 50 ms pulse and zero idle current."
+        },
+        {
+          "type": "image",
+          "src": "images/projects/mars-369/1.png",
+          "alt": "MARS 369 robot module",
+          "caption": "The module is built around a hexagonal PCB that also serves as the structural bottom deck."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Six directions of infrared"
+        },
+        {
+          "type": "paragraph",
+          "text": "Each module carries six directional 38 kHz infrared transceiver channels arranged at 60-degree increments. Neighbor discovery starts with bearing and ID exchange; once a peer is identified, higher-bandwidth data can move over the ESP-NOW mesh. The ESP32-S3 handles the radio stack while the local control loop manages locomotion and docking state."
+        },
+        {
+          "type": "table",
+          "caption": "MARS 369 module specifications.",
+          "head": [
+            "Subsystem",
+            "Specification"
+          ],
+          "rows": [
+            [
+              "Form factor",
+              "115 mm across flats, 42 mm chassis height"
+            ],
+            [
+              "Latching",
+              "3x hermaphroditic electro-permanent magnetic couplers"
+            ],
+            [
+              "Holding force",
+              "18.5 N per latch interface, zero continuous power"
+            ],
+            [
+              "Communication",
+              "6-channel modulated 38 kHz directional IR"
+            ],
+            [
+              "Processor",
+              "Dual-core ESP32-S3 at 240 MHz"
+            ],
+            [
+              "Drive",
+              "Dual N20 gearmotors with 334 CPR encoders"
+            ],
+            [
+              "Power",
+              "3.7 V 1200 mAh LiPo with USB-C charging"
+            ],
+            [
+              "Runtime",
+              "3.5 hours active locomotion and latching"
+            ]
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Alignment before magnetism"
+        },
+        {
+          "type": "paragraph",
+          "text": "A magnetic latch is only useful if the two modules arrive in a repeatable position. Chamfered mechanical guides provide roughly plus or minus 8 mm of lateral correction and plus or minus 12 degrees of angular correction during the docking approach. The magnet closes the last gap; the geometry does the alignment work."
+        },
+        {
+          "type": "callout",
+          "title": "The mechanism is part of the protocol",
+          "text": "Docking is not a software event layered on top of a mechanical connector. The approach path, the guide chamfers, the IR bearing estimate, and the pulse timing all have to agree before the latch can be trusted."
+        },
+        {
+          "type": "references",
+          "items": [
+            {
+              "label": "MARS 369 hardware and firmware repository",
+              "url": "https://github.com/aaruthrun-beep/mars-369-swarm-robot",
+              "note": "project repository"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "rtk-rover-field-notes",
+      "title": "Teaching a rover where it is, to within a few centimetres",
+      "subtitle": "The Caterpillar Autonomous Rover is less about a single sensor and more about making several imperfect position estimates agree.",
+      "summary": "Field notes from an outdoor autonomy stack built around RTK-GPS, LiDAR, wheel odometry, and a ROS2 navigation layer.",
+      "date": "2026-09-08",
+      "category": "Robotics",
+      "tags": [
+        "CAT Rover",
+        "RTK-GPS",
+        "ROS2",
+        "Field Testing"
+      ],
+      "project": "cat-autonomous-rover",
+      "cover": "images/field-notes/cat-cover.jpg",
+      "thumb": "images/field-notes/cat-thumb.jpg",
+      "coverAlt": "Caterpillar autonomous rover outdoors",
+      "coverCaption": "The rover on broken ground during an outdoor field session.",
+      "author": "Aaruthrun",
+      "featured": false,
+      "status": "published",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Indoor robotics lets you assume the floor is flat and the environment is repeatable. The Caterpillar Autonomous Rover does not get that luxury. Its position estimate has to survive uneven ground, changing satellite geometry, dust, and a chassis that moves differently when the payload shifts."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "A navigation stack with two brains"
+        },
+        {
+          "type": "paragraph",
+          "text": "The rover splits high-level autonomy from low-level motion. A Raspberry Pi 4 runs ROS2 and the navigation stack, while an STM32F4 handles low-level motion control over CAN. An extended Kalman filter fuses IMU, wheel odometry, and RTK-GPS fixes; a Regulated Pure Pursuit controller follows the waypoint sequence."
+        },
+        {
+          "type": "image",
+          "src": "images/field-notes/cat-body-1.jpg",
+          "alt": "Caterpillar rover outdoors",
+          "caption": "Field testing the rover on uneven ground. The navigation stack has to tolerate terrain the lab never provided."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "The field is the test fixture"
+        },
+        {
+          "type": "paragraph",
+          "text": "RTK corrections arrived over NTRIP through a cellular link, which introduced a failure mode that no indoor test could reproduce: the fix quality could change while the rover was moving. The useful question was not whether RTK could be centimetre-accurate. It was what the controller should do when the fix degraded."
+        },
+        {
+          "type": "table",
+          "caption": "CAT Autonomous Rover platform specifications.",
+          "head": [
+            "Subsystem",
+            "Specification"
+          ],
+          "rows": [
+            [
+              "Drive",
+              "4WD independent planetary gearmotors, 150 W total"
+            ],
+            [
+              "Chassis",
+              "Welded 6061 aluminium box section with rocker suspension"
+            ],
+            [
+              "Positioning",
+              "u-blox ZED-F9P multi-band RTK GNSS, under 2 cm"
+            ],
+            [
+              "Perception",
+              "Slamtec RPLiDAR A2M8, 12 m, 360 degrees at 10 Hz"
+            ],
+            [
+              "Compute",
+              "Raspberry Pi 4 running ROS2 Humble + STM32F4 motion hub"
+            ],
+            [
+              "Battery",
+              "24 V 20 Ah LiFePO4 with active BMS"
+            ],
+            [
+              "Runtime",
+              "4 hours continuous field mapping"
+            ],
+            [
+              "Payload",
+              "15 kg sensor or sampling payload"
+            ]
+          ]
+        },
+        {
+          "type": "image-grid",
+          "images": [
+            {
+              "src": "images/field-notes/cat-body-2.jpg",
+              "alt": "Rover chassis detail",
+              "caption": "Chassis and drive layout in the field."
+            },
+            {
+              "src": "images/field-notes/cat-body-3.jpg",
+              "alt": "Rover field test",
+              "caption": "A later pass on the same test plot."
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "What the rover taught the map"
+        },
+        {
+          "type": "paragraph",
+          "text": "The successful waypoint runs were accurate to a few centimetres across an open agricultural plot. That number is less interesting than the conditions around it: a clear sky, a stable correction link, and a route that stayed inside the mapped area. Autonomy claims should carry their test conditions with them."
+        },
+        {
+          "type": "callout",
+          "title": "Field note",
+          "text": "A position estimate is a claim about uncertainty, not just a coordinate. The rover behaves well only when the rest of the stack knows how much to trust that claim."
+        },
+        {
+          "type": "references",
+          "items": [
+            {
+              "label": "CAT Autonomous Rover ROS2 workspace",
+              "url": "https://github.com/aaruthrun-beep/cat-autonomous-rover",
+              "note": "project repository"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "scrap-built-six-axis",
+      "title": "Scrap is a material, not a constraint",
+      "subtitle": "ScrapX6 was built from salvaged motors, drivers, and structural material. The limitation was real, but it was also a useful design filter.",
+      "summary": "A six-axis robot assembled from salvaged NEMA steppers, TB6600 drivers, an Arduino Mega, and reclaimed structure — and taken to a competition.",
+      "date": "2026-08-21",
+      "category": "Experiments",
+      "tags": [
+        "ScrapX6",
+        "NEMA",
+        "TB6600",
+        "Onfluence 2026"
+      ],
+      "project": "scrapx6",
+      "cover": "images/field-notes/scrap-cover.jpg",
+      "thumb": "images/field-notes/scrap-thumb.jpg",
+      "coverAlt": "ScrapX6 six-axis arm photographed on the bench",
+      "coverCaption": "ScrapX6 assembled from reclaimed motors, drivers and structural material.",
+      "author": "Aaruthrun",
+      "featured": false,
+      "status": "published",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Most robot arms start with a specification and then choose parts. ScrapX6 started with the parts that were available. The design had to fit the torque, mounting pattern, and condition of salvaged NEMA 17 and NEMA 23 steppers rather than the other way around."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "The parts bin as a design brief"
+        },
+        {
+          "type": "paragraph",
+          "text": "The arm uses TB6600 microstepping drivers coordinated by an Arduino Mega 2560. The structure is assembled from reclaimed material, with arm links sized around the salvaged motors rather than a purchased design. That constraint changed the proportions, the joint order, and the amount of mechanical adjustment built into each axis."
+        },
+        {
+          "type": "image",
+          "src": "images/field-notes/scrap-body-1.jpg",
+          "alt": "ScrapX6 on the bench",
+          "caption": "ScrapX6 on the competition table with its project board."
+        },
+        {
+          "type": "table",
+          "caption": "ScrapX6 build inventory.",
+          "head": [
+            "Subsystem",
+            "Parts used"
+          ],
+          "rows": [
+            [
+              "Degrees of freedom",
+              "Six-axis articulated arm"
+            ],
+            [
+              "Motors",
+              "Salvaged NEMA 17 and NEMA 23 steppers"
+            ],
+            [
+              "Drivers",
+              "TB6600 microstepping modules"
+            ],
+            [
+              "Controller",
+              "Arduino Mega 2560"
+            ],
+            [
+              "Structure",
+              "Repurposed scrap and salvaged components"
+            ],
+            [
+              "Recognition",
+              "Third place, Onfluence 2026"
+            ]
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Open-loop choreography"
+        },
+        {
+          "type": "paragraph",
+          "text": "The control is open-loop stepper choreography with gear-reduction compensation across six axes, tuned against the salvaged motors. There is no encoder to rescue a missed step. The mechanical assembly has to be stiff enough and the motion conservative enough that the open-loop assumption stays true."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "What a competition changes"
+        },
+        {
+          "type": "paragraph",
+          "text": "At Onfluence 2026 the robot was demonstrated live and awarded third place. The competition added a different kind of test: transport, setup time, a public audience, and the expectation that the machine would work away from the bench. A scrap-built mechanism has to be maintained as carefully as a purchased one."
+        },
+        {
+          "type": "callout",
+          "title": "Constraint as a filter",
+          "text": "Working from scrap removes the option of buying the correct part. It forces the design toward adjustable joints, conservative motion, and a deep familiarity with every component. Those are useful habits even when the budget exists."
+        },
+        {
+          "type": "references",
+          "items": [
+            {
+              "label": "ScrapX6 repository",
+              "url": "https://github.com/aaruthrun-beep/scrapx6",
+              "note": "project repository"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "corexy-input-shaping",
+      "title": "Input shaping on a printer built from aluminium extrusion",
+      "subtitle": "A fast CoreXY printer is a mechanical system first. Input shaping only works after the frame and gantry have earned it.",
+      "summary": "Building a high-temperature CoreXY fabricator around a stiff frame, linear rails, a CAN toolhead, and resonance measurements instead of guesswork.",
+      "date": "2026-08-02",
+      "category": "Engineering Notes",
+      "tags": [
+        "Titan CoreXY",
+        "Klipper",
+        "Input Shaping",
+        "PA-CF"
+      ],
+      "projectLabel": "Titan-Klipper CoreXY (archived build)",
+      "cover": "images/field-notes/titan-cover.svg",
+      "thumb": "images/field-notes/titan-cover.svg",
+      "coverAlt": "Titan CoreXY technical cover plate",
+      "coverCaption": "Technical cover plate: the CoreXY gantry and heated-chamber layout.",
+      "author": "Aaruthrun",
+      "featured": false,
+      "status": "published",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The Titan-Klipper printer was built for one reason: producing structural parts in engineering polymers for the robot projects. That requirement pushed the design toward a stiff frame, a heated chamber, and a motion system that could move quickly without turning every corner into ringing."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Stiffness before speed"
+        },
+        {
+          "type": "paragraph",
+          "text": "The machine uses a true CoreXY gantry on 3030 aluminium extrusion, with MGN12H linear rails on all linear axes and an 8 mm cast aluminium tooling plate. The moving mass was kept low so the acceleration target would be a motion problem rather than a frame problem."
+        },
+        {
+          "type": "image",
+          "src": "images/projects/titan-klipper-corexy/1.png",
+          "alt": "Titan-Klipper CoreXY printer",
+          "caption": "The completed CoreXY machine. The enclosure is part of the thermal design, not an afterthought."
+        },
+        {
+          "type": "table",
+          "caption": "Titan-Klipper CoreXY specifications.",
+          "head": [
+            "Subsystem",
+            "Specification"
+          ],
+          "rows": [
+            [
+              "Kinematics",
+              "CoreXY with crossed 9 mm Gates belts"
+            ],
+            [
+              "Build volume",
+              "300 x 300 x 350 mm"
+            ],
+            [
+              "Motion",
+              "Hiwin MGN12H linear rails"
+            ],
+            [
+              "Speed",
+              "500 mm/s at up to 25,000 mm/s²"
+            ],
+            [
+              "Hotend",
+              "Water-cooled UHF ceramic hotend, up to 450 C"
+            ],
+            [
+              "Toolhead",
+              "RP2040 CAN board with ADXL345"
+            ],
+            [
+              "Chamber",
+              "Active 65 C heated enclosure"
+            ],
+            [
+              "Mainboard",
+              "BTT Octopus Pro + Raspberry Pi 4 running Klipper"
+            ]
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Input shaping is a measurement"
+        },
+        {
+          "type": "paragraph",
+          "text": "The ADXL345 on the toolhead captures the gantry response, and Klipper's input shaper uses that measurement to compensate for resonance. The useful part is not choosing a shaper type from a list. It is changing one mechanical variable at a time and watching the resonance graph respond."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "The chamber is part of the machine"
+        },
+        {
+          "type": "paragraph",
+          "text": "PA-CF and other engineering polymers do not behave like PLA in an open frame. The 65 C chamber reduces warping and makes the printed part a structural candidate rather than a prototype. The printer exists so the robot projects can use printed parts with predictable dimensions."
+        },
+        {
+          "type": "callout",
+          "title": "A printer is a test instrument",
+          "text": "The value of the machine is not only the parts it produces. It is the ability to change a material, a tolerance, or a geometry and get a measurable result back the same day."
+        },
+        {
+          "type": "references",
+          "items": [
+            {
+              "label": "Klipper resonance compensation documentation",
+              "url": "https://www.klipper3d.org/Resonance_Compensation.html",
+              "note": "input shaping reference"
+            },
+            {
+              "label": "Titan-Klipper configuration repository",
+              "url": "https://github.com/aaruthrun-beep/titan-klipper-corexy",
+              "note": "project repository"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "balancing-robot-control-loop",
+      "title": "A balancing robot is a control loop with a camera attached",
+      "subtitle": "The camera gets the attention, but the ESP32-S3 micro-robot stays upright because two cores are given very different jobs.",
+      "summary": "A two-wheeled inverted pendulum built around a 200 Hz FreeRTOS balance loop, a Madgwick filter, and a separate Wi-Fi video path.",
+      "date": "2026-07-14",
+      "category": "Embedded Systems",
+      "tags": [
+        "ESP32-S3",
+        "FreeRTOS",
+        "IMU",
+        "PID"
+      ],
+      "projectLabel": "ESP32-S3 Micro Robot (archived build)",
+      "cover": "images/field-notes/esp32-cover.svg",
+      "thumb": "images/field-notes/esp32-cover.svg",
+      "coverAlt": "ESP32-S3 balancing robot technical cover plate",
+      "coverCaption": "Technical cover plate: the inverted-pendulum balance architecture.",
+      "author": "Aaruthrun",
+      "featured": false,
+      "status": "published",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A self-balancing robot is a control problem disguised as a robot. The camera and web dashboard make it look like a connected device, but the machine only stays up if the balance task runs on a predictable schedule."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Two cores, two jobs"
+        },
+        {
+          "type": "paragraph",
+          "text": "The ESP32-S3 splits the work deterministically. Core 0 handles Wi-Fi, the HTTP server, and the WebSocket video stream. Core 1 runs an un-preemptible 200 Hz FreeRTOS task that reads the MPU6050, computes the Madgwick attitude estimate, executes the cascaded balance loop, and updates the motor PWM outputs."
+        },
+        {
+          "type": "image",
+          "src": "images/projects/esp32-s3-micro-robot/1.png",
+          "alt": "ESP32-S3 balancing robot",
+          "caption": "The compact chassis places the 18650 cell high and central to tune the pendulum dynamics."
+        },
+        {
+          "type": "table",
+          "caption": "ESP32-S3 micro-robot specifications.",
+          "head": [
+            "Subsystem",
+            "Specification"
+          ],
+          "rows": [
+            [
+              "Dimensions",
+              "70 x 60 x 95 mm"
+            ],
+            [
+              "Control rate",
+              "200 Hz balance loop"
+            ],
+            [
+              "MCU",
+              "ESP32-S3 dual-core at 240 MHz, 8 MB PSRAM"
+            ],
+            [
+              "Vision",
+              "OV2640 2 MP camera over WebSockets"
+            ],
+            [
+              "Sensors",
+              "MPU6050 IMU + dual quadrature encoders"
+            ],
+            [
+              "Drive",
+              "Coreless micro metal gearmotors"
+            ],
+            [
+              "Power",
+              "18650 Li-ion with onboard 5 V / 3.3 V boost"
+            ],
+            [
+              "Telemetry",
+              "Browser dashboard with live PID tuning"
+            ]
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Balance is a stack of small corrections"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "The inner loop stabilises chassis tilt at 200 Hz.",
+            "The outer loop regulates translational position and velocity at 50 Hz.",
+            "The derivative filter was tuned to remove wheel buzz without making the robot sluggish.",
+            "A packet timeout stops the motors rather than letting the last command persist."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "The camera is a separate problem"
+        },
+        {
+          "type": "paragraph",
+          "text": "The OV2640 streams JPEG frames over WebSockets at 25 FPS VGA, with measured latency under 95 ms on a local network. The important design decision was to keep the video path off the control core. A dropped frame should not become a dropped balance update."
+        },
+        {
+          "type": "callout",
+          "title": "Determinism is a feature",
+          "text": "The robot is more impressive when the camera is disconnected, because that is when the control loop has to stand on its own. Build the balance task first; add the network stack without giving it permission to interrupt it."
+        },
+        {
+          "type": "references",
+          "items": [
+            {
+              "label": "ESP32-S3 micro-robot repository and web UI",
+              "url": "https://github.com/aaruthrun-beep/esp32-s3-micro-robot",
+              "note": "project repository"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "steer-by-wire-haptics",
+      "title": "What a steering wheel should feel like when there is no steering column",
+      "subtitle": "The FFB steer-by-wire car is a latency problem, a sensor problem, and a mechanical-feel problem at the same time.",
+      "summary": "Building a direct-drive haptic steering system that reconstructs road feel from tie-rod load cells, a tire model, and chassis motion.",
+      "date": "2026-06-26",
+      "category": "Electronics",
+      "tags": [
+        "FFB",
+        "Haptics",
+        "Strain Gauges",
+        "CAN"
+      ],
+      "projectLabel": "FFB Steer-by-Wire (archived build)",
+      "cover": "images/field-notes/ffb-cover.svg",
+      "thumb": "images/field-notes/ffb-cover.svg",
+      "coverAlt": "FFB steer-by-wire technical cover plate",
+      "coverCaption": "Technical cover plate: the force-feedback steering loop.",
+      "author": "Aaruthrun",
+      "featured": false,
+      "status": "published",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A conventional RC transmitter gives the driver a trigger and a spring. It does not communicate tire grip, rack resistance, or the moment the front wheels lose adhesion. The FFB steer-by-wire project replaces that open loop with a measured, actuated steering feel."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Three forces at the rim"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Measured rack force from strain-gauge tie rods in the chassis.",
+            "Synthesised tire self-aligning torque derived from a Pacejka-style slip model using yaw rate and wheel speed.",
+            "High-frequency road texture reconstructed from accelerometer data."
+          ]
+        },
+        {
+          "type": "image",
+          "src": "images/projects/ffb-steer-by-wire/1.png",
+          "alt": "FFB steer-by-wire hardware",
+          "caption": "The direct-drive steering base uses a high-torque outrunner and a 2400 PPR encoder."
+        },
+        {
+          "type": "table",
+          "caption": "FFB steer-by-wire system specifications.",
+          "head": [
+            "Subsystem",
+            "Specification"
+          ],
+          "rows": [
+            [
+              "Chassis",
+              "1:10 scale 4WD touring / drift platform"
+            ],
+            [
+              "Telemetry",
+              "2.4 GHz ESP-NOW + CAN 2.0 gateway"
+            ],
+            [
+              "Steering motor",
+              "Direct-drive outrunner, up to 4.2 Nm"
+            ],
+            [
+              "Wheel sensing",
+              "2400 PPR optical encoder with index"
+            ],
+            [
+              "Rack actuator",
+              "Coreless digital steering servo, 0.06 s / 60 degrees"
+            ],
+            [
+              "Force sensing",
+              "Custom tie-rod load cells"
+            ],
+            [
+              "Latency",
+              "Under 4.8 ms tire impact to wheel reaction"
+            ],
+            [
+              "Firmware",
+              "FreeRTOS on both nodes"
+            ]
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Latency is a feel"
+        },
+        {
+          "type": "paragraph",
+          "text": "The control loop has to close fast enough that the driver experiences the wheel as a mechanical system. The measured end-to-end latency was 4.8 ms. That budget includes sensor acquisition, the ESP-NOW link, filtering, the haptic model, and the motor command."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Blind testing"
+        },
+        {
+          "type": "paragraph",
+          "text": "In controlled low-friction tests, drivers identified understeer and oversteer transitions through the wheel alone. Lap-time consistency improved by 18 percent and unrecoverable spin-outs fell by 65 percent. Those results are about the feedback loop, not the steering ratio."
+        },
+        {
+          "type": "callout",
+          "title": "Force feedback is a signal chain",
+          "text": "Every stage adds delay: the load cell, the amplifier, the radio, the filter, the motor. A convincing haptic system is mostly the discipline of keeping that chain short and predictable."
+        },
+        {
+          "type": "references",
+          "items": [
+            {
+              "label": "FFB steer-by-wire firmware and telemetry",
+              "url": "https://github.com/aaruthrun-beep/ffb-steer-by-wire",
+              "note": "project repository"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

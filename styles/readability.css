@@ -1,0 +1,1107 @@
+/* ==========================================================================
+   AARUTHRUN — GLOBAL READABILITY & TYPOGRAPHY
+   Loaded last on every page. Preserves the warm-grey editorial identity while
+   normalising headings, reading sizes, technical labels and documentation
+   alignment. No layout redesign: measurements and hierarchy only.
+   ========================================================================== */
+
+:root {
+  --reading-width: 720px;
+  --reading-measure: 70ch;
+  --font-body-size: 1rem;        /* 17px at the current root */
+  --font-body-leading: 1.72;
+  --font-display-weight: 400;
+}
+
+/* --------------------------------------------------------------------------
+   GLOBAL TYPE
+   -------------------------------------------------------------------------- */
+
+html {
+  font-size: 17px;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-leading);
+  color: var(--color-text-main);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Major headings use the editorial serif. Inline weights on legacy pages are
+   normalised to the single display weight so the face is never synthesised. */
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: var(--font-display-weight);
+  color: var(--color-text-main);
+  letter-spacing: -0.018em;
+  text-wrap: balance;
+}
+
+h1 { line-height: 1.06; }
+h2 { line-height: 1.12; }
+h3 { line-height: 1.22; }
+h4 { line-height: 1.3; }
+
+h1[style*="font-weight"],
+h2[style*="font-weight"],
+h3[style*="font-weight"],
+h4[style*="font-weight"] {
+  font-weight: var(--font-display-weight) !important;
+}
+
+h5, h6 {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+p {
+  color: var(--color-text-secondary);
+  line-height: var(--font-body-leading);
+}
+
+/* Legacy pages size paragraphs inline. Normalise them to the reading scale
+   without touching cards, labels or display copy that uses classes. */
+main p[style*="font-size"] {
+  font-size: 1rem !important;
+  line-height: 1.72 !important;
+  max-width: var(--reading-width);
+  margin-bottom: 18px;
+}
+
+main p[style*="line-height"] {
+  line-height: 1.72 !important;
+}
+
+/* Technical annotations on legacy pages were often 11–12px. Raise them to a
+   legible minimum while keeping the mono voice. */
+main .mono[style*="font-size"] {
+  font-size: 0.8125rem !important;
+  line-height: 1.55 !important;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: #FFFFFF;
+}
+
+/* --------------------------------------------------------------------------
+   SHARED COMPONENTS
+   -------------------------------------------------------------------------- */
+
+.nav-link {
+  font-size: 11px;
+  letter-spacing: 0.07em;
+  color: var(--color-text-secondary);
+}
+
+.nav-link.active { color: var(--color-text-main); }
+
+.brand-link {
+  font-size: 13px;
+  letter-spacing: 0.1em;
+}
+
+.tag {
+  padding: 3px 8px;
+  font-size: 10.5px;
+  line-height: 1.45;
+  color: var(--color-text-secondary);
+  letter-spacing: 0.04em;
+}
+
+.status-chip {
+  padding: 3px 8px;
+  font-size: 10.5px;
+  line-height: 1.45;
+  letter-spacing: 0.06em;
+}
+
+.filter-label,
+.filter-btn {
+  font-size: 11px;
+  letter-spacing: 0.05em;
+}
+
+.filter-label { color: var(--color-text-muted); }
+
+.btn {
+  font-size: 0.9375rem;
+  line-height: 1.35;
+}
+
+.btn-sm {
+  padding: 7px 12px;
+  font-size: 0.875rem;
+}
+
+.btn-mono {
+  font-size: 0.8125rem;
+  letter-spacing: 0.04em;
+}
+
+.footer-desc,
+.footer-links a {
+  font-size: 0.9375rem;
+  line-height: 1.7;
+}
+
+.footer-col-title {
+  font-size: 11px;
+  letter-spacing: 0.07em;
+  color: var(--color-text-muted);
+}
+
+.footer-bottom {
+  font-size: 11px;
+  line-height: 1.7;
+}
+
+.crumbs {
+  font-size: 10.5px;
+  line-height: 1.7;
+  letter-spacing: 0.05em;
+}
+
+.platform-kicker {
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+}
+
+.platform-head p {
+  max-width: 68ch;
+  font-size: 1.0625rem;
+  line-height: 1.7;
+}
+
+.platform-empty p {
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.placeholder-inline {
+  font-size: 10.5px;
+  letter-spacing: 0.04em;
+}
+
+/* --------------------------------------------------------------------------
+   HOMEPAGE
+   -------------------------------------------------------------------------- */
+
+.home .hero-eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+}
+
+.home .hero-lead {
+  max-width: 46ch;
+  font-size: clamp(1.16rem, 1.5vw, 1.32rem);
+  line-height: 1.62;
+}
+
+.home .hero-body {
+  max-width: 680px;
+  font-size: 1.0625rem;
+  line-height: 1.75;
+}
+
+.home .hero-status {
+  max-width: 64ch;
+  font-size: 10.5px;
+  line-height: 1.85;
+  letter-spacing: 0.06em;
+}
+
+.home .hero-fig figcaption {
+  font-size: 10px;
+  line-height: 1.7;
+}
+
+.home .sec-meta {
+  font-size: 10.5px;
+}
+
+.home .sec-note {
+  max-width: 680px;
+  font-size: 1rem;
+  line-height: 1.72;
+}
+
+.home .bench-copy > p {
+  max-width: 58ch;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.home .bench-focus {
+  font-size: 0.9375rem;
+  line-height: 1.55;
+}
+
+.home .bench-focus span {
+  font-size: 10px;
+}
+
+.home .bench-link,
+.home .work-link {
+  font-size: 10.5px;
+}
+
+.home .work-copy > p {
+  max-width: 640px;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.home .work-specs dt {
+  font-size: 9.5px;
+}
+
+.home .work-specs dd {
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.home .home-note p {
+  font-size: 0.9375rem;
+  line-height: 1.65;
+}
+
+.home .home-skill-row p {
+  font-size: 0.8125rem;
+  line-height: 1.6;
+}
+
+.home .home-skill-count {
+  font-size: 10px;
+}
+
+.home .record-item {
+  font-size: 0.9375rem;
+  line-height: 1.65;
+}
+
+.home .record-item span {
+  font-size: 10px;
+}
+
+.home .venture p {
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.home .venture-tag {
+  font-size: 10px;
+}
+
+.home .edu-row h3 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1.12rem;
+  line-height: 1.3;
+}
+
+.home .edu-row p {
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.home .contact-side p {
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+/* --------------------------------------------------------------------------
+   PROJECT DOCUMENTATION
+   -------------------------------------------------------------------------- */
+
+.doc-page .container {
+  max-width: 1240px;
+}
+
+.doc-head {
+  padding-bottom: clamp(26px, 3vw, 36px);
+}
+
+.doc-kicker {
+  font-size: 11px;
+  line-height: 1.7;
+  letter-spacing: 0.07em;
+}
+
+.doc-updated {
+  font-size: 11px;
+  letter-spacing: 0.04em;
+}
+
+.doc-meta-row {
+  gap: 12px 22px;
+}
+
+.doc-layout {
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: clamp(40px, 5vw, 64px);
+}
+
+/* One consistent grid for every section: number, heading, content. */
+.doc-section {
+  grid-template-columns: 52px minmax(0, 1fr);
+  gap: 28px;
+  padding: clamp(32px, 4vw, 44px) 0;
+  border-top: 1px solid var(--color-border);
+}
+
+.doc-num {
+  padding-top: 7px;
+  font-size: 11.5px;
+  line-height: 1.4;
+  letter-spacing: 0.05em;
+}
+
+.doc-title {
+  margin: 0 0 18px;
+  font-size: clamp(1.9rem, 3vw, 2.4rem);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+}
+
+.doc-content > p {
+  max-width: var(--reading-width);
+  margin: 0 0 1.2em;
+  font-size: 1.0625rem;
+  line-height: 1.78;
+  color: var(--color-text-main);
+}
+
+.doc-content > p:last-child {
+  margin-bottom: 0;
+}
+
+.doc-sub {
+  margin: 0 0 2em;
+}
+
+.doc-sub:last-child {
+  margin-bottom: 0;
+}
+
+.doc-sub h3 {
+  margin: 0 0 8px;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 500;
+  line-height: 1.6;
+  letter-spacing: 0.08em;
+  color: var(--color-text-secondary);
+}
+
+.doc-sub p {
+  max-width: var(--reading-width);
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.78;
+  color: var(--color-text-main);
+}
+
+.doc-log {
+  max-width: var(--reading-width);
+}
+
+.doc-log-item {
+  padding: 18px 0;
+}
+
+.doc-log-date {
+  margin-bottom: 5px;
+  font-size: 10px;
+  line-height: 1.6;
+  letter-spacing: 0.05em;
+}
+
+.doc-log-title {
+  margin-bottom: 6px;
+  font-size: 1.0625rem;
+  line-height: 1.4;
+}
+
+.doc-log-body {
+  max-width: var(--reading-width);
+  font-size: 1rem;
+  line-height: 1.72;
+}
+
+.doc-status {
+  gap: 22px 30px;
+  max-width: var(--reading-width);
+}
+
+.doc-status dt {
+  margin-bottom: 6px;
+  font-size: 10px;
+  line-height: 1.5;
+  letter-spacing: 0.07em;
+}
+
+.doc-status dd {
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+.doc-note {
+  max-width: var(--reading-width);
+  font-size: 10px;
+  line-height: 1.75;
+  letter-spacing: 0.02em;
+}
+
+.doc-side {
+  width: 340px;
+  max-width: 100%;
+}
+
+.spec-box {
+  padding: 22px 0;
+}
+
+.spec-box-title {
+  margin-bottom: 14px;
+  font-size: 10px;
+  line-height: 1.5;
+  letter-spacing: 0.09em;
+}
+
+/* Specification sheet: label above value, both left aligned, no squeezed
+   right-hand column and no awkward mid-token breaks. */
+.spec-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.spec-table tr {
+  display: block;
+  padding: 11px 0;
+  border-top: 1px solid var(--color-border);
+}
+
+.spec-table tr:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.spec-table th,
+.spec-table td {
+  display: block;
+  width: auto;
+  padding: 0;
+  text-align: left;
+}
+
+.spec-table th {
+  margin-bottom: 4px;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: 0.04em;
+  color: var(--color-text-muted);
+}
+
+.spec-table td {
+  font-size: 1rem;
+  line-height: 1.55;
+  color: var(--color-text-main);
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+
+.doc-refs li {
+  margin-bottom: 10px;
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+.doc-related-title {
+  font-size: 0.9375rem;
+  line-height: 1.45;
+}
+
+.doc-related-meta {
+  font-size: 9.5px;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+}
+
+.doc-pager a {
+  font-size: 1.4rem;
+  line-height: 1.25;
+}
+
+.doc-pager a span {
+  font-size: 9.5px;
+  letter-spacing: 0.07em;
+}
+
+/* --------------------------------------------------------------------------
+   JOURNAL
+   -------------------------------------------------------------------------- */
+
+.entry-page .container {
+  max-width: 960px;
+}
+
+.entry-head {
+  padding-bottom: clamp(28px, 4vw, 40px);
+}
+
+.entry-kicker {
+  margin-bottom: 20px;
+  font-size: 10.5px;
+  line-height: 1.75;
+  letter-spacing: 0.06em;
+}
+
+.entry-head h1 {
+  max-width: 22ch;
+  font-size: clamp(2.4rem, 4.8vw, 3.7rem);
+  line-height: 1.04;
+}
+
+.entry-summary {
+  max-width: 66ch;
+  font-size: clamp(1.0625rem, 1.4vw, 1.15rem);
+  line-height: 1.72;
+}
+
+.entry-body {
+  max-width: var(--reading-width);
+  padding-top: clamp(32px, 4vw, 48px);
+}
+
+.entry-body > p {
+  max-width: var(--reading-width);
+  margin: 0 0 1.35em;
+  font-size: 1.0625rem;
+  line-height: 1.8;
+  color: var(--color-text-main);
+}
+
+.entry-body > p:first-child {
+  font-size: 1.0625rem;
+  line-height: 1.78;
+}
+
+.entry-body h2 {
+  margin: 2.3em 0 0.65em;
+  font-size: clamp(1.9rem, 3.2vw, 2.35rem);
+  line-height: 1.14;
+}
+
+/* Subsection headings inside a note are sans-serif to distinguish them from
+   the serif section headings. */
+.entry-body h3 {
+  margin: 2em 0 0.55em;
+  font-family: var(--font-sans);
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1.45;
+  letter-spacing: -0.01em;
+}
+
+.entry-list {
+  margin: 0 0 1.5em;
+  padding-left: 1.35em;
+}
+
+.entry-list li {
+  margin-bottom: 0.6em;
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  color: var(--color-text-main);
+}
+
+.entry-figure figcaption {
+  margin-top: 10px;
+  font-size: 10.5px;
+  line-height: 1.65;
+  letter-spacing: 0.02em;
+  color: var(--color-text-secondary);
+}
+
+.entry-table table {
+  font-size: 0.9375rem;
+}
+
+.entry-table th {
+  padding: 11px 13px;
+  font-size: 10px;
+  line-height: 1.5;
+  letter-spacing: 0.05em;
+}
+
+.entry-table td {
+  padding: 11px 13px;
+  line-height: 1.6;
+}
+
+.entry-table figcaption {
+  font-size: 10.5px;
+  line-height: 1.65;
+}
+
+.entry-code code {
+  font-size: 13px;
+  line-height: 1.72;
+}
+
+.entry-callout p {
+  font-size: 1rem;
+  line-height: 1.72;
+}
+
+.entry-refs-title {
+  font-size: 10.5px;
+  letter-spacing: 0.07em;
+}
+
+.entry-refs li {
+  font-size: 0.9375rem;
+  line-height: 1.65;
+}
+
+.entry-sharing .mono,
+.entry-project-kicker {
+  font-size: 10px;
+  line-height: 1.6;
+}
+
+.entry-project-meta {
+  font-size: 10px;
+  line-height: 1.6;
+}
+
+.entry-cite {
+  font-size: 0.875rem;
+  line-height: 1.65;
+}
+
+.entry-pager a {
+  font-size: 1.35rem;
+  line-height: 1.3;
+}
+
+.entry-pager a span {
+  font-size: 9.5px;
+  letter-spacing: 0.07em;
+}
+
+.journal-empty p {
+  max-width: 62ch;
+  font-size: 1.0625rem;
+  line-height: 1.72;
+}
+
+.journal-toolbar-group > .mono {
+  font-size: 10px;
+  letter-spacing: 0.07em;
+  color: var(--color-text-muted);
+}
+
+.journal-chips .filter-btn {
+  font-size: 10.5px;
+}
+
+.entry-row-date {
+  font-size: 11px;
+  line-height: 1.7;
+  letter-spacing: 0.04em;
+}
+
+.entry-row-kicker {
+  font-size: 10px;
+  letter-spacing: 0.07em;
+}
+
+.entry-row p {
+  font-size: 1rem;
+  line-height: 1.68;
+}
+
+.entry-row h2 {
+  font-size: clamp(1.6rem, 3vw, 2.1rem);
+}
+
+.template-banner {
+  font-size: 0.9375rem;
+  line-height: 1.65;
+}
+
+.template-banner strong {
+  font-size: 10.5px;
+}
+
+/* --------------------------------------------------------------------------
+   ARCHIVE
+   -------------------------------------------------------------------------- */
+
+.archive-head p {
+  max-width: 68ch;
+  font-size: 1.0625rem;
+  line-height: 1.72;
+}
+
+.archive-page .filter-label,
+.archive-page .filter-btn {
+  font-size: 10.5px;
+}
+
+.archive-page .status-chip,
+.archive-page .archive-status-empty {
+  font-size: 10px;
+  line-height: 1.45;
+}
+
+.archive-page .tag {
+  font-size: 10px;
+  line-height: 1.45;
+  padding: 2px 6px;
+}
+
+.archive-group-count,
+.archive-group-index {
+  font-size: 9.5px;
+  line-height: 1.5;
+  letter-spacing: 0.07em;
+}
+
+.archive-feature-kicker {
+  font-size: 9.5px;
+  line-height: 1.6;
+  letter-spacing: 0.07em;
+}
+
+.archive-feature-summary {
+  max-width: 58ch;
+  font-size: 1.0625rem;
+  line-height: 1.7;
+}
+
+.archive-feature-problem {
+  max-width: 60ch;
+  font-size: 1rem;
+  line-height: 1.72;
+}
+
+.archive-specs dt {
+  font-size: 10px;
+  line-height: 1.45;
+  letter-spacing: 0.05em;
+}
+
+.archive-specs dd {
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.archive-feature-link {
+  font-size: 10.5px;
+  letter-spacing: 0.05em;
+}
+
+.archive-mini h3 {
+  font-size: 1.4rem;
+}
+
+.archive-mini-meta {
+  font-size: 10px;
+  line-height: 1.55;
+}
+
+.archive-mini-body p {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.archive-mini-spec {
+  font-size: 9px;
+  line-height: 1.6;
+}
+
+.archive-note p {
+  font-size: 0.9375rem;
+  line-height: 1.72;
+}
+
+.archive-note-title {
+  font-size: 9.5px;
+  letter-spacing: 0.06em;
+}
+
+/* --------------------------------------------------------------------------
+   SKILLS, TIMELINE, GALLERY
+   -------------------------------------------------------------------------- */
+
+.skill-category-count,
+.skill-category-num {
+  font-size: 10px;
+  line-height: 1.5;
+  letter-spacing: 0.05em;
+}
+
+.skill-entry h3 {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.skill-entry-projects a {
+  font-size: 9.5px;
+  line-height: 1.5;
+}
+
+.skill-entry-empty {
+  font-size: 9.5px;
+}
+
+.ledger-event {
+  padding: 16px 0;
+}
+
+.ledger-year {
+  font-size: clamp(2.3rem, 4vw, 3.1rem);
+}
+
+.ledger-date {
+  font-size: 10px;
+  line-height: 1.7;
+  letter-spacing: 0.05em;
+  color: var(--color-text-secondary);
+}
+
+.ledger-type {
+  font-size: 9.5px;
+  line-height: 1.5;
+}
+
+.ledger-body h3 {
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;
+  font-weight: 500;
+  line-height: 1.45;
+}
+
+.ledger-body p {
+  max-width: 66ch;
+  font-size: 1rem;
+  line-height: 1.68;
+}
+
+.ledger-body a {
+  font-size: 9.5px;
+  line-height: 1.6;
+}
+
+.section-desc {
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--color-text-secondary);
+}
+
+/* --------------------------------------------------------------------------
+   LEGACY PAGE NORMALISATION
+   -------------------------------------------------------------------------- */
+
+.v-timeline-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1.3rem;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+.v-timeline-date {
+  font-size: 11.5px;
+  line-height: 1.6;
+  letter-spacing: 0.03em;
+  color: var(--color-text-secondary);
+}
+
+.v-timeline-sub {
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+.channel-label {
+  font-size: 10.5px;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+}
+
+.channel-value {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.form-label {
+  font-size: 11px;
+  line-height: 1.5;
+  letter-spacing: 0.05em;
+}
+
+.form-input,
+.form-textarea {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.section-title-wrap h2 {
+  line-height: 1.15;
+}
+
+/* Legacy section headings were set as small sans-serif labels. Give them the
+   same editorial scale as the rest of the site. */
+main h2[style*="font-size"] {
+  font-size: clamp(1.65rem, 2.2vw, 1.95rem) !important;
+  line-height: 1.16;
+}
+
+.channel-value,
+.form-input,
+.form-textarea {
+  font-size: 1rem;
+}
+
+.ledger-date,
+.spec-box-title,
+.doc-status dt,
+.entry-kicker,
+.entry-row-kicker,
+.ledger-type,
+.doc-log-date {
+  font-size: 11px;
+}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE
+   -------------------------------------------------------------------------- */
+
+/* Legacy pages use a narrower editorial container; give the two-column
+   contact/startup layouts and the timeline enough room to breathe. */
+.contact-page .container,
+.startup-page .container { max-width: 1080px; }
+.timeline-page .container { max-width: 1120px; }
+
+@media (max-width: 1100px) {
+  .doc-page .container { max-width: 1080px; }
+  .doc-layout { grid-template-columns: minmax(0, 1fr) 310px; gap: 40px; }
+  .doc-side { width: 310px; }
+}
+
+@media (max-width: 980px) {
+  .doc-layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 36px;
+  }
+
+  .doc-side {
+    position: static;
+    width: auto;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 32px;
+    margin-top: 4px;
+    padding-top: 20px;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .spec-box {
+    padding: 18px 0;
+  }
+
+  .spec-box:first-child { padding-top: 0; }
+  .archive-head p { max-width: 64ch; }
+}
+
+@media (max-width: 760px) {
+  html { font-size: 16.5px; }
+
+  .home .hero-body,
+  .home .sec-note,
+  .doc-content > p,
+  .doc-sub p,
+  .entry-body > p { font-size: 1.0625rem; }
+
+  .doc-section {
+    grid-template-columns: 42px minmax(0, 1fr);
+    gap: 18px;
+  }
+
+  .doc-title { font-size: clamp(1.7rem, 5.2vw, 2.1rem); }
+  .doc-side { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .archive-feature-summary,
+  .archive-feature-problem { font-size: 1rem; }
+}
+
+@media (max-width: 620px) {
+  html { font-size: 16px; }
+
+  h1 { line-height: 1.08; }
+
+  .home .hero-lead { font-size: 1.12rem; }
+  .home .hero-body { font-size: 1rem; line-height: 1.72; }
+
+  .doc-page .container { padding-left: 18px; padding-right: 18px; }
+
+  .doc-section {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 6px;
+    padding: 28px 0;
+  }
+
+  .doc-num {
+    padding-top: 0;
+    font-size: 11px;
+  }
+
+  .doc-title {
+    margin-bottom: 14px;
+    font-size: clamp(1.65rem, 6.5vw, 2rem);
+  }
+
+  .entry-body > p,
+  .entry-body > p:first-child {
+    font-size: 1.0625rem;
+    line-height: 1.78;
+  }
+
+  .entry-head h1 { font-size: clamp(2.2rem, 9vw, 3rem); }
+  .entry-summary { font-size: 1.0625rem; }
+
+  .spec-table tr { padding: 10px 0; }
+  .spec-table td { font-size: 1rem; }
+
+  .home .work-specs dd { text-align: right; }
+  .home .home-skill-row p { font-size: 0.9375rem; }
+
+  .archive-page .tag { font-size: 10px; }
+  .archive-feature-kicker { font-size: 10px; }
+
+  .entry-table table { font-size: 0.9375rem; }
+  .entry-table th,
+  .entry-table td { padding: 9px 10px; }
+
+  .ledger-body p { font-size: 1rem; }
+}
+
+@media (max-width: 420px) {
+  .doc-title { font-size: 2rem; }
+  .entry-body > p { font-size: 1rem; }
+  .home .hero-status { font-size: 10px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { scroll-behavior: auto !important; }
+}

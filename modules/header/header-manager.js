@@ -31,6 +31,10 @@ const HeaderManager = (function () {
       page = 'projects.html'; // Treat project detail as projects page for nav highlighting
     }
 
+    if (page === 'journal-entry.html') {
+      page = 'journal.html';
+    }
+
     return page;
   }
 

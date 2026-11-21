@@ -1,0 +1,448 @@
+/* ==========================================================================
+   AARUTHRUN — ACADEMIC PROFILE
+   Education record, competitive results, training and research. Scoped to
+   .edu-page so nothing here reaches the rest of the site. Tokens only: no new
+   palette, no shadows, no decoration beyond rules and labels.
+   ========================================================================== */
+
+.edu-page .container {
+  max-width: 1080px;
+}
+
+.edu-page main {
+  padding-top: 0;
+}
+
+.edu-head {
+  padding-top: clamp(34px, 5vw, 60px);
+}
+
+.edu-head h1 {
+  margin-bottom: 18px;
+}
+
+.edu-lede {
+  max-width: 58ch;
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+}
+
+.edu-quote.engineering-quote {
+  margin: clamp(24px, 3vw, 34px) 0 0;
+  max-width: 760px;
+}
+
+.edu-quote .engineering-quote-body {
+  font-size: 0.9375rem;
+  line-height: 1.7;
+}
+
+/* --------------------------------------------------------------------------
+   SECTION FRAME
+   -------------------------------------------------------------------------- */
+
+.edu-sec {
+  padding: clamp(34px, 4.6vw, 54px) 0 clamp(10px, 1.6vw, 18px);
+  border-top: 1px solid var(--color-border);
+}
+
+.edu-sec + .edu-sec {
+  padding-top: clamp(34px, 4.6vw, 54px);
+}
+
+.edu-sec-head {
+  display: grid;
+  grid-template-columns: 30px minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 14px;
+  margin-bottom: clamp(18px, 2.4vw, 30px);
+}
+
+.edu-sec-index {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--color-accent);
+}
+
+.edu-sec-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.5rem, 2.7vw, 2.1rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--color-text-main);
+}
+
+.edu-sec-meta {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+/* --------------------------------------------------------------------------
+   01 · ACADEMIC TIMELINE
+   -------------------------------------------------------------------------- */
+
+.edu-timeline {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.edu-degree {
+  display: grid;
+  grid-template-columns: minmax(0, 180px) minmax(0, 1fr);
+  gap: clamp(18px, 3.4vw, 48px);
+  padding: clamp(20px, 2.6vw, 30px) 0;
+  border-top: 1px solid var(--color-border);
+}
+
+.edu-degree:last-child {
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* The current qualification carries the section's only colour cue: one cobalt
+   rule on the left, so the eye lands there before the completed diploma. */
+.edu-degree.is-current {
+  border-left: 2px solid var(--color-accent);
+  padding-left: clamp(16px, 2.2vw, 26px);
+}
+
+.edu-degree-when {
+  display: grid;
+  justify-items: start;
+  align-content: start;
+  gap: 10px;
+}
+
+.edu-years {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--color-text-main);
+}
+
+.edu-degree.is-current .edu-years {
+  color: var(--color-accent);
+}
+
+.edu-degree-title {
+  margin: 0 0 6px;
+  font-size: 1.0625rem;
+  font-weight: var(--font-medium);
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  color: var(--color-text-main);
+}
+
+.edu-degree.is-current .edu-degree-title {
+  font-size: clamp(1.25rem, 2.1vw, 1.5rem);
+  line-height: 1.25;
+}
+
+.edu-degree-inst {
+  margin: 0 0 10px;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--color-text-main);
+}
+
+.edu-degree-desc {
+  max-width: 60ch;
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+}
+
+/* --------------------------------------------------------------------------
+   02 · COMPETITIVE ACHIEVEMENTS
+   -------------------------------------------------------------------------- */
+
+.edu-awards {
+  display: grid;
+}
+
+.edu-award {
+  display: grid;
+  grid-template-columns: minmax(0, 180px) minmax(0, 1fr);
+  gap: clamp(18px, 3.4vw, 48px);
+  padding: clamp(20px, 2.6vw, 30px) 0;
+  border-top: 1px solid var(--color-border);
+}
+
+.edu-award:last-child {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.edu-award.is-win {
+  border-left: 2px solid var(--color-accent);
+  padding-left: clamp(16px, 2.2vw, 26px);
+}
+
+.edu-award-result {
+  display: grid;
+  align-content: start;
+  justify-items: start;
+  gap: 8px;
+}
+
+.edu-result {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: var(--color-text-main);
+}
+
+.edu-award.is-win .edu-result {
+  font-size: clamp(1.4rem, 2.3vw, 1.75rem);
+  color: var(--color-accent);
+}
+
+.edu-award-meta {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  line-height: 1.6;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.edu-award-body h3 {
+  margin: 0 0 8px;
+  font-size: 1.0625rem;
+  font-weight: var(--font-medium);
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  color: var(--color-text-main);
+}
+
+.edu-award-body p {
+  max-width: 62ch;
+  margin: 0 0 12px;
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+}
+
+/* --------------------------------------------------------------------------
+   03 · CREDENTIALS
+   -------------------------------------------------------------------------- */
+
+.edu-cred-group {
+  padding: 18px 0 6px;
+  border-top: 1px solid var(--color-border);
+}
+
+.edu-cred-group:first-of-type {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.edu-cred-discipline {
+  margin: 0 0 4px;
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: var(--font-medium);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+}
+
+.edu-cred-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.edu-cred {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 12px 28px;
+  align-items: start;
+  padding: 16px 0;
+}
+
+.edu-cred h4 {
+  margin: 0 0 4px;
+  font-size: 1rem;
+  font-weight: var(--font-medium);
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  color: var(--color-text-main);
+}
+
+.edu-cred p {
+  max-width: 64ch;
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.65;
+  color: var(--color-text-secondary);
+}
+
+.edu-cred-status {
+  padding: 3px 8px;
+  border: 1px solid var(--color-border);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  line-height: 1.6;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+.edu-cred-status.is-certification {
+  color: var(--color-accent);
+  border-color: color-mix(in srgb, var(--color-accent) 35%, transparent);
+}
+
+.edu-cred-status.is-independent {
+  color: var(--color-text-secondary);
+}
+
+/* --------------------------------------------------------------------------
+   04 · RESEARCH & COURSEWORK
+   -------------------------------------------------------------------------- */
+
+.edu-papers {
+  display: grid;
+}
+
+.edu-paper {
+  padding: 16px 0;
+  border-top: 1px solid var(--color-border);
+}
+
+.edu-paper:last-of-type {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.edu-paper h3 {
+  max-width: 58ch;
+  margin: 0 0 5px;
+  font-size: 1rem;
+  font-weight: var(--font-medium);
+  line-height: 1.45;
+  letter-spacing: -0.01em;
+  color: var(--color-text-main);
+}
+
+.edu-paper-meta {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.edu-paper-note {
+  margin: 10px 0 0;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.06em;
+  color: var(--color-text-muted);
+}
+
+.edu-course-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(20px, 3.4vw, 48px);
+  margin-top: clamp(26px, 3.4vw, 40px);
+}
+
+.edu-course h3 {
+  margin: 0 0 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--color-border-strong);
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: var(--font-medium);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-main);
+}
+
+.edu-course ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.edu-course li {
+  padding: 7px 0;
+  border-bottom: 1px solid var(--color-border);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+}
+
+.edu-course li:last-child {
+  border-bottom: 0;
+}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 760px) {
+  .edu-degree,
+  .edu-award {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  .edu-degree-when,
+  .edu-award-result {
+    grid-auto-flow: column;
+    justify-content: start;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .edu-award-result {
+    justify-items: start;
+  }
+
+  .edu-sec-head {
+    grid-template-columns: 24px minmax(0, 1fr);
+    row-gap: 6px;
+  }
+
+  .edu-sec-meta {
+    grid-column: 2;
+  }
+
+  .edu-cred {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .edu-cred-status {
+    justify-self: start;
+  }
+
+  .edu-course-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .edu-degree-when,
+  .edu-award-result {
+    flex-wrap: wrap;
+  }
+
+  .edu-sec-title {
+    font-size: 1.4rem;
+  }
+}

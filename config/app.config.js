@@ -21,6 +21,7 @@ const AppConfig = (function () {
     title: 'Aaruthrun — Robotics & Automation Engineer',
     defaultTitle: 'Aaruthrun — Robotics & Automation Engineer | Mechatronics Portfolio',
     description: 'Technical portfolio of Aaruthrun, Robotics & Automation Engineering student at PSG College of Technology. 6-DOF manipulators, BLDC FOC motor control, autonomous swarms, and embedded real-time systems.',
+    url: 'https://aaruthrun-beep.github.io/portfolio',
     ogImage: 'images/aaruthrun.jpeg',
     twitterCard: 'summary_large_image',
   };
@@ -43,6 +44,15 @@ const AppConfig = (function () {
     tags: ['ROBOTICS', 'AUTOMATION', 'EMBEDDED', 'CONTROL SYSTEMS'],
   };
 
+  // Contact configuration
+  // FormSubmit is a static-host-compatible form-to-email service. The endpoint
+  // is public (it contains the public contact address), not an API key.
+  const CONTACT = {
+    formEndpoint: 'https://formsubmit.co/ajax/aaruthrun@gmail.com',
+    formFallbackEndpoint: 'https://formsubmit.co/aaruthrun@gmail.com',
+    minimumSubmitTimeMs: 2500,
+  };
+
   // Navigation configuration
   const NAV = {
     items: [
@@ -52,7 +62,7 @@ const AppConfig = (function () {
       { label: 'Gallery', href: 'gallery.html', priority: 4 },
       { label: 'Skills', href: 'skills.html', priority: 5 },
       { label: 'Startups', href: 'startup.html', priority: 6 },
-      { label: 'Blog', href: 'blog.html', priority: 7 },
+      { label: 'Journal', href: 'journal.html', priority: 7 },
       { label: 'Education', href: 'education.html', priority: 8 },
       { label: 'Contact', href: 'contact.html', priority: 9 },
     ],
@@ -66,17 +76,20 @@ const AppConfig = (function () {
   const FOOTER = {
     currentYear: new Date().getFullYear(),
     links: {
+      // Footer navigation runs as one horizontal line, so labels stay short.
       navigation: [
-        { label: 'About & Home', href: 'index.html' },
-        { label: 'Filterable Project Archive', href: 'projects.html' },
-        { label: 'Concurrent Project Gantt', href: 'timeline.html' },
-        { label: 'Infinite Photo Gallery', href: 'gallery.html' },
-        { label: 'Cross-Linked Skills Matrix', href: 'skills.html' },
-        { label: 'Startups (Dynamics & Agrotech)', href: 'startup.html' },
-        { label: 'Engineering Blog', href: 'blog.html' },
-        { label: 'Education & Credentials', href: 'education.html' },
+        { label: 'Home', href: 'index.html' },
+        { label: 'Projects', href: 'projects.html' },
+        { label: 'Timeline', href: 'timeline.html' },
+        { label: 'Gallery', href: 'gallery.html' },
+        { label: 'Skills', href: 'skills.html' },
+        { label: 'Startups', href: 'startup.html' },
+        { label: 'Journal', href: 'journal.html' },
+        { label: 'Education', href: 'education.html' },
       ],
       connect: [
+        { label: 'Résumé (PDF)', href: 'images/resume/Aaruthrun_S_FlowCV_Resume_2026-11-21.pdf', external: true },
+        { label: 'Curriculum Vitae', href: 'cv.html' },
         { label: 'aaruthrun@gmail.com', href: 'mailto:aaruthrun@gmail.com', external: true },
         { label: 'GitHub // @aaruthrun-beep', href: 'https://github.com/aaruthrun-beep', external: true },
         { label: 'LinkedIn Profile', href: 'https://linkedin.com/in/aaruthrun-saravanakumar', external: true },
@@ -160,13 +173,20 @@ const AppConfig = (function () {
   const GALLERY = {
     /* The canvas sizes itself to the layout. Photos are never scaled down
        or cropped. Files smaller than minPhotoEdge are shown larger (up to
-       maxPhotoUpscale) so a low-resolution photo does not become a speck
-       next to a 4K one. */
-    minPhotoEdge: 2400,    /* long-edge floor, in source pixels */
-    maxPhotoUpscale: 3,    /* ceiling; 2400px never needs more than 2.7x */
+       maxPhotoUpscale) so every print on the wall reads the same size: the
+       phone photos that dominate the archive are 4000px wide, so a 1080p
+       screenshot or a small CAD render is lifted to that same width instead
+       of printing 40% smaller than its neighbours. */
+    minPhotoEdge: 4000,    /* long-edge floor, in source pixels */
+    maxPhotoUpscale: 4.5,  /* ceiling; the smallest source (720px) needs 4.4x */
     minScale: 0.004,
     maxScale: 1.5,
     zoomFactor: 1.35,
+    /* Circles named here are repacked from scratch on every build: their
+       photos take new random spots instead of keeping the previous
+       placements. Change shuffleSeed to hand out a different arrangement. */
+    shuffle: ['mars-369', 'origin-one'],
+    shuffleSeed: 3,
     maxRot: 6,             /* random tilt per photo, ± degrees */
     pad: 6,                /* clear space between photos, layout px */
     density: 0.75,         /* starting radius guess: area coverage */
@@ -240,6 +260,7 @@ const AppConfig = (function () {
     getSite: () => ({ ...SITE }),
     getAuthor: () => ({ ...AUTHOR }),
     getNav: () => ({ items: [...NAV.items], brand: { ...NAV.brand } }),
+    getContact: () => ({ ...CONTACT }),
     getFooter: () => ({ ...FOOTER }),
     getData: () => ({ ...DATA }),
     getAnimations: () => ({ ...ANIMATIONS }),

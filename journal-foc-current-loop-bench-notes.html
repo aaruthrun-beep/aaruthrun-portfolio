@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+(function(){
+  try {
+    var k = "portfolio-theme";
+    var v = localStorage.getItem(k);
+    if (v !== "light" && v !== "dark") {
+      v = "light";
+      try { localStorage.setItem(k, v); } catch(e) {}
+    }
+    if (v === "light") {
+      document.documentElement.setAttribute("data-theme","light");
+    }
+  } catch(e) {
+    document.documentElement.setAttribute("data-theme","light");
+  }
+})();
+</script>
+    <meta name="generator" content="tools/build-pages.mjs">
+  <title>Bench notes from a 25 kHz FOC current loop — Field Notes</title>
+  <meta name="description" content="Notes from bringing up a compact brushless actuator: current sensing, Space Vector PWM, encoder feedback, and the order in which the control loops actually need to be tuned.">
+  <link rel="canonical" href="https://aaruthrun-beep.github.io/portfolio/journal-foc-current-loop-bench-notes.html">
+
+  <meta property="og:title" content="Bench notes from a 25 kHz FOC current loop">
+  <meta property="og:description" content="Notes from bringing up a compact brushless actuator: current sensing, Space Vector PWM, encoder feedback, and the order in which the control loops actually need to be tuned.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://aaruthrun-beep.github.io/portfolio/journal-foc-current-loop-bench-notes.html">
+  <meta property="og:image" content="https://aaruthrun-beep.github.io/portfolio/images/og-image.webp">
+  <meta property="og:image:alt" content="FOC control-loop technical cover plate">
+  <meta property="og:site_name" content="Aaruthrun">
+  <meta property="og:locale" content="en_IN">
+  <meta property="article:published_time" content="2026-10-19">
+  <meta property="article:author" content="Aaruthrun">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Bench notes from a 25 kHz FOC current loop">
+  <meta name="twitter:description" content="Notes from bringing up a compact brushless actuator: current sensing, Space Vector PWM, encoder feedback, and the order in which the control loops actually need to be tuned.">
+  <meta name="twitter:image" content="https://aaruthrun-beep.github.io/portfolio/images/og-image.webp">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Bench notes from a 25 kHz FOC current loop","description":"Notes from bringing up a compact brushless actuator: current sensing, Space Vector PWM, encoder feedback, and the order in which the control loops actually need to be tuned.","image":"https://aaruthrun-beep.github.io/portfolio/images/og-image.webp","url":"https://aaruthrun-beep.github.io/portfolio/journal-foc-current-loop-bench-notes.html","keywords":"FOC, SVPWM, STM32, Current Control","author":{"@type":"Person","name":"Aaruthrun","url":"https://aaruthrun-beep.github.io/portfolio"},"publisher":{"@type":"Person","name":"Aaruthrun","url":"https://aaruthrun-beep.github.io/portfolio"},"isPartOf":{"@type":"Blog","name":"Field Notes","url":"https://aaruthrun-beep.github.io/portfolio/journal.html"},"datePublished":"2026-10-19"}</script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css?v=2026-11-23">
+  <link rel="stylesheet" href="config/design-tokens.css?v=2026-11-15">
+  <link rel="stylesheet" href="styles/platform.css?v=2026-11-15">
+  <!-- Global typography system -->
+  <link rel="stylesheet" href="styles/readability.css?v=2026-11-16">
+  <link rel="stylesheet" href="styles/journal.css?v=2026-11-15b">
+</head>
+<body class="entry-page platform-page journal-entry-page" data-page="journal" data-slug="foc-current-loop-bench-notes">
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <header id="site-header"></header>
+
+  <main id="main-content">
+    <div class="container">
+      <article id="journal-entry">
+        <p class="mono text-muted" style="padding: 48px 0;">Loading field note&hellip;</p>
+      </article>
+    </div>
+      <noscript>
+      <div class="container">
+        <p class="mono text-muted">FIELD NOTE // MOTOR CONTROL</p>
+        <h1>Bench notes from a 25 kHz FOC current loop</h1>
+        <p>The part of a brushless servo that decides whether the machine feels precise or nervous is the current loop running underneath everything else.</p>
+        <p><a href="journal.html">Back to Field Notes &rarr;</a></p>
+      </div>
+    </noscript>
+  </main>
+
+  <footer id="site-footer"></footer>
+
+  <script src="config/app.config.js?v=2026-11-15"></script>
+  <script src="data/data-store.js?v=2026-11-15"></script>
+  <script src="modules/theme/theme-manager.js?v=2026-11-15"></script>
+  <script src="modules/header/header-manager.js?v=2026-11-15"></script>
+  <script src="modules/footer/footer-manager.js?v=2026-11-15"></script>
+  <script src="modules/reveal/reveal-manager.js?v=2026-11-15"></script>
+  <script src="modules/content/blocks.js?v=2026-11-18"></script>
+  <script src="config/firebase.config.js?v=2026-11-17b"></script>
+  <script src="data/content-store.js?v=2026-11-17"></script>
+  <script src="modules/journal/journal-manager.js?v=2026-11-18"></script>
+  <script src="js/app.js?v=2026-11-15"></script>
+</body>
+</html>

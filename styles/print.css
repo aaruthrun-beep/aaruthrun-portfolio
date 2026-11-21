@@ -1,0 +1,759 @@
+/* ==========================================================================
+   AARUTHRUN — PRINT STYLESHEET
+   Optimised for browser print (Ctrl+P) and PDF export.
+   Scoped so the base stylesheets stay unchanged.
+   ========================================================================== */
+
+@media print {
+
+  /* --------------------------------------------------------------------------
+     Universal — hide navigation, interactive elements, and non-printable chrome
+     -------------------------------------------------------------------------- */
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  html {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  body {
+    background: #fff !important;
+    -webkit-print-color-adjust: !important;
+    print-color-adjust: !important;
+    margin: 0;
+    padding: 0 !important;
+  }
+
+  a,
+  area,
+  link,
+  cursor {
+    text-decoration: none !important;
+    cursor: default !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  a[href]:after {
+    content: " (" attr(href) ")" !important;
+    font-size: 85% !important;
+    color: #111 !important;
+    white-space: nowrap !important;
+  }
+
+  img {
+    page-break-inside: avoid;
+    max-width: 100% !important;
+    height: auto !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  video,
+  canvas {
+    display: none !important;
+  }
+
+  svg {
+    overflow: visible !important;
+  }
+
+  /* --------------------------------------------------------------------------
+     Hide interactive and runtime elements
+     -------------------------------------------------------------------------- */
+
+  .skip-link,
+  [hidden],
+  .reveal,
+  .reveal-child,
+  .text-muted,
+  .mono,
+  .hero-actions,
+  .hero-fig,
+  .hero-status,
+  .sec-jump,
+  .ventures,
+  .edu,
+  .edu-row,
+  .edu-meta,
+  .venture-tag,
+  .venture-arrow,
+  .cv-download-link,
+  .contact-email,
+  .contact-links,
+  .contact-band,
+  .cv-page .cv-footer-download,
+  .form-submit,
+  .form-status,
+  form,
+  button,
+  input,
+  select,
+  textarea,
+  .contact-honeypot,
+  .contact-field-error,
+  .contact-form-status,
+  .contact-success,
+  .contact-reset,
+  .contact-form-direct,
+  .contact-form-privacy,
+  .contact-form-intro,
+  .contact-form-wrap,
+  .contact-form-layout,
+  .contact-form-row,
+  .contact-field,
+  .contact-label,
+  .contact-input,
+  .contact-select,
+  .contact-textarea,
+  .contact-kicker,
+  .contact-kicker-mark,
+  .contact-hero-email,
+  .contact-arrow,
+  .contact-channel-list,
+  .contact-channel,
+  .contact-channel-label,
+  .contact-channel-value,
+  .contact-channel-action,
+  .contact-meta,
+  .contact-meta dt,
+  .contact-meta dd,
+  .contact-interest-list,
+  .contact-interest,
+  .contact-interest-num,
+  .contact-interest-name,
+  .contact-form-direct-label,
+  .contact-form-lede,
+  .contact-form-direct a,
+  .contact-form-status a,
+  .contact-success h3,
+  .contact-success p,
+  .contact-success a,
+  .contact-form-status.is-error,
+  .contact-form-status a,
+  .contact-location,
+  .contact-location span,
+  .contact-section-head p,
+  .contact-section-index,
+  .contact-kicker,
+  .contact-section,
+  .contact-section-form,
+  .contact-hero,
+  .contact-hero-aside,
+  .contact-portrait,
+  .contact-portrait img,
+  .contact-portrait figcaption,
+  .contact-interest-list,
+  .contact-interest,
+  .contact-section-index,
+  .contact-kicker,
+  .contact-hero,
+  .contact-hero h1,
+  .contact-hero-intro,
+  .contact-hero-email,
+  .contact-hero-email:hover,
+  .contact-hero-aside,
+  .contact-portrait,
+  .contact-portrait img,
+  .contact-portrait figcaption,
+  .contact-meta,
+  .contact-meta div,
+  .contact-meta dt,
+  .contact-meta dd,
+  .contact-section,
+  .contact-section-form,
+  .contact-meta,
+  .contact-meta div,
+  .contact-meta dt,
+  .contact-meta dd,
+  .contact-section-head,
+  .contact-section-index,
+  .contact-interest-list,
+  .contact-interest,
+  .contact-interest-num,
+  .contact-interest-name,
+  .contact-form-layout,
+  .contact-form-intro,
+  .contact-form-lede,
+  .contact-form-direct,
+  .contact-form-direct-label,
+  .contact-form-direct a,
+  .contact-form-privacy,
+  .contact-form-wrap,
+  .contact-form-wrap,
+  .contact-form-row,
+  .contact-field,
+  .contact-label,
+  .contact-input,
+  .contact-select,
+  .contact-textarea,
+  .contact-kicker,
+  .contact-kicker-mark,
+  .contact-hero-email,
+  .contact-arrow,
+  .contact-channel-list,
+  .contact-channel,
+  .contact-channel-label,
+  .contact-channel-value,
+  .contact-channel-action,
+  .contact-location,
+  .contact-location span,
+  .contact-section-head p,
+  .contact-section-index,
+  .contact-kicker,
+  .contact-hero,
+  .contact-hero h1,
+  .contact-hero-intro,
+  .contact-hero-email,
+  .contact-arrow,
+  .contact-channel-list,
+  .contact-channel,
+  .contact-channel-label,
+  .contact-channel-value,
+  .contact-channel-action,
+  .contact-location,
+  .contact-location span,
+  .contact-section-head p,
+  .contact-section-index,
+  .contact-kicker,
+
+  /* Buttons and form elements */
+  button,
+  input,
+  select,
+  textarea,
+  .contact-submit,
+  .contact-reset,
+
+  /* Header/footer */
+  #site-header,
+  #site-footer,
+
+  /* Interactive sections */
+  .hero,
+  .sec,
+  .sec-meta,
+  .sec-intro,
+  .sec-title,
+  .sec-note,
+  .sec-num,
+  .sec-kicker,
+  .sec-title,
+  .sec-note,
+
+  /* Gallery and home specifics */
+  .gallery,
+  .bench,
+  .ventures,
+  .edu,
+
+  /* Project/journal specific */
+  .project,
+  .journal,
+  .project-header,
+  .project-figure,
+  .project-caption,
+  .project-tags,
+  .journal-entry,
+  .journal-header,
+  .journal-meta,
+  .journal-content,
+
+  /* Timeline */
+  .timeline,
+  .timeline-panel,
+  .timeline-viewport,
+  .timeline-foot,
+  .record-strip,
+  .record-item,
+
+  /* Skills */
+  .skills,
+  .skills-domain,
+  .skill,
+
+  /* Contact form */
+  .contact-page,
+
+  /* General display */
+  .cv-page .cv-footer-download,
+  .cv-download-link,
+
+  /* State classes */
+  .is-error,
+  .has-error,
+
+  /* Reduced motion */
+  *[role="dialog"],
+  .modal,
+  .popup,
+
+  /* Anything with display:none from base */
+  .no-print {
+
+    display: none !important;
+    visibility: hidden !important;
+    width: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
+  }
+
+  /* --------------------------------------------------------------------------
+     Show printable links for external resources
+     -------------------------------------------------------------------------- */
+
+  a[href]:after {
+    content: " (" attr(href) ")" !important;
+    font-size: 85% !important;
+    color: #111 !important;
+    white-space: nowrap !important;
+    margin-left: 4px !important;
+  }
+
+  /* --------------------------------------------------------------------------
+     CV page print optimization
+     -------------------------------------------------------------------------- */
+
+  .cv {
+    margin: 0;
+    padding: 0;
+    min-width: 210mm;
+    min-height: 297mm;
+  }
+
+  .cv-header {
+    page-break-after: avoid;
+  }
+
+  .cv-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.5rem;
+    margin: 0 0 4px;
+    line-height: 1.1;
+  }
+
+  .cv-role {
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    color: #555;
+    margin: 0 0 16px;
+    display: inline-block;
+  }
+
+  .cv-contact {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.875rem;
+    color: #666;
+    margin: 0 0 24px;
+  }
+
+  .cv-contact a {
+    color: #0057FF;
+    text-decoration: underline;
+  }
+
+  .cv-section {
+    margin: 0 0 32px;
+    page-break-inside: avoid;
+  }
+
+  .cv-section-head {
+    display: grid;
+    grid-template-columns: 24px 1fr;
+    gap: 12px;
+    margin: 0 0 24px;
+    border-bottom: 1px solid #ddd;
+    padding: 0 0 12px;
+  }
+
+  .cv-section-index {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: #0057FF;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .cv-section h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.75rem;
+    margin: 0;
+    line-height: 1.1;
+    page-break-after: avoid;
+  }
+
+  .cv-education,
+  .cv-jobs,
+  .cv-skills,
+  .cv-projects {
+    margin: 0;
+  }
+
+  .cv-degree {
+    margin: 0 0 24px;
+  }
+
+  .cv-degree h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.25rem;
+    margin: 0 0 4px;
+  }
+
+  .cv-degree p {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.875rem;
+    color: #555;
+    margin: 0;
+  }
+
+  .cv-dates {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: #777;
+    margin: 4px 0 0;
+  }
+
+  .cv-job .cv-company {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1rem;
+    margin: 0 0 4px;
+    display: block;
+  }
+
+  .cv-job .cv-role {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.875rem;
+    color: #555;
+    margin: 0 0 8px;
+  }
+
+  .cv-job ul {
+    margin: 0;
+    padding: 0 0 0 16px;
+  }
+
+  .cv-job li {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.875rem;
+    color: #444;
+    margin: 4px 0;
+    list-style: none;
+  }
+
+  .cv-skills .cv-skill-group {
+    margin: 0 0 24px;
+  }
+
+  .cv-skills .cv-skill-group h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1rem;
+    margin: 0 0 12px;
+    display: block;
+  }
+
+  .cv-skills .cv-skill-group ul {
+    margin: 0;
+    padding: 0;
+  }
+
+  .cv-skills .cv-skill-group li {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.875rem;
+    color: #444;
+    margin: 4px 0;
+    list-style: none;
+    padding-left: 16px;
+    position: relative;
+  }
+
+  .cv-skills .cv-skill-group li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #0057FF;
+  }
+
+  .cv-projects .cv-project {
+    margin: 0 0 16px;
+  }
+
+  .cv-projects .cv-project h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1rem;
+    margin: 0 0 4px;
+  }
+
+  .cv-projects .cv-project p {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.875rem;
+    color: #555;
+    margin: 0;
+  }
+
+  .cv-footer {
+    margin: 32px 0 0;
+    page-break-before: always;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: #777;
+  }
+
+  .cv-footer-text {
+    margin: 0 0 16px;
+  }
+
+  .cv-footer a {
+    color: #0057FF;
+    text-decoration: underline;
+  }
+
+  .cv-footer-download {
+    margin: 0;
+  }
+
+  .cv-download-link {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: #0057FF;
+    text-decoration: none;
+    border: 1px solid #0057FF;
+    padding: 6px 12px;
+    margin: 0;
+  }
+
+  .cv-download-link:hover {
+    background: #0057FF;
+    color: #fff;
+  }
+
+  /* --------------------------------------------------------------------------
+     General page print optimization
+     -------------------------------------------------------------------------- */
+
+  @page {
+    size: A4;
+    margin: 20mm 15mm 20mm 15mm;
+    @top-center { content: counter(page) " of " counter(pages); font-family: 'JetBrains Mono', monospace; font-size: 9pt; color: #666; }
+    @bottom-center { content: "Aaruthrun — Robotics & Automation Engineer"; font-family: 'DM Serif Display', serif; font-size: 9pt; color: #111; }
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+  }
+
+  .container {
+    max-width: none;
+    padding: 0;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    page-break-after: avoid;
+  }
+
+  p {
+    orphans: 3;
+    widows: 3;
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0 0 0 24px;
+  }
+
+  li {
+    margin: 4px 0;
+  }
+
+  hr {
+    border: 1px solid #ddd;
+    margin: 24px 0;
+  }
+
+  .reveal,
+  .reveal-child {
+    visibility: visible !important;
+    display: block !important;
+  }
+
+  .hero,
+  .sec,
+  .sec-meta,
+  .sec-intro,
+  .sec-title,
+  .sec-note {
+    page-break-inside: avoid;
+  }
+
+  /* --------------------------------------------------------------------------
+     Responsive adjustments for print
+     -------------------------------------------------------------------------- */
+
+  @media (max-width: 960px) {
+
+    .cv-section-head {
+      grid-template-columns: 1fr;
+    }
+
+    .cv-name {
+      font-size: 2rem;
+    }
+
+    .cv-role {
+      font-size: 0.875rem;
+    }
+
+    .cv-contact {
+      font-size: 0.8125rem;
+    }
+
+    .cv-section h2 {
+      font-size: 1.5rem;
+    }
+
+    .cv-section-index {
+      font-size: 8px;
+    }
+
+    .cv-job .cv-company {
+      font-size: 0.875rem;
+    }
+
+    .cv-job .cv-role {
+      font-size: 0.75rem;
+    }
+
+    .cv-skills .cv-skill-group h3 {
+      font-size: 0.875rem;
+    }
+
+    .cv-skills .cv-skill-group li {
+      font-size: 0.75rem;
+    }
+
+    .cv-projects .cv-project h3 {
+      font-size: 0.875rem;
+    }
+
+    .cv-projects .cv-project p {
+      font-size: 0.75rem;
+    }
+  }
+
+  @media (max-width: 720px) {
+
+    .cv {
+      min-width: 180mm;
+    }
+
+    .cv-name {
+      font-size: 1.75rem;
+    }
+
+    .cv-section h2 {
+      font-size: 1.25rem;
+    }
+
+    .cv-footer {
+      font-size: 0.65rem;
+    }
+  }
+
+  @media (max-width: 430px) {
+
+    .cv-name {
+      font-size: 1.5rem;
+    }
+
+    .cv-section h2 {
+      font-size: 1.125rem;
+    }
+
+    .cv-section-index {
+      display: none;
+    }
+
+    .cv-footer-download {
+      display: none;
+    }
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* PROJECT DOCUMENTATION — one-page recruiter print                    */
+/* ------------------------------------------------------------------ */
+
+@media print {
+
+  /* Chrome and controls belong to the screen; the printed sheet is the
+     documentation itself. */
+  .doc-page #site-header,
+  .doc-page #site-footer,
+  .doc-page .skip-link,
+  .doc-page .crumbs,
+  .doc-page .doc-pager,
+  .doc-page .doc-actions,
+  .doc-page .doc-note {
+    display: none !important;
+  }
+
+  .doc-page .doc-layout {
+    display: block !important;
+  }
+
+  .doc-page .doc-main,
+  .doc-page .doc-side {
+    width: 100% !important;
+    max-width: none !important;
+  }
+
+  .doc-page .doc-side {
+    page-break-before: always;
+    break-before: page;
+  }
+
+  .doc-page .doc-cover img {
+    max-width: 100%;
+    max-height: 85mm;
+    object-fit: contain;
+  }
+
+  .doc-page .doc-section {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* The media grid is 15 full-size photographs on screen; a one-pager keeps
+     the cover and sends the reader to the URL for the rest. */
+  .doc-page #media,
+  .doc-page #log {
+    display: none !important;
+  }
+
+  .doc-page .spec-table {
+    font-size: 8pt;
+  }
+
+  .doc-page a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 7pt;
+    color: #555;
+  }
+}

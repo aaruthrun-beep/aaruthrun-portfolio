@@ -1,0 +1,37 @@
+name: site
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+
+      # The generators are the source of truth: if a data file changed without
+      # regenerating its output pages, the diff check below catches it.
+      - run: npm run pages
+      - run: npm run gallery
+      - run: npm run cv
+      # Derivatives are committed: check they exist rather than re-encoding
+      # them, because JPEG bytes can differ between libvips builds.
+      - run: npm run responsive:check
+
+      - run: npm run check
+
+      - name: Generated files must be committed
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "Generated files are out of date:"
+            git status --short
+            git diff
+            exit 1
+          fi
