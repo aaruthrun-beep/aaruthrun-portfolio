@@ -85,7 +85,12 @@ const GalleryRows = (function () {
     img.loading = 'lazy';
     img.decoding = 'async';
     img.alt = photo.text || (project.shortTitle || project.title) + ' — photograph';
-    if (photo.w && photo.h) img.style.aspectRatio = photo.w + ' / ' + photo.h;
+    /* The files on disk are cut to the layout size (pw/ph), not to the source
+       size (w/h). Sizing the box from w/h squashed every print to a ratio the
+       file does not have. */
+    var boxW = photo.pw || photo.w;
+    var boxH = photo.ph || photo.h;
+    if (boxW && boxH) img.style.aspectRatio = boxW + ' / ' + boxH;
     figure.appendChild(img);
 
     return figure;

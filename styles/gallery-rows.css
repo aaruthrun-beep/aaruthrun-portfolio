@@ -72,6 +72,10 @@ body.gallery-rows-body {
   height: 100%;
   width: auto;
   max-width: none;
+  /* Belt and braces: a print is never stretched to fill the row. If a file's
+     shape ever disagrees with its reserved box, it is letterboxed instead. */
+  object-fit: contain;
+  object-position: center;
   background: #fbf9f3;
   border-radius: 2px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.26), 0 7px 16px rgba(0, 0, 0, 0.15);
