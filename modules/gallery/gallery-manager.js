@@ -181,27 +181,111 @@ const GalleryManager = (function () {
     // habits picked up in CAD and map tools.
     var moved = false, startX = 0, startY = 0, wasDrag = false;
 
+    // Touch pointers are tracked so two fingers can pinch: one finger pans,
+    // two fingers zoom about the point between them. Without this the browser
+    // cannot help - the map's own zoom owns the gesture.
+    var touches = new Map();
+    var pinch = null;
+
     vp.addEventListener('dragstart', function (e) { e.preventDefault(); });
 
     // The context menu would cut a right-button drag short.
     vp.addEventListener('contextmenu', function (e) { e.preventDefault(); });
 
+    function pinchState() {
+      var pts = Array.from(touches.values());
+      if (pts.length < 2) return null;
+
+      var a = pts[0], b = pts[1];
+      return {
+        dist: Math.hypot(a.x - b.x, a.y - b.y) || 1,
+        x: (a.x + b.x) / 2,
+        y: (a.y + b.y) / 2,
+      };
+    }
+
+    function beginPinch() {
+      var state = pinchState();
+      if (!state) return;
+
+      var rect = vp.getBoundingClientRect();
+
+      // The world point under the fingers' midpoint stays under it for the
+      // whole gesture; that is what makes a pinch feel attached to the map.
+      pinch = {
+        dist: state.dist,
+        scale: scale,
+        worldX: (state.x - rect.left - tx) / scale,
+        worldY: (state.y - rect.top - ty) / scale,
+      };
+
+      dragging = false;
+      wasDrag = true; /* a pinch is never a click */
+      vp.style.cursor = 'grabbing';
+      swapToFull();
+    }
+
+    function endPointer(e) {
+      touches.delete(e.pointerId);
+      if (touches.size < 2) pinch = null;
+
+      if (touches.size === 0) {
+        dragging = false;
+        vp.style.cursor = 'grab';
+      } else {
+        // Keep panning from where the remaining finger is, no jump.
+        var rest = Array.from(touches.values())[0];
+        dragging = true;
+        ddX = rest.x - tx;
+        ddY = rest.y - ty;
+      }
+
+      try { vp.releasePointerCapture(e.pointerId); } catch (_) {}
+    }
+
     vp.addEventListener('pointerdown', function (e) {
       if (e.button !== undefined && e.button !== 0 && e.button !== 2) return;
+
+      if (e.pointerType === 'touch' || e.pointerType === 'pen') {
+        touches.set(e.pointerId, { x: e.clientX, y: e.clientY });
+        try { vp.setPointerCapture(e.pointerId); } catch (_) {}
+
+        if (touches.size >= 2) {
+          beginPinch();
+          return;
+        }
+      }
+
       dragging = true; moved = false; wasDrag = false;
       startX = e.clientX; startY = e.clientY;
       ddX = e.clientX - tx; ddY = e.clientY - ty;
       vp.style.cursor = 'grabbing';
       try { vp.setPointerCapture(e.pointerId); } catch (_) {}
     });
-    window.addEventListener('pointerup', function (e) {
-      dragging = false; vp.style.cursor = 'grab';
-      try { vp.releasePointerCapture(e.pointerId); } catch (_) {}
-    });
-    window.addEventListener('pointercancel', function () {
-      dragging = false; vp.style.cursor = 'grab';
-    });
+    window.addEventListener('pointerup', endPointer);
+    window.addEventListener('pointercancel', endPointer);
     vp.addEventListener('pointermove', function (e) {
+      if (touches.has(e.pointerId)) {
+        touches.set(e.pointerId, { x: e.clientX, y: e.clientY });
+
+        if (pinch && touches.size >= 2) {
+          var state = pinchState();
+          if (!state) return;
+
+          var rect = vp.getBoundingClientRect();
+          var next = Math.max(
+            CFG.minScale,
+            Math.min(pinch.scale * (state.dist / pinch.dist), CFG.maxScale)
+          );
+
+          scale = next;
+          tx = (state.x - rect.left) - pinch.worldX * scale;
+          ty = (state.y - rect.top) - pinch.worldY * scale;
+          applyTransform();
+          return;
+        }
+      }
+
       if (!dragging) return;
       if (!moved && Math.abs(e.clientX - startX) + Math.abs(e.clientY - startY) > 4) {
         moved = true;
@@ -209,6 +293,12 @@ const GalleryManager = (function () {
       if (moved) wasDrag = true;
       tx = e.clientX - ddX; ty = e.clientY - ddY; applyTransform();
     }, { passive: true });
+
+    // iOS Safari fires its own gesture events, which zoom the whole page
+    // (and leave the map behind) even with touch-action set.
+    ['gesturestart', 'gesturechange', 'gestureend'].forEach(function (name) {
+      document.addEventListener(name, function (e) { e.preventDefault(); }, { passive: false });
+    });
 
     // After a pan, swallow the click so a photo does not open (lightbox or
     // page) when the user meant to drag the map.
