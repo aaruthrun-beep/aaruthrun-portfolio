@@ -47,6 +47,7 @@ const GalleryManager = (function () {
   }
 
   var scale = 1, tx = 0, ty = 0;
+  var fitScale = 0;
   var dragging = false, ddX = 0, ddY = 0;
   var vp = null, cvs = null;
   var started = false;
@@ -65,6 +66,14 @@ const GalleryManager = (function () {
     try {
       window.dispatchEvent(new CustomEvent('gallery:transform', { detail: { scale: scale } }));
     } catch (e) {}
+  }
+
+  /* The floor is relative to the fitted view. On a phone the whole map already
+     fits at roughly the absolute minScale, so a fixed floor made zooming out
+     clamp straight back and look locked. */
+  function minScaleAllowed() {
+    if (!fitScale) return CFG.minScale;
+    return Math.min(CFG.minScale, fitScale * 0.45);
   }
 
   function fitToScreen() {
@@ -95,8 +104,8 @@ const GalleryManager = (function () {
     if (cw <= 0 || ch <= 0) return;
 
     // 0.9 leaves room for the captions that hang below each circle
-    scale = Math.min(vw / cw, vh / ch) * 0.9;
-    scale = Math.max(CFG.minScale, Math.min(scale, CFG.maxScale));
+    fitScale = Math.min(vw / cw, vh / ch) * 0.9;
+    scale = Math.max(minScaleAllowed(), Math.min(fitScale, CFG.maxScale));
 
     tx = (vw - cw * scale) / 2 - minX * scale;
     ty = (vh - ch * scale) / 2 - minY * scale;
@@ -107,7 +116,7 @@ const GalleryManager = (function () {
   // cursor fixed while scaling, the translation has to scale too:
   //   t' = anchor - (anchor - t) * k
   function zoomBy(factor, anchorX, anchorY) {
-    var ns = Math.max(CFG.minScale, Math.min(scale * factor, CFG.maxScale));
+    var ns = Math.max(minScaleAllowed(), Math.min(scale * factor, CFG.maxScale));
     if (ns === scale) return;
     var k = ns / scale;
     tx = anchorX - (anchorX - tx) * k;
@@ -274,7 +283,7 @@ const GalleryManager = (function () {
 
           var rect = vp.getBoundingClientRect();
           var next = Math.max(
-            CFG.minScale,
+            minScaleAllowed(),
             Math.min(pinch.scale * (state.dist / pinch.dist), CFG.maxScale)
           );
 
@@ -310,8 +319,8 @@ const GalleryManager = (function () {
     }, true);
     vp.addEventListener('wheel', function (e) {
       e.preventDefault();
-      var factor = Math.exp(-e.deltaY * 0.0016);
-      factor = Math.max(0.82, Math.min(factor, 1.22));
+      var factor = Math.exp(-e.deltaY * 0.0024);
+      factor = Math.max(0.72, Math.min(factor, 1.4));
       var rect = vp.getBoundingClientRect();
       zoomBy(factor, e.clientX - rect.left, e.clientY - rect.top);
     }, { passive: false });

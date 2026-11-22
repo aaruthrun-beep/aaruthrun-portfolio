@@ -191,9 +191,10 @@ const AppConfig = (function () {
        of printing 40% smaller than its neighbours. */
     minPhotoEdge: 4000,    /* long-edge floor, in source pixels */
     maxPhotoUpscale: 4.5,  /* ceiling; the smallest source (720px) needs 4.4x */
-    minScale: 0.004,
+    minScale: 0.004,       /* absolute floor; on small screens the real floor
+                              is derived from the fitted view instead */
     maxScale: 1.5,
-    zoomFactor: 1.35,
+    zoomFactor: 1.5,       /* one step of the zoom buttons */
     /* Circles named here are repacked from scratch on every build: their
        photos take new random spots instead of keeping the previous
        placements. Change shuffleSeed to hand out a different arrangement. */
