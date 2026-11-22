@@ -12,3 +12,10 @@ tools/legacy/
 # Local QA artefacts: browser profiles, captures and exported attachment previews
 screenshots/
 .cloud-attachments/
+
+# Raw video takes stay out of the repository: GitHub rejects files over 100 MB
+# and the gallery plays demos from YouTube, not from the web root.
+images/projects/**/*.mp4
+
+# Local static-server bookkeeping
+.http-server-*.pid
