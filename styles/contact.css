@@ -691,7 +691,7 @@
   margin-left: 0;
   margin-right: 0;
   padding: 0;
-  grid-template-columns: minmax(0, 1.55fr) minmax(0, 0.9fr) minmax(0, 0.9fr);
+  grid-template-columns: minmax(0, 1.55fr) minmax(0, 0.9fr);
   gap: clamp(32px, 4.5vw, 56px);
   margin-bottom: clamp(36px, 4vw, 48px);
 }

@@ -21,7 +21,7 @@ const Lightbox = (function () {
     if (group) {
       return Array.from(document.querySelectorAll('[data-lightbox-group="' + CSS.escape(group) + '"]'));
     }
-    return Array.from(document.querySelectorAll('.gl-photo, .js-lightbox'));
+    return Array.from(document.querySelectorAll('.gl-photo:not(.gl-video), .js-lightbox'));
   }
 
   function dataFor(anchor) {
@@ -98,7 +98,7 @@ const Lightbox = (function () {
     if (overlay) return;
     build();
     document.addEventListener('click', function (event) {
-      const trigger = event.target.closest('.gl-photo, .js-lightbox');
+      const trigger = event.target.closest('.gl-photo:not(.gl-video), .js-lightbox');
       if (!trigger || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button > 0) return;
       if (trigger.classList.contains('js-lightbox') && !/\.(jpe?g|png|webp|gif|avif)$/i.test(trigger.getAttribute('href') || '')) return;
       event.preventDefault();

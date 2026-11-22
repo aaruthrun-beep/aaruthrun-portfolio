@@ -1,8 +1,16 @@
 /**
  * AARUTHRUN — FIREBASE WEB CONFIG
  *
- * These are public browser identifiers, not secrets. Publishing is protected by
- * Firebase Authentication plus the Firestore rules in firebase/firestore.rules.
+ * These are public browser identifiers, not secrets: the Firebase Web SDK
+ * config is served to every visitor, so nothing here can be hidden. Access is
+ * controlled by Firebase Authentication and the Firestore security rules.
+ *
+ * The apiKey must stay restricted in Google Cloud (APIs & Services >
+ * Credentials): limit its API access to Identity Toolkit and Cloud Firestore,
+ * and limit its HTTP referrers to this site's Pages URL and localhost. An
+ * unrestricted key would let anyone bill this project's quota on other Google
+ * APIs. See .github/secret_scanning.yml for why secret scanning ignores this
+ * file.
  *
  * Production identifiers for the Aaruthrun portfolio Firebase project.
  * Publishing is limited to the Email/Password editor account that has a

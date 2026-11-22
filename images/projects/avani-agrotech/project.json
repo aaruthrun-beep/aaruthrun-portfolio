@@ -1,0 +1,50 @@
+{
+  "site": {
+    "title": "Avani AgroTech — Electric Farm Machinery",
+    "shortTitle": "Avani AgroTech",
+    "start": "2021",
+    "href": "startup.html#agrotech-detail"
+  },
+  "captions": {
+    "agrotech-01.jpg": {
+      "text": "Weeder and earth auger prototypes",
+      "date": "2026-06-14"
+    },
+    "agrotech-02.jpg": {
+      "text": "Earth auger on its own frame",
+      "date": "2026-06-14"
+    },
+    "agrotech-03.jpg": {
+      "text": "Single-wheel weeder, long handle and tine",
+      "date": "2026-06-14"
+    },
+    "agrotech-04.jpg": {
+      "text": "Prototype line-up with the sprayer cart",
+      "date": "2026-06-14"
+    },
+    "agrotech-05.jpg": {
+      "text": "Earth auger boring a planting hole"
+    },
+    "agrotech-06.jpg": {
+      "text": "Single-wheel weeder working a cultivated row"
+    },
+    "agrotech-07.jpg": {
+      "text": "Finger weeder head in the soil"
+    },
+    "agrotech-08.jpg": {
+      "text": "Press wheels and chain drive on the planter"
+    },
+    "agrotech-09.jpg": {
+      "text": "Chain-drive mini tiller opening a trench"
+    },
+    "agrotech-10.jpg": {
+      "text": "Mini tiller turning soil in the row"
+    },
+    "agrotech-11.jpg": {
+      "text": "Mini tiller mid-pass"
+    },
+    "agrotech-12.jpg": {
+      "text": "Seed-drill beam drawn along the row"
+    }
+  }
+}

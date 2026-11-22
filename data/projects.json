@@ -481,6 +481,8 @@
     "slug": "origin-one",
     "title": "Origin One — First DC-Motor Robot",
     "shortTitle": "Origin One DC Robot",
+    "featured": true,
+    "featuredRank": 5,
     "category": "Robotics",
     "start": "2023-06",
     "end": "2023-12",

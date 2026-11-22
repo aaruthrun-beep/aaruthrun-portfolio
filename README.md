@@ -40,7 +40,7 @@ portfolio-2/
 ├── timeline.html           # Concurrent project timeline (swimlanes Gantt in SVG)
 ├── skills.html             # Skills matrix grouped by domain, cross-linking projects
 ├── startup.html            # Avani Dynamics venture page (MARS 369 swarm robot, roadmap)
-├── education.html          # Vertical timeline: B.E. at PSG Tech, Diploma, IndiaSkills
+├── education.html          # Vertical timeline: B.E. at PSG Tech, Diploma, training
 ├── contact.html            # Direct email, copy button, GitHub, LinkedIn, inquiry form
 ├── projects.json           # Single source of truth datastore for all projects
 ├── generate_images.py      # Script generating 16:10 technical engineering WebP drawings

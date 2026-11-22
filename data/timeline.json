@@ -2,30 +2,6 @@
   "schemaVersion": 1,
   "events": [
     {
-      "date": null,
-      "dateLabel": "Date not recorded",
-      "type": "Award",
-      "title": "IndiaSkills — State Finalist",
-      "detail": "Mobile Robotics & Mechatronics",
-      "link": "education.html"
-    },
-    {
-      "date": null,
-      "dateLabel": "Date not recorded",
-      "type": "Award",
-      "title": "#BuildAtHive — 1st place",
-      "detail": "48-hour hardware sprint",
-      "link": "education.html"
-    },
-    {
-      "date": null,
-      "dateLabel": "Date not recorded",
-      "type": "Research",
-      "title": "Two papers presented",
-      "detail": "Cycloidal actuators & swarm kinematics",
-      "link": "education.html"
-    },
-    {
       "date": "2025",
       "dateLabel": "2025 — 2028",
       "type": "Education",

@@ -62,8 +62,65 @@
 }
 
 /* Hover is applied by the gallery module (tilt follows the pointer) */
-.gl-photo.is-hover .polaroid {
+.gl-photo.is-hover .polaroid,
+.gl-photo.gl-video:hover .polaroid {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3), 0 18px 44px rgba(0, 0, 0, 0.26);
+}
+
+/* Video prints: same frame as the photos, a player instead of the picture.
+   The player ignores the pointer until the print is zoomed in far enough to
+   use its playback bar, so dragging still pans the map. */
+.gl-photo.gl-video {
+  cursor: inherit;
+}
+
+.gl-video-mount {
+  position: relative;
+  display: block;
+  background: #101010;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* The mount is the 16:9 picture area, so the player fills it edge to edge:
+   no letterboxing, and nothing can spill onto the neighbouring prints. */
+.gl-video-mount iframe {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.gl-video .polaroid {
+  overflow: hidden;
+}
+
+.gl-video.has-controls .gl-video-mount {
+  pointer-events: auto;
+}
+
+.gl-video-badge {
+  position: absolute;
+  left: calc(var(--side, 0px) + 10px);
+  top: calc(var(--side, 0px) + 10px);
+  max-width: calc(100% - var(--side, 0px) * 2 - 20px);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  padding: 2px 7px;
+  font-family: var(--font-mono, monospace);
+  font-size: calc(var(--side, 0px) * 0.2 + 9px);
+  letter-spacing: 0.08em;
+  line-height: 1.4;
+  color: #fbf9f3;
+  background: rgba(16, 16, 16, 0.72);
+  pointer-events: none;
+}
+
+.gl-video.has-controls .gl-video-badge {
+  opacity: 0;
 }
 
 [data-theme="dark"] .gl-photo .polaroid {

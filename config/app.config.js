@@ -50,7 +50,9 @@ const AppConfig = (function () {
   const CONTACT = {
     formEndpoint: 'https://formsubmit.co/ajax/aaruthrun@gmail.com',
     formFallbackEndpoint: 'https://formsubmit.co/aaruthrun@gmail.com',
-    minimumSubmitTimeMs: 2500,
+    // Long enough to catch a script that submits instantly, short enough that
+    // a person who fills the form from autofill is never held back.
+    minimumSubmitTimeMs: 1200,
   };
 
   // Navigation configuration
@@ -76,17 +78,8 @@ const AppConfig = (function () {
   const FOOTER = {
     currentYear: new Date().getFullYear(),
     links: {
-      // Footer navigation runs as one horizontal line, so labels stay short.
-      navigation: [
-        { label: 'Home', href: 'index.html' },
-        { label: 'Projects', href: 'projects.html' },
-        { label: 'Timeline', href: 'timeline.html' },
-        { label: 'Gallery', href: 'gallery.html' },
-        { label: 'Skills', href: 'skills.html' },
-        { label: 'Startups', href: 'startup.html' },
-        { label: 'Journal', href: 'journal.html' },
-        { label: 'Education', href: 'education.html' },
-      ],
+      // The header already carries the site navigation, so the footer does not
+      // repeat it.
       connect: [
         { label: 'Résumé (PDF)', href: 'images/resume/Aaruthrun_S_FlowCV_Resume_2026-11-21.pdf', external: true },
         { label: 'Curriculum Vitae', href: 'cv.html' },
@@ -99,14 +92,33 @@ const AppConfig = (function () {
     },
     quotes: [
       {
-        text: '"Ere long intelligence — transmitted without wires — will throb through the earth like a pulse through a living organism."',
+        text: '"I do not think there is any thrill that can go through the human heart like that felt by the inventor as he sees some creation of the brain unfolding to success... Such emotions make a man forget food, sleep, friends, love, everything."',
         author: 'NIKOLA TESLA',
-        source: 'ELECTRICAL ENGINEER, JUN 1892',
       },
-    ],
-    credits: [
-      'Built with semantic HTML5, pure CSS, and vanilla JS.',
-      'HOSTED_ON: GITHUB_PAGES // WCAG_AA // TESLA IMAGES: WIKIPEDIA COMMONS',
+      {
+        text: '"If you want to find the secrets of the universe, think in terms of energy, frequency and vibration."',
+        author: 'NIKOLA TESLA',
+      },
+      {
+        text: '"I don\'t care that they stole my idea... I care that they don\'t have any of their own."',
+        author: 'NIKOLA TESLA',
+      },
+      {
+        text: '"Be alone, that is the secret of invention; be alone, that is when ideas are born."',
+        author: 'NIKOLA TESLA',
+      },
+      {
+        text: '"The spread of civilisation may be likened to a fire; first, a feeble spark, next a flickering flame, then a mighty blaze, ever increasing in speed and power."',
+        author: 'NIKOLA TESLA',
+      },
+      {
+        text: '"Let the future tell the truth, and evaluate each one according to his work and accomplishments. The present is theirs; the future, for which I have really worked, is mine."',
+        author: 'NIKOLA TESLA',
+      },
+      {
+        text: '"Today\'s scientists have substituted mathematics for experiments, and they wander off through equation after equation, and eventually build a structure which has no relation to reality."',
+        author: 'NIKOLA TESLA',
+      },
     ],
   };
 
@@ -195,6 +207,19 @@ const AppConfig = (function () {
     compact: 50,           /* compaction passes when packing from scratch */
     projectGap: 420,       /* gap between circles; covers the ink stroke */
     clusterMargin: 900,    /* canvas padding around the whole map */
+    /* A circle named here keeps a fixed relationship with its neighbours on
+       every build instead of drifting with the packing: `above` parks it
+       clear on top of that circle, and `near` slides it along the line toward
+       a second one. `shift` is how far toward `near` it leans (0–1). */
+    placement: {
+      'origin-one': { above: 'cat-autonomous-rover', near: 'scrapx6', shift: 0.4 },
+      /* AgroTech belongs to the startup page, not to the robotics cluster:
+         keep it clear below the rover instead of reading as part of it. */
+      'avani-agrotech': { below: 'cat-autonomous-rover', drop: 7000 },
+    },
+    videoEdge: 4000,       /* long edge of a video print, in layout px */
+    videoControlsPx: 420,  /* once a print is this wide on screen, its player
+                              shows the playback bar and takes the pointer */
   };
 
   // Skills domains configuration
@@ -271,7 +296,10 @@ const AppConfig = (function () {
       statusLabels: { ...TIMELINE.statusLabels },
       defaultZoom: TIMELINE.defaultZoom,
     }),
-    getGallery: () => ({ ...GALLERY }),
+    getGallery: () => ({
+      ...GALLERY,
+      placement: JSON.parse(JSON.stringify(GALLERY.placement || {})),
+    }),
     getSkillsDomains: () => JSON.parse(JSON.stringify(SKILLS_DOMAINS)),
   };
 })();

@@ -188,7 +188,8 @@ main {
 
 .footer-grid {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
+  /* Brand + Connect only: the header carries the navigation. */
+  grid-template-columns: 2fr 1fr;
   gap: var(--space-5);
   margin-bottom: var(--space-5);
 }

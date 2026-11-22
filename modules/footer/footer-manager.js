@@ -43,24 +43,13 @@ const FooterManager = (function () {
             </ul>
           </div>
 
-          <!-- Navigation: one line across the footer -->
-          <nav class="footer-nav" aria-label="Footer navigation">
-            <ul class="footer-links footer-nav-links">
-              ${config.links.navigation.map(link => `
-                <li><a href="${link.href}">${link.label}</a></li>
-              `).join('')}
-            </ul>
-          </nav>
         </div>
 
         <!-- Bottom Bar -->
         <div class="footer-bottom">
           <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
             <div>
-              &copy; ${year} ${author.name}. ${config.credits[0]}
-            </div>
-            <div class="mono">
-              ${config.credits[1]}
+              &copy; ${year} ${author.name}.
             </div>
             <button class="theme-toggle" id="theme-toggle" title="Toggle light/dark theme" aria-label="Toggle theme" style="margin-left: auto;">
               <span class="toggle-icon" id="toggle-icon">☀️</span>

@@ -137,20 +137,6 @@ if (typeof ThemeManager !== 'undefined' && typeof HeaderManager !== 'undefined' 
             </div>
 
             <div>
-              <div class="footer-col-title">Navigation</div>
-              <ul class="footer-links">
-                <li><a href="index.html">About &amp; Home</a></li>
-                <li><a href="projects.html">Filterable Project Archive</a></li>
-                <li><a href="timeline.html">Concurrent Project Gantt</a></li>
-                <li><a href="gallery.html">Infinite Photo Gallery</a></li>
-                <li><a href="skills.html">Cross-Linked Skills Matrix</a></li>
-                <li><a href="startup.html">Startups (Dynamics & Agrotech)</a></li>
-                <li><a href="journal.html">Field Notes Journal</a></li>
-                <li><a href="education.html">Education & Credentials</a></li>
-              </ul>
-            </div>
-
-            <div>
               <div class="footer-col-title">Connect</div>
               <ul class="footer-links">
                 <li><a href="mailto:aaruthrun@gmail.com" target="_blank" rel="noopener">aaruthrun@gmail.com</a></li>
@@ -163,20 +149,16 @@ if (typeof ThemeManager !== 'undefined' && typeof HeaderManager !== 'undefined' 
           </div>
           <blockquote class="engineering-quote" style="margin-top: 16px; margin-bottom: 24px;">
             <p class="engineering-quote-body" style="font-size: 0.875rem;">
-              "Ere long intelligence &mdash; transmitted without wires &mdash; will throb through the earth like a pulse through a living organism."
+              "If you want to find the secrets of the universe, think in terms of energy, frequency and vibration."
             </p>
             <div class="engineering-quote-cite" style="font-size: 0.625rem;">
               <span class="engineering-quote-author">NIKOLA TESLA</span>
-              <span class="engineering-quote-source">// ELECTRICAL ENGINEER, JUN 1892</span>
             </div>
           </blockquote>
           <div class="footer-bottom">
             <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
               <div>
-                &copy; ${new Date().getFullYear()} Aaruthrun. Built with semantic HTML5, pure CSS, and vanilla JS.
-              </div>
-              <div class="mono">
-                HOSTED_ON: GITHUB_PAGES // WCAG_AA // TESLA IMAGES: WIKIPEDIA COMMONS
+                &copy; ${new Date().getFullYear()} Aaruthrun.
               </div>
               <button class="theme-toggle" id="theme-toggle" title="Toggle light/dark theme" aria-label="Toggle theme" style="margin-left: auto;">
                 <span class="toggle-icon" id="toggle-icon">☀️</span>

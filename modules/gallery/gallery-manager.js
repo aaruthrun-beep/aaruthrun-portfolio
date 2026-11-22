@@ -59,13 +59,19 @@ const GalleryManager = (function () {
   function applyTransform() {
     if (!cvs) return;
     cvs.style.transform = 'translate(' + tx + 'px,' + ty + 'px) scale(' + scale + ')';
+
+    // Video prints decide from their on-screen size whether their player
+    // shows a playback bar, so they need to hear about every zoom step.
+    try {
+      window.dispatchEvent(new CustomEvent('gallery:transform', { detail: { scale: scale } }));
+    } catch (e) {}
   }
 
   function fitToScreen() {
     if (!vp || !cvs) return;
     var vw = vp.clientWidth, vh = vp.clientHeight;
     if (vw <= 0 || vh <= 0) return;
-    var photos = cvs.querySelectorAll('a.gl-photo');
+    var photos = cvs.querySelectorAll('.gl-photo');
     if (photos.length === 0) return;
 
     var minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
@@ -347,6 +353,28 @@ const GalleryManager = (function () {
                      esc(formatDate(img.date)) + '</time>';
         }
 
+        // A video is the same framed print with a player where the photograph
+        // would be. The mount stays empty until the print is on screen; the
+        // video module fills it.
+        if (img.kind === 'video') {
+          var videoAlt = (proj.shortTitle || proj.title) +
+                         (img.text ? ' — ' + img.text : '') + ' — video';
+
+          html += '<div class="gl-photo gl-video" data-video="' + esc(img.videoId) + '"' +
+                  ' data-rot="' + img.rot.toFixed(2) +
+                  '" style="left:' + left.toFixed(1) + 'px;top:' + top.toFixed(1) +
+                  'px;width:' + img.w + 'px;height:' + img.h +
+                  'px;transform:rotate(' + img.rot.toFixed(2) + 'deg);">' +
+                  '<figure class="polaroid" style="padding:' + side + 'px ' + side +
+                  'px ' + bottom + 'px;--side:' + side + 'px;--bottom:' + bottom + 'px;">' +
+                  '<div class="gl-video-mount" role="img" aria-label="' + esc(videoAlt) +
+                  '" style="width:' + pw + 'px;height:' + ph + 'px;"></div>' +
+                  '<span class="gl-video-badge" aria-hidden="true">VIDEO' +
+                  (img.text ? ' \u00b7 ' + esc(img.text) : '') + '</span>' +
+                  '</figure></div>';
+          continue;
+        }
+
         // The photo is a print on the map, but it still needs a name for
         // screen readers and the lightbox: project, note and date, never a
         // filename.
@@ -354,7 +382,9 @@ const GalleryManager = (function () {
         if (img.text) photoAlt += ' — ' + img.text;
         if (img.date) photoAlt += ' — ' + formatDate(img.date);
 
-        var href = 'project-' + encodeURIComponent(proj.slug) + '.html';
+        // Photo sets that belong to an existing page (Avani AgroTech on
+        // startup.html) carry their own href from the build.
+        var href = proj.href || ('project-' + encodeURIComponent(proj.slug) + '.html');
 
         html += '<a class="gl-photo" href="' + href +
                 '" data-project="' + href +
@@ -383,6 +413,10 @@ const GalleryManager = (function () {
         dateSize: R * 0.06,
       };
 
+      var period = '';
+      if (proj.start) period = proj.start + ' \u2192 ' + (proj.end || 'NOW');
+      else if (proj.end) period = proj.end;
+
       html += '<div class="gl-label" style="position:absolute;left:' +
               (cx + label.x).toFixed(1) + 'px;top:' + (cy + label.y).toFixed(1) +
               'px;width:' + label.width + 'px;transform:translateX(-50%);' +
@@ -390,10 +424,12 @@ const GalleryManager = (function () {
               '<span class="gl-name" style="display:block;font-family:var(--font-mono);' +
               'font-size:' + label.size + 'px;font-weight:600;line-height:1.2;color:' +
               P.muted + ';">' + esc(proj.shortTitle) + '</span>' +
-              '<span class="gl-date" style="display:block;margin-top:' +
-              (label.size * 0.15).toFixed(1) + 'px;font-family:var(--font-mono);font-size:' +
-              label.dateSize + 'px;color:' + P.muted + ';">' +
-              (proj.start || '') + ' \u2192 ' + (proj.end || 'NOW') + '</span></div>';
+              (period
+                ? '<span class="gl-date" style="display:block;margin-top:' +
+                  (label.size * 0.15).toFixed(1) + 'px;font-family:var(--font-mono);font-size:' +
+                  label.dateSize + 'px;color:' + P.muted + ';">' + period + '</span>'
+                : '') +
+              '</div>';
     }
 
     canvasEl.insertAdjacentHTML('beforeend', html);
@@ -401,7 +437,11 @@ const GalleryManager = (function () {
     // Cache full-res sources right away so zoom swaps are instant.
     preloadImages();
 
-    var photos = canvasEl.querySelectorAll('a.gl-photo');
+    // gallery-video.js declares a top-level const, which is a binding, not a
+    // window property - test the identifier rather than window.*.
+    if (typeof GalleryVideo !== 'undefined') GalleryVideo.scan(canvasEl);
+
+    var photos = canvasEl.querySelectorAll('.gl-photo');
     var reduced = window.matchMedia &&
                   window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 

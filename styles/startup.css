@@ -694,3 +694,58 @@
     transition: none;
   }
 }
+
+/* --------------------------------------------------------------------------
+   AVANI AGROTECH — prototype photographs
+   Each print keeps the photograph's own proportions; the grid just sets the
+   column width, so portrait field shots are never cropped.
+   -------------------------------------------------------------------------- */
+
+.ad-agro-photos .ag-photo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: start;
+  gap: clamp(16px, 2.4vw, 28px);
+  margin-top: 4px;
+}
+
+.ag-photo {
+  margin: 0;
+}
+
+.ag-photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--color-border);
+  background-color: var(--color-card);
+}
+
+.ag-photo figcaption {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 8px;
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.07em;
+  line-height: 1.5;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.ag-photo figcaption span:first-child {
+  color: var(--color-text-secondary);
+}
+
+@media (max-width: 900px) {
+  .ad-agro-photos .ag-photo-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 620px) {
+  .ad-agro-photos .ag-photo-grid {
+    grid-template-columns: 1fr;
+  }
+}

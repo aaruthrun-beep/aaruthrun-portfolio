@@ -327,6 +327,23 @@ function minEnclosingCircle(points) {
   return c;
 }
 
+// A video print can land anywhere in the circle, including the bottom edge
+// where the project label hangs. Slide it straight up until something blocks
+// it, so the screen never sits on the caption.
+function liftClips(items, radius, cfg) {
+  const clips = items.filter((item) => item.kind === 'video');
+
+  for (const clip of clips) {
+    const others = items.filter((item) => item !== clip);
+
+    for (let step = 0; step < 60; step++) {
+      const probe = probeAt(clip, clip.x, clip.y - clip.h * 0.2);
+      if (!fits(probe, others, radius, cfg.pad)) break;
+      clip.y = probe.y;
+    }
+  }
+}
+
 function layoutFresh(items, cfg, rng) {
   const bound = packFresh(items, cfg, rng);
   compact(items, bound, cfg);
@@ -398,6 +415,8 @@ function layoutProject(project, previous, cfg, forceFresh) {
   ));
 
   const items = project.images.map((img) => ({
+    kind: img.kind || 'photo',
+    videoId: img.videoId || '',
     src: img.src,
     w: img.w,
     h: img.h,
@@ -464,6 +483,8 @@ function layoutProject(project, previous, cfg, forceFresh) {
     radius = layoutFresh(items, cfg, rng);
   }
 
+  liftClips(items, radius, cfg);
+
   // Label anchor: below the lowest printed corner, not the circle's bottom
   // (a circle around a wide cluster has a large empty cap).
   let minX = Infinity;
@@ -490,6 +511,8 @@ function layoutProject(project, previous, cfg, forceFresh) {
   return {
     label,
     images: items.map((item) => ({
+      kind: item.kind,
+      videoId: item.videoId,
       src: item.src,
       w: item.w,
       h: item.h,
@@ -558,13 +581,27 @@ function separateClusters(clusters, gap) {
 
         // Sub-pixel rounding of saved centres must not trigger a push.
         if (d < need - 0.5) {
-          const push = (need - d) / 2 + 0.5;
+          // A pinned circle holds its ground, so the free one takes the whole
+          // push. Two pinned circles cannot be reconciled; their placement
+          // rules are the authority.
+          if (A.pinned && B.pinned) continue;
+
+          const push = need - d + 0.5;
           const ux = dx / d;
           const uy = dy / d;
-          A.x -= ux * push;
-          A.y -= uy * push;
-          B.x += ux * push;
-          B.y += uy * push;
+
+          if (A.pinned) {
+            B.x += ux * push;
+            B.y += uy * push;
+          } else if (B.pinned) {
+            A.x -= ux * push;
+            A.y -= uy * push;
+          } else {
+            A.x -= ux * push * 0.5;
+            A.y -= uy * push * 0.5;
+            B.x += ux * push * 0.5;
+            B.y += uy * push * 0.5;
+          }
           moved = true;
         }
       }
@@ -593,6 +630,8 @@ function attractClusters(clusters, gap) {
     let moved = false;
 
     for (const c of clusters) {
+      if (c.pinned) continue;
+
       const dx = cx - c.x;
       const dy = cy - c.y;
       const d = Math.hypot(dx, dy);
@@ -619,6 +658,37 @@ function attractClusters(clusters, gap) {
     }
 
     if (!moved) break;
+  }
+}
+
+/* A circle named in GALLERY.placement is pinned to a fixed relationship
+   instead of drifting with the packing: `above` or `below` parks it clear on
+   that side of the anchor circle, `drop` adds extra clearance on that side,
+   and `near` slides it along the line toward a second circle. The anchor is
+   pinned too, so every later pass moves the rest of the map around them. */
+function applyPlacements(clusters, cfg) {
+  const rules = cfg.placement || {};
+  const bySlug = new Map();
+  for (const c of clusters) bySlug.set(c.slug, c);
+
+  for (const slug of Object.keys(rules)) {
+    const rule = rules[slug];
+    const c = bySlug.get(slug);
+    if (!c || !rule) continue;
+
+    const below = rule.below ? bySlug.get(rule.below) : null;
+    const anchor = rule.above ? bySlug.get(rule.above) : below;
+    if (!anchor) continue;
+
+    const shift = Number.isFinite(rule.shift) ? rule.shift : 0.35;
+    const near = rule.near ? bySlug.get(rule.near) : null;
+    const drop = Number.isFinite(rule.drop) ? rule.drop : 0;
+    const side = below ? 1 : -1;
+
+    c.x = near ? anchor.x + (near.x - anchor.x) * shift : anchor.x;
+    c.y = anchor.y + side * (anchor.radius + cfg.projectGap + c.radius + 16 + drop);
+    c.pinned = true;
+    anchor.pinned = true;
   }
 }
 
@@ -659,6 +729,7 @@ export function layoutGallery(projects, previous, config) {
       id: project.id || 0,
       title: project.title || project.slug,
       shortTitle: project.shortTitle || project.title || project.slug,
+      href: project.href || '',
       start: project.start || null,
       end: project.end || null,
       seed: hashSeed(project.slug + ':ring'),
@@ -681,6 +752,9 @@ export function layoutGallery(projects, previous, config) {
   }
 
   seedFreshClusters(clusters, cfg.projectGap);
+  separateClusters(clusters, cfg.projectGap);
+  attractClusters(clusters, cfg.projectGap);
+  applyPlacements(clusters, cfg);
   separateClusters(clusters, cfg.projectGap);
   attractClusters(clusters, cfg.projectGap);
   separateClusters(clusters, cfg.projectGap);
@@ -718,6 +792,7 @@ export function layoutGallery(projects, previous, config) {
       id: c.id,
       title: c.title,
       shortTitle: c.shortTitle,
+      href: c.href,
       start: c.start,
       end: c.end,
       seed: c.seed,

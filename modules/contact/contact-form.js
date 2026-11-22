@@ -283,10 +283,12 @@ const ContactForm = (function () {
         }
 
         if (!response.ok || !data || String(data.success) !== 'true') {
-          if (data && data.message) {
-            console.warn('[ContactForm] Submission refused:', data.message);
-          }
-          throw new Error('The form endpoint did not accept the message.');
+          const error = new Error('The form endpoint did not accept the message.');
+          // FormSubmit says why in words ("Please activate...", "Please open
+          // this page through a web server"); repeating that is the only way
+          // the visitor can act on it.
+          if (data && data.message) error.providerMessage = String(data.message);
+          throw error;
         }
 
         form.reset();
@@ -294,10 +296,13 @@ const ContactForm = (function () {
         showSuccess();
       } catch (error) {
         const isTimeout = error && error.name === 'AbortError';
+        const reason = error && error.providerMessage;
         showFailure(
           isTimeout
             ? 'The request timed out, so the message was not sent.'
-            : 'The message could not be sent.',
+            : reason
+              ? 'The message could not be sent: ' + reason
+              : 'The message could not be sent.',
           payload
         );
         console.warn('[ContactForm] Submission failed:', error);

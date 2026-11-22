@@ -1,0 +1,8 @@
+# Video links for this project's gallery circle.
+#
+# One video per line, either:
+#   https://youtu.be/VIDEO_ID
+#   Title of the video | https://youtu.be/VIDEO_ID
+#
+# Full links work too (youtu.be, /watch?v=, /shorts/, /embed/).
+# Lines starting with # are ignored. After saving this file run: npm run gallery

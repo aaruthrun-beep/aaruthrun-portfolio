@@ -27,6 +27,9 @@ const PROJECTS_JSON = path.join(DATA_DIR, 'projects.json');
 const OUTPUT = path.join(DATA_DIR, 'gallery.json');
 
 const IMAGE_RE = /\.(jpe?g|png|webp|gif)$/i;
+
+// A project's video links live in a plain notepad file next to its photos.
+const VIDEO_FILES = ['videos.txt', 'video.txt'];
 const args = new Set(process.argv.slice(2));
 const watchMode = args.has('--watch') || args.has('-w');
 
@@ -239,6 +242,52 @@ async function listFolders(dir) {
   }
 }
 
+const YOUTUBE_ID = /(?:youtu\.be\/|youtube\.com\/(?:watch\?[^#\s]*?v=|embed\/|shorts\/|live\/))([A-Za-z0-9_-]{11})/;
+
+function youtubeId(text) {
+  const value = String(text || '').trim();
+  const match = value.match(YOUTUBE_ID);
+  if (match) return match[1];
+  if (/^[A-Za-z0-9_-]{11}$/.test(value)) return value;
+  return '';
+}
+
+// images/projects/<slug>/videos.txt — one video per line, either
+//   https://youtu.be/VIDEOID
+//   Title of the video | https://youtu.be/VIDEOID
+// Blank lines and lines starting with # are ignored, so the file can carry
+// its own instructions at the top.
+async function readVideos(folder) {
+  for (const name of VIDEO_FILES) {
+    let text;
+    try {
+      text = await fsp.readFile(path.join(folder, name), 'utf8');
+    } catch {
+      continue;
+    }
+
+    const videos = [];
+    const seen = new Set();
+
+    for (const raw of text.replace(/^\uFEFF/, '').split(/\r?\n/)) {
+      const line = raw.trim();
+      if (!line || line.startsWith('#')) continue;
+
+      const bar = line.indexOf('|');
+      const title = bar > 0 ? line.slice(0, bar).trim() : '';
+      const id = youtubeId(bar > 0 ? line.slice(bar + 1) : line) || youtubeId(line);
+
+      if (!id || seen.has(id)) continue;
+      seen.add(id);
+      videos.push({ id, title });
+    }
+
+    return videos;
+  }
+
+  return [];
+}
+
 async function listImages(dir) {
   try {
     const entries = await fsp.readdir(dir, { withFileTypes: true });
@@ -324,18 +373,26 @@ async function collectProjects(meta, cfg) {
   let captioned = 0;
 
   for (const slug of slugs) {
-    const info = metaBySlug.get(slug) || {
-      slug,
-      id: 0,
-      title: titleFromSlug(slug),
-      shortTitle: titleFromSlug(slug),
-      start: null,
-      end: null,
-    };
-
     const folder = path.join(PROJECTS_DIR, slug);
     const sidecar = await readJson(path.join(folder, 'project.json'));
     const captions = (sidecar && sidecar.captions) || {};
+
+    // A folder with no entry in data/projects.json is not a project page:
+    // it is a photo set that belongs to a page which already exists (Avani
+    // AgroTech lives on startup.html). Its project.json can name it and point
+    // its prints at that page.
+    const site = (sidecar && sidecar.site) || {};
+
+    const info = metaBySlug.get(slug) || {
+      slug,
+      id: 0,
+      title: site.title || titleFromSlug(slug),
+      shortTitle: site.shortTitle || site.title || titleFromSlug(slug),
+      start: site.start || null,
+      end: site.end || null,
+      href: site.href || '',
+    };
+
     const files = await listImages(folder);
 
     // An explicit `images` list in data/projects.json sets the running order,
@@ -387,6 +444,41 @@ async function collectProjects(meta, cfg) {
       });
     }
 
+    // Videos are prints too, but the picture is always exactly 16:9 - the
+    // YouTube ratio - and the bezel around it is even on all four sides, so
+    // the player fills its screen with no letterboxing.
+    const videoEdge = Math.round(Number(cfg.videoEdge) || Number(cfg.minPhotoEdge) || 4000);
+    const videoW = videoEdge;
+    const videoH = Math.round(videoEdge * (9 / 16));
+    const frameCfg = cfg.frame || FRAME;
+    const videoSide = Math.round(Math.max(frameCfg.minSide, videoW * frameCfg.sideRatio));
+    const videoFrame = {
+      side: videoSide,
+      top: videoSide,
+      bottom: videoSide,
+      W: videoW + videoSide * 2,
+      H: videoH + videoSide * 2,
+    };
+
+    for (const video of await readVideos(folder)) {
+      images.push({
+        kind: 'video',
+        videoId: video.id,
+        src: `video:${video.id}`,
+        w: videoFrame.W,
+        h: videoFrame.H,
+        pw: videoW,
+        ph: videoH,
+        side: videoFrame.side,
+        bottom: videoFrame.bottom,
+        nw: videoW,
+        nh: videoH,
+        srcset: '',
+        text: video.title,
+        date: '',
+      });
+    }
+
     if (!explicit.length) {
       images.sort((a, b) => a.src.localeCompare(b.src, 'en', { numeric: true }));
     }
@@ -434,7 +526,12 @@ async function build() {
     await fsp.rename(tmp, OUTPUT);
   }
 
-  const photos = model.projects.reduce((sum, p) => sum + p.images.length, 0);
+  const total = model.projects.reduce((sum, p) => sum + p.images.length, 0);
+  const videos = model.projects.reduce(
+    (sum, p) => sum + p.images.filter((img) => img.kind === 'video').length,
+    0
+  );
+  const photos = total - videos;
   const ms = Date.now() - started;
   const enlarged = collectProjects.enlarged || 0;
   const dated = collectProjects.dated || 0;
@@ -442,13 +539,20 @@ async function build() {
 
   console.log(
     `[gallery] ${model.projects.length} circles · ${photos} photos` +
+    (videos ? ` · ${videos} videos` : '') +
     (enlarged ? ` (${enlarged} lifted to ${cfg.minPhotoEdge}px)` : '') +
     ` · ${dated} dated · ${captioned} captioned` +
     ` · ${model.canvas.width}×${model.canvas.height} · ${ms}ms → data/gallery.json`
   );
 
   for (const project of model.projects) {
-    console.log(`          ${project.slug.padEnd(24)} ${String(project.images.length).padStart(2)} photos  r=${project.radius}`);
+    const count = project.images.filter((img) => img.kind !== 'video').length;
+    const clips = project.images.length - count;
+    console.log(
+      `          ${project.slug.padEnd(24)} ${String(count).padStart(2)} photos` +
+      (clips ? ` + ${clips} video` : '') +
+      `  r=${project.radius}`
+    );
   }
 
   const problems = verifyLayout(model, cfg);

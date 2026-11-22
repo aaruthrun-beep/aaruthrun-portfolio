@@ -1,13 +1,13 @@
 {
   "version": 1,
   "layoutVersion": 3,
-  "generatedAt": "2026-11-22T01:30:06.333Z",
+  "generatedAt": "2026-11-22T03:37:16.439Z",
   "frameHash": 3926459638,
   "canvas": {
-    "width": 71975,
-    "height": 62405,
-    "offsetX": 27818.73,
-    "offsetY": 30215.9
+    "width": 73524,
+    "height": 83298,
+    "offsetX": 29368.41,
+    "offsetY": 34839.95
   },
   "projects": [
     {
@@ -15,13 +15,14 @@
       "id": 1,
       "title": "NITE 369 — Six-Axis Robotic Arm",
       "shortTitle": "NITE 369 6-Axis Arm",
+      "href": "",
       "start": "2024-03",
       "end": "2024-11",
       "seed": 150174122,
-      "x": 6492.92,
-      "y": 10546.74,
-      "cx": 34311.7,
-      "cy": 40762.6,
+      "x": 6529.29,
+      "y": 10390.93,
+      "cx": 35897.7,
+      "cy": 45230.9,
       "radius": 12688,
       "label": {
         "x": -197,
@@ -32,6 +33,8 @@
       },
       "images": [
         {
+          "kind": "photo",
+          "videoId": "",
           "src": "images/projects/nite-369/1.png",
           "w": 4360,
           "h": 3078,
@@ -49,6 +52,8 @@
           "rot": -4.59
         },
         {
+          "kind": "photo",
+          "videoId": "",
           "src": "images/projects/nite-369/darker_check.png",
           "w": 3488,
           "h": 4662,
@@ -66,6 +71,8 @@
           "rot": 3.5
         },
         {
+          "kind": "photo",
+          "videoId": "",
           "src": "images/projects/nite-369/IMG_20260707_191639419.jpg",
           "w": 3348,
           "h": 4731,
@@ -83,6 +90,8 @@
           "rot": -1.77
         },
         {
+          "kind": "photo",
+          "videoId": "",
           "src": "images/projects/nite-369/IMG_20260713_182610886.jpg",
           "w": 3348,
           "h": 4731,
@@ -100,6 +109,8 @@
           "rot": 5.99
         },
         {
+          "kind": "photo",
+          "videoId": "",
           "src": "images/projects/nite-369/IMG_20260713_182846050.jpg",
           "w": 3348,
           "h": 4731,
@@ -117,6 +128,8 @@
           "rot": 3.83
         },
         {
+          "kind": "photo",
+          "videoId": "",
           "src": "images/projects/nite-369/IMG_20260729_014512191.jpg",
           "w": 4464,
           "h": 3918,
@@ -134,6 +147,8 @@
           "rot": 3.19
         },
         {
+          "kind": "photo",
+          "videoId": "",
           "src": "images/projects/nite-369/IMG_20260731_002215921.jpg",
           "w": 3348,
           "h": 4731,
@@ -151,6 +166,8 @@
           "rot": 3.6
         },
         {
+          "kind": "photo",
+          "videoId": "",
           "src": "images/projects/nite-369/IMG_20260801_120742624.jpg",
           "w": 3348,
           "h": 4731,
@@ -168,6 +185,8 @@
           "rot": -0.8
         },
         {
+          "kind": "photo",
+          "videoId": "",
           "src": "images/projects/nite-369/IMG_20260801_120745341.jpg",
           "w": 3348,
           "h": 4731,
@@ -185,6 +204,8 @@
           "rot": 2.32
         },
         {
+          "kind": "photo",
+          "videoId": "",
           "src": "images/projects/nite-369/IMG_20260801_120753747.jpg",
           "w": 3348,
           "h": 4731,
@@ -202,6 +223,8 @@
           "rot": -0.52
         },
         {
+          "kind": "photo",
+          "videoId": "",
           "src": "images/projects/nite-369/IMG_20260801_120802966.jpg",
           "w": 3348,
           "h": 4731,
@@ -219,6 +242,8 @@
           "rot": -3.62
         },
         {
+          "kind": "photo",
+          "videoId": "",
           "src": "images/projects/nite-369/IMG_20260810_004419763.jpg",
           "w": 3348,
           "h": 4731,
@@ -236,6 +261,8 @@
           "rot": -4.3
         },
         {
+          "kind": "photo",
+          "videoId": "",
           "src": "images/projects/nite-369/IMG_20260810_004658996.jpg",
           "w": 4464,
           "h": 3918,
@@ -253,6 +280,8 @@
           "rot": 0.91
         },
         {
+          "kind": "photo",
+          "videoId": "",
           "src": "images/projects/nite-369/max 3.png",
           "w": 3488,
           "h": 4662,
@@ -270,6 +299,8 @@
           "rot": 3.51
         },
         {
+          "kind": "photo",
+          "videoId": "",
           "src": "images/projects/nite-369/NITE_369_LAUNCHING_SOON_POSTER.png",
           "w": 3488,
           "h": 4662,
@@ -293,13 +324,14 @@
       "id": 2,
       "title": "MARS 369 — Modular Autonomous Robotic Swarm",
       "shortTitle": "MARS 369 Swarm Robot",
+      "href": "",
       "start": "2024-08",
       "end": null,
       "seed": 4077674827,
-      "x": -14989.73,
-      "y": -5223.03,
+      "x": -16539.41,
+      "y": -3784.25,
       "cx": 12829,
-      "cy": 24992.9,
+      "cy": 31055.7,
       "radius": 11929,
       "label": {
         "x": 59.1,
@@ -310,6 +342,8 @@
       },
       "images": [
         {
+          "kind": "photo",
+          "videoId": "",
           "src": "images/projects/mars-369/mars-369-01.jpg",
           "w": 4360,
           "h": 3078,
@@ -327,6 +361,8 @@
           "rot": 0.88
         },
         {
+          "kind": "photo",
+          "videoId": "",
           "src": "images/projects/mars-369/mars-369-02.jpg",
           "w": 4360,
           "h": 3078,
@@ -344,6 +380,8 @@
           "rot": -2.89
         },
         {
+          "kind": "photo",
+          "videoId": "",
           "src": "images/projects/mars-369/mars-369-03.jpg",
           "w": 4360,
           "h": 3078,
@@ -361,6 +399,8 @@
           "rot": -1.37
         },
         {
+          "kind": "photo",
+          "videoId": "",
           "src": "images/projects/mars-369/mars-369-04.jpg",
           "w": 4360,
           "h": 3078,
@@ -378,6 +418,8 @@
           "rot": -1.55
         },
         {
+          "kind": "photo",
+          "videoId": "",
           "src": "images/projects/mars-369/mars-369-05.jpg",
           "w": 4360,
           "h": 3078,
@@ -395,6 +437,8 @@
           "rot": 1.81
         },
         {
+          "kind": "photo",
+          "videoId": "",
           "src": "images/projects/mars-369/mars-369-06.jpg",
           "w": 4360,
           "h": 3078,
@@ -412,6 +456,8 @@
           "rot": -5.98
         },
         {
+          "kind": "photo",
+          "videoId": "",
           "src": "images/projects/mars-369/mars-369-07.jpg",
           "w": 4360,
           "h": 3078,
@@ -429,6 +475,8 @@
           "rot": -4.71
         },
         {
+          "kind": "photo",
+          "videoId": "",
           "src": "images/projects/mars-369/mars-369-08.jpg",
           "w": 4360,
           "h": 3078,
@@ -446,6 +494,8 @@
           "rot": -1.54
         },
         {
+          "kind": "photo",
+          "videoId": "",
           "src": "images/projects/mars-369/mars-369-09.jpg",
           "w": 4360,
           "h": 3078,
@@ -463,6 +513,8 @@
           "rot": -4.74
         },
         {
+          "kind": "photo",
+          "videoId": "",
           "src": "images/projects/mars-369/mars-369-10.jpg",
           "w": 4360,
           "h": 3078,
@@ -480,6 +532,8 @@
           "rot": -3.2
         },
         {
+          "kind": "photo",
+          "videoId": "",
           "src": "images/projects/mars-369/mars-369-11.jpg",
           "w": 4360,
           "h": 3078,
@@ -497,6 +551,8 @@
           "rot": 4.32
         },
         {
+          "kind": "photo",
+          "videoId": "",
           "src": "images/projects/mars-369/mars-369-12.jpg",
           "w": 4360,
           "h": 3078,
@@ -514,6 +570,8 @@
           "rot": -1.83
         },
         {
+          "kind": "photo",
+          "videoId": "",
           "src": "images/projects/mars-369/mars-369-13.jpg",
           "w": 4360,
           "h": 3078,
@@ -531,6 +589,8 @@
           "rot": -2.2
         },
         {
+          "kind": "photo",
+          "videoId": "",
           "src": "images/projects/mars-369/mars-369-14.jpg",
           "w": 4360,
           "h": 3078,
@@ -554,13 +614,14 @@
       "id": 6,
       "title": "CAT Autonomous Rover — Caterpillar Autonomous Challenge",
       "shortTitle": "CAT Autonomous Rover",
+      "href": "",
       "start": "2025-05",
       "end": "2026-02",
       "seed": 778274129,
       "x": 31416.29,
       "y": 8470.49,
-      "cx": 59235,
-      "cy": 38686.4,
+      "cx": 60784.7,
+      "cy": 43310.4,
       "radius": 11839,
       "label": {
         "x": -332,
@@ -571,6 +632,8 @@
       },
       "images": [
         {
+          "kind": "photo",
+          "videoId": "",
           "src": "images/projects/cat-autonomous-rover/20251214_130742.jpg",
           "w": 4360,
           "h": 3828,
@@ -588,6 +651,8 @@
           "rot": -0.68
         },
         {
+          "kind": "photo",
+          "videoId": "",
           "src": "images/projects/cat-autonomous-rover/20251214_152004.jpg",
           "w": 4360,
           "h": 3828,
@@ -605,6 +670,8 @@
           "rot": -4.29
         },
         {
+          "kind": "photo",
+          "videoId": "",
           "src": "images/projects/cat-autonomous-rover/20251214_155126.jpg",
           "w": 4360,
           "h": 3828,
@@ -622,6 +689,8 @@
           "rot": -5.07
         },
         {
+          "kind": "photo",
+          "videoId": "",
           "src": "images/projects/cat-autonomous-rover/cat-autonomous-rover-01.jpg",
           "w": 4360,
           "h": 3082,
@@ -639,6 +708,8 @@
           "rot": 5.4
         },
         {
+          "kind": "photo",
+          "videoId": "",
           "src": "images/projects/cat-autonomous-rover/cat-autonomous-rover-02.jpg",
           "w": 4360,
           "h": 3078,
@@ -656,6 +727,8 @@
           "rot": 4.92
         },
         {
+          "kind": "photo",
+          "videoId": "",
           "src": "images/projects/cat-autonomous-rover/cat-autonomous-rover-03.jpg",
           "w": 4360,
           "h": 3078,
@@ -673,6 +746,8 @@
           "rot": -4.35
         },
         {
+          "kind": "photo",
+          "videoId": "",
           "src": "images/projects/cat-autonomous-rover/cat-autonomous-rover-04.jpg",
           "w": 4360,
           "h": 3078,
@@ -690,6 +765,8 @@
           "rot": 1.17
         },
         {
+          "kind": "photo",
+          "videoId": "",
           "src": "images/projects/cat-autonomous-rover/IMG20251214153627.jpg",
           "w": 4464,
           "h": 3918,
@@ -707,6 +784,8 @@
           "rot": 0.37
         },
         {
+          "kind": "photo",
+          "videoId": "",
           "src": "images/projects/cat-autonomous-rover/IMG20251214155739.jpg",
           "w": 4464,
           "h": 3918,
@@ -724,6 +803,8 @@
           "rot": -2.46
         },
         {
+          "kind": "photo",
+          "videoId": "",
           "src": "images/projects/cat-autonomous-rover/IMG20261113153917.jpg",
           "w": 3348,
           "h": 4731,
@@ -741,6 +822,8 @@
           "rot": 1.25
         },
         {
+          "kind": "photo",
+          "videoId": "",
           "src": "images/projects/cat-autonomous-rover/IMG20261113153921.jpg",
           "w": 3348,
           "h": 4731,
@@ -758,6 +841,8 @@
           "rot": 5.03
         },
         {
+          "kind": "photo",
+          "videoId": "",
           "src": "images/projects/cat-autonomous-rover/vlcsnap-2026-11-21-18h38m16s924.png",
           "w": 4360,
           "h": 3078,
@@ -775,6 +860,8 @@
           "rot": 0.5
         },
         {
+          "kind": "photo",
+          "videoId": "",
           "src": "images/projects/cat-autonomous-rover/vlcsnap-2026-11-21-18h38m58s661.png",
           "w": 4360,
           "h": 3078,
@@ -792,6 +879,8 @@
           "rot": 2.83
         },
         {
+          "kind": "photo",
+          "videoId": "",
           "src": "images/projects/cat-autonomous-rover/vlcsnap-2026-11-21-18h39m02s098.png",
           "w": 4360,
           "h": 3078,
@@ -809,6 +898,8 @@
           "rot": 3.76
         },
         {
+          "kind": "photo",
+          "videoId": "",
           "src": "images/projects/cat-autonomous-rover/vlcsnap-2026-11-21-18h40m08s693.png",
           "w": 4360,
           "h": 3078,
@@ -832,12 +923,13 @@
       "id": 8,
       "title": "ScrapX6 — Six-Axis Robot Built from Scrap",
       "shortTitle": "ScrapX6 Scrap Robot",
+      "href": "",
       "start": "2025-11",
       "end": "2026-03",
       "seed": 3219288860,
-      "x": 8407.13,
-      "y": -15933.9,
-      "cx": 36225.9,
+      "x": 2992.34,
+      "y": -20557.95,
+      "cx": 32360.8,
       "cy": 14282,
       "radius": 13382,
       "label": {
@@ -849,6 +941,8 @@
       },
       "images": [
         {
+          "kind": "photo",
+          "videoId": "",
           "src": "images/projects/scrapx6/scrapx6-01.jpg",
           "w": 4360,
           "h": 3837,
@@ -866,6 +960,8 @@
           "rot": -2.17
         },
         {
+          "kind": "photo",
+          "videoId": "",
           "src": "images/projects/scrapx6/scrapx6-02.jpg",
           "w": 4360,
           "h": 3326,
@@ -883,6 +979,8 @@
           "rot": -0.01
         },
         {
+          "kind": "photo",
+          "videoId": "",
           "src": "images/projects/scrapx6/scrapx6-03.jpg",
           "w": 4360,
           "h": 3326,
@@ -900,6 +998,8 @@
           "rot": 2.26
         },
         {
+          "kind": "photo",
+          "videoId": "",
           "src": "images/projects/scrapx6/scrapx6-04.jpg",
           "w": 2010,
           "h": 4382,
@@ -917,6 +1017,8 @@
           "rot": -5.72
         },
         {
+          "kind": "photo",
+          "videoId": "",
           "src": "images/projects/scrapx6/scrapx6-05.jpg",
           "w": 3280,
           "h": 4621,
@@ -934,6 +1036,8 @@
           "rot": -0.02
         },
         {
+          "kind": "photo",
+          "videoId": "",
           "src": "images/projects/scrapx6/scrapx6-06.jpg",
           "w": 3280,
           "h": 4621,
@@ -951,6 +1055,8 @@
           "rot": 5.82
         },
         {
+          "kind": "photo",
+          "videoId": "",
           "src": "images/projects/scrapx6/scrapx6-07.jpg",
           "w": 2009,
           "h": 4382,
@@ -968,6 +1074,8 @@
           "rot": -0.83
         },
         {
+          "kind": "photo",
+          "videoId": "",
           "src": "images/projects/scrapx6/scrapx6-08.jpg",
           "w": 4360,
           "h": 2671,
@@ -985,6 +1093,8 @@
           "rot": 3
         },
         {
+          "kind": "photo",
+          "videoId": "",
           "src": "images/projects/scrapx6/scrapx6-09.jpg",
           "w": 3270,
           "h": 4621,
@@ -1002,6 +1112,8 @@
           "rot": -5.38
         },
         {
+          "kind": "photo",
+          "videoId": "",
           "src": "images/projects/scrapx6/scrapx6-10.jpg",
           "w": 3348,
           "h": 4715,
@@ -1019,6 +1131,8 @@
           "rot": 4.86
         },
         {
+          "kind": "photo",
+          "videoId": "",
           "src": "images/projects/scrapx6/scrapx6-11.jpg",
           "w": 4448,
           "h": 3918,
@@ -1036,6 +1150,8 @@
           "rot": 4.3
         },
         {
+          "kind": "photo",
+          "videoId": "",
           "src": "images/projects/scrapx6/scrapx6-12.jpg",
           "w": 4360,
           "h": 2623,
@@ -1053,6 +1169,8 @@
           "rot": 3.99
         },
         {
+          "kind": "photo",
+          "videoId": "",
           "src": "images/projects/scrapx6/scrapx6-13.jpg",
           "w": 4360,
           "h": 2623,
@@ -1070,6 +1188,8 @@
           "rot": 3.08
         },
         {
+          "kind": "photo",
+          "videoId": "",
           "src": "images/projects/scrapx6/scrapx6-14.jpg",
           "w": 1957,
           "h": 4373,
@@ -1087,6 +1207,8 @@
           "rot": -4.06
         },
         {
+          "kind": "photo",
+          "videoId": "",
           "src": "images/projects/scrapx6/scrapx6-15.jpg",
           "w": 3270,
           "h": 4621,
@@ -1104,6 +1226,8 @@
           "rot": 4.75
         },
         {
+          "kind": "photo",
+          "videoId": "",
           "src": "images/projects/scrapx6/scrapx6-16.jpg",
           "w": 3270,
           "h": 4621,
@@ -1121,6 +1245,8 @@
           "rot": -2.42
         },
         {
+          "kind": "photo",
+          "videoId": "",
           "src": "images/projects/scrapx6/scrapx6-17.jpg",
           "w": 3270,
           "h": 4621,
@@ -1138,6 +1264,8 @@
           "rot": -5.41
         },
         {
+          "kind": "photo",
+          "videoId": "",
           "src": "images/projects/scrapx6/scrapx6-18.jpg",
           "w": 4360,
           "h": 3828,
@@ -1155,6 +1283,8 @@
           "rot": -4.06
         },
         {
+          "kind": "photo",
+          "videoId": "",
           "src": "images/projects/scrapx6/scrapx6-19.jpg",
           "w": 3270,
           "h": 4621,
@@ -1172,6 +1302,8 @@
           "rot": 2.98
         },
         {
+          "kind": "photo",
+          "videoId": "",
           "src": "images/projects/scrapx6/scrapx6-20.jpg",
           "w": 4360,
           "h": 3828,
@@ -1195,13 +1327,14 @@
       "id": 9,
       "title": "Origin One — First DC-Motor Robot",
       "shortTitle": "Origin One DC Robot",
+      "href": "",
       "start": "2023-06",
       "end": "2023-12",
       "seed": 745254838,
-      "x": 19264.18,
-      "y": 25076.09,
-      "cx": 47082.9,
-      "cy": 55292,
+      "x": 20046.71,
+      "y": -10017.51,
+      "cx": 49415.1,
+      "cy": 24822.4,
       "radius": 6213,
       "label": {
         "x": -103.4,
@@ -1212,6 +1345,8 @@
       },
       "images": [
         {
+          "kind": "photo",
+          "videoId": "",
           "src": "images/projects/origin-one/20231228_163308.jpg",
           "w": 2530,
           "h": 4606,
@@ -1229,6 +1364,8 @@
           "rot": 3.41
         },
         {
+          "kind": "photo",
+          "videoId": "",
           "src": "images/projects/origin-one/20231228_122943.jpg",
           "w": 2530,
           "h": 4606,
@@ -1246,6 +1383,8 @@
           "rot": 5.67
         },
         {
+          "kind": "photo",
+          "videoId": "",
           "src": "images/projects/origin-one/20231228_162124.jpg",
           "w": 4500,
           "h": 3178,
@@ -1263,6 +1402,8 @@
           "rot": -3.31
         },
         {
+          "kind": "photo",
+          "videoId": "",
           "src": "images/projects/origin-one/origin-one-01.jpg",
           "w": 4360,
           "h": 2671,
@@ -1280,6 +1421,8 @@
           "rot": -0.32
         },
         {
+          "kind": "photo",
+          "videoId": "",
           "src": "images/projects/origin-one/origin-one-02.jpg",
           "w": 4360,
           "h": 2671,
@@ -1295,6 +1438,258 @@
           "x": -3760.9,
           "y": -227.8,
           "rot": -5.21
+        }
+      ]
+    },
+    {
+      "slug": "avani-agrotech",
+      "id": 0,
+      "title": "Avani AgroTech — Electric Farm Machinery",
+      "shortTitle": "Avani AgroTech",
+      "href": "startup.html#agrotech-detail",
+      "start": "2021",
+      "end": null,
+      "seed": 2480371004,
+      "x": 31416.29,
+      "y": 37651.49,
+      "cx": 60784.7,
+      "cy": 72491.4,
+      "radius": 9906,
+      "label": {
+        "x": 411.3,
+        "y": 7280.8,
+        "width": 12877.8,
+        "size": 941.1,
+        "dateSize": 643.9
+      },
+      "images": [
+        {
+          "kind": "photo",
+          "videoId": "",
+          "src": "images/projects/avani-agrotech/agrotech-01.jpg",
+          "w": 4360,
+          "h": 3840,
+          "pw": 4000,
+          "ph": 3012,
+          "side": 180,
+          "bottom": 648,
+          "text": "Weeder and earth auger prototypes",
+          "date": "2026-06-14",
+          "srcset": "images/derived/projects/avani-agrotech/agrotech-01-800.jpg 800w, images/derived/projects/avani-agrotech/agrotech-01-1600.jpg 1600w",
+          "nw": 4000,
+          "nh": 3012,
+          "x": 765.7,
+          "y": 415.4,
+          "rot": -5.81
+        },
+        {
+          "kind": "photo",
+          "videoId": "",
+          "src": "images/projects/avani-agrotech/agrotech-02.jpg",
+          "w": 3284,
+          "h": 4626,
+          "pw": 3012,
+          "ph": 4000,
+          "side": 136,
+          "bottom": 490,
+          "text": "Earth auger on its own frame",
+          "date": "2026-06-14",
+          "srcset": "images/derived/projects/avani-agrotech/agrotech-02-800.jpg 800w, images/derived/projects/avani-agrotech/agrotech-02-1600.jpg 1600w",
+          "nw": 3012,
+          "nh": 4000,
+          "x": -3642.3,
+          "y": 100.1,
+          "rot": 2.23
+        },
+        {
+          "kind": "photo",
+          "videoId": "",
+          "src": "images/projects/avani-agrotech/agrotech-03.jpg",
+          "w": 3284,
+          "h": 4626,
+          "pw": 3012,
+          "ph": 4000,
+          "side": 136,
+          "bottom": 490,
+          "text": "Single-wheel weeder, long handle and tine",
+          "date": "2026-06-14",
+          "srcset": "images/derived/projects/avani-agrotech/agrotech-03-800.jpg 800w, images/derived/projects/avani-agrotech/agrotech-03-1600.jpg 1600w",
+          "nw": 3012,
+          "nh": 4000,
+          "x": 5063.6,
+          "y": -295.7,
+          "rot": 0.71
+        },
+        {
+          "kind": "photo",
+          "videoId": "",
+          "src": "images/projects/avani-agrotech/agrotech-04.jpg",
+          "w": 4360,
+          "h": 3840,
+          "pw": 4000,
+          "ph": 3012,
+          "side": 180,
+          "bottom": 648,
+          "text": "Prototype line-up with the sprayer cart",
+          "date": "2026-06-14",
+          "srcset": "images/derived/projects/avani-agrotech/agrotech-04-800.jpg 800w, images/derived/projects/avani-agrotech/agrotech-04-1600.jpg 1600w",
+          "nw": 4000,
+          "nh": 3012,
+          "x": -512.1,
+          "y": 4652.2,
+          "rot": 5.22
+        },
+        {
+          "kind": "photo",
+          "videoId": "",
+          "src": "images/projects/avani-agrotech/agrotech-05.jpg",
+          "w": 2452,
+          "h": 4465,
+          "pw": 2250,
+          "ph": 4000,
+          "side": 101,
+          "bottom": 364,
+          "text": "Earth auger boring a planting hole",
+          "date": "",
+          "srcset": "images/derived/projects/avani-agrotech/agrotech-05-800.jpg 800w, images/derived/projects/avani-agrotech/agrotech-05-1600.jpg 1600w",
+          "nw": 2160,
+          "nh": 3840,
+          "x": -5859.4,
+          "y": 4713.1,
+          "rot": -1.83
+        },
+        {
+          "kind": "photo",
+          "videoId": "",
+          "src": "images/projects/avani-agrotech/agrotech-06.jpg",
+          "w": 2449,
+          "h": 4465,
+          "pw": 2247,
+          "ph": 4000,
+          "side": 101,
+          "bottom": 364,
+          "text": "Single-wheel weeder working a cultivated row",
+          "date": "",
+          "srcset": "images/derived/projects/avani-agrotech/agrotech-06-800.jpg 800w, images/derived/projects/avani-agrotech/agrotech-06-1600.jpg 1600w",
+          "nw": 1558,
+          "nh": 2773,
+          "x": 1119.2,
+          "y": -7370.8,
+          "rot": -1.1
+        },
+        {
+          "kind": "photo",
+          "videoId": "",
+          "src": "images/projects/avani-agrotech/agrotech-07.jpg",
+          "w": 2452,
+          "h": 4465,
+          "pw": 2250,
+          "ph": 4000,
+          "side": 101,
+          "bottom": 364,
+          "text": "Finger weeder head in the soil",
+          "date": "",
+          "srcset": "images/derived/projects/avani-agrotech/agrotech-07-800.jpg 800w, images/derived/projects/avani-agrotech/agrotech-07-1600.jpg 1600w",
+          "nw": 2160,
+          "nh": 3840,
+          "x": 8006.1,
+          "y": 1292.4,
+          "rot": -0.54
+        },
+        {
+          "kind": "photo",
+          "videoId": "",
+          "src": "images/projects/avani-agrotech/agrotech-08.jpg",
+          "w": 2452,
+          "h": 4465,
+          "pw": 2250,
+          "ph": 4000,
+          "side": 101,
+          "bottom": 364,
+          "text": "Press wheels and chain drive on the planter",
+          "date": "",
+          "srcset": "images/derived/projects/avani-agrotech/agrotech-08-800.jpg 800w, images/derived/projects/avani-agrotech/agrotech-08-1600.jpg 1600w",
+          "nw": 2160,
+          "nh": 3840,
+          "x": -7013.8,
+          "y": -235.9,
+          "rot": -5.02
+        },
+        {
+          "kind": "photo",
+          "videoId": "",
+          "src": "images/projects/avani-agrotech/agrotech-09.jpg",
+          "w": 4360,
+          "h": 3078,
+          "pw": 4000,
+          "ph": 2250,
+          "side": 180,
+          "bottom": 648,
+          "text": "Chain-drive mini tiller opening a trench",
+          "date": "",
+          "srcset": "images/derived/projects/avani-agrotech/agrotech-09-800.jpg 800w, images/derived/projects/avani-agrotech/agrotech-09-1600.jpg 1600w",
+          "nw": 3840,
+          "nh": 2160,
+          "x": 1095.6,
+          "y": -3492.7,
+          "rot": -1.82
+        },
+        {
+          "kind": "photo",
+          "videoId": "",
+          "src": "images/projects/avani-agrotech/agrotech-10.jpg",
+          "w": 4360,
+          "h": 3078,
+          "pw": 4000,
+          "ph": 2250,
+          "side": 180,
+          "bottom": 648,
+          "text": "Mini tiller turning soil in the row",
+          "date": "",
+          "srcset": "images/derived/projects/avani-agrotech/agrotech-10-800.jpg 800w, images/derived/projects/avani-agrotech/agrotech-10-1600.jpg 1600w",
+          "nw": 3840,
+          "nh": 2160,
+          "x": 3978,
+          "y": 4996.6,
+          "rot": 1.78
+        },
+        {
+          "kind": "photo",
+          "videoId": "",
+          "src": "images/projects/avani-agrotech/agrotech-11.jpg",
+          "w": 4360,
+          "h": 3078,
+          "pw": 4000,
+          "ph": 2250,
+          "side": 180,
+          "bottom": 648,
+          "text": "Mini tiller mid-pass",
+          "date": "",
+          "srcset": "images/derived/projects/avani-agrotech/agrotech-11-800.jpg 800w, images/derived/projects/avani-agrotech/agrotech-11-1600.jpg 1600w",
+          "nw": 3840,
+          "nh": 2160,
+          "x": -3523.1,
+          "y": -4446.1,
+          "rot": -2.06
+        },
+        {
+          "kind": "photo",
+          "videoId": "",
+          "src": "images/projects/avani-agrotech/agrotech-12.jpg",
+          "w": 2452,
+          "h": 4465,
+          "pw": 2250,
+          "ph": 4000,
+          "side": 101,
+          "bottom": 364,
+          "text": "Seed-drill beam drawn along the row",
+          "date": "",
+          "srcset": "images/derived/projects/avani-agrotech/agrotech-12-800.jpg 800w, images/derived/projects/avani-agrotech/agrotech-12-1600.jpg 1600w",
+          "nw": 2160,
+          "nh": 3840,
+          "x": 4599.4,
+          "y": -5703.2,
+          "rot": 2.24
         }
       ]
     }
