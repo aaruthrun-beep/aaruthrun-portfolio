@@ -36,7 +36,7 @@ const args = new Set(process.argv.slice(2));
 const checkOnly = args.has('--check');
 const baseArg = [...args].find((a) => a.startsWith('--base-url='));
 
-const FALLBACK_SITE_URL = 'https://aaruthrun-beep.github.io/portfolio';
+const FALLBACK_SITE_URL = 'https://aaruthrun-beep.github.io/aaruthrun-portfolio';
 const FALLBACK_IMAGE = 'images/og-image.webp';
 const RASTER = /\.(jpe?g|png|webp|gif|avif)$/i;
 const GENERATED_RE = /^(project|journal)-[A-Za-z0-9._-]+\.html$/;

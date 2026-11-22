@@ -252,7 +252,7 @@ Right-click `index.html` and select **"Open with Live Server"**.
 3. In GitHub, navigate to **Settings > Pages**.
 4. Under **Build and deployment > Source**, select **Deploy from a branch**.
 5. Choose branch `main` and folder `/ (root)`.
-6. Click **Save**. Your site will be live at `https://aaruthrun-beep.github.io/portfolio/` within minutes!
+6. Click **Save**. Your site will be live at `https://aaruthrun-beep.github.io/aaruthrun-portfolio/` within minutes!
 
 ---
 

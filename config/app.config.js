@@ -21,7 +21,7 @@ const AppConfig = (function () {
     title: 'Aaruthrun — Robotics & Automation Engineer',
     defaultTitle: 'Aaruthrun — Robotics & Automation Engineer | Mechatronics Portfolio',
     description: 'Technical portfolio of Aaruthrun, Robotics & Automation Engineering student at PSG College of Technology. 6-DOF manipulators, BLDC FOC motor control, autonomous swarms, and embedded real-time systems.',
-    url: 'https://aaruthrun-beep.github.io/portfolio',
+    url: 'https://aaruthrun-beep.github.io/aaruthrun-portfolio',
     ogImage: 'images/aaruthrun.jpeg',
     twitterCard: 'summary_large_image',
   };
