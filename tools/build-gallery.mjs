@@ -322,7 +322,7 @@ function displaySize(size, cfg) {
 // tools/build-responsive.mjs writes images/derived/... variants. Record the
 // ones that exist so the page can offer them, rather than making the browser
 // request candidates that were never built.
-const DERIVED_WIDTHS = [800, 1600];
+const DERIVED_WIDTHS = [400, 800, 1600];
 
 function srcsetFor(src) {
   if (!/\.(jpe?g|png|webp)$/i.test(src)) return '';

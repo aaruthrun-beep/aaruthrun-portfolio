@@ -11,6 +11,7 @@
  * phone downloads ~120 KB instead of 6 MB.
  *
  *   images/projects/<slug>/<name>.jpg
+ *     -> images/derived/projects/<slug>/<name>-400.jpg
  *     -> images/derived/projects/<slug>/<name>-800.jpg
  *     -> images/derived/projects/<slug>/<name>-1600.jpg
  *
@@ -26,7 +27,7 @@ import sharp from 'sharp';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const SOURCE_DIR = path.join(ROOT, 'images');
 const OUTPUT_DIR = path.join(SOURCE_DIR, 'derived');
-const WIDTHS = [800, 1600];
+const WIDTHS = [400, 800, 1600];
 const RASTER = /\.(jpe?g|png|webp)$/i;
 const SKIP_DIRS = new Set(['derived']);
 

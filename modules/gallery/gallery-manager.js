@@ -48,6 +48,7 @@ const GalleryManager = (function () {
 
   var scale = 1, tx = 0, ty = 0;
   var fitScale = 0;
+  var resTicking = false;
   var dragging = false, ddX = 0, ddY = 0;
   var vp = null, cvs = null;
   var started = false;
@@ -60,6 +61,16 @@ const GalleryManager = (function () {
   function applyTransform() {
     if (!cvs) return;
     cvs.style.transform = 'translate(' + tx + 'px,' + ty + 'px) scale(' + scale + ')';
+
+    // Picking a file size per frame would be wasteful; once per frame is plenty.
+    if (!resTicking) {
+      resTicking = true;
+      window.requestAnimationFrame(function () {
+        resTicking = false;
+        sweepVisible();
+        refreshResolution();
+      });
+    }
 
     // Video prints decide from their on-screen size whether their player
     // shows a playback bar, so they need to hear about every zoom step.
@@ -127,52 +138,130 @@ const GalleryManager = (function () {
 
   function zoomIn() {
     if (!vp) return;
-    swapToFull();
     zoomBy(CFG.zoomFactor, vp.clientWidth / 2, vp.clientHeight / 2);
   }
 
   function zoomOut() {
     if (!vp) return;
-    swapToThumb();
     zoomBy(1 / CFG.zoomFactor, vp.clientWidth / 2, vp.clientHeight / 2);
   }
 
   /* ------------------------------------------------------------------ */
-  /* Zoom image swap (full-res sources are preloaded on init)            */
+  /* Image loading: only what is on screen, at the size it is drawn      */
   /* ------------------------------------------------------------------ */
 
-  function swapToFull() {
-    if (!cvs) return;
-    var imgs = cvs.querySelectorAll('img.gl-img');
-    for (var i = 0; i < imgs.length; i++) {
-      var img = imgs[i];
-      if (!img.dataset.fullsrc || img.dataset.fullsrc === img.src) continue;
-      var tmp = img.src;
-      img.src = img.dataset.fullsrc;
-      img.dataset.fullsrc = tmp;
+  // A print is laid out 4000 CSS pixels wide, so the browser's own srcset
+  // sizing always asks for the largest candidate and the map ends up
+  // downloading every photo at full resolution before the first pan. Instead
+  // each print loads when it scrolls near the viewport, at the 800px
+  // derivative, and only steps up to 1600px or the original once the zoom
+  // makes the extra pixels visible.
+  var TIERS = ['thumb', 'small', 'medium', 'large'];
+  var photoIndex = [];
+  var visiblePhotos = new Set();
+
+  function tierSource(img, tier) {
+    if (tier === 'large') {
+      return img.dataset.srcLarge || img.dataset.srcMedium || img.dataset.srcSmall ||
+             img.dataset.srcThumb || '';
+    }
+    if (tier === 'medium') {
+      return img.dataset.srcMedium || img.dataset.srcSmall || img.dataset.srcThumb || '';
+    }
+    if (tier === 'small') {
+      return img.dataset.srcSmall || img.dataset.srcMedium || img.dataset.srcThumb || '';
+    }
+    return img.dataset.srcThumb || img.dataset.srcSmall || '';
+  }
+
+  function setTier(img, tier, allowDowngrade) {
+    var want = TIERS.indexOf(tier);
+    if (want < 0) return;
+
+    var src = tierSource(img, tier);
+    if (!src) return;
+
+    // First load: nothing on screen yet, so nothing to protect - request it.
+    // (A print that has not loaded is labelled with its starting tier, which
+    // must not be mistaken for "already showing this file".)
+    if (!img.getAttribute('src')) {
+      img.dataset.tier = tier;
+      img.src = src;
+      return;
+    }
+
+    var have = TIERS.indexOf(img.dataset.tier || 'thumb');
+    if (have < 0) have = 0;
+    if (want === have) return;
+    if (!allowDowngrade && want < have) return;
+
+    img.dataset.tier = tier;
+
+    // Later upgrades swap only once the new file has decoded, so a print
+    // never blinks out while zooming.
+    var pre = new Image();
+    pre.onload = function () {
+      if (img.dataset.tier === tier) img.src = src;
+    };
+    pre.src = src;
+  }
+
+  /* How many device pixels each visible print covers right now. */
+  function refreshResolution() {
+    if (!visiblePhotos.size) return;
+
+    var dpr = window.devicePixelRatio || 1;
+    visiblePhotos.forEach(function (img) {
+      var pw = parseFloat(img.getAttribute('width')) || 0;
+      var need = pw * scale * dpr;
+      var tier = need > 2200 ? 'large'
+               : need > 900 ? 'medium'
+               : need > 420 ? 'small'
+               : 'thumb';
+      setTier(img, tier, need < 300);
+    });
+  }
+
+  // Prints sit at known canvas coordinates, so "is this on screen" is a few
+  // lines of arithmetic instead of a layout read per photo per frame.
+  function indexPhotos() {
+    var photos = cvs ? cvs.querySelectorAll('.gl-photo') : [];
+    photoIndex = [];
+    visiblePhotos.clear();
+
+    for (var i = 0; i < photos.length; i++) {
+      var img = photos[i].querySelector('img.gl-img');
+      if (!img) continue;
+      photoIndex.push({
+        img: img,
+        x: parseFloat(photos[i].style.left) || 0,
+        y: parseFloat(photos[i].style.top) || 0,
+        w: parseFloat(photos[i].style.width) || 0,
+        h: parseFloat(photos[i].style.height) || 0,
+      });
     }
   }
 
-  function swapToThumb() {
-    if (!cvs) return;
-    var imgs = cvs.querySelectorAll('img.gl-img');
-    for (var i = 0; i < imgs.length; i++) {
-      var img = imgs[i];
-      if (!img.dataset.fullsrc || img.dataset.fullsrc === img.src) continue;
-      var tmp = img.src;
-      img.src = img.dataset.fullsrc;
-      img.dataset.fullsrc = tmp;
-    }
-  }
+  /* Request every print near the viewport, forget the rest. */
+  function sweepVisible() {
+    if (!photoIndex.length || !vp || !scale) return;
 
-  function preloadImages() {
-    if (!cvs) return;
-    var imgs = cvs.querySelectorAll('img.gl-img');
-    for (var i = 0; i < imgs.length; i++) {
-      var full = imgs[i].dataset.fullsrc;
-      if (!full || full === imgs[i].src) continue;
-      var pref = new Image();
-      pref.src = full;
+    var margin = 700 / scale;
+    var left = -tx / scale - margin;
+    var top = -ty / scale - margin;
+    var right = (vp.clientWidth - tx) / scale + margin;
+    var bottom = (vp.clientHeight - ty) / scale + margin;
+
+    visiblePhotos.clear();
+
+    for (var i = 0; i < photoIndex.length; i++) {
+      var entry = photoIndex[i];
+      var hit = entry.x < right && entry.x + entry.w > left &&
+                entry.y < bottom && entry.y + entry.h > top;
+      if (!hit) continue;
+
+      visiblePhotos.add(entry.img);
+      if (!entry.img.getAttribute('src')) setTier(entry.img, 'thumb', true);
     }
   }
 
@@ -485,6 +574,24 @@ const GalleryManager = (function () {
         // startup.html) carry their own href from the build.
         var href = proj.href || ('project-' + encodeURIComponent(proj.slug) + '.html');
 
+        // The resolution ladder the build wrote for the archive cards: 800px
+        // for an overview, 1600px once zoomed, and the original only when the
+        // print is drawn wider than that.
+        var srcThumb = '', srcSmall = '', srcMedium = '';
+        var candidates = (img.srcset || '').split(',');
+        for (var s = 0; s < candidates.length; s++) {
+          var bits = candidates[s].trim().split(/\s+/);
+          if (bits.length < 2) continue;
+          var candidateWidth = parseInt(bits[1], 10);
+          if (candidateWidth === 400) srcThumb = bits[0];
+          else if (candidateWidth === 800) srcSmall = bits[0];
+          else if (candidateWidth === 1600) srcMedium = bits[0];
+        }
+        if (!srcSmall) srcSmall = srcMedium || img.src;
+        if (!srcMedium) srcMedium = srcSmall;
+        if (!srcThumb) srcThumb = srcSmall;
+        var srcLarge = img.fullsrc || img.src;
+
         html += '<a class="gl-photo" href="' + href +
                 '" data-project="' + href +
                 '" aria-label="Open ' + esc(proj.shortTitle || proj.title) + ' documentation"' +
@@ -494,11 +601,12 @@ const GalleryManager = (function () {
                 'px;transform:rotate(' + img.rot.toFixed(2) + 'deg);">' +
                 '<figure class="polaroid" style="padding:' + side + 'px ' + side +
                 'px ' + bottom + 'px;--side:' + side + 'px;--bottom:' + bottom + 'px;">' +
-                '<img class="gl-img" src="' + img.src + '" data-fullsrc="' +
-                esc(img.fullsrc || img.src) +
-                (img.srcset ? '" srcset="' + img.srcset : '') +
-                '" sizes="' + pw + 'px" alt="' + esc(photoAlt) + '" ' +
-                'loading="lazy" draggable="false" decoding="async" width="' + pw + '" height="' + ph +
+                '<img class="gl-img" data-src-thumb="' + esc(srcThumb) +
+                '" data-src-small="' + esc(srcSmall) +
+                '" data-src-medium="' + esc(srcMedium) +
+                '" data-src-large="' + esc(srcLarge) +
+                '" alt="' + esc(photoAlt) + '" ' +
+                'draggable="false" decoding="async" width="' + pw + '" height="' + ph +
                 '" style="width:' + pw + 'px;height:' + ph + 'px;">' +
                 (caption ? '<figcaption>' + caption + '</figcaption>' : '') +
                 '</figure></a>';
@@ -533,8 +641,9 @@ const GalleryManager = (function () {
 
     canvasEl.insertAdjacentHTML('beforeend', html);
 
-    // Cache full-res sources right away so zoom swaps are instant.
-    preloadImages();
+    // Photos request their own file as they come near the viewport; the first
+    // sweep runs through fitToScreen() at the end of this function.
+    indexPhotos();
 
     // gallery-video.js declares a top-level const, which is a binding, not a
     // window property - test the identifier rather than window.*.

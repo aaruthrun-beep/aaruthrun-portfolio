@@ -31,7 +31,7 @@ const Lightbox = (function () {
       (img ? img.alt : '');
     const href = anchor.getAttribute('href') || '';
     return {
-      src: img ? (img.currentSrc || img.src) : '',
+      src: img ? (img.dataset.srcLarge || img.currentSrc || img.src) : '',
       alt: img ? img.alt : caption,
       caption: caption,
       project: anchor.getAttribute('data-project') || (/project\.html/.test(href) ? href : '')
