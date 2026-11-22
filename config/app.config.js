@@ -62,6 +62,7 @@ const AppConfig = (function () {
       { label: 'Projects', href: 'projects.html', priority: 2 },
       { label: 'Timeline', href: 'timeline.html', priority: 3 },
       { label: 'Gallery', href: 'gallery.html', priority: 4 },
+      { label: 'Gallery 1', href: 'gallery-1.html', priority: 4.5 },
       { label: 'Skills', href: 'skills.html', priority: 5 },
       { label: 'Startups', href: 'startup.html', priority: 6 },
       { label: 'Journal', href: 'journal.html', priority: 7 },

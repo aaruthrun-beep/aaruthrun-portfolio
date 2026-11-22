@@ -51,6 +51,7 @@ if (typeof ThemeManager !== 'undefined' && typeof HeaderManager !== 'undefined' 
       { label: 'Projects', href: 'projects.html' },
       { label: 'Timeline', href: 'timeline.html' },
       { label: 'Gallery', href: 'gallery.html' },
+      { label: 'Gallery 1', href: 'gallery-1.html' },
       { label: 'Skills', href: 'skills.html' },
       { label: 'Startups', href: 'startup.html' },
       { label: 'Journal', href: 'journal.html' },

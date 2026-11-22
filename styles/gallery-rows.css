@@ -1,0 +1,163 @@
+/* ==================================================================
+   GALLERY 1 — ROW REEL
+   The screen is split into three rows. One project owns a row and its
+   photos stream past horizontally in a loop; scrolling the page moves
+   down to the next group of three projects and pushes the rows faster.
+   ================================================================== */
+
+/* The page itself does not scroll: the row stack does, so three rows always
+   fill exactly one screen. */
+body.gallery-rows-body {
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.gr-main {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background-color: var(--color-card, #FAFAF7);
+  overscroll-behavior-y: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+.gr-row {
+  position: relative;
+  height: calc(100% / 3);
+  min-height: 150px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+}
+
+.gr-row:last-child {
+  border-bottom: 0;
+}
+
+.gr-row-track {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: max-content;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+}
+
+.gr-run {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  flex: 0 0 auto;
+  gap: 16px;
+  padding-right: 16px;
+}
+
+.gr-print {
+  height: 100%;
+  margin: 0;
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  padding: 14px 0;
+  box-sizing: border-box;
+}
+
+.gr-print img {
+  display: block;
+  height: 100%;
+  width: auto;
+  max-width: none;
+  background: #fbf9f3;
+  border-radius: 2px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.26), 0 7px 16px rgba(0, 0, 0, 0.15);
+  -webkit-user-drag: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Project label, pinned to the left edge of its row so it stays legible
+   while the photos travel underneath. */
+.gr-row-meta {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 2;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  max-width: 78%;
+  padding: 8px 14px 8px 16px;
+  pointer-events: none;
+  background: var(--color-card, #FAFAF7);
+  border-bottom-right-radius: 3px;
+}
+
+.gr-row-idx {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--text-muted, #777);
+}
+
+.gr-row-name {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: 0.95rem;
+  line-height: 1.1;
+  color: var(--text-main, #111);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.gr-row-count {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.625rem;
+  letter-spacing: 0.08em;
+  color: var(--text-muted, #777);
+  white-space: nowrap;
+}
+
+/* Quiet page-level hint, out of the rows' way. */
+.gr-hint {
+  position: fixed;
+  left: 16px;
+  bottom: 14px;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.625rem;
+  letter-spacing: 0.08em;
+  color: var(--text-muted, #777);
+  background: var(--color-card, #FAFAF7);
+  border: 1px solid rgba(0, 0, 0, 0.09);
+  border-radius: 2px;
+  pointer-events: none;
+}
+
+.gr-status {
+  padding: 24px;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.75rem;
+  color: var(--text-muted, #777);
+}
+
+@media (max-width: 640px) {
+  .gr-row { min-height: 120px; }
+  .gr-row-name { font-size: 0.8125rem; }
+  .gr-run { gap: 10px; padding-right: 10px; }
+  .gr-print { padding: 10px 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gr-row { overflow-x: auto; }
+  .gr-row-track { will-change: auto; transform: none !important; }
+}
