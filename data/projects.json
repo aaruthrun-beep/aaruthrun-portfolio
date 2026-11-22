@@ -650,5 +650,87 @@
       "images/projects/smart-rover/WhatsApp Image 2026-03-19 at 9.12.04 PM (1).jpeg",
       "images/projects/smart-rover/WhatsApp Image 2026-03-19 at 9.12.04 PM.jpeg"
     ]
+  },
+  {
+    "id": 11,
+    "slug": "masr-369",
+    "title": "MASR 369 — Minimally Actuated Serial Robot",
+    "shortTitle": "MASR 369",
+    "category": "Robotics",
+    "start": "2026-10",
+    "end": "2026-10",
+    "updated": "2026-10-03",
+    "status": "Active",
+    "tags": [
+      "Robotics",
+      "Mechanical",
+      "Control"
+    ],
+    "skills": [
+      "SolidWorks",
+      "Serial Kinematics",
+      "Joint Clamping",
+      "Box-Section Links",
+      "CAD Assembly",
+      "Rendering"
+    ],
+    "summary": "A serial robot built on the minimally actuated idea: the arm is a chain of hinged links where a joint is either locked or released, so one actuator reconfigures the whole chain instead of every axis carrying its own motor. MASR 369 is the CAD assembly working out that trade — link chain, clamp blocks, base and end plates.",
+    "monoSpec": "Minimally Actuated Serial Robot // Chain of Hinged Links // Clamped Joints // Fewer Motors Than Axes",
+    "image": "images/projects/masr-369/Assem10.png",
+    "specs": {
+      "Machine class": "Minimally actuated serial robot (MASR)",
+      "Configuration": "Serial chain of box-section links, base plate to end plate",
+      "Actuation": "Fewer motors than joints — joints are clamped or released, so the driven axis repositions the chain",
+      "Joint hardware": "Circular hinge joints with clamp blocks at each axis",
+      "Structure": "Box-section links in yellow and black, with base and end plates",
+      "Electronics": "A mid-chain block mounts the control electronics",
+      "Stage": "CAD assembly and rendered poses"
+    },
+    "milestones": [
+      {
+        "date": "2026-10",
+        "type": "design",
+        "label": "Minimally Actuated Concept",
+        "description": "Settled the design on a serial chain with fewer actuators than joints, where locking a joint takes that axis out of the driven chain."
+      },
+      {
+        "date": "2026-10",
+        "type": "prototype",
+        "label": "Full Chain CAD",
+        "description": "Modelled the link chain end to end with hinge joints, clamp blocks, base plate and end plate in one assembly."
+      },
+      {
+        "date": "2026-10",
+        "type": "demo",
+        "label": "Pose Renders",
+        "description": "Rendered the assembly upright, folded and extended to show how the chain reconfigures."
+      }
+    ],
+    "problem": "A motor per joint is what makes a serial arm heavy, expensive and awkward to wire: every axis adds an actuator, its drive and its cabling. A minimally actuated serial robot takes the other trade — keep the joints, drop most of the motors, and clamp the joints that are not being driven so the remaining actuator can move the chain.",
+    "architecture": "The robot is a serial chain of hinged links with a base plate at one end and an end plate at the other. Rather than an actuator at every hinge, the joints are clamped or released: locked joints hold their angle, and the driven axis reconfigures the links around them.",
+    "mechanical": "The links are box-section extrusion in yellow and black, joined by circular hinge joints with clamp blocks at each axis. Base and end plates close the chain at both ends, and a block mid-chain mounts the electronics.",
+    "electronicsFirmware": "Because the motor count stays low, the drive electronics the chain has to carry stay small; the CAD places them in a block on the chain instead of fanning a drive per axis down the arm.",
+    "control": "Minimally actuated control: hold the joints that should stay put, release the one being changed, and drive the powered axis so the end plate walks through a sequence of poses without an actuator at every joint.",
+    "results": "A complete CAD assembly of a minimally actuated serial robot — link chain, clamp blocks, base and end plates and the mid-chain electronics block — shown both folded and extended.",
+    "buildLog": [
+      {
+        "date": "2026-10-02",
+        "entry": "Assembled the link chain in CAD and worked out the clamp block at each hinge."
+      },
+      {
+        "date": "2026-10-03",
+        "entry": "Rendered the upright, folded and extended poses of the assembly."
+      }
+    ],
+    "images": [
+      "images/projects/masr-369/Assem10.png",
+      "images/projects/masr-369/Assem101.png",
+      "images/projects/masr-369/Assem102.png",
+      "images/projects/masr-369/Assem103.png",
+      "images/projects/masr-369/WhatsApp Image 2026-10-02 at 9.37.42 PM.jpeg",
+      "images/projects/masr-369/WhatsApp Image 2026-10-03 at 9.32.19 PM.jpeg",
+      "images/projects/masr-369/WhatsApp Image 2026-10-03 at 9.36.33 PM.jpeg",
+      "images/projects/masr-369/WhatsApp Image 2026-10-03 at 9.49.44 PM.jpeg"
+    ]
   }
 ]
