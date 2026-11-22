@@ -24,7 +24,7 @@
   <title>Gallery Map — Aaruthrun</title>
   <meta name="description" content="An interactive infinite canvas of project photos.">
 
-  <link rel="stylesheet" href="css/style.css?v=2026-11-25">
+  <link rel="stylesheet" href="css/style.css?v=2026-11-27">
 
   <link rel="stylesheet" href="config/design-tokens.css?v=2026-11-08">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -58,11 +58,14 @@
     <!-- The interactive viewport -->
     <div class="gallery-viewport" id="gallery-viewport" style="flex: 1; position: relative; overflow: hidden; touch-action: none; background-color: var(--color-card); cursor: grab;">
 
-      <!-- The movable/zoomable canvas -->
-      <div class="gallery-canvas" id="gallery-canvas" style="position:absolute;top:0;left:0;width:4800px;height:3600px;transform-origin:0 0;transition:none;will-change:transform;background-color:var(--color-card);">
-        <!-- Subtle grid texture (CAD blueprint dots on white) -->
-        <div style="position: absolute; inset: 0; background-image: radial-gradient(rgba(0,0,0,0.05) 1px, transparent 1px); background-size: 1200px 1200px; pointer-events: none;"></div>
+      <!-- Blueprint dots. Painted on a screen-sized layer whose spacing and
+           offset follow the map: the canvas itself is tens of thousands of
+           pixels across, and mobile Safari will not rasterise a texture that
+           big, which left most of the map blank. -->
+      <div id="gallery-grid" aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(rgba(0,0,0,0.05) 1px, transparent 1px);background-size:1200px 1200px;"></div>
 
+      <!-- The movable/zoomable canvas -->
+      <div class="gallery-canvas" id="gallery-canvas" style="position:absolute;top:0;left:0;width:4800px;height:3600px;transform-origin:0 0;transition:none;">
         <!-- Rendered by JS -->
       </div>
 
@@ -86,7 +89,7 @@
   <script src="modules/header/header-manager.js?v=2026-11-08"></script>
   <script src="modules/footer/footer-manager.js?v=2026-11-25b"></script>
   <script src="modules/reveal/reveal-manager.js?v=2026-11-08"></script>
-  <script src="modules/gallery/gallery-manager.js?v=2026-11-26d"></script>
+  <script src="modules/gallery/gallery-manager.js?v=2026-11-27b"></script>
   <script src="modules/gallery/gallery-video.js?v=2026-11-25"></script>
   <script src="js/gallery.js"></script>
   <script src="modules/gallery/lightbox.js?v=2026-11-26c"></script>

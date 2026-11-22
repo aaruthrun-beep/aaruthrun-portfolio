@@ -50,7 +50,7 @@ const GalleryManager = (function () {
   var fitScale = 0;
   var resTicking = false;
   var dragging = false, ddX = 0, ddY = 0;
-  var vp = null, cvs = null;
+  var vp = null, cvs = null, gridEl = null;
   var started = false;
   var tiltRaf = null;
 
@@ -62,12 +62,22 @@ const GalleryManager = (function () {
     if (!cvs) return;
     cvs.style.transform = 'translate(' + tx + 'px,' + ty + 'px) scale(' + scale + ')';
 
-    // Picking a file size per frame would be wasteful; once per frame is plenty.
+    // The blueprint dots are a screen-sized layer, so they scale with the map
+    // instead of being painted across the whole canvas.
+    if (gridEl) {
+      gridEl.style.backgroundSize = (1200 * scale) + 'px ' + (1200 * scale) + 'px';
+      gridEl.style.backgroundPosition = tx + 'px ' + ty + 'px';
+    }
+
+    // Loading is arithmetic only, so it runs right here: a hidden tab pauses
+    // requestAnimationFrame, and prints must not wait on that to appear.
+    sweepVisible();
+
+    // Choosing a file size is more work, so once per frame is plenty.
     if (!resTicking) {
       resTicking = true;
       window.requestAnimationFrame(function () {
         resTicking = false;
-        sweepVisible();
         refreshResolution();
       });
     }
@@ -722,6 +732,7 @@ const GalleryManager = (function () {
     started = true;
     vp = document.getElementById('gallery-viewport');
     cvs = document.getElementById('gallery-canvas');
+    gridEl = document.getElementById('gallery-grid');
     if (!vp || !cvs) return;
     setupInteractions();
     renderGallery();

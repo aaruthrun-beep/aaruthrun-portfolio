@@ -695,9 +695,8 @@
   background-color: #FAFAF7;
 }
 
-.gallery-canvas {
-  background-color: #FAFAF7;
-}
+/* The canvas is tens of thousands of pixels across; the paper colour is
+   painted by .gallery-viewport so no giant background is ever rasterised. */
 
 .gallery-project-label {
   display: flex;
