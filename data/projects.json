@@ -563,5 +563,92 @@
     ],
     "archiveImage": "images/archive/origin-one.jpg",
     "thumbImage": "images/archive/origin-one-thumb.jpg"
+  },
+  {
+    "id": 10,
+    "slug": "smart-rover",
+    "title": "Smart Rover — Scrap-Built Robot from Class 8",
+    "shortTitle": "Smart Rover",
+    "category": "Robotics",
+    "start": "2020-08",
+    "end": "2020-09",
+    "updated": "2020-09-01",
+    "status": "Completed",
+    "tags": [
+      "Robotics",
+      "Mechanical",
+      "Fabrication",
+      "Embedded"
+    ],
+    "skills": [
+      "Hand Fabrication",
+      "Scrap-Part Build",
+      "Wheeled Chassis",
+      "3-Axis Arm",
+      "Rope Lashing",
+      "Manual Control",
+      "Sensor Demo"
+    ],
+    "summary": "A rover built in class 8 out of whatever scraps I could find: a PVC-pipe frame lashed with rope over wooden cross members, four salvaged gear motors for wheels, and a three-axis arm on a painted wooden deck. It is driven by hand, and it was shown together with a water sensor, a fire alarm and a non-contact voltage detector carried on the machine.",
+    "monoSpec": "Class 8 Build // Scrap Parts Only // 4 Gear-Motor Chassis // 3-Axis Arm // Manually Controlled",
+    "image": "images/projects/smart-rover/IMG-20200831-WA0003.jpg",
+    "specs": {
+      "Frame": "PVC pipe ladder frame with wooden cross members, lashed with rope",
+      "Drive": "Four salvaged gear motors, one per wheel",
+      "Arm": "Three-axis arm built from scrap timber and aluminium offcuts",
+      "Control": "Manually controlled",
+      "Sensor extras": "Water sensor, fire alarm, non-contact voltage detector",
+      "Materials": "Scrap parts only — PVC pipe, timber, salvaged motors, wheels and hardware",
+      "Built": "Class 8, 2020"
+    },
+    "milestones": [
+      {
+        "date": "2020-08",
+        "type": "prototype",
+        "label": "Frame and Drive",
+        "description": "Lashed the PVC pipe frame over wooden cross members and mounted the four salvaged gear motors and wheels."
+      },
+      {
+        "date": "2020-08",
+        "type": "prototype",
+        "label": "Three-Axis Arm",
+        "description": "Built the arm from scrap timber and aluminium offcuts and mounted it on the painted wooden deck."
+      },
+      {
+        "date": "2020-09",
+        "type": "demo",
+        "label": "Exhibition Display",
+        "description": "Showed the rover with a hand-written specification sheet listing the chassis, the arm and the sensor extras."
+      }
+    ],
+    "problem": "The constraint was that nothing could be bought for it: every part had to come out of scraps. The whole design therefore grew around what was already lying around — pipe, timber, motors and wheels — instead of around a drawing.",
+    "architecture": "Four gear motors drive the wheels of a PVC pipe frame, with a three-axis arm sitting on a wooden deck at the centre of the chassis. The machine is driven by hand, and the sensor extras ride on the same frame as the drive and the arm.",
+    "mechanical": "The chassis is a ladder of PVC pipe joints, lashed with rope to wooden cross members rather than bolted. The deck is a wooden plate painted in three colours, and the arm is scrap timber and aluminium offcuts pivoting on the same kind of salvaged motor and hardware as the drivetrain.",
+    "electronicsFirmware": "The drive and arm motors are wired back to a manual control, and the sensor extras — water sensor, fire alarm and non-contact voltage detector — are wired alongside them on the same frame.",
+    "control": "Manual: the rover is driven and the arm moved by hand from the control wiring, with no autonomous behaviour.",
+    "results": "A working scrap-built rover that drove and moved its three-axis arm, shown with its hand-written specification sheet.",
+    "buildLog": [
+      {
+        "date": "2020-08-31",
+        "entry": "Finished the lashed pipe frame with its four gear motors, wheels and wooden deck, and mounted the three-axis arm on top."
+      },
+      {
+        "date": "2020-09-01",
+        "entry": "Wired the manual control and the sensor extras, then photographed the rover with its specification sheet at the display."
+      }
+    ],
+    "images": [
+      "images/projects/smart-rover/IMG-20200831-WA0003.jpg",
+      "images/projects/smart-rover/IMG-20200831-WA0009.jpg",
+      "images/projects/smart-rover/IMG-20200831-WA0016.jpg",
+      "images/projects/smart-rover/IMG-20200831-WA0017.jpg",
+      "images/projects/smart-rover/IMG-20200831-WA0018.jpg",
+      "images/projects/smart-rover/IMG-20200901-WA0000.jpg",
+      "images/projects/smart-rover/IMG-20200901-WA0004.jpg",
+      "images/projects/smart-rover/WhatsApp Image 2026-03-03 at 5.03.57 PM.jpeg",
+      "images/projects/smart-rover/WhatsApp Image 2026-03-19 at 9.12.03 PM.jpeg",
+      "images/projects/smart-rover/WhatsApp Image 2026-03-19 at 9.12.04 PM (1).jpeg",
+      "images/projects/smart-rover/WhatsApp Image 2026-03-19 at 9.12.04 PM.jpeg"
+    ]
   }
 ]
