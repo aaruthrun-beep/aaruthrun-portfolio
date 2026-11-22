@@ -25,6 +25,7 @@ const GalleryRows = (function () {
   var impulse = 0;
   var lastScroll = 0;
   var rafId = null;
+  var resPending = false;
   var lastTime = 0;
   var started = false;
 
@@ -39,11 +40,34 @@ const GalleryRows = (function () {
       .replace(/"/g, '&quot;');
   }
 
-  /** The smallest derivative in a srcset, so a row costs almost nothing. */
-  function thumbOf(photo) {
-    var candidates = (photo.srcset || '').split(',');
-    var first = candidates[0] && candidates[0].trim().split(/\s+/)[0];
-    return first || photo.src;
+  /**
+   * The width candidates for a photo, smallest first. The 400/800/1600
+   * derivatives come from the srcset; the original is the ceiling for a print
+   * that is shown larger than any derivative.
+   */
+  function candidatesOf(photo) {
+    var list = [];
+
+    (photo.srcset || '').split(',').forEach(function (entry) {
+      var parts = entry.trim().split(/\s+/);
+      if (!parts[0]) return;
+      list.push({ url: parts[0], width: parseInt(parts[1], 10) || 0, original: false });
+    });
+
+    if (photo.src) {
+      list.push({ url: photo.src, width: photo.w || 0, original: true });
+    }
+
+    list.sort(function (a, b) { return a.width - b.width; });
+    return list;
+  }
+
+  /** Smallest file that covers the device pixels the print occupies. */
+  function chooseSource(candidates, need) {
+    for (var i = 0; i < candidates.length; i++) {
+      if (candidates[i].width >= need) return candidates[i];
+    }
+    return candidates[candidates.length - 1] || null;
   }
 
   function buildPrint(photo, project) {
@@ -51,9 +75,13 @@ const GalleryRows = (function () {
     figure.className = 'gr-print';
 
     var img = document.createElement('img');
-    img.src = thumbOf(photo);
-    if (photo.srcset) img.srcset = photo.srcset;
-    img.sizes = '(max-width: 700px) 55vw, 26vw';
+    var candidates = candidatesOf(photo);
+    img.src = (candidates[0] && candidates[0].url) || photo.src;
+    img.__candidates = candidates;
+    img.__chosen = img.src;
+    /* The final file is picked by applyResolution() once the row has a height:
+       a print's width comes from the row height and its aspect ratio, not from
+       the viewport, so a viewport-based `sizes` under-asks on wide photos. */
     img.loading = 'lazy';
     img.decoding = 'async';
     img.alt = photo.text || (project.shortTitle || project.title) + ' — photograph';
@@ -125,6 +153,20 @@ const GalleryRows = (function () {
       row.track.appendChild(copy);
     }
     row.runCount = row.track.children.length;
+
+    // cloneNode drops the JS properties that carry the width candidates, so a
+    // copy would stay on the smallest file. Hand them back and let
+    // applyResolution() choose again for every copy.
+    var originals = row.run.querySelectorAll('img');
+    Array.prototype.forEach.call(row.track.children, function (runEl, index) {
+      if (!index) return;
+      Array.prototype.forEach.call(runEl.querySelectorAll('img'), function (img, i) {
+        var source = originals[i];
+        if (!source || !source.__candidates) return;
+        img.__candidates = source.__candidates;
+        img.__chosen = img.getAttribute('src');
+      });
+    });
   }
 
   function render(model, mount) {
@@ -161,6 +203,47 @@ const GalleryRows = (function () {
     rows.forEach(function (row) {
       if (third) row.el.style.height = Math.max(120, third) + 'px';
       ensureCopies(row);
+    });
+
+    applyResolution();
+  }
+
+  /**
+   * Pick a file per print from the device pixels it actually covers. The 1.2
+   * headroom keeps a print sharp while it is drifting and after a small zoom,
+   * and it rounds up so a print never lands one pixel short of a sharper file.
+   */
+  function applyResolution() {
+    var dpr = window.devicePixelRatio || 1;
+    // Past 2x the extra pixels stop being visible and the files get heavy.
+    var density = Math.min(dpr, 2);
+    var main = document.querySelector('.gr-main');
+    var view = main ? main.clientHeight : window.innerHeight;
+    var top = main ? main.scrollTop : window.pageYOffset;
+    var mainTop = main ? main.getBoundingClientRect().top : 0;
+
+    rows.forEach(function (row) {
+      // Rows further than a couple of screens away keep their small thumbnails
+      // until they are scrolled near; then they get the sharp file.
+      var box = row.el.getBoundingClientRect();
+      var rowTop = box.top - mainTop + top;
+      if (rowTop > top + view * 2.5 || rowTop + box.height < top - view * 1.5) return;
+
+      var imgs = row.track.querySelectorAll('img');
+      for (var i = 0; i < imgs.length; i++) {
+        var img = imgs[i];
+        var candidates = img.__candidates;
+        if (!candidates || !candidates.length) continue;
+
+        var width = img.getBoundingClientRect().width;
+        if (!width) continue;
+
+        var pick = chooseSource(candidates, Math.ceil(width * density * 1.2));
+        if (!pick || pick.url === img.__chosen) continue;
+
+        img.__chosen = pick.url;
+        img.src = pick.url;
+      }
     });
   }
 
@@ -202,6 +285,15 @@ const GalleryRows = (function () {
     var delta = Math.abs(top - lastScroll);
     lastScroll = top;
     impulse = Math.min(MAX_IMPULSE, impulse + delta * SCROLL_GAIN);
+
+    // New rows came into range: give them their sharp files.
+    if (!resPending) {
+      resPending = true;
+      window.requestAnimationFrame(function () {
+        resPending = false;
+        applyResolution();
+      });
+    }
   }
 
   function setupScrollDriver() {
