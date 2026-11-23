@@ -38,7 +38,7 @@ const baseArg = [...args].find((a) => a.startsWith('--base-url='));
 
 const FALLBACK_SITE_URL = 'https://aaruthrun-beep.github.io/aaruthrun-portfolio';
 // ?v=2 keeps link previews off the cached copy of the old, undecodable card.
-const FALLBACK_IMAGE = 'images/og-image.jpg?v=2';
+const FALLBACK_IMAGE = 'images/og-image.jpg?v=3';
 const RASTER = /\.(jpe?g|png|webp|gif|avif)$/i;
 const GENERATED_RE = /^(project|journal)-[A-Za-z0-9._-]+\.html$/;
 const MARKER = 'tools/build-pages.mjs';
@@ -109,7 +109,7 @@ const absolute = (rel) => BASE + '/' + String(rel).replace(/^\.?\//, '');
 /* ------------------------------------------------------------------ */
 
 // Each project has its own generated preview card (photo, name, spec) built by
-// tools/make-project-cards.js. Prefer it; a raw photograph has no name on it.
+// tools/make-share-cards.js. Prefer it; a raw photograph has no name on it.
 function projectCard(project) {
   const card = 'images/og/project-' + project.slug + '.jpg';
   return exists(card) ? card : null;
@@ -130,6 +130,13 @@ function noteImage(entry, project) {
   if (RASTER.test(entry.cover || '') && exists(entry.cover)) return entry.cover;
   if (project) return projectImage(project);
   return FALLBACK_IMAGE;
+}
+
+// Field notes get the same generated card: their photograph (or a blueprint
+// field when the cover is an SVG plate), the title and the standfirst.
+function noteCard(entry) {
+  const card = 'images/og/note-' + entry.slug + '.jpg';
+  return exists(card) ? card : null;
 }
 
 /* ------------------------------------------------------------------ */
@@ -235,7 +242,7 @@ function notePage(entry, project) {
 
   const file = 'journal-' + slug + '.html';
   const url = absolute(file);
-  const image = absolute(noteImage(entry, project));
+  const image = absolute(noteCard(entry) || noteImage(entry, project));
   const description = clip(entry.summary || entry.subtitle || '', 300);
   const published = isoDay(entry.date);
 

@@ -186,14 +186,15 @@ npm run pages:check    # exit 1 when a page is missing or out of date
 It writes `project-<slug>.html` and `journal-<slug>.html` beside the templates with:
 
 - `<title>`, description, canonical, and Open Graph/Twitter tags for that build or note
-- an absolute `og:image`: `images/og/project-<slug>.jpg` for a project, the web-sized `images/archive/` derivative (never the multi-megabyte original) for a field note
-- for projects, a generated 1200x630 baseline-JPEG card carrying the build's photo, its name and its one-line spec, built by `tools/make-project-cards.js`:
+- an absolute `og:image`: `images/og/project-<slug>.jpg` for a project, `images/og/note-<slug>.jpg` for a field note — both generated 1200x630 baseline-JPEG cards built by `tools/make-share-cards.js`, carrying the photo (or a blueprint field for a note whose cover is an SVG plate), the name and a line of detail:
 
 ```bash
-npm run cards          # regenerate after editing data/projects.json (or adding photos)
+npm run cards          # regenerate after editing data/projects.json or data/journal.json (or adding photos)
 ```
 
-  The card is composed *centre-safe*: every piece of text lives inside the centre 630x630 square (x 285..915). Telegram and Twitter show the whole 1.91:1 rectangle, but WhatsApp's link preview is a square cut from the centre of the image, so anything outside that square is lost there. Keep new text inside it.
+  Both card kinds are composed *centre-safe*: every piece of text lives inside the centre 630x630 square (x 285..915). Telegram and Twitter show the whole 1.91:1 rectangle, but WhatsApp's link preview is a square cut from the centre of the image, so anything outside that square is lost there. Keep new text inside it. The raw `images/archive/` derivative (never the multi-megabyte original) remains the field-note fallback when a card is missing.
+
+  The site-wide portrait card (`images/og-image.jpg`, from `npm run brand`) follows the same rule: kicker, framed portrait, name, role and specialties all sit inside that square, with cream margins either side. Its URL carries `?v=3` in the pages — bump it again when the card changes, or unfurlers keep serving the cached image.
 - `TechArticle` / `BlogPosting` structured data
 - `data-page` / `data-slug` on `<body>`, so the usual renderer takes over on load
 - a `<noscript>` summary of the page

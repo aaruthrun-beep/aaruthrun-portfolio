@@ -506,11 +506,10 @@ const JournalManager = (function () {
     });
   }
 
-  // SVG covers do not render in link previews; use a photograph instead.
-  function previewImage(entry, projects) {
-    if (/\.(jpe?g|png|webp|gif|avif)$/i.test(entry.cover || '')) return entry.cover;
-    const project = projectFor(entry, projects);
-    if (project) return project.archiveImage || project.image || '';
+  // Every published note has a generated centre-safe card; the raw cover may be
+  // an SVG (which crawlers do not render) or a multi-megabyte photograph.
+  function previewImage(entry) {
+    if (entry.slug) return 'images/og/note-' + entry.slug + '.jpg';
     return 'images/og-image.jpg';
   }
 

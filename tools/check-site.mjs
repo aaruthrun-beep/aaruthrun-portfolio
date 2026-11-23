@@ -27,6 +27,14 @@ if (existsSync(projectsJsonPath)) {
   projects = JSON.parse(readFileSync(projectsJsonPath, 'utf-8'));
 }
 
+// ---- Discover the published field notes ----
+const journalJsonPath = resolve(PROJECT_ROOT, 'data/journal.json');
+let notes = [];
+if (existsSync(journalJsonPath)) {
+  const journal = JSON.parse(readFileSync(journalJsonPath, 'utf-8'));
+  notes = (journal.entries || []).filter(e => e && e.slug && e.status === 'published');
+}
+
 // ---- Build a map of existing pages ----
 const existingPages = new Set();
 htmlFiles.forEach(path => {
@@ -323,7 +331,7 @@ function checkPageCard(file, rel) {
   const full = resolve(PROJECT_ROOT, file);
 
   if (!existsSync(full)) {
-    issues.push({ type: 'Project page is missing', file, check: 'og-image' });
+    issues.push({ type: 'Prerendered page is missing', file, check: 'og-image' });
     return issues;
   }
 
@@ -362,6 +370,13 @@ function checkShareCard() {
     const rel = `images/og/project-${project.slug}.jpg`;
     issues.push(...cardIssues(rel));
     issues.push(...checkPageCard(`project-${project.slug}.html`, rel));
+  }
+
+  // One card per published field note, and its prerendered page has to name it.
+  for (const entry of notes) {
+    const rel = `images/og/note-${entry.slug}.jpg`;
+    issues.push(...cardIssues(rel));
+    issues.push(...checkPageCard(`journal-${entry.slug}.html`, rel));
   }
 
   return issues;
