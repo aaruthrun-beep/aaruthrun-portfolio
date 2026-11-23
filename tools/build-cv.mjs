@@ -123,3 +123,38 @@ if (next === current) {
   fs.writeFileSync(CV, next);
   console.log('[cv] cv.html regenerated from timeline, skills config and project archive');
 }
+
+/* ------------------------------------------------------------------ */
+/* Résumé PDF                                                          */
+/* ------------------------------------------------------------------ */
+
+// cv.html points at cv.pdf, but every FlowCV export is named with its date, so
+// dated links die as soon as a new export lands. Copy the newest PDF to the
+// stable path instead, and keep --check honest about it.
+function syncResume() {
+  const dir = path.join(ROOT, 'images/resume');
+  if (!fs.existsSync(dir)) return;
+
+  const pdfs = fs.readdirSync(dir).filter((f) => f.toLowerCase().endsWith('.pdf'));
+  if (!pdfs.length) return;
+
+  const newest = pdfs
+    .map((f) => ({ f, time: fs.statSync(path.join(dir, f)).mtimeMs }))
+    .sort((a, b) => b.time - a.time)[0].f;
+  const src = path.join(dir, newest);
+  const dest = path.join(ROOT, 'cv.pdf');
+
+  if (fs.existsSync(dest) && fs.readFileSync(src).equals(fs.readFileSync(dest))) {
+    console.log('[cv] cv.pdf matches ' + newest);
+    return;
+  }
+  if (checkOnly) {
+    console.error('[cv] cv.pdf is out of date; run `npm run cv`');
+    process.exitCode = 1;
+    return;
+  }
+  fs.copyFileSync(src, dest);
+  console.log('[cv] cv.pdf \u2190 ' + newest);
+}
+
+syncResume();

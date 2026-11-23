@@ -63,7 +63,7 @@ portfolio-2/
     ├── titan-klipper.webp
     ├── mars-swarm-diagram.webp
     ├── avatar.webp
-    └── og-image.webp
+    └── og-image.jpg
 ```
 
 ---

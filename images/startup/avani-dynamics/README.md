@@ -12,7 +12,7 @@ Pictures for the **Avani Dynamics** startup page (`startup.html`).
 | Embedded systems & control | `embedded-01.webp` ... | PCBs, ESP32/STM32 boards, test benches, scope captures |
 | Prototyping & R&D | `rnd-01.webp` ... | 48-hour sprint builds, bench testing, workshop shots |
 | Team / lab photos | `lab-01.webp` ... | Workspace, machines, people working |
-| Logo / OG image | `logo.webp`, `og-image.webp` | Site-wide branding (og-image currently flat in `images/`) |
+| Logo / OG image | `logo.webp`, `images/og-image.jpg` | Site-wide branding (share card lives in `images/og-image.jpg`) |
 
 ## Conventions
 

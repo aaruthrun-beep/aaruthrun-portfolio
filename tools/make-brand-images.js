@@ -127,9 +127,87 @@ async function buildCard() {
   console.log('Wrote ' + path.relative(ROOT, OG_OUT) + ' (' + W + 'x' + H + ', ' + Math.round(size / 1024) + ' KB)');
 }
 
+/* -------------------------------------------------------------------------- */
+/* Favicon, touch icon and web manifest                                       */
+/* -------------------------------------------------------------------------- */
+
+// Same crop as the header avatar, so the tab icon, the home-screen shortcut and
+// the brand mark are all the same face.
+const CROP = { left: 170, top: 145, width: 720, height: 720 };
+
+async function squarePng(size, out) {
+  await sharp(PORTRAIT)
+    .extract(CROP)
+    .resize(size, size, { fit: 'cover' })
+    .png({ compressionLevel: 9 })
+    .toFile(out);
+  console.log('Wrote ' + path.relative(ROOT, out) + ' (' + size + 'x' + size + ')');
+}
+
+// sharp cannot write .ico, but an ICO may carry a PNG payload: a six-field
+// directory entry followed by the PNG bytes is a valid file for every browser.
+async function buildIco() {
+  const png = await sharp(PORTRAIT)
+    .extract(CROP)
+    .resize(32, 32, { fit: 'cover' })
+    .png({ compressionLevel: 9 })
+    .toBuffer();
+
+  const header = Buffer.alloc(6);
+  header.writeUInt16LE(0, 0);          // reserved
+  header.writeUInt16LE(1, 2);          // type: icon
+  header.writeUInt16LE(1, 4);          // one image
+
+  const entry = Buffer.alloc(16);
+  entry.writeUInt8(32, 0);             // width
+  entry.writeUInt8(32, 1);             // height
+  entry.writeUInt8(0, 2);              // palette count
+  entry.writeUInt8(0, 3);              // reserved
+  entry.writeUInt16LE(1, 4);           // colour planes
+  entry.writeUInt16LE(32, 6);          // bits per pixel
+  entry.writeUInt32LE(png.length, 8);  // payload size
+  entry.writeUInt32LE(22, 12);         // payload offset
+
+  const out = path.join(ROOT, 'favicon.ico');
+  fs.writeFileSync(out, Buffer.concat([header, entry, png]));
+  console.log('Wrote favicon.ico (32x32 PNG payload)');
+}
+
+function buildManifest() {
+  const manifest = {
+    name: 'Aaruthrun — Engineering Archive',
+    short_name: 'Aaruthrun',
+    description: 'Robotics and automation engineering archive.',
+    start_url: '/aaruthrun-portfolio/',
+    scope: '/aaruthrun-portfolio/',
+    display: 'browser',
+    background_color: '#F5F3EB',
+    theme_color: '#202524',
+    icons: [
+      { src: 'images/logo/icon-192.png', sizes: '192x192', type: 'image/png' },
+      { src: 'images/logo/icon-512.png', sizes: '512x512', type: 'image/png' },
+      { src: 'images/logo/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
+  };
+  const out = path.join(ROOT, 'site.webmanifest');
+  fs.writeFileSync(out, JSON.stringify(manifest, null, 2) + '\n');
+  console.log('Wrote site.webmanifest');
+}
+
+async function buildIcons() {
+  fs.mkdirSync(path.join(ROOT, 'images/logo'), { recursive: true });
+  await squarePng(32, path.join(ROOT, 'images/logo/favicon-32.png'));
+  await squarePng(180, path.join(ROOT, 'images/logo/apple-touch-icon.png'));
+  await squarePng(192, path.join(ROOT, 'images/logo/icon-192.png'));
+  await squarePng(512, path.join(ROOT, 'images/logo/icon-512.png'));
+  await buildIco();
+  buildManifest();
+}
+
 (async () => {
   await buildLogo();
   await buildCard();
+  await buildIcons();
 })().catch((err) => {
   console.error(err);
   process.exit(1);
