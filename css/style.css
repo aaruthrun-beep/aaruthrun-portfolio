@@ -1567,9 +1567,17 @@ main {
     top: 100%;
     left: 0;
     right: 0;
+    /* Desktop sets height: 100%; here that would clamp the panel to the
+       header's own height, leaving the links hanging outside their own
+       background and over the page text. */
+    height: auto;
+    max-height: 80vh;
+    overflow-y: auto;
     background-color: var(--bg);
-    border-bottom: none
+    border-bottom: var(--border-default);
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.14);
     padding: var(--s-3);
+    z-index: 1001;
   }
   .site-nav.open {
     display: block;
