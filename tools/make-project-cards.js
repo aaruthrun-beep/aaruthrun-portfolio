@@ -7,6 +7,27 @@
  *
  *   data/projects.json  ->  images/og/project-<slug>.jpg
  *
+ * CENTRE-SAFE LAYOUT
+ * Telegram and Twitter show the whole 1.91:1 rectangle. WhatsApp does not: its
+ * link preview is a square, cut from the centre of the image, so a card with
+ * the text on the left and the photo on the right loses half of both. Every
+ * element therefore lives inside the centre 630x630 square (x 285..915), which
+ * is the only part WhatsApp keeps:
+ *
+ *   +-----------------------------------+
+ *   |      |                    |       |
+ *   |      |  kicker            |       |
+ *   |      |  NAME              |       |
+ *   | photo|  ---               | photo |
+ *   |      |  spec // spec      |       |
+ *   |      |  site              |       |
+ *   |      |                    |       |
+ *   +-----------------------------------+
+ *
+ * The photograph bleeds the full width, so the wide view gains picture at the
+ * sides and the square view keeps the same composition. Nothing important sits
+ * outside the safe square — only photo and the gold footer, which are trim.
+ *
  * The photo is the web-sized archive derivative when one exists (the originals
  * in images/projects run up to 16 MB, which unfurlers time out on). The card is
  * encoded as a baseline JPEG for the same reason as the portrait card:
@@ -25,22 +46,27 @@ const OUT_DIR = path.join(ROOT, 'images/og');
 const W = 1200;
 const H = 630;
 
-const INK = '#202524';
-const CREAM = '#F5F3EB';
-const GOLD = '#A67C2E';
-const MUTED = '#6C736E';
+/* WhatsApp's square crop, centred. Everything that must be read goes here. */
+const SAFE = 630;
+const SAFE_X = (W - SAFE) / 2;
+const SAFE_PAD = 60;
+const TEXT_MAX_WIDTH = SAFE - SAFE_PAD * 2;
+
+const CREAM = '#F7F5EE';
+const GOLD = '#D9AE63';
+const MUTED = '#D5D9D3';
 
 const SITE = 'aaruthrun-beep.github.io/aaruthrun-portfolio';
 const RASTER = /\.(jpe?g|png|webp)$/i;
 
 const NAME_SIZE = 62;
 const NAME_LEADING = 66;
-const NAME_MAX_WIDTH = 512;
+const NAME_SMALL = 52;
+const NAME_SMALL_LEADING = 56;
 
 const SPEC_SIZE = 18;
 const SPEC_LEADING = 30;
 const SPEC_TRACKING = 1;
-const SPEC_MAX_WIDTH = 516;
 const SPEC_MAX_LINES = 3;
 
 const exists = (rel) => Boolean(rel) && fs.existsSync(path.join(ROOT, rel));
@@ -59,9 +85,9 @@ const oneLine = (value) => String(value || '').replace(/\s+/g, ' ').trim();
 
 // sharp lays text out itself, so fitting is estimated from an average glyph
 // advance rather than measured. Serif display faces run a little under 0.55em.
-function wrapName(text, size) {
+function wrapName(text, size, maxWidth) {
   const charWidth = size * 0.53;
-  const maxChars = Math.max(10, Math.floor(NAME_MAX_WIDTH / charWidth));
+  const maxChars = Math.max(8, Math.floor(maxWidth / charWidth));
   const words = oneLine(text).split(' ').filter(Boolean);
   const lines = [];
 
@@ -80,7 +106,7 @@ function wrapName(text, size) {
 // at the separators: a line never ends mid-spec and the "//" never opens one.
 function wrapSpec(text) {
   const charWidth = SPEC_SIZE * 0.6 + SPEC_TRACKING;
-  const maxChars = Math.floor(SPEC_MAX_WIDTH / charWidth);
+  const maxChars = Math.floor(TEXT_MAX_WIDTH / charWidth);
   const segments = oneLine(text).split(/\s*\/\/\s*/).filter(Boolean);
   const lines = [];
 
@@ -119,95 +145,120 @@ async function buildCard(project, index) {
   const src = photoSource(project);
 
   const name = projectName(project);
-  let nameLines = wrapName(name, NAME_SIZE);
   let nameSize = NAME_SIZE;
   let leading = NAME_LEADING;
+  let nameLines = wrapName(name, nameSize, TEXT_MAX_WIDTH);
   if (nameLines.length > 2) {
-    nameSize = 52;
-    leading = 56;
-    nameLines = wrapName(name, nameSize);
+    nameSize = NAME_SMALL;
+    leading = NAME_SMALL_LEADING;
+    nameLines = wrapName(name, nameSize, TEXT_MAX_WIDTH);
   }
 
   const specLines = wrapSpec(project.monoSpec || '');
 
-  const PW = 504;
-  const PH = 420;
-  const PX = W - 72 - PW;
-  const PY = Math.round((H - PH) / 2);
+  // The block is measured top-down and then centred vertically.
+  const RULE_H = 4;
+  const KICKER_OFFSET = 40; // rule top -> kicker baseline
+  const NAME_OFFSET = 118; // rule top -> first name baseline
+  const RULE_GAP = 34; // last name baseline -> rule top
+  const SPEC_GAP = 48; // rule top -> first spec baseline
+  const TAIL = 12; // descender room under the last spec baseline
+
+  const blockHeight =
+    NAME_OFFSET +
+    (nameLines.length - 1) * leading +
+    RULE_GAP +
+    SPEC_GAP +
+    (specLines.length - 1) * SPEC_LEADING +
+    TAIL;
+  const top = Math.round((H - blockHeight) / 2);
+
+  const ruleY = top;
+  const kickerY = top + KICKER_OFFSET;
+  const nameBase = top + NAME_OFFSET;
+  const dividerY = nameBase + (nameLines.length - 1) * leading + RULE_GAP;
+  const specStart = dividerY + SPEC_GAP;
 
   const kicker = 'PROJECT // ' + oneLine(project.category || 'Robotics').toUpperCase();
-  const kickerY = 176;
-
-  const nameBase = kickerY + 96;
-  const lastBaseline = nameBase + (nameLines.length - 1) * leading;
-  const ruleY = lastBaseline + 34;
-  const specStart = ruleY + 52;
-
-  const dots = [];
-  for (let x = 40; x < W; x += 18) {
-    for (let y = 40; y < H; y += 18) dots.push(`<circle cx="${x}" cy="${y}" r="1"/>`);
-  }
 
   let photoMarkup = '';
   if (src) {
+    // Full-bleed: covers the wide view, and the centre square still shows the
+    // middle of the photograph rather than an empty margin.
     const photo = await sharp(path.join(ROOT, src))
       .rotate()
-      .resize(PW * 2, PH * 2, { fit: 'cover', position: 'centre' })
-      .jpeg({ quality: 88 })
+      .resize(W, H, { fit: 'cover', position: 'centre' })
+      .jpeg({ quality: 86 })
       .toBuffer();
 
     photoMarkup = `
   <image xlink:href="data:image/jpeg;base64,${photo.toString('base64')}"
-         x="${PX}" y="${PY}" width="${PW}" height="${PH}"
-         preserveAspectRatio="xMidYMid slice" clip-path="url(#photoClip)"/>
-  <rect x="${PX}" y="${PY}" width="${PW}" height="${PH}" rx="4" fill="none" stroke="${INK}" stroke-opacity="0.85" stroke-width="2"/>`;
+         x="0" y="0" width="${W}" height="${H}" preserveAspectRatio="xMidYMid slice"/>`;
   }
 
   const nameMarkup = nameLines
     .map(
       (line, i) =>
-        `  <text x="70" y="${nameBase + i * leading}" font-family="DM Serif Display, Georgia, 'Times New Roman', serif"
-        font-size="${nameSize}" letter-spacing="-1" fill="${INK}">${esc(line)}</text>`
+        `  <text x="${W / 2}" y="${nameBase + i * leading}" text-anchor="middle" font-family="DM Serif Display, Georgia, 'Times New Roman', serif"
+        font-size="${nameSize}" letter-spacing="-1" fill="${CREAM}">${esc(line)}</text>`
     )
     .join('\n');
 
   const specMarkup = specLines
     .map(
       (line, i) =>
-        `  <text x="72" y="${specStart + i * SPEC_LEADING}" font-family="JetBrains Mono, DejaVu Sans Mono, Consolas, monospace"
+        `  <text x="${W / 2}" y="${specStart + i * SPEC_LEADING}" text-anchor="middle" font-family="JetBrains Mono, DejaVu Sans Mono, Consolas, monospace"
         font-size="${SPEC_SIZE}" letter-spacing="${SPEC_TRACKING}" fill="${MUTED}">${esc(line)}</text>`
     )
     .join('\n');
 
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
   <defs>
-    <clipPath id="photoClip"><rect x="${PX}" y="${PY}" width="${PW}" height="${PH}" rx="4"/></clipPath>
-    <linearGradient id="wash" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#FBFAF4"/>
-      <stop offset="0.6" stop-color="${CREAM}"/>
-      <stop offset="1" stop-color="#EAE8E0"/>
+    <linearGradient id="scrim" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0E1110" stop-opacity="0.55"/>
+      <stop offset="0.32" stop-color="#0E1110" stop-opacity="0.68"/>
+      <stop offset="0.72" stop-color="#0E1110" stop-opacity="0.76"/>
+      <stop offset="1" stop-color="#0E1110" stop-opacity="0.9"/>
     </linearGradient>
+    <linearGradient id="edges" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#0E1110" stop-opacity="0.42"/>
+      <stop offset="0.5" stop-color="#0E1110" stop-opacity="0"/>
+      <stop offset="1" stop-color="#0E1110" stop-opacity="0.42"/>
+    </linearGradient>
+    <radialGradient id="pool" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#0E1110" stop-opacity="0.62"/>
+      <stop offset="0.62" stop-color="#0E1110" stop-opacity="0.5"/>
+      <stop offset="1" stop-color="#0E1110" stop-opacity="0"/>
+    </radialGradient>
   </defs>
 
-  <rect width="${W}" height="${H}" fill="url(#wash)"/>
-  <g fill="${INK}" opacity="0.13">${dots.join('')}</g>
+  <rect width="${W}" height="${H}" fill="#151917"/>
 ${photoMarkup}
+  <rect width="${W}" height="${H}" fill="url(#scrim)"/>
+  <rect width="${W}" height="${H}" fill="url(#edges)"/>
 
-  <rect x="72" y="132" width="46" height="4" fill="${GOLD}"/>
+  <!-- A soft dark pool under the copy, so the spec stays legible over a
+       busy render without a visible plate edge. -->
+  <ellipse cx="${W / 2}" cy="${H / 2}" rx="330" ry="285" fill="url(#pool)"/>
 
-  <text x="72" y="${kickerY}" font-family="JetBrains Mono, DejaVu Sans Mono, Consolas, monospace"
+  <rect x="26" y="26" width="${W - 52}" height="${H - 52}" fill="none"
+        stroke="${CREAM}" stroke-opacity="0.18" stroke-width="1"/>
+
+  <rect x="${W / 2 - 23}" y="${ruleY}" width="46" height="${RULE_H}" fill="${GOLD}"/>
+
+  <text x="${W / 2}" y="${kickerY}" text-anchor="middle" font-family="JetBrains Mono, DejaVu Sans Mono, Consolas, monospace"
         font-size="15" letter-spacing="4.5" fill="${GOLD}">${esc(kicker)}</text>
 
 ${nameMarkup}
 
-  <rect x="72" y="${ruleY}" width="108" height="3" fill="${GOLD}"/>
+  <rect x="${W / 2 - 54}" y="${dividerY}" width="108" height="3" fill="${GOLD}"/>
 
 ${specMarkup}
 
-  <text x="72" y="566" font-family="JetBrains Mono, DejaVu Sans Mono, Consolas, monospace"
-        font-size="14" letter-spacing="0.8" fill="${MUTED}">${esc(SITE)}</text>
+  <text x="${W / 2}" y="578" text-anchor="middle" font-family="JetBrains Mono, DejaVu Sans Mono, Consolas, monospace"
+        font-size="13" letter-spacing="0.8" fill="${MUTED}" opacity="0.85">${esc(SITE)}</text>
 
-  <rect x="0" y="${H - 10}" width="${W}" height="10" fill="${GOLD}"/>
+  <rect x="0" y="${H - 10}" width="${W}" height="10" fill="#A67C2E"/>
 </svg>`;
 
   fs.mkdirSync(OUT_DIR, { recursive: true });

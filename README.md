@@ -192,6 +192,8 @@ It writes `project-<slug>.html` and `journal-<slug>.html` beside the templates w
 ```bash
 npm run cards          # regenerate after editing data/projects.json (or adding photos)
 ```
+
+  The card is composed *centre-safe*: every piece of text lives inside the centre 630x630 square (x 285..915). Telegram and Twitter show the whole 1.91:1 rectangle, but WhatsApp's link preview is a square cut from the centre of the image, so anything outside that square is lost there. Keep new text inside it.
 - `TechArticle` / `BlogPosting` structured data
 - `data-page` / `data-slug` on `<body>`, so the usual renderer takes over on load
 - a `<noscript>` summary of the page
