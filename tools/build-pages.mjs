@@ -108,6 +108,13 @@ const absolute = (rel) => BASE + '/' + String(rel).replace(/^\.?\//, '');
 /* Images                                                              */
 /* ------------------------------------------------------------------ */
 
+// Each project has its own generated preview card (photo, name, spec) built by
+// tools/make-project-cards.js. Prefer it; a raw photograph has no name on it.
+function projectCard(project) {
+  const card = 'images/og/project-' + project.slug + '.jpg';
+  return exists(card) ? card : null;
+}
+
 // The archive derivatives are ~50–140 KB; the originals in images/projects are
 // up to 16 MB, which unfurlers time out on or refuse outright.
 function projectImage(project) {
@@ -175,7 +182,7 @@ function projectPage(project, projects) {
 
   const file = 'project-' + slug + '.html';
   const url = absolute(file);
-  const image = absolute(projectImage(project));
+  const image = absolute(projectCard(project) || projectImage(project));
   const description = clip(project.summary, 300);
   const published = isoDay(project.start);
   const modified = isoDay(project.end) || published;

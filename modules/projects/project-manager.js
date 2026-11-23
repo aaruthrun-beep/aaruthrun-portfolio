@@ -425,12 +425,16 @@ const ProjectManager = (function () {
       el.setAttribute('content', content);
     };
 
+    // The generated card carries the photo, the name and the spec. The raw
+    // project photograph is multi-megabyte and unfurlers skip or shrink it.
+    const card = new URL(`images/og/project-${project.slug}.jpg`, site.url + '/').href;
+
     setMeta('og:title', `${project.title} — ${site.title}`);
     setMeta('og:description', project.summary);
-    setMeta('og:image', project.image);
+    setMeta('og:image', card);
     setMeta('twitter:title', `${project.title} — ${site.title}`);
     setMeta('twitter:description', project.summary);
-    setMeta('twitter:image', project.image);
+    setMeta('twitter:image', card);
   }
 
   /**

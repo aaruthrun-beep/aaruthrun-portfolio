@@ -186,7 +186,12 @@ npm run pages:check    # exit 1 when a page is missing or out of date
 It writes `project-<slug>.html` and `journal-<slug>.html` beside the templates with:
 
 - `<title>`, description, canonical, and Open Graph/Twitter tags for that build or note
-- an absolute `og:image` taken from the web-sized `images/archive/` derivative, never the multi-megabyte original
+- an absolute `og:image`: `images/og/project-<slug>.jpg` for a project, the web-sized `images/archive/` derivative (never the multi-megabyte original) for a field note
+- for projects, a generated 1200x630 baseline-JPEG card carrying the build's photo, its name and its one-line spec, built by `tools/make-project-cards.js`:
+
+```bash
+npm run cards          # regenerate after editing data/projects.json (or adding photos)
+```
 - `TechArticle` / `BlogPosting` structured data
 - `data-page` / `data-slug` on `<body>`, so the usual renderer takes over on load
 - a `<noscript>` summary of the page

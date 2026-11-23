@@ -285,36 +285,83 @@ function jpegFrameInfo(buf) {
   return null;
 }
 
-function checkShareCard() {
+// A 200 with the right content type is not enough: WhatsApp paints a black
+// rectangle for progressive JPEGs, so every card's encoding is asserted here.
+function cardIssues(rel) {
   const issues = [];
-  const card = resolve(PROJECT_ROOT, 'images/og-image.jpg');
+  const card = resolve(PROJECT_ROOT, rel);
 
   if (!existsSync(card)) {
-    issues.push({ type: 'Missing share card', file: 'images/og-image.jpg', check: 'og-image' });
+    issues.push({ type: 'Missing share card', file: rel, check: 'og-image' });
     return issues;
   }
 
   const bytes = statSync(card).size;
   if (bytes > 300 * 1024) {
-    issues.push({ type: 'Share card over 300 KB', file: `images/og-image.jpg (${Math.round(bytes / 1024)} KB)`, check: 'og-image' });
+    issues.push({ type: 'Share card over 300 KB', file: `${rel} (${Math.round(bytes / 1024)} KB)`, check: 'og-image' });
   }
 
   const frame = jpegFrameInfo(readFileSync(card));
   if (!frame) {
-    issues.push({ type: 'Share card is not a JPEG', file: 'images/og-image.jpg', check: 'og-image' });
+    issues.push({ type: 'Share card is not a JPEG', file: rel, check: 'og-image' });
   } else {
     if (frame.width !== 1200 || frame.height !== 630) {
-      issues.push({ type: 'Share card is not 1200x630', file: `images/og-image.jpg is ${frame.width}x${frame.height}`, check: 'og-image' });
+      issues.push({ type: 'Share card is not 1200x630', file: `${rel} is ${frame.width}x${frame.height}`, check: 'og-image' });
     }
     if (frame.progressive) {
-      issues.push({ type: 'Share card is progressive (WhatsApp renders it black)', file: 'images/og-image.jpg', check: 'og-image' });
+      issues.push({ type: 'Share card is progressive (WhatsApp renders it black)', file: rel, check: 'og-image' });
     }
   }
+
+  return issues;
+}
+
+// The crawler only sees what the HTML carries, so the og:image it was served is
+// compared against the card that belongs to that page.
+function checkPageCard(file, rel) {
+  const issues = [];
+  const full = resolve(PROJECT_ROOT, file);
+
+  if (!existsSync(full)) {
+    issues.push({ type: 'Project page is missing', file, check: 'og-image' });
+    return issues;
+  }
+
+  const html = readFileSync(full, 'utf-8');
+  const meta = html.match(/<meta property="og:image" content="([^"]+)"/);
+  const expected = rel.split('/').pop();
+
+  if (!meta) {
+    issues.push({ type: 'og:image is missing', file, check: 'og-image' });
+  } else if (!/^https:\/\//.test(meta[1])) {
+    issues.push({ type: 'og:image is not an absolute https URL', file, check: 'og-image' });
+  } else if (!meta[1].endsWith('/' + rel)) {
+    issues.push({ type: `og:image does not point at ${expected}`, file, check: 'og-image' });
+  }
+
+  const twitter = html.match(/<meta name="twitter:image" content="([^"]+)"/);
+  if (!twitter || twitter[1] !== (meta && meta[1])) {
+    issues.push({ type: 'twitter:image does not match og:image', file, check: 'og-image' });
+  }
+
+  return issues;
+}
+
+function checkShareCard() {
+  const issues = [...cardIssues('images/og-image.jpg')];
 
   const html = readFileSync(resolve(PROJECT_ROOT, 'index.html'), 'utf-8');
   const meta = html.match(/<meta property="og:image" content="([^"]+)"/);
   if (!meta || !/^https:\/\//.test(meta[1])) {
     issues.push({ type: 'og:image is not an absolute https URL', file: 'index.html', check: 'og-image' });
+  }
+
+  // One card per project, and the prerendered page has to name it.
+  for (const project of projects) {
+    if (!project || !project.slug) continue;
+    const rel = `images/og/project-${project.slug}.jpg`;
+    issues.push(...cardIssues(rel));
+    issues.push(...checkPageCard(`project-${project.slug}.html`, rel));
   }
 
   return issues;
