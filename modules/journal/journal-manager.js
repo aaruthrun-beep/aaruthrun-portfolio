@@ -511,7 +511,7 @@ const JournalManager = (function () {
     if (/\.(jpe?g|png|webp|gif|avif)$/i.test(entry.cover || '')) return entry.cover;
     const project = projectFor(entry, projects);
     if (project) return project.archiveImage || project.image || '';
-    return 'images/og-image.webp';
+    return 'images/og-image.jpg';
   }
 
   function setMeta(selector, attribute, value) {

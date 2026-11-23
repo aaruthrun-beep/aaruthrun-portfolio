@@ -68,7 +68,7 @@ const HeaderManager = (function () {
     return `
       <div class="container nav-container">
         <a href="${brand.href}" class="brand-link" aria-label="Aaruthrun Portfolio Home">
-          <span class="brand-mark" aria-hidden="true"></span>
+          <img class="brand-avatar" src="images/logo/aaruthrun-logo.png" alt="" width="32" height="32" aria-hidden="true" decoding="async">
           <span>${brand.label}</span>
         </a>
 

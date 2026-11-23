@@ -184,28 +184,22 @@ main {
 .brand-link:hover {
   color: var(--color-accent);
 }
-.brand-mark {
-  display: inline-flex;
-  align-items: center;
-  gap: 3px;
+.brand-avatar {
+  display: block;
+  flex: none;
+  width: 32px;
+  height: 32px;
+  object-fit: cover;
+  object-position: 50% 25%;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  background-color: var(--surface-subtle);
 }
-.brand-mark::before,
-.brand-mark::after {
-  content: '';
-  display: inline-block;
-  width: 5px;
-  height: 5px;
-  border: 1px solid currentColor;
-}
-.brand-mark::before {
-  background-color: var(--color-accent);
-  border-color: var(--color-accent);
-}
-.brand-mark::after {
-  background-color: transparent;
-  border-color: var(--color-accent);
-  margin-left: -4px;
-  opacity: 0.4;
+@media (max-width: 480px) {
+  .brand-avatar {
+    width: 28px;
+    height: 28px;
+  }
 }
 
 /* Avatar — sharp square, not round (pairing with pixel aesthetic) */

@@ -4,6 +4,7 @@
   "private": true,
   "description": "Static engineering portfolio with a folder-driven project gallery map.",
   "scripts": {
+    "brand": "node tools/make-brand-images.js",
     "gallery": "node tools/build-gallery.mjs",
     "responsive": "node tools/build-responsive.mjs",
     "responsive:check": "node tools/build-responsive.mjs --check",
