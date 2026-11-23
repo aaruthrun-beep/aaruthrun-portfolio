@@ -28,53 +28,8 @@ const ThemeManager = (function () {
   // The footer button is only reachable once a reader has scrolled to the end of
   // a page, so a second control stays pinned to the bottom corner. It lives
   // here rather than in the footer module so every page that has a theme gets
-  // it, and it carries its own styles so it cannot depend on a cached
-  // stylesheet.
+  // it; its styles are in css/style.css beside the other theme-toggle rules.
   const FLOAT_ID = 'theme-float-toggle';
-  const FLOAT_STYLE_ID = 'theme-float-toggle-style';
-
-  const FLOAT_CSS = [
-    '#theme-float-toggle {',
-    '  position: fixed;',
-    '  right: 20px;',
-    '  bottom: 20px;',
-    '  z-index: 900;',
-    '  display: inline-flex;',
-    '  align-items: center;',
-    '  gap: 8px;',
-    '  padding: 9px 14px;',
-    '  font-family: var(--font-mono, ui-monospace, monospace);',
-    '  font-size: 11px;',
-    '  letter-spacing: 0.12em;',
-    '  text-transform: uppercase;',
-    '  color: var(--text-secondary, #4A514C);',
-    '  background: var(--surface-subtle, #EDEAE4);',
-    '  border: 1px solid var(--color-border, #D8DAD4);',
-    '  border-radius: 999px;',
-    '  box-shadow: 0 6px 20px rgba(20, 24, 23, 0.14);',
-    '  cursor: pointer;',
-    '  transition: color .2s ease, border-color .2s ease, transform .2s ease;',
-    '}',
-    '#theme-float-toggle:hover {',
-    '  color: var(--color-accent, #315C9B);',
-    '  border-color: var(--color-accent, #315C9B);',
-    '  transform: translateY(-1px);',
-    '}',
-    '#theme-float-toggle:focus-visible {',
-    '  outline: 2px solid var(--color-accent, #315C9B);',
-    '  outline-offset: 2px;',
-    '}',
-    '#theme-float-toggle .theme-float-icon {',
-    '  font-size: 12px;',
-    '  line-height: 1;',
-    '}',
-    '@media (max-width: 600px) {',
-    '  #theme-float-toggle { right: 12px; bottom: 12px; padding: 8px 12px; }',
-    '}',
-    '@media print {',
-    '  #theme-float-toggle { display: none; }',
-    '}',
-  ].join('\n');
 
   /**
    * Get stored theme. Light is the hard default — no system preference fallback.
@@ -159,13 +114,6 @@ const ThemeManager = (function () {
    */
   function buildFloatingToggle() {
     if (document.getElementById(FLOAT_ID)) return;
-
-    if (!document.getElementById(FLOAT_STYLE_ID)) {
-      const style = document.createElement('style');
-      style.id = FLOAT_STYLE_ID;
-      style.textContent = FLOAT_CSS;
-      document.head.appendChild(style);
-    }
 
     const button = document.createElement('button');
     button.id = FLOAT_ID;
