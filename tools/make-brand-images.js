@@ -146,13 +146,12 @@ async function buildCard() {
 /* Favicon, touch icon and web manifest                                       */
 /* -------------------------------------------------------------------------- */
 
-// Same crop as the header avatar, so the tab icon, the home-screen shortcut and
-// the brand mark are all the same face.
-const CROP = { left: 170, top: 145, width: 720, height: 720 };
+// Use Tesla's portrait for the header avatar, tab icon and home-screen shortcut.
+const ICON_CROP = { left: 120, top: 55, width: 380, height: 380 };
 
 async function squarePng(size, out) {
-  await sharp(PORTRAIT)
-    .extract(CROP)
+  await sharp(BRAND_PORTRAIT)
+    .extract(ICON_CROP)
     .resize(size, size, { fit: 'cover' })
     .png({ compressionLevel: 9 })
     .toFile(out);
@@ -162,8 +161,8 @@ async function squarePng(size, out) {
 // sharp cannot write .ico, but an ICO may carry a PNG payload: a six-field
 // directory entry followed by the PNG bytes is a valid file for every browser.
 async function buildIco() {
-  const png = await sharp(PORTRAIT)
-    .extract(CROP)
+  const png = await sharp(BRAND_PORTRAIT)
+    .extract(ICON_CROP)
     .resize(32, 32, { fit: 'cover' })
     .png({ compressionLevel: 9 })
     .toBuffer();
