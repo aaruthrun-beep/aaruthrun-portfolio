@@ -37,7 +37,8 @@ const checkOnly = args.has('--check');
 const baseArg = [...args].find((a) => a.startsWith('--base-url='));
 
 const FALLBACK_SITE_URL = 'https://aaruthrun-beep.github.io/aaruthrun-portfolio';
-const FALLBACK_IMAGE = 'images/og-image.jpg';
+// ?v=2 keeps link previews off the cached copy of the old, undecodable card.
+const FALLBACK_IMAGE = 'images/og-image.jpg?v=2';
 const RASTER = /\.(jpe?g|png|webp|gif|avif)$/i;
 const GENERATED_RE = /^(project|journal)-[A-Za-z0-9._-]+\.html$/;
 const MARKER = 'tools/build-pages.mjs';

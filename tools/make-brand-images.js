@@ -115,8 +115,12 @@ async function buildCard() {
   <rect x="0" y="${H - 10}" width="${W}" height="10" fill="${GOLD}"/>
 </svg>`;
 
+  // Baseline, not progressive: WhatsApp's thumbnailer and several Android
+  // decoders render progressively-encoded JPEGs as a black rectangle.
+  // mozjpeg is left out on purpose: sharp forces progressive encoding when it
+  // is enabled, and progressive JPEGs break some thumbnailers.
   await sharp(Buffer.from(svg))
-    .jpeg({ quality: 84, chromaSubsampling: '4:4:4', mozjpeg: true })
+    .jpeg({ quality: 86, chromaSubsampling: '4:4:4', progressive: false, optimiseCoding: true })
     .toFile(OG_OUT);
 
   const { size } = fs.statSync(OG_OUT);
