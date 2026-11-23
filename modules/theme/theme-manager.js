@@ -16,19 +16,15 @@ const ThemeManager = (function () {
   let currentTheme = THEMES.LIGHT;
   let observers = [];
 
-  // DOM references (set after initialization)
-  let toggleBtn = null;
-  let toggleIcon = null;
-  let toggleLabel = null;
 
   /* ------------------------------------------------------------------ */
   /* Floating control                                                   */
   /* ------------------------------------------------------------------ */
 
-  // The footer button is only reachable once a reader has scrolled to the end of
-  // a page, so a second control stays pinned to the bottom corner. It lives
-  // here rather than in the footer module so every page that has a theme gets
-  // it; its styles are in css/style.css beside the other theme-toggle rules.
+  // The control sits pinned to the bottom corner so it is reachable without
+  // scrolling to the footer. It lives here rather than in the footer module so
+  // every page that has a theme gets it; its styles are in css/style.css beside
+  // the other theme-toggle rules.
   const FLOAT_ID = 'theme-float-toggle';
 
   /**
@@ -90,15 +86,6 @@ const ThemeManager = (function () {
    * Initialize DOM references and event listeners
    */
   function init() {
-    // Find theme toggle elements
-    toggleBtn = document.getElementById('theme-toggle');
-    toggleIcon = document.getElementById('toggle-icon');
-    toggleLabel = document.getElementById('toggle-label');
-
-    if (toggleBtn) {
-      toggleBtn.addEventListener('click', toggle);
-    }
-
     buildFloatingToggle();
 
     // Apply initial theme
@@ -130,12 +117,6 @@ const ThemeManager = (function () {
    */
   function updateUI(theme) {
     const dark = theme === THEMES.DARK;
-
-    if (toggleIcon && toggleLabel) {
-      toggleIcon.textContent = dark ? '🌙' : '☀️';
-      toggleLabel.textContent = dark ? 'DARK' : 'LIGHT';
-    }
-
     const floating = document.getElementById(FLOAT_ID);
     if (floating) {
       const icon = floating.querySelector('.theme-float-icon');

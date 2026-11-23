@@ -157,15 +157,7 @@ if (typeof ThemeManager !== 'undefined' && typeof HeaderManager !== 'undefined' 
             </div>
           </blockquote>
           <div class="footer-bottom">
-            <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
-              <div>
-                &copy; ${new Date().getFullYear()} Aaruthrun.
-              </div>
-              <button class="theme-toggle" id="theme-toggle" title="Toggle light/dark theme" aria-label="Toggle theme" style="margin-left: auto;">
-                <span class="toggle-icon" id="toggle-icon">☀️</span>
-                <span id="toggle-label">LIGHT</span>
-              </button>
-            </div>
+            &copy; ${new Date().getFullYear()} Aaruthrun.
           </div>
         </div>
       `;
@@ -212,40 +204,11 @@ if (typeof ThemeManager !== 'undefined' && typeof HeaderManager !== 'undefined' 
         renderHeader();
         renderFooter();
         initReveal();
-        setupThemeToggle();
       });
     } else {
       renderHeader();
       renderFooter();
       initReveal();
-      setupThemeToggle();
-    }
-
-    // Theme toggle
-    function setupThemeToggle() {
-      const toggle = document.getElementById('theme-toggle');
-      const icon = document.getElementById('toggle-icon');
-      const label = document.getElementById('toggle-label');
-      if (!toggle || !icon || !label) return;
-
-      function updateUI(theme) {
-        if (theme === DARK) {
-          icon.textContent = '🌙';
-          label.textContent = 'DARK';
-        } else {
-          icon.textContent = '☀️';
-          label.textContent = 'LIGHT';
-        }
-      }
-
-      updateUI(document.documentElement.getAttribute('data-theme') || LIGHT);
-
-      toggle.addEventListener('click', () => {
-        const current = document.documentElement.getAttribute('data-theme') || LIGHT;
-        const next = current === DARK ? LIGHT : DARK;
-        applyTheme(next);
-        updateUI(next);
-      });
     }
 
     // Re-scan for new reveal elements

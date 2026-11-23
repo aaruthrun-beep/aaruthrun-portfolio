@@ -12,7 +12,7 @@
 @import url('../styles/layout.css');
 @import url('../styles/components.css');
 @import url('../styles/typography.css');
-@import url('../styles/animations.css?v=2026-11-23');
+@import url('../styles/animations.css?v=2026-12-03');
 @import url('../styles/utilities.css');
 
 /* Legacy custom styles can go below */
@@ -295,58 +295,129 @@ main {
   color: var(--color-accent);
 }
 
-/* Buttons — clean, minimal, cobalt accent */
+/* Buttons — pill geometry, a colour sweep on hover, and a circular arrow
+   badge that turns as the pointer arrives. */
 .btn {
+  --btn-fg: var(--color-text-main);
+  --btn-circle-bg: var(--color-text-main);
+  --btn-circle-fg: var(--bg);
+  --btn-sweep: var(--color-accent);
+  --btn-hover-fg: #FFFFFF;
+  --btn-edge: var(--color-border-strong);
+
+  position: relative;
+  isolation: isolate;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  padding: 8px 16px;
-  font-size: 0.8125rem;
+  gap: 10px;
+  height: 46px;
+  padding: 0 18px;
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
   font-weight: 500;
+  letter-spacing: -0.005em;
   text-decoration: none;
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--btn-edge);
+  border-radius: 999px;
   background-color: transparent;
-  color: var(--color-text-main);
+  color: var(--btn-fg);
   cursor: pointer;
-  transition: border-color var(--transition-base), color var(--transition-base), background-color var(--transition-base);
-  font-family: var(--font-mono);
-  letter-spacing: var(--tracking-normal);
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+  transition: color 300ms var(--ease-settle), border-color 300ms var(--ease-settle), transform 400ms var(--ease-settle);
 }
-.btn:hover {
-  border-color: var(--color-accent);
-  color: var(--color-accent);
+
+/* The sweep grows in from the right edge, under the label. */
+.btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background-color: var(--btn-sweep);
+  transform: scaleX(0);
+  transform-origin: right center;
+  transition: transform 500ms var(--ease-settle);
 }
-/* Primary: filled with cobalt, white text */
+.btn:hover,
+.btn:focus-visible {
+  color: var(--btn-hover-fg);
+  border-color: var(--btn-sweep);
+}
+.btn:hover::before,
+.btn:focus-visible::before {
+  transform: scaleX(1);
+}
+.btn:active {
+  transform: scale(0.97);
+}
+
+/* The arrow the markup already carries becomes the circular badge. */
+.btn > [aria-hidden="true"] {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  margin-right: -6px;
+  flex: none;
+  border-radius: 50%;
+  background-color: var(--btn-circle-bg);
+  color: var(--btn-circle-fg);
+  font-size: 0.8125rem;
+  line-height: 1;
+  transition: transform 500ms var(--ease-settle), background-color 300ms var(--ease-settle), color 300ms var(--ease-settle);
+}
+.btn:hover > [aria-hidden="true"],
+.btn:focus-visible > [aria-hidden="true"] {
+  transform: rotate(-45deg);
+}
+
+/* Primary: filled cobalt; the sweep goes to the ink colour, so the label
+   flips to the page colour on hover. */
 .btn-primary {
+  --btn-fg: #FFFFFF;
+  --btn-circle-bg: #FFFFFF;
+  --btn-circle-fg: var(--color-accent);
+  --btn-sweep: var(--color-text-main);
+  --btn-hover-fg: var(--bg);
+  --btn-edge: var(--color-accent);
   background-color: var(--color-accent);
-  color: #FFFFFF;
-  border-color: var(--color-accent);
 }
-.btn-primary:hover {
-  background-color: var(--color-accent-hover);
-  border-color: var(--color-accent-hover);
-  color: #FFFFFF;
-}
-/* Secondary: outline style */
+
+/* Secondary: outlined, the lighter companion to the fill. */
 .btn-secondary {
-  border-color: var(--color-border);
-  color: var(--color-text-secondary);
+  --btn-fg: var(--color-text-main);
+  --btn-edge: color-mix(in srgb, var(--color-text-main) 38%, transparent);
+  --btn-circle-bg: var(--color-text-main);
+  --btn-circle-fg: var(--bg);
+  background-color: transparent;
 }
-.btn-secondary:hover {
-  border-color: var(--color-accent);
-  color: var(--color-accent);
-}
-.btn-sm {
-  padding: 5px 10px;
+
+.btn.btn-sm {
+  height: 36px;
+  padding: 0 13px;
+  gap: 8px;
   font-size: 0.75rem;
 }
-.btn-xs {
-  padding: 3px 7px;
+.btn.btn-sm > [aria-hidden="true"] {
+  width: 24px;
+  height: 24px;
+  margin-right: -5px;
+  font-size: 0.6875rem;
+}
+.btn.btn-xs {
+  height: 30px;
+  padding: 0 10px;
+  gap: 6px;
   font-size: var(--text-xs);
 }
-.btn-mono {
+.btn.btn-mono {
   font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 /* Section Header — numbered engineering sections */
@@ -401,13 +472,13 @@ main {
   border: 1px solid var(--color-border);
   background-color: transparent;
   color: var(--color-text-secondary);
-  border-radius: 0;
+  border-radius: 999px;
   display: inline-flex;
   align-items: center;
   gap: 5px;
   letter-spacing: var(--tracking-normal);
   text-transform: uppercase;
-  transition: border-color var(--transition-base), color var(--transition-base);
+  transition: border-color var(--transition-base), color var(--transition-base), background-color var(--transition-base);
 }
 .tag:hover {
   border-color: var(--color-accent);
@@ -947,6 +1018,97 @@ main {
 }
 .vgantt-bar {
   transition: opacity 0.15s ease;
+}
+
+/* Gantt ink — the SVG is generated with light-theme colours in its attributes,
+   so dark mode has to restate the ink, the grid and the status palette.
+   Classes come from modules/timeline/timeline-manager.js. */
+[data-theme="dark"] .timeline-svg .tl-axis-label,
+[data-theme="dark"] .timeline-svg .tl-row-name {
+  fill: var(--color-text-main);
+}
+
+[data-theme="dark"] .timeline-svg .tl-axis-label--minor,
+[data-theme="dark"] .timeline-svg .tl-row-meta {
+  fill: var(--color-text-muted);
+}
+
+[data-theme="dark"] .timeline-svg .tl-axis-rule {
+  stroke: var(--color-text-main);
+}
+
+[data-theme="dark"] .timeline-svg .tl-grid {
+  stroke: rgba(237, 237, 237, 0.1);
+}
+
+[data-theme="dark"] .timeline-svg .tl-grid--year {
+  stroke: rgba(237, 237, 237, 0.26);
+}
+
+[data-theme="dark"] .timeline-svg .tl-row-rule {
+  stroke: rgba(237, 237, 237, 0.08);
+}
+
+/* Status ink: the light palette uses near-black for completed work, which
+   disappears against the dark card. */
+[data-theme="dark"] .timeline-svg .vgantt-bar[data-status="completed"],
+[data-theme="dark"] .timeline-svg .vgantt-dot[data-status="completed"],
+[data-theme="dark"] .timeline-svg .vgantt-tip[data-status="completed"] {
+  fill: #c3cac7;
+}
+
+[data-theme="dark"] .timeline-svg .vgantt-status[data-status="completed"] {
+  fill: #c3cac7;
+}
+
+[data-theme="dark"] .timeline-svg .vgantt-bar[data-status="active"],
+[data-theme="dark"] .timeline-svg .vgantt-dot[data-status="active"],
+[data-theme="dark"] .timeline-svg .vgantt-tip[data-status="active"] {
+  fill: #4c8dff;
+}
+
+[data-theme="dark"] .timeline-svg .vgantt-status[data-status="active"] {
+  fill: #4c8dff;
+}
+
+[data-theme="dark"] .timeline-svg .vgantt-bar[data-status="paused"],
+[data-theme="dark"] .timeline-svg .vgantt-dot[data-status="paused"],
+[data-theme="dark"] .timeline-svg .vgantt-tip[data-status="paused"] {
+  fill: #f0a34a;
+}
+
+[data-theme="dark"] .timeline-svg .vgantt-status[data-status="paused"] {
+  fill: #f0a34a;
+}
+
+[data-theme="dark"] .timeline-svg .vgantt-bar[data-status="on hold"],
+[data-theme="dark"] .timeline-svg .vgantt-dot[data-status="on hold"],
+[data-theme="dark"] .timeline-svg .vgantt-tip[data-status="on hold"] {
+  fill: #9aa09c;
+}
+
+[data-theme="dark"] .timeline-svg .vgantt-status[data-status="on hold"] {
+  fill: #9aa09c;
+}
+
+[data-theme="dark"] .timeline-svg .vgantt-milestone {
+  fill: var(--color-card);
+}
+
+[data-theme="dark"] .timeline-svg .vgantt-milestone[data-status="completed"] {
+  stroke: #c3cac7;
+}
+
+[data-theme="dark"] .timeline-svg .vgantt-milestone[data-status="active"] {
+  stroke: #4c8dff;
+}
+
+[data-theme="dark"] .timeline-svg .vgantt-milestone[data-status="paused"] {
+  stroke: #f0a34a;
+}
+
+[data-theme="dark"] .timeline-svg .vgantt-milestone[data-status="on hold"] {
+  stroke: #9aa09c;
 }
 
 /* Vertical Stream View & Mini Timeline */
@@ -1490,7 +1652,7 @@ main {
   content: '\00b7';
   margin: 0 var(--s-2);
   color: var(--text-muted);
-}
+}
 .footer-bottom {
   border-top: var(--border-default);
   padding-top: var(--s-3);

@@ -69,6 +69,26 @@
 
 .tag-list { display: flex; flex-wrap: wrap; gap: 6px; }
 
+/* Chips read as boxes: a drawn ring around small mono text, which fills
+   cobalt when the pointer lands on a linked chip. */
+.tag,
+.status-chip,
+.skill-proj-pill {
+  border-radius: 999px;
+  transition:
+    color 240ms var(--ease-settle),
+    border-color 240ms var(--ease-settle),
+    background-color 240ms var(--ease-settle);
+}
+
+a.tag:hover,
+.tag.clickable:hover,
+.skill-proj-pill:hover {
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #FFFFFF;
+}
+
 .crumbs {
   display: flex;
   flex-wrap: wrap;

@@ -45,17 +45,10 @@ const FooterManager = (function () {
 
         </div>
 
-        <!-- Bottom Bar -->
+        <!-- Bottom Bar. The theme control lives in the pinned floating button
+             (modules/theme/theme-manager.js), not down here. -->
         <div class="footer-bottom">
-          <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
-            <div>
-              &copy; ${year} ${author.name}.
-            </div>
-            <button class="theme-toggle" id="theme-toggle" title="Toggle light/dark theme" aria-label="Toggle theme" style="margin-left: auto;">
-              <span class="toggle-icon" id="toggle-icon">☀️</span>
-              <span id="toggle-label">LIGHT</span>
-            </button>
-          </div>
+          &copy; ${year} ${author.name}.
         </div>
       </div>
     `;

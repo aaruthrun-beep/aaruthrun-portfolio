@@ -445,16 +445,6 @@ html:active-view-transition main {
   transform: scale(1.025);
 }
 
-/* The arrow inside a button drifts the way it points. */
-.home .btn > [aria-hidden="true"] {
-  display: inline-block;
-  transition: translate 200ms var(--ease-settle);
-}
-
-.home .btn:hover > [aria-hidden="true"],
-.home .btn:focus-visible > [aria-hidden="true"] {
-  translate: 3px 0;
-}
 
 /* --------------------------------------------------------------------------
    HERO PORTRAIT — the print settles onto the page
@@ -478,11 +468,6 @@ html:active-view-transition main {
 
   .bench-entry,
   .work-row {
-    translate: none !important;
-    transition: none !important;
-  }
-
-  .home .btn > [aria-hidden="true"] {
     translate: none !important;
     transition: none !important;
   }

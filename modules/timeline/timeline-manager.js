@@ -225,16 +225,16 @@ const TimelineManager = (function () {
         const x = xOf(d);
         const isYr = d.getMonth() === 0;
         const show = isYr || (d.getMonth() % step === 0);
-        svg += `<line x1="${x}" y1="${ruleY}" x2="${x}" y2="${bottomY}" stroke="${isYr ? '#D8D8D8' : '#F1F1F1'}" stroke-width="${isYr ? 1.1 : 0.7}"/>`;
+        svg += `<line class="tl-grid${isYr ? ' tl-grid--year' : ''}" x1="${x}" y1="${ruleY}" x2="${x}" y2="${bottomY}" stroke="${isYr ? '#D8D8D8' : '#F1F1F1'}" stroke-width="${isYr ? 1.1 : 0.7}"/>`;
         if (show && x + 34 < W) {
-          svg += `<text x="${x + 4}" y="${labelY}" font-family="JetBrains Mono,monospace" font-size="${isYr ? 10 : 9}" font-weight="${isYr ? 600 : 400}" fill="${isYr ? '#111' : '#999'}">${isYr ? d.getFullYear() : MONTHS[d.getMonth()]}</text>`;
+          svg += `<text class="tl-axis-label${isYr ? '' : ' tl-axis-label--minor'}" x="${x + 4}" y="${labelY}" font-family="JetBrains Mono,monospace" font-size="${isYr ? 10 : 9}" font-weight="${isYr ? 600 : 400}" fill="${isYr ? '#111' : '#999'}">${isYr ? d.getFullYear() : MONTHS[d.getMonth()]}</text>`;
         }
       });
 
       // Axis lines
-      svg += `<line x1="0" y1="${ruleY}" x2="${W}" y2="${ruleY}" stroke="#111" stroke-width="1"/>`;
-      svg += `<line x1="${o.labelW}" y1="${ruleY}" x2="${o.labelW}" y2="${bottomY}" stroke="#111" stroke-width="1"/>`;
-      svg += `<text x="0" y="${labelY}" font-family="JetBrains Mono,monospace" font-size="9" fill="#999">PROJECT</text>`;
+      svg += `<line class="tl-axis-rule" x1="0" y1="${ruleY}" x2="${W}" y2="${ruleY}" stroke="#111" stroke-width="1"/>`;
+      svg += `<line class="tl-axis-rule" x1="${o.labelW}" y1="${ruleY}" x2="${o.labelW}" y2="${bottomY}" stroke="#111" stroke-width="1"/>`;
+      svg += `<text class="tl-axis-label tl-axis-label--minor" x="0" y="${labelY}" font-family="JetBrains Mono,monospace" font-size="9" fill="#999">PROJECT</text>`;
 
       // Rows
       projs.forEach((p, i) => {
@@ -260,26 +260,26 @@ const TimelineManager = (function () {
 
         // Row background + hairline
         svg += `<rect class="vgantt-rowbg" x="0" y="${y}" width="${W}" height="${o.rowH}" fill="transparent"/>`;
-        svg += `<line x1="0" y1="${y + o.rowH}" x2="${W}" y2="${y + o.rowH}" stroke="#F0F0F0" stroke-width="1"/>`;
+        svg += `<line class="tl-row-rule" x1="0" y1="${y + o.rowH}" x2="${W}" y2="${y + o.rowH}" stroke="#F0F0F0" stroke-width="1"/>`;
 
         // Label
-        svg += `<circle cx="16" cy="${o.showMeta ? cy - 7 : cy}" r="4" fill="${color}"/>`;
-        svg += `<text x="28" y="${o.showMeta ? cy - 4 : cy + 4}" font-family="Inter,sans-serif" font-size="12.5" font-weight="600" fill="#111" pointer-events="none">${esc(lbl)}</text>`;
+        svg += `<circle class="vgantt-dot" data-status="${sk}" cx="16" cy="${o.showMeta ? cy - 7 : cy}" r="4" fill="${color}"/>`;
+        svg += `<text class="tl-row-name" x="28" y="${o.showMeta ? cy - 4 : cy + 4}" font-family="Inter,sans-serif" font-size="12.5" font-weight="600" fill="#111" pointer-events="none">${esc(lbl)}</text>`;
 
         if (o.showMeta) {
-          svg += `<text x="28" y="${cy + 13}" font-family="JetBrains Mono,monospace" font-size="9" fill="#999" pointer-events="none">${range}</text>`;
-          svg += `<text x="${o.labelW - 16}" y="${cy + 13}" font-family="JetBrains Mono,monospace" font-size="9" fill="${color}" text-anchor="end" pointer-events="none">${esc(stLbl)}</text>`;
+          svg += `<text class="tl-row-meta" x="28" y="${cy + 13}" font-family="JetBrains Mono,monospace" font-size="9" fill="#999" pointer-events="none">${range}</text>`;
+          svg += `<text class="vgantt-status" data-status="${sk}" x="${o.labelW - 16}" y="${cy + 13}" font-family="JetBrains Mono,monospace" font-size="9" fill="${color}" text-anchor="end" pointer-events="none">${esc(stLbl)}</text>`;
         }
 
         // Bar
-        svg += `<rect class="vgantt-bar" x="${x1}" y="${cy - o.barH / 2}" width="${bw}" height="${o.barH}" rx="3" fill="${color}"/>`;
+        svg += `<rect class="vgantt-bar" data-status="${sk}" x="${x1}" y="${cy - o.barH / 2}" width="${bw}" height="${o.barH}" rx="3" fill="${color}"/>`;
 
         if (!p.end) {
-          svg += `<polygon points="${x2 - 2},${cy - 5} ${x2 + 4},${cy} ${x2 - 2},${cy + 5}" fill="${color}"/>`;
+          svg += `<polygon class="vgantt-tip" data-status="${sk}" points="${x2 - 2},${cy - 5} ${x2 + 4},${cy} ${x2 - 2},${cy + 5}" fill="${color}"/>`;
         }
 
         if (o.showMeta && bw >= 90) {
-          svg += `<text x="${x1 + bw / 2}" y="${cy - o.barH / 2 - 6}" font-family="JetBrains Mono,monospace" font-size="9" fill="#999" text-anchor="middle" pointer-events="none">${range}</text>`;
+          svg += `<text class="tl-row-meta" x="${x1 + bw / 2}" y="${cy - o.barH / 2 - 6}" font-family="JetBrains Mono,monospace" font-size="9" fill="#999" text-anchor="middle" pointer-events="none">${range}</text>`;
         }
 
         // Milestones
@@ -290,7 +290,7 @@ const TimelineManager = (function () {
             if (md < minD || md > maxD) return;
             const mx = xOf(md);
             svg += `<g pointer-events="none"><title>${esc(m.label)} — ${esc(m.date)}</title>` +
-                   `<polygon points="${mx},${cy - r} ${mx + r},${cy} ${mx},${cy + r} ${mx - r},${cy}" fill="#fff" stroke="${color}" stroke-width="1.6"/></g>`;
+                   `<polygon class="vgantt-milestone" data-status="${sk}" points="${mx},${cy - r} ${mx + r},${cy} ${mx},${cy + r} ${mx - r},${cy}" fill="#fff" stroke="${color}" stroke-width="1.6"/></g>`;
           });
         }
 

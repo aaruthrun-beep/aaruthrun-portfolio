@@ -972,3 +972,123 @@
     max-width: 100%;
   }
 }
+
+/* --------------------------------------------------------------------------
+   BOXED LABELS
+   The small editorial labels — eyebrow, section jump, contact kicker, status
+   note, contact links — are set inside a drawn box, so a page of quiet type
+   gains a row of small technical marks. Linked boxes fill cobalt on hover.
+   -------------------------------------------------------------------------- */
+
+.home .hero-eyebrow,
+.home .sec-jump,
+.home .contact-kicker,
+.home .hero-status span,
+.home .contact-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background-color: var(--color-card);
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+  text-decoration: none;
+  transition:
+    color 260ms var(--ease-settle),
+    border-color 260ms var(--ease-settle),
+    background-color 260ms var(--ease-settle),
+    translate 260ms var(--ease-settle);
+}
+
+.home .hero-eyebrow {
+  padding-left: 10px;
+  margin-bottom: 26px;
+  color: var(--color-text-main);
+}
+
+/* The eyebrow mark is a clipped square, as in a technical drawing legend. */
+.home .hero-eyebrow .eyebrow-mark {
+  clip-path: polygon(0 0, 100% 0, 100% 100%);
+}
+
+.home .hero-status span {
+  margin-right: 10px;
+  border-color: color-mix(in srgb, var(--color-accent) 35%, transparent);
+  background-color: var(--color-accent-soft);
+  color: var(--color-accent);
+}
+
+.home .contact-kicker {
+  border-color: color-mix(in srgb, var(--color-accent) 30%, transparent);
+  background-color: var(--color-accent-soft);
+  color: var(--color-accent);
+}
+
+.home .record-item span {
+  display: inline-flex;
+  padding: 4px 10px;
+  margin-bottom: 8px;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background-color: var(--color-card);
+}
+
+.home .sec-jump:hover,
+.home .contact-links a:hover {
+  border-color: var(--color-accent);
+  background-color: var(--color-accent);
+  color: #FFFFFF;
+  translate: 0 -1px;
+}
+
+.home .sec-jump > [aria-hidden="true"],
+.home .contact-links a > [aria-hidden="true"] {
+  transition: translate 220ms var(--ease-settle);
+}
+
+.home .sec-jump:hover > [aria-hidden="true"] {
+  translate: 2px -2px;
+}
+
+/* --------------------------------------------------------------------------
+   BOX-AND-TURN MOTION
+   The eyebrow box settles into place and its mark turns as the hero lands;
+   the bench label follows a beat later.
+   -------------------------------------------------------------------------- */
+
+@keyframes box-settle {
+  from { opacity: 0; translate: 0 6px; }
+  to { opacity: 1; translate: 0 0; }
+}
+
+@keyframes mark-turn {
+  from { opacity: 0; transform: rotate(-90deg) scale(0.4); }
+  to { opacity: 1; transform: rotate(0deg) scale(1); }
+}
+
+.reveal.reveal-in .hero-eyebrow {
+  animation: box-settle 460ms var(--ease-settle) both;
+}
+
+.reveal.reveal-in .hero-eyebrow .eyebrow-mark {
+  animation: mark-turn 520ms var(--ease-settle) 120ms both;
+}
+
+.reveal.reveal-in .hero-status span {
+  animation: box-settle 420ms var(--ease-settle) 180ms both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal.reveal-in .hero-eyebrow,
+  .reveal.reveal-in .hero-eyebrow .eyebrow-mark,
+  .reveal.reveal-in .hero-status span {
+    animation: none !important;
+  }
+
+  .home .sec-jump:hover,
+  .home .contact-links a:hover {
+    translate: none !important;
+  }
+}
