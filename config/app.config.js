@@ -215,6 +215,11 @@ const AppConfig = (function () {
        a second one. `shift` is how far toward `near` it leans (0–1). */
     placement: {
       'origin-one': { above: 'cat-autonomous-rover', near: 'scrapx6', shift: 0.4 },
+      /* The two newest builds are pinned under the left-hand column instead of
+         being seeded past the edge of the map, where they read as stray
+         circles in empty space. */
+      'smart-rover': { below: 'mars-369', near: 'nite-369', shift: 0 },
+      'masr-369': { below: 'smart-rover', near: 'cat-autonomous-rover', shift: 0.35 },
       /* AgroTech belongs to the startup page, not to the robotics cluster:
          keep it clear below the rover instead of reading as part of it. */
       'avani-agrotech': { below: 'cat-autonomous-rover', drop: 7000 },
