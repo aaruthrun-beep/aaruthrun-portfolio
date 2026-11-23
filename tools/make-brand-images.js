@@ -1,14 +1,23 @@
 /**
  * AARUTHRUN PORTFOLIO — BRAND IMAGES
  *
- * Builds the two identity images from the portrait in images/aaruthrun.jpeg:
+ * Builds the two identity images:
  *
- *   images/logo/aaruthrun-logo.png   square crop of the face, used in the header
- *   images/og-image.jpg              1200x630 card used for link previews
+ *   images/logo/aaruthrun-logo.png   square crop of Tesla's portrait, used in
+ *                                    the header beside the wordmark
+ *   images/og-image.jpg              1200x630 card used for link previews,
+ *                                    built from the portrait in
+ *                                    images/aaruthrun.jpeg
  *                                    (WhatsApp, Slack, X, iMessage…)
  *
  * The preview card has to be a JPEG: WhatsApp and several other unfurlers do
  * not decode WebP, and they want a wide 1.91:1 image under a few hundred KB.
+ *
+ * It is composed centre-safe, like the project and field-note cards: Telegram
+ * and Twitter show the whole 1.91:1 rectangle, but WhatsApp's link preview is a
+ * square cut from the centre of the image. Everything — kicker, portrait, name,
+ * role — therefore sits inside the centre 630x630 square (x 285..915), and the
+ * cream margins either side are trim.
  *
  * Run: node tools/make-brand-images.js
  */
@@ -19,6 +28,7 @@ const sharp = require('sharp');
 
 const ROOT = path.resolve(__dirname, '..');
 const PORTRAIT = path.join(ROOT, 'images/aaruthrun.jpeg');
+const BRAND_PORTRAIT = path.join(ROOT, 'images/tesla-portrait.jpg');
 const LOGO_OUT = path.join(ROOT, 'images/logo/aaruthrun-logo.png');
 const OG_OUT = path.join(ROOT, 'images/og-image.jpg');
 
@@ -39,11 +49,11 @@ const MUTED = '#6C736E';
 async function buildLogo() {
   fs.mkdirSync(path.dirname(LOGO_OUT), { recursive: true });
 
-  // The portrait is 1088x1445 with the head centred on x≈530. A 720px square
-  // from (170, 145) leaves a little headroom above the hair while stopping at
-  // the shoulders.
-  await sharp(PORTRAIT)
-    .extract({ left: 170, top: 145, width: 720, height: 720 })
+  // The header mark is Tesla rather than the site owner. His portrait is
+  // 560x751 with the head from roughly y 45 (hair) to y 430 (chin); a 380px
+  // square from (120, 55) frames the head with a little of the collar.
+  await sharp(BRAND_PORTRAIT)
+    .extract({ left: 120, top: 55, width: 380, height: 380 })
     .resize(160, 160, { fit: 'cover' })
     .png({ compressionLevel: 9 })
     .toFile(LOGO_OUT);
@@ -59,13 +69,20 @@ async function buildCard() {
   const W = 1200;
   const H = 630;
 
-  // Photo panel, inset from the right edge like a framed print.
-  const PW = 350;
-  const PH = 510;
-  const PX = W - 72 - PW;
-  const PY = (H - PH) / 2;
+  // WhatsApp keeps only a centred 630x630 square; everything readable goes in it.
+  const CENTRE = W / 2;
+
+  // Portrait panel, a framed print centred above the name. The card crop is
+  // wider than the icon crop so the frame carries the shoulders too; a head
+  // alone reads as a mugshot at this size.
+  const CARD_CROP = { left: 96, top: 116, width: 896, height: 896 };
+  const PW = 240;
+  const PH = 240;
+  const PX = (W - PW) / 2;
+  const PY = 92;
 
   const photo = await sharp(PORTRAIT)
+    .extract(CARD_CROP)
     .resize(PW * 2, PH * 2, { fit: 'cover', position: 'top' })
     .jpeg({ quality: 88 })
     .toBuffer();
@@ -93,24 +110,22 @@ async function buildCard() {
          preserveAspectRatio="xMidYMin slice" clip-path="url(#photoClip)"/>
   <rect x="${PX}" y="${PY}" width="${PW}" height="${PH}" rx="4" fill="none" stroke="${INK}" stroke-opacity="0.85" stroke-width="2"/>
 
-  <rect x="72" y="150" width="46" height="4" fill="${GOLD}"/>
-
-  <text x="72" y="196" font-family="JetBrains Mono, DejaVu Sans Mono, Consolas, monospace"
+  <text x="${CENTRE}" y="74" text-anchor="middle" font-family="JetBrains Mono, DejaVu Sans Mono, Consolas, monospace"
         font-size="15" letter-spacing="4.5" fill="${GOLD}">ENGINEERING ARCHIVE</text>
 
-  <text x="70" y="300" font-family="DM Serif Display, Georgia, 'Times New Roman', serif"
-        font-size="86" letter-spacing="-1" fill="${INK}">${NAME}</text>
+  <text x="${CENTRE}" y="404" text-anchor="middle" font-family="DM Serif Display, Georgia, 'Times New Roman', serif"
+        font-size="78" letter-spacing="-1" fill="${INK}">${NAME}</text>
 
-  <rect x="72" y="336" width="108" height="3" fill="${GOLD}"/>
+  <rect x="${CENTRE - 54}" y="430" width="108" height="3" fill="${GOLD}"/>
 
-  <text x="72" y="392" font-family="JetBrains Mono, DejaVu Sans Mono, Consolas, monospace"
-        font-size="22" letter-spacing="1.6" fill="${INK}">${ROLE}</text>
+  <text x="${CENTRE}" y="476" text-anchor="middle" font-family="JetBrains Mono, DejaVu Sans Mono, Consolas, monospace"
+        font-size="17" letter-spacing="1.6" fill="${INK}">${ROLE}</text>
 
-  <text x="72" y="442" font-family="JetBrains Mono, DejaVu Sans Mono, Consolas, monospace"
-        font-size="14" letter-spacing="1.2" fill="${MUTED}">${LINE}</text>
+  <text x="${CENTRE}" y="510" text-anchor="middle" font-family="JetBrains Mono, DejaVu Sans Mono, Consolas, monospace"
+        font-size="13" letter-spacing="1.2" fill="${MUTED}">${LINE}</text>
 
-  <text x="72" y="562" font-family="JetBrains Mono, DejaVu Sans Mono, Consolas, monospace"
-        font-size="14" letter-spacing="0.8" fill="${MUTED}">${SITE}</text>
+  <text x="${CENTRE}" y="574" text-anchor="middle" font-family="JetBrains Mono, DejaVu Sans Mono, Consolas, monospace"
+        font-size="12" letter-spacing="0.8" fill="${MUTED}">${SITE}</text>
 
   <rect x="0" y="${H - 10}" width="${W}" height="10" fill="${GOLD}"/>
 </svg>`;
