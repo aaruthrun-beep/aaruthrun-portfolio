@@ -263,6 +263,7 @@ main {
   transition: color var(--transition-base), background-color var(--transition-base);
   text-decoration: none;
   letter-spacing: var(--tracking-normal);
+  white-space: nowrap; /* "Gallery 1" must not break into two lines */
 }
 .nav-link:hover {
   color: var(--color-accent);
