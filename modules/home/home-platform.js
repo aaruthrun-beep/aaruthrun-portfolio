@@ -67,7 +67,10 @@ const HomePlatform = (function () {
         '<span class="bench-updated">Updated ' + (project.updated ? fmt(project.updated) : placeholder('not recorded')) + '</span></div>' +
         '<h3><a href="project-' + esc(project.slug) + '.html">' + esc(project.shortTitle || project.title) + '</a></h3>' +
         '<p>' + esc(project.summary) + '</p>' +
-        '<div class="bench-focus"><span>Current focus</span>' + (project.currentFocus ? esc(project.currentFocus) : placeholder('not documented yet')) + '</div>' +
+        // The placeholder marks this one field as unrecorded. "Not documented
+        // yet" read as a claim about the whole page, which contradicted the
+        // documentation link directly beneath it.
+        '<div class="bench-focus"><span>Current focus</span>' + (project.currentFocus ? esc(project.currentFocus) : placeholder('not recorded')) + '</div>' +
         '<a class="bench-link" href="project-' + esc(project.slug) + '.html">Open documentation &rarr;</a>' +
         '</div></article>'
       );
