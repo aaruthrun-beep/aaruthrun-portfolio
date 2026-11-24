@@ -437,22 +437,29 @@
 
 .home .bench .b1 { grid-column: span 7; }
 .home .bench .b2 { grid-column: span 5; }
-.home .bench .b3 { grid-column: span 5; }
-.home .bench .b4 { grid-column: span 7; }
+.home .bench .b3 { grid-column: span 7; }
+.home .bench .b4 { grid-column: span 5; }
 
 .home .bench img {
   display: block;
   width: 100%;
+  height: auto;
   border: 1px solid var(--color-border);
   object-fit: cover;
   background-color: var(--color-surface-subtle);
 }
 
+/* Each frame matches its file's own orientation, so the photographs and the
+   CAD screenshot keep their full framing instead of being cropped to a shape
+   they were never shot in. */
 .home .bench .b1 img,
-.home .bench .b4 img { aspect-ratio: 16 / 10; }
-
 .home .bench .b2 img,
-.home .bench .b3 img { aspect-ratio: 4 / 3; }
+.home .bench .b4 img { aspect-ratio: 4 / 3; }
+
+.home .bench .b3 img {
+  aspect-ratio: 1400 / 874;
+  object-fit: contain;
+}
 
 /* --------------------------------------------------------------------------
    VENTURES
@@ -935,13 +942,6 @@
     grid-column: span 12;
   }
 
-  .home .bench .b1 img,
-  .home .bench .b2 img,
-  .home .bench .b3 img,
-  .home .bench .b4 img {
-    aspect-ratio: 16 / 10;
-  }
-
   .home .note-row {
     grid-template-columns: minmax(0, 1fr);
     gap: 6px;
@@ -1090,5 +1090,67 @@
   .home .sec-jump:hover,
   .home .contact-links a:hover {
     translate: none !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   PHONE — the hero is a full column here, so the vertical rhythm is trimmed
+   to keep the primary action inside the first screen, and the small mono links
+   that are the only route into a project get a thumb-sized hit area.
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 560px) {
+  .home .hero {
+    padding-top: 22px;
+    padding-bottom: 40px;
+    gap: 32px;
+  }
+
+  .home .hero-eyebrow {
+    margin-bottom: 16px;
+    font-size: 10px;
+  }
+
+  .home .hero-name {
+    margin-bottom: 14px;
+  }
+
+  .home .hero-lead {
+    margin-bottom: 12px;
+    font-size: 1.02rem;
+    line-height: 1.5;
+  }
+
+  .home .hero-body {
+    font-size: 0.9rem;
+    line-height: 1.65;
+  }
+
+  .home .hero-actions {
+    margin-top: 22px;
+    gap: 8px;
+  }
+
+  .home .hero-status {
+    margin-top: 22px;
+    font-size: 10.5px;
+    line-height: 1.75;
+  }
+
+  .home .sec {
+    padding: 32px 0;
+  }
+
+  .home .sec-jump {
+    display: inline-flex;
+    align-items: center;
+    min-height: 38px;
+  }
+
+  .home .work-link,
+  .home .bench-link,
+  .home .contact-links a {
+    display: inline-block;
+    padding: 8px 0;
   }
 }

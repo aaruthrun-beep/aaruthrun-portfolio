@@ -110,8 +110,11 @@ const GalleryRows = (function () {
     el.className = 'gr-row';
     el.setAttribute('aria-label', project.title);
 
+    // The rows page is a photo wall: YouTube prints and clips from the project
+    // folder both belong to the map, not here.
     var photos = (project.images || []).filter(function (photo) {
-      return photo && photo.kind !== 'video' && (photo.srcset || photo.src);
+      return photo && photo.kind !== 'video' && photo.kind !== 'clip' &&
+             (photo.srcset || photo.src);
     });
 
     var track = document.createElement('div');

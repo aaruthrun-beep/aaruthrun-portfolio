@@ -1,10 +1,10 @@
 /**
  * AARUTHRUN PORTFOLIO — CONTACT FORM
- * Client-side validation and accessible submission feedback for the static
- * FormSubmit endpoint. The provider is the only delivery path; no success
- * state is shown unless the provider explicitly accepts the submission.
- * If FormSubmit fails or is not activated, a mailto fallback opens the
- * user's email client with the form data pre-populated.
+ * Client-side validation and accessible submission feedback for the contact
+ * endpoint (worker/contact-api.js, which delivers through Resend). The
+ * endpoint is the only delivery path; no success state is shown unless it
+ * explicitly accepts the submission. If it fails, the failure state offers a
+ * mailto link with the same message pre-populated.
  */
 
 const ContactForm = (function () {
@@ -21,7 +21,7 @@ const ContactForm = (function () {
       ? AppConfig.getContact()
       : {};
 
-    const endpoint = config.formEndpoint || form.getAttribute('action').replace('formsubmit.co/', 'formsubmit.co/ajax/');
+    const endpoint = config.formEndpoint || form.getAttribute('action');
     const submitButton = document.getElementById('contact-submit');
     const submitLabel = document.getElementById('contact-submit-label');
     const status = document.getElementById('contact-form-status');
@@ -177,10 +177,6 @@ const ContactForm = (function () {
         payload[key] = typeof value === 'string' ? value.trim() : value;
       });
 
-      payload._subject = 'Portfolio enquiry — ' + (payload.category || 'General');
-      payload._template = 'table';
-      payload._captcha = 'false';
-
       if (/^https?:$/.test(window.location.protocol)) {
         payload._url = window.location.href;
       }
@@ -284,9 +280,9 @@ const ContactForm = (function () {
 
         if (!response.ok || !data || String(data.success) !== 'true') {
           const error = new Error('The form endpoint did not accept the message.');
-          // FormSubmit says why in words ("Please activate...", "Please open
-          // this page through a web server"); repeating that is the only way
-          // the visitor can act on it.
+          // The endpoint says why in words ("Enter a valid email address",
+          // "domain is not verified"); repeating that is the only way the
+          // visitor — or the site owner — can act on it.
           if (data && data.message) error.providerMessage = String(data.message);
           throw error;
         }

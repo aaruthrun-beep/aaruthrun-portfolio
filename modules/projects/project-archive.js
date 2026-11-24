@@ -81,7 +81,10 @@ const ProjectArchive = (function () {
       '<h3>' + esc(project.shortTitle || project.title) + '</h3>' +
       '<p>' + esc(project.summary) + '</p>' +
       (project.monoSpec ? '<div class="archive-mini-spec" title="' + esc(project.monoSpec) + '">' + esc(project.monoSpec) + '</div>' : '') +
+      '<div class="archive-mini-foot">' +
       tagList((project.tags || []).slice(0, 4)) +
+      '<span class="archive-mini-cta">Open file <span aria-hidden="true">&rarr;</span></span>' +
+      '</div>' +
       '</div></a>'
     );
   }

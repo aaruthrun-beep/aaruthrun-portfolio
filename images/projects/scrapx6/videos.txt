@@ -3,6 +3,11 @@
 # One video per line, either:
 #   https://youtu.be/VIDEO_ID
 #   Title of the video | https://youtu.be/VIDEO_ID
+#   Title of the clip  | clip.mp4 | 1080x1920
 #
-# Full links work too (youtu.be, /watch?v=, /shorts/, /embed/).
-# Lines starting with # are ignored. After saving this file run: npm run gallery
+# Full links work too (youtu.be, /watch?v=, /shorts/, /embed/). A line that
+# names a video file (mp4/webm/mov) plays that file instead of YouTube, and the
+# optional trailing WxH keeps a portrait clip in a portrait print. Note that
+# .gitignore skips images/projects/**/*.mp4, so only a small clip that has been
+# force-added (or un-ignored) belongs here — a 100 MB+ capture cannot reach
+# GitHub Pages. Lines starting with # are ignored. After saving: npm run gallery

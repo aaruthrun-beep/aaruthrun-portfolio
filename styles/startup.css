@@ -247,18 +247,6 @@
   color: var(--color-text-muted);
 }
 
-/* Agrotech identity panel ------------------------------------------------- */
-
-.ad-visual-agro .ad-visual-main img {
-  box-sizing: border-box;
-  object-fit: contain;
-  padding: clamp(28px, 4vw, 54px);
-}
-
-[data-theme="dark"] .ad-visual-agro .ad-visual-main img {
-  filter: invert(1);
-}
-
 .ad-visual-text {
   display: flex;
   flex-direction: column;
@@ -568,6 +556,15 @@
   }
 }
 
+/* The AgroTech hero is a portrait machine photograph: in the tablet range the
+   shared 16:10 visual would make its frame nearly square and slice the machine,
+   so that one panel gets a portrait frame of its own. */
+@media (min-width: 621px) and (max-width: 900px) {
+  .ad-agrotech .ad-visual {
+    aspect-ratio: 4 / 5;
+  }
+}
+
 @media (max-width: 620px) {
   .ad-logo {
     width: 118px;
@@ -625,6 +622,12 @@
     grid-column: 1 / -1;
     grid-row: auto;
     aspect-ratio: 4 / 3;
+  }
+
+  /* The AgroTech hero is a portrait machine photograph, so on phones the frame
+     takes the photograph's own 9:16 shape instead of slicing it to 4:3. */
+  .ad-agrotech .ad-visual-main {
+    aspect-ratio: 9 / 16;
   }
 
   .ad-visual-tile {

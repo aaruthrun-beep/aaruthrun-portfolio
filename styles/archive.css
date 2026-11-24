@@ -243,37 +243,83 @@
 .archive-compact-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0 clamp(24px, 4vw, 48px);
+  gap: clamp(16px, 2.4vw, 24px);
 }
 
+/* Each compact project is a drawn card: a rounded box around an image plate,
+   the copy, a chip row, a rule, and a pill that opens the file. */
 .archive-mini {
-  display: grid;
-  grid-template-columns: 148px minmax(0, 1fr);
-  gap: 16px;
-  align-items: start;
-  padding: 18px 0;
-  border-bottom: 1px solid var(--color-border);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  background-color: var(--color-card);
+  overflow: hidden;
   text-decoration: none;
   color: inherit;
+  transition:
+    translate 260ms var(--ease-settle),
+    border-color 260ms var(--ease-settle),
+    box-shadow 260ms var(--ease-settle);
 }
 
-.archive-mini-media { overflow: hidden; background: var(--color-surface-subtle); border: 1px solid var(--color-border); }
+/* A hairline of accent draws across the top edge as the pointer arrives. */
+.archive-mini::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: var(--color-accent);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 420ms var(--ease-settle);
+  pointer-events: none;
+}
+
+.archive-mini:hover,
+.archive-mini:focus-visible {
+  translate: 0 -4px;
+  border-color: var(--color-accent);
+  box-shadow: 0 22px 44px -34px rgba(32, 37, 34, 0.5);
+}
+
+.archive-mini:hover::after,
+.archive-mini:focus-visible::after {
+  transform: scaleX(1);
+}
+
+.archive-mini-media {
+  overflow: hidden;
+  border-radius: 10px;
+  background: var(--color-surface-subtle);
+}
 .archive-mini-media img {
   display: block;
   width: 100%;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 16 / 10;
   object-fit: cover;
   filter: saturate(0.94);
   transition: transform 600ms var(--ease-settle);
 }
 .archive-mini:hover .archive-mini-media img { transform: scale(1.03); }
 
+.archive-mini-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 14px 6px 2px;
+}
+
 .archive-mini-meta {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 6px 10px;
-  margin-bottom: 5px;
+  margin-bottom: 8px;
   font-family: var(--font-mono);
   font-size: 8px;
   letter-spacing: 0.05em;
@@ -316,8 +362,51 @@
   color: var(--color-text-muted);
 }
 
-.archive-mini .tag-list { gap: 4px; }
-.archive-mini .tag { padding: 1px 5px; font-size: 8px; }
+.archive-mini .tag-list { gap: 5px; }
+.archive-mini .tag { padding: 2px 8px; font-size: 8.5px; }
+
+/* Footer rule and the pill CTA, mirroring the card boxes above it. */
+.archive-mini-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 12px;
+  margin-top: auto;
+  padding-top: 13px;
+  border-top: 1px solid var(--color-border);
+}
+
+.archive-mini-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 8.5px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--color-text-main);
+  transition:
+    color 240ms var(--ease-settle),
+    background-color 240ms var(--ease-settle),
+    border-color 240ms var(--ease-settle);
+}
+
+.archive-mini-cta span { transition: translate 240ms var(--ease-settle); }
+
+.archive-mini:hover .archive-mini-cta,
+.archive-mini:focus-visible .archive-mini-cta {
+  border-color: var(--color-accent);
+  background-color: var(--color-accent);
+  color: #FFFFFF;
+}
+
+.archive-mini:hover .archive-mini-cta span {
+  translate: 3px 0;
+}
 
 /* --------------------------------------------------------------------------
    EMPTY / NOTE
@@ -374,6 +463,25 @@
 
 @media (max-width: 760px) {
   .archive-compact-grid { grid-template-columns: minmax(0, 1fr); }
+
+  /* Filters are the main control on this page and were 25px tall. */
+  .archive-page .filter-label { font-size: 10px; }
+  .archive-page .filter-bar { gap: 10px 20px; }
+  .archive-page .filter-group { gap: 7px; }
+  .archive-page .filter-btn {
+    display: inline-flex;
+    align-items: center;
+    min-height: 36px;
+    padding: 8px 13px;
+    font-size: 10px;
+    letter-spacing: 0.05em;
+  }
+
+  /* The only way into a featured project was a 14px-tall text link. */
+  .archive-feature-link {
+    display: inline-block;
+    padding: 9px 0;
+  }
 }
 
 @media (max-width: 560px) {
@@ -382,7 +490,8 @@
   .archive-feature { padding: 26px 0; }
   .archive-specs { grid-template-columns: minmax(0, 1fr); gap: 8px; }
   .archive-feature-foot { align-items: flex-start; flex-direction: column; }
-  .archive-mini { grid-template-columns: 104px minmax(0, 1fr); gap: 12px; padding: 14px 0; }
+  .archive-mini { padding: 8px; }
+  .archive-mini-body { padding: 12px 4px 2px; }
   .archive-mini-body p { -webkit-line-clamp: 2; }
   .archive-mini-spec { display: none; }
   .archive-mini h3 { font-size: 1.15rem; }
@@ -395,4 +504,15 @@
   .archive-mini-media img { transition: none; }
   .archive-feature-media:hover img,
   .archive-mini:hover .archive-mini-media img { transform: none; }
+
+  .archive-mini,
+  .archive-mini::after,
+  .archive-mini-cta,
+  .archive-mini-cta span { transition: none; }
+
+  .archive-mini:hover,
+  .archive-mini:focus-visible { translate: none; }
+  .archive-mini:hover::after,
+  .archive-mini:focus-visible::after { transform: none; }
+  .archive-mini:hover .archive-mini-cta span { translate: none; }
 }

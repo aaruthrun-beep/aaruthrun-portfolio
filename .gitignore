@@ -20,6 +20,13 @@ images/projects/**/*.mp4
 # Local static-server bookkeeping
 .http-server-*.pid
 
+# Resend API key dropped here for `sites_set_secret`; never committed
+worker/*.key
+worker/*-key.txt
+
 # Raw camera/video sources for Avani AgroTech; the web copies live in
 # images/projects/avani-agrotech/ and are what the site serves.
 images/startup/Avani agrotech/New folder/
+
+# Local preview harness, screenshots and server logs
+.preview/

@@ -1,0 +1,11 @@
+{
+  "entrypoint": "contact-api.js",
+  "compatibilityDate": "2026-11-01",
+  "modules": [
+    {
+      "name": "contact-api.js",
+      "type": "esm",
+      "path": "./contact-api.js"
+    }
+  ]
+}

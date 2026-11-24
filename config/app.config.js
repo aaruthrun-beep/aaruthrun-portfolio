@@ -45,11 +45,10 @@ const AppConfig = (function () {
   };
 
   // Contact configuration
-  // FormSubmit is a static-host-compatible form-to-email service. The endpoint
-  // is public (it contains the public contact address), not an API key.
+  // The form posts to a small Resend-backed endpoint (see worker/contact-api.js).
+  // The endpoint is a public URL; the Resend API key stays in the Worker secret.
   const CONTACT = {
-    formEndpoint: 'https://formsubmit.co/ajax/aaruthrun@gmail.com',
-    formFallbackEndpoint: 'https://formsubmit.co/aaruthrun@gmail.com',
+    formEndpoint: 'https://portfolio-contact-endpoint-n1kwpj-preview.freebuff.site/',
     // Long enough to catch a script that submits instantly, short enough that
     // a person who fills the form from autofill is never held back.
     minimumSubmitTimeMs: 1200,

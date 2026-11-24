@@ -201,20 +201,12 @@
   border-bottom: 0;
 }
 
+/* Headings sit flush with the lists below them — no numbered column in the
+   side margin. */
 .contact-section-head {
   display: grid;
-  grid-template-columns: 58px minmax(0, 1fr);
-  gap: clamp(16px, 2.5vw, 30px);
+  grid-template-columns: minmax(0, 1fr);
   margin-bottom: clamp(30px, 4vw, 48px);
-}
-
-.contact-section-index {
-  padding-top: 7px;
-  font-family: var(--font-mono);
-  font-size: 10px;
-  line-height: 1.4;
-  letter-spacing: 0.08em;
-  color: var(--color-accent);
 }
 
 .contact-section-head h2 {
@@ -274,26 +266,60 @@
    CHANNELS
    -------------------------------------------------------------------------- */
 
+/* One drawn box holds the three routes; each row is separated by a rule, so
+   the section reads as a small card rather than three floating slabs. */
 .contact-channel-list {
-  border-top: 1px solid var(--color-border);
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  background-color: var(--color-card);
+  overflow: hidden;
 }
 
 .contact-channel {
+  position: relative;
   display: grid;
-  grid-template-columns: minmax(150px, 0.55fr) minmax(0, 1fr) auto;
-  gap: 20px;
+  grid-template-columns: minmax(132px, 0.34fr) minmax(0, 1fr) auto;
+  gap: 18px;
   align-items: center;
-  padding: 21px 0;
+  /* The generic .contact-channel component in style.css painted each row as
+     its own card and added a margin; inside the list box both are reset. */
+  padding: 18px 22px;
+  margin: 0;
+  background-color: transparent;
+  border: 0;
   border-bottom: 1px solid var(--color-border);
+  border-radius: 0;
   text-decoration: none;
   color: var(--color-text-main) !important;
-  transition: background-color var(--transition-base), padding-left var(--transition-base), padding-right var(--transition-base);
+  transition: background-color 240ms var(--ease-settle);
 }
 
-.contact-channel:hover {
+.contact-channel:last-child { border-bottom: 0; }
+
+/* The accent runs down the left edge of the row under the pointer. */
+.contact-channel::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 2px;
+  background-color: var(--color-accent);
+  transform: scaleY(0);
+  transform-origin: top center;
+  transition: transform 300ms var(--ease-settle);
+}
+
+.contact-channel:hover,
+.contact-channel:focus-visible {
   background: var(--color-surface-subtle);
-  padding-left: 14px;
-  padding-right: 14px;
+  padding-left: 22px;
+  padding-right: 22px;
+}
+
+.contact-channel:hover::before,
+.contact-channel:focus-visible::before {
+  transform: scaleY(1);
 }
 
 .contact-channel-label {
@@ -318,13 +344,27 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  padding: 6px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
   font-family: var(--font-mono);
   font-size: 9px;
   line-height: 1.5;
   letter-spacing: 0.07em;
   text-transform: uppercase;
-  color: var(--color-accent);
+  color: var(--color-text-main);
   white-space: nowrap;
+  transition:
+    color 240ms var(--ease-settle),
+    background-color 240ms var(--ease-settle),
+    border-color 240ms var(--ease-settle);
+}
+
+.contact-channel:hover .contact-channel-action,
+.contact-channel:focus-visible .contact-channel-action {
+  border-color: var(--color-accent);
+  background-color: var(--color-accent);
+  color: #FFFFFF;
 }
 
 .contact-location {
@@ -835,15 +875,6 @@
     font-size: 0.75rem;
   }
 
-  .contact-section-head {
-    grid-template-columns: 38px minmax(0, 1fr);
-    gap: 12px;
-  }
-
-  .contact-section-index {
-    padding-top: 4px;
-  }
-
   .contact-interest {
     grid-template-columns: 40px minmax(0, 1fr);
     gap: 10px;
@@ -853,12 +884,13 @@
   .contact-channel {
     grid-template-columns: minmax(0, 1fr) auto;
     gap: 6px 18px;
-    padding: 17px 0;
+    padding: 16px 16px;
   }
 
-  .contact-channel:hover {
-    padding-left: 10px;
-    padding-right: 10px;
+  .contact-channel:hover,
+  .contact-channel:focus-visible {
+    padding-left: 16px;
+    padding-right: 16px;
   }
 
   .contact-channel-label {
@@ -965,6 +997,8 @@
 @media (prefers-reduced-motion: reduce) {
   .contact-arrow,
   .contact-channel,
+  .contact-channel::before,
+  .contact-channel-action,
   .contact-submit {
     transition: none !important;
   }

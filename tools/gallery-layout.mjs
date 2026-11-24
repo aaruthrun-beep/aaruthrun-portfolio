@@ -331,7 +331,7 @@ function minEnclosingCircle(points) {
 // where the project label hangs. Slide it straight up until something blocks
 // it, so the screen never sits on the caption.
 function liftClips(items, radius, cfg) {
-  const clips = items.filter((item) => item.kind === 'video');
+  const clips = items.filter((item) => item.kind === 'video' || item.kind === 'clip');
 
   for (const clip of clips) {
     const others = items.filter((item) => item !== clip);

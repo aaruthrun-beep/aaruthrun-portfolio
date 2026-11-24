@@ -27,6 +27,7 @@ const GalleryVideo = (function () {
 
   var apiPromise = null;
   var tiles = [];
+  var clips = [];
   var viewport = null;
   var raf = null;
 
@@ -183,10 +184,61 @@ const GalleryVideo = (function () {
   /* Visibility and zoom                                                 */
   /* ------------------------------------------------------------------ */
 
+  /* ------------------------------------------------------------------ */
+  /* Local clips                                                         */
+  /* ------------------------------------------------------------------ */
+
+  // Clips from the project folder are plain <video> elements. The file is not
+  // requested until the print is on screen, and playback stops when it leaves,
+  // so a wall of clips costs nothing until it is looked at.
+  function syncClips(view) {
+    for (var i = 0; i < clips.length; i++) {
+      var clip = clips[i];
+      var video = clip.video;
+      if (!video) continue;
+
+      var box = clip.el.getBoundingClientRect();
+      var visible = box.right > view.left + 8 && box.left < view.right - 8 &&
+                    box.bottom > view.top + 8 && box.top < view.bottom - 8;
+
+      if (!visible) {
+        if (!video.paused) {
+          try {
+            video.pause();
+          } catch (e) {
+            // Nothing to pause yet.
+          }
+        }
+        continue;
+      }
+
+      if (!clip.attached) {
+        var src = clip.el.getAttribute('data-clip');
+        if (src) {
+          video.setAttribute('src', src);
+          video.load();
+        }
+        clip.attached = true;
+      }
+
+      if (video.paused && !document.hidden) {
+        var playing = video.play();
+        if (playing && typeof playing.catch === 'function') {
+          playing.catch(function () {
+            // Autoplay refused (or the file is still loading): the poster frame
+            // stays, and the next sweep tries again.
+          });
+        }
+      }
+    }
+  }
+
   function sync() {
-    if (!viewport || !tiles.length) return;
+    if (!viewport || (!tiles.length && !clips.length)) return;
 
     var view = viewport.getBoundingClientRect();
+
+    syncClips(view);
 
     for (var i = 0; i < tiles.length; i++) {
       var tile = tiles[i];
@@ -227,6 +279,16 @@ const GalleryVideo = (function () {
     if (!canvasEl || !viewport) return;
 
     tiles = [];
+    clips = [];
+
+    var clipPrints = canvasEl.querySelectorAll('.gl-clip');
+    for (var c = 0; c < clipPrints.length; c++) {
+      clips.push({
+        el: clipPrints[c],
+        video: clipPrints[c].querySelector('.gl-clip-video'),
+        attached: false,
+      });
+    }
 
     var prints = canvasEl.querySelectorAll('.gl-video');
     for (var i = 0; i < prints.length; i++) {
@@ -241,19 +303,30 @@ const GalleryVideo = (function () {
       });
     }
 
-    if (!tiles.length) return;
-
     // Fill the prints as soon as the API is ready; requestAnimationFrame does
     // not tick in a background tab, so the first pass is not left to it.
-    loadApi().then(sync);
-    schedule();
+    if (tiles.length) loadApi().then(sync);
+    if (tiles.length || clips.length) schedule();
   }
 
   window.addEventListener('gallery:transform', schedule);
   window.addEventListener('resize', schedule);
 
   document.addEventListener('visibilitychange', function () {
-    if (!tiles.length || !viewport) return;
+    if (!viewport) return;
+
+    for (var c = 0; c < clips.length; c++) {
+      var video = clips[c].video;
+      if (!video || !clips[c].attached) continue;
+      try {
+        if (document.hidden) video.pause();
+        else video.play().catch(function () {});
+      } catch (e) {
+        // Not loaded yet; the next sweep will start it.
+      }
+    }
+
+    if (!tiles.length) return;
 
     for (var i = 0; i < tiles.length; i++) {
       var tile = tiles[i];

@@ -168,6 +168,14 @@ main {
   margin: 0 auto;
 }
 
+/* The masthead keeps one width on every page. Pages narrow .container to suit
+   their own content (gallery 920px, projects 1200px, startup 1280px…), and the
+   nav shares that class, so without this the header squeezed and stretched as
+   you moved between sections. */
+.site-header .container.nav-container {
+  max-width: 1240px;
+}
+
 /* Brand: pixel font, small cobalt mark — technical identity */
 .brand-link {
   font-family: var(--font-mono);
@@ -681,12 +689,13 @@ main {
 .filter-btn {
   font-family: var(--font-mono);
   font-size: var(--text-xs);
-  padding: 4px 9px;
+  padding: 5px 12px;
   background-color: transparent;
   border: 1px solid var(--color-border);
+  border-radius: 999px;
   color: var(--text-secondary);
   cursor: pointer;
-  transition: all var(--transition-base);
+  transition: color var(--transition-base), border-color var(--transition-base), background-color var(--transition-base);
   letter-spacing: var(--tracking-normal);
   text-transform: uppercase;
 }
@@ -1716,6 +1725,10 @@ main {
   }
   .nav-toggle {
     display: block;
+    /* A 26px-tall button is below a comfortable thumb target. */
+    min-height: 44px;
+    padding: 10px 12px;
+    font-size: 0.75rem;
   }
   .site-nav {
     display: none;
@@ -1741,11 +1754,25 @@ main {
   .nav-list {
     flex-direction: column;
     height: auto;
-    gap: var(--s-2);
+    gap: 2px;
+  }
+  .nav-item {
+    width: 100%;
   }
   .nav-link {
-    padding: 6px 0;
+    /* Drawer links: taller rows and readable type on a phone. The row spans
+       the panel so the whole strip is tappable, not just the word. */
+    width: 100%;
+    padding: 13px 0;
+    font-size: 0.82rem;
     border-bottom: none;
+  }
+  .brand-link {
+    min-height: 44px;
+  }
+  .footer-links a {
+    display: inline-block;
+    padding: 5px 0;
   }
   .nav-link.active::after {
     display: none;

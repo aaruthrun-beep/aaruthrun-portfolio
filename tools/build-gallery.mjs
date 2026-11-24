@@ -255,8 +255,33 @@ function youtubeId(text) {
 // images/projects/<slug>/videos.txt — one video per line, either
 //   https://youtu.be/VIDEOID
 //   Title of the video | https://youtu.be/VIDEOID
+//   Title of the clip  | clip.mp4 | 1080x1920
 // Blank lines and lines starting with # are ignored, so the file can carry
-// its own instructions at the top.
+// its own instructions at the top. The trailing WxH is optional: it is the
+// clip's own pixel size, so a portrait clip gets a portrait print instead of
+// being sliced into the 16:9 YouTube frame.
+//
+// A path to a clip that actually exists: either relative to the project folder
+// (clip.mp4) or from the repository root (images/projects/<slug>/clip.mp4).
+const CLIP_RE = /\.(mp4|m4v|webm|mov)$/i;
+
+function localVideo(ref, folder) {
+  const clean = ref.replace(/^["']|["']$/g, '').trim();
+  if (!CLIP_RE.test(clean)) return '';
+
+  const tries = path.isAbsolute(clean)
+    ? [clean]
+    : [path.resolve(folder, clean), path.resolve(ROOT, clean)];
+
+  for (const abs of tries) {
+    if (!abs.startsWith(ROOT) || !fs.existsSync(abs)) continue;
+    if (!fs.statSync(abs).isFile()) continue;
+    return path.relative(ROOT, abs).split(path.sep).join('/');
+  }
+
+  return '';
+}
+
 async function readVideos(folder) {
   for (const name of VIDEO_FILES) {
     let text;
@@ -273,13 +298,36 @@ async function readVideos(folder) {
       const line = raw.trim();
       if (!line || line.startsWith('#')) continue;
 
-      const bar = line.indexOf('|');
-      const title = bar > 0 ? line.slice(0, bar).trim() : '';
-      const id = youtubeId(bar > 0 ? line.slice(bar + 1) : line) || youtubeId(line);
+      const parts = line.split('|').map((part) => part.trim());
 
-      if (!id || seen.has(id)) continue;
-      seen.add(id);
-      videos.push({ id, title });
+      // A trailing 1080x1920 (or 1920x1080) is the clip's own pixel size.
+      let size = null;
+      if (parts.length > 1) {
+        const last = parts[parts.length - 1];
+        const match = /^(\d{2,5})\s*[x×]\s*(\d{2,5})$/i.exec(last);
+        if (match) {
+          size = { w: Number(match[1]), h: Number(match[2]) };
+          parts.pop();
+        }
+      }
+
+      const ref = parts.length > 1 ? parts.pop() : parts[0];
+      const title = parts.join(' | ').trim();
+      const id = youtubeId(ref) || youtubeId(line);
+
+      if (id) {
+        if (seen.has(id)) continue;
+        seen.add(id);
+        videos.push({ id, title });
+        continue;
+      }
+
+      // A file in the project folder plays from disk, so a clip can sit on the
+      // wall beside the photographs without a YouTube upload.
+      const file = localVideo(ref, folder);
+      if (!file || seen.has(file)) continue;
+      seen.add(file);
+      videos.push({ file, title, width: size ? size.w : 0, height: size ? size.h : 0 });
     }
 
     return videos;
@@ -461,18 +509,41 @@ async function collectProjects(meta, cfg) {
     };
 
     for (const video of await readVideos(folder)) {
+      const fromFile = Boolean(video.file);
+
+      // YouTube prints are always 16:9. A clip from disk keeps its own shape
+      // when videos.txt declares it, so a portrait phone clip is not sliced.
+      let boxW = videoW;
+      let boxH = videoH;
+
+      if (fromFile) {
+        const aspect = video.width && video.height ? video.width / video.height : 16 / 9;
+        if (aspect >= 1) {
+          boxW = videoW;
+          boxH = Math.round(videoW / aspect);
+        } else {
+          boxH = videoW;
+          boxW = Math.round(videoW * aspect);
+        }
+      }
+
+      // A clip from disk wears the same polaroid frame as the photographs, so
+      // it sits in the wall as one more print; the YouTube prints keep their
+      // even bezel instead.
+      const box = fromFile ? frameOf(boxW, boxH, frameCfg) : videoFrame;
+
       images.push({
-        kind: 'video',
-        videoId: video.id,
-        src: `video:${video.id}`,
-        w: videoFrame.W,
-        h: videoFrame.H,
-        pw: videoW,
-        ph: videoH,
-        side: videoFrame.side,
-        bottom: videoFrame.bottom,
-        nw: videoW,
-        nh: videoH,
+        kind: fromFile ? 'clip' : 'video',
+        videoId: video.id || '',
+        src: fromFile ? video.file : `video:${video.id}`,
+        w: box.W,
+        h: box.H,
+        pw: boxW,
+        ph: boxH,
+        side: box.side,
+        bottom: box.bottom,
+        nw: boxW,
+        nh: boxH,
         srcset: '',
         text: video.title,
         date: '',

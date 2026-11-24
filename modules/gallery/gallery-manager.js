@@ -551,6 +551,29 @@ const GalleryManager = (function () {
                      esc(formatDate(img.date)) + '</time>';
         }
 
+        // A clip is the same framed print and frame, but the player is a plain
+        // <video>: no third-party embed, and the file is only attached when
+        // the print comes into view (gallery-video.js starts and stops it).
+        if (img.kind === 'clip') {
+          var clipAlt = (proj.shortTitle || proj.title) +
+                        (img.text ? ' — ' + img.text : '') + ' — video';
+
+          html += '<div class="gl-photo gl-clip" data-clip="' + esc(img.src) + '"' +
+                  ' data-rot="' + img.rot.toFixed(2) +
+                  '" style="left:' + left.toFixed(1) + 'px;top:' + top.toFixed(1) +
+                  'px;width:' + img.w + 'px;height:' + img.h +
+                  'px;transform:rotate(' + img.rot.toFixed(2) + 'deg);">' +
+                  '<figure class="polaroid" style="padding:' + side + 'px ' + side +
+                  'px ' + bottom + 'px;--side:' + side + 'px;--bottom:' + bottom + 'px;">' +
+                  '<video class="gl-clip-video" muted loop playsinline preload="none"' +
+                  ' aria-label="' + esc(clipAlt) + '"' +
+                  ' style="width:' + pw + 'px;height:' + ph + 'px;"></video>' +
+                  '<span class="gl-video-badge" aria-hidden="true">VIDEO' +
+                  (img.text ? ' — ' + esc(img.text) : '') + '</span>' +
+                  '</figure></div>';
+          continue;
+        }
+
         // A video is the same framed print with a player where the photograph
         // would be. The mount stays empty until the print is on screen; the
         // video module fills it.

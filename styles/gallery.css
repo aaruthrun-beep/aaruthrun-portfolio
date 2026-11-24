@@ -123,6 +123,21 @@
   opacity: 0;
 }
 
+/* A clip from the project folder: a plain <video> in the same frame as the
+   photographs. It plays itself, muted and looping, and never takes the
+   pointer, so dragging still pans the map across it. */
+.gl-photo.gl-clip {
+  cursor: inherit;
+}
+
+.gl-clip-video {
+  position: relative;
+  display: block;
+  background: #101010;
+  object-fit: cover;
+  pointer-events: none;
+}
+
 [data-theme="dark"] .gl-photo .polaroid {
   background: #efebe2;
 }
