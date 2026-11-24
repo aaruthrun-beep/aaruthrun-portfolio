@@ -115,8 +115,11 @@ const GalleryVideo = (function () {
     tile.controls = null;
     tile.el.classList.remove('has-controls');
 
-    var leftover = tile.el.querySelector('.gl-video-mount');
-    if (leftover) leftover.remove();
+    // Only one mount belongs to a print. Clearing them all keeps a rebuild
+    // from stacking an empty one in front of the player, which would push the
+    // picture out of the polaroid frame.
+    var leftovers = tile.el.querySelectorAll('.gl-video-mount');
+    for (var i = 0; i < leftovers.length; i++) leftovers[i].remove();
   }
 
   function currentTime(tile) {
@@ -132,6 +135,10 @@ const GalleryVideo = (function () {
 
   function create(tile, controls, startAt) {
     if (!tile.id || !window.YT || !window.YT.Player) return;
+
+    // A player is only ever mounted on a clean print.
+    var stale = tile.el.querySelectorAll('.gl-video-mount');
+    for (var s = 0; s < stale.length; s++) stale[s].remove();
 
     var mount = makeMount(tile);
     var host = mount.firstChild;

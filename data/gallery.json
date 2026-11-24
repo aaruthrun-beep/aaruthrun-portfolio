@@ -1,7 +1,7 @@
 {
   "version": 1,
   "layoutVersion": 3,
-  "generatedAt": "2026-11-24T10:30:19.655Z",
+  "generatedAt": "2026-11-24T11:19:12.650Z",
   "frameHash": 3926459638,
   "canvas": {
     "width": 73524,
@@ -1319,6 +1319,25 @@
           "x": -2438.6,
           "y": -7464.6,
           "rot": 0.23
+        },
+        {
+          "kind": "video",
+          "videoId": "d3OuYUVEofQ",
+          "src": "video:d3OuYUVEofQ",
+          "w": 4360,
+          "h": 2610,
+          "pw": 4000,
+          "ph": 2250,
+          "side": 180,
+          "bottom": 180,
+          "text": "Video test",
+          "date": "",
+          "srcset": "",
+          "nw": 4000,
+          "nh": 2250,
+          "x": -6458.3,
+          "y": 7973.6,
+          "rot": -0.75
         }
       ]
     },

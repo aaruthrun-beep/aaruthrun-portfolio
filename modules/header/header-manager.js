@@ -14,6 +14,7 @@ const HeaderManager = (function () {
   // State
   let currentPage = 'index.html';
   let scrollBound = false;
+  let globalBound = false;
 
   /**
    * Get current page from URL
@@ -104,6 +105,11 @@ const HeaderManager = (function () {
     headerEl = document.getElementById('site-header');
     if (!headerEl) return;
 
+    // Pages inject their content after load, which re-renders this header. If
+    // the menu was already open, keep it open instead of swallowing the tap
+    // the visitor just made.
+    const wasOpen = !!(navMenu && navMenu.classList.contains('open'));
+
     headerEl.className = 'site-header';
     headerEl.innerHTML = buildNavHTML();
 
@@ -113,7 +119,7 @@ const HeaderManager = (function () {
 
     // Setup mobile toggle
     if (toggleBtn && navMenu) {
-      setupMobileToggle();
+      setupMobileToggle(wasOpen);
     }
 
     // Setup smooth scroll for anchor links
@@ -144,13 +150,24 @@ const HeaderManager = (function () {
   /**
    * Setup mobile navigation toggle
    */
-  function setupMobileToggle() {
+  function setupMobileToggle(wasOpen) {
+    if (wasOpen) {
+      toggleBtn.setAttribute('aria-expanded', 'true');
+      toggleBtn.textContent = '[CLOSE]';
+      navMenu.classList.add('open');
+    }
+
     toggleBtn.addEventListener('click', function () {
       const isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true';
       toggleBtn.setAttribute('aria-expanded', !isExpanded);
       toggleBtn.textContent = !isExpanded ? '[CLOSE]' : '[MENU]';
       navMenu.classList.toggle('open');
     });
+
+    // The two document listeners are bound once: they read the module-level
+    // toggleBtn/navMenu, which every render refreshes.
+    if (globalBound) return;
+    globalBound = true;
 
     // Close on click outside
     document.addEventListener('click', function (e) {

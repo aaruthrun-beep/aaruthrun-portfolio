@@ -11,3 +11,5 @@
 # .gitignore skips images/projects/**/*.mp4, so only a small clip that has been
 # force-added (or un-ignored) belongs here — a 100 MB+ capture cannot reach
 # GitHub Pages. Lines starting with # are ignored. After saving: npm run gallery
+
+Video test | https://www.youtube.com/watch?v=d3OuYUVEofQ
