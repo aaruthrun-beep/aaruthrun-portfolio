@@ -12,4 +12,5 @@
 # force-added (or un-ignored) belongs here — a 100 MB+ capture cannot reach
 # GitHub Pages. Lines starting with # are ignored. After saving: npm run gallery
 
-Video test | https://www.youtube.com/watch?v=d3OuYUVEofQ
+
+Video test | clip.mp4 | 1080x1920
